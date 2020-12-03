@@ -27,7 +27,7 @@ export default class SfmcApiHelper
         };
 
         let postBody = {
-            'grant_type': 'refresh_token',
+            //'grant_type': 'refresh_token',
             'clientId': clientId,
             'clientSecret': clientSecret
         };
