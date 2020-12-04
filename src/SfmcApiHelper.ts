@@ -23,7 +23,7 @@ export default class SfmcApiHelper
         Utils.logInfo("Using specified ClientID and ClientSecret to get OAuth token...");
 
         let headers = {
-            'Content-Type': 'application/json;charset=UTF-8',
+            'Content-Type': 'application/json',
         };
 
         let postBody = {
@@ -48,7 +48,7 @@ export default class SfmcApiHelper
         Utils.logInfo("Getting OAuth Access Token with refreshToken: " + refreshToken);
         
         let headers = {
-            'Content-Type': 'application/json;charset=UTF-8',
+            'Content-Type': 'application/json',
         };
 
         let postBody = {
