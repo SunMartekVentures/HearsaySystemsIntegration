@@ -27,7 +27,7 @@ export default class SfmcApiHelper
         };
 
         let postBody = {
-            //'grant_type': 'refresh_token',
+            'grant_type': 'client_credentials',
             'clientId': clientId,
             'clientSecret': clientSecret
         };
@@ -69,7 +69,7 @@ export default class SfmcApiHelper
         return new Promise<any>((resolve, reject) =>
         {
             // POST to Marketing Cloud REST Auth service and get back an OAuth access token.
-            let sfmcAuthServiceApiUrl = "https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.auth.marketingcloudapis.com/v2/requestToken";
+            let sfmcAuthServiceApiUrl = "https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.auth.marketingcloudapis.com/v2/token";
             axios.post(sfmcAuthServiceApiUrl, postBody, {"headers" : headers})
             .then((response: any) => {
                 // success
