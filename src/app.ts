@@ -50,6 +50,13 @@ app.use(express.static(path.join(__dirname, "../static")));
 app.use(favicon(path.join(__dirname,'../static','images','favicons', 'favicon.ico')));
 
 // Routes: pages
+app.get('/app/:id', checkUserAuth, findApp, renderView, sendJSON);
+
+function checkUserAuth(req, res, next) {
+  if (req.session.user) return next();
+  return next(new NotAuthorizedError());
+}
+
 app.get('/', function(req, res) { Utils.initSampleDataAndRenderView(req, res, 'apidemo.ejs') });
 app.get('/apidemo', function(req, res) { Utils.initSampleDataAndRenderView(req, res, 'apidemo.ejs') });
 app.get('/appdemo', function(req, res) { Utils.initSampleDataAndRenderView(req, res, 'appdemo.ejs') });
