@@ -39,24 +39,16 @@ export default class SfmcApiDemoRoutes
             Utils.logInfo("Getting OAuth Access Token with ClientID and ClientSecret from in environment variables.");
             
             // set the desired timeout in options
-            const options = {
-            //...
-            timeout: 60000,
-            };
+            
 
-            // create a request
-            const request = req(options, res => {
-            // your callback here
-            });
-
-            // use its "timeout" event to abort the request
-            request.on('timeout', self._apiHelper.getOAuthAccessToken(clientId, clientSecret)           
+            
+             self._apiHelper.getOAuthAccessToken(clientId, clientSecret)           
             .then((result) => {
                 req.session.oauthAccessToken = result.oauthAccessToken;
                 req.session.oauthAccessTokenExpiry = result.oauthAccessTokenExpiry;
                 res.status(result.status).send(result.statusText);
-                req.abort();
-            }))
+                req.setTimeout(60000);
+            })
             .catch((err) => {
                 res.status(500).send(err);
             });
