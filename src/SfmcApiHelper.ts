@@ -77,9 +77,12 @@ export default class SfmcApiHelper
                 // success
                 Utils.logInfo("Success, got auth token from MC...");
                 let accessToken = response.data.access_token;
+                Utils.logInfo("oauth token..." + accessToken);
                 let bearer = response.data.token_type;
+                Utils.logInfo("Bearer..." + bearer);
                 let tokenExpiry = response.data.expires_in;
-                tokenExpiry.setSeconds(tokenExpiry.getSeconds() + response.data.expiresIn);
+                Utils.logInfo("tokenExpiry..." + tokenExpiry);
+                tokenExpiry.setSeconds(tokenExpiry.getSeconds() + response.data.expires_in);
                 Utils.logInfo("Got OAuth token: " + accessToken + ", expires = " +  tokenExpiry);
 
                 resolve(
