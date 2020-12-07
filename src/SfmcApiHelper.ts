@@ -68,6 +68,7 @@ export default class SfmcApiHelper
     {
         return new Promise<any>((resolve, reject) =>
         {
+            Utils.logInfo("Using specified ClientID and ClientSecret to get OAuth token...");
             // POST to Marketing Cloud REST Auth service and get back an OAuth access token.
             let sfmcAuthServiceApiUrl = "https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.auth.marketingcloudapis.com/v2/token";
             axios.post(sfmcAuthServiceApiUrl, postBody, {"headers" : headers})
