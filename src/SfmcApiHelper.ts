@@ -73,7 +73,7 @@ export default class SfmcApiHelper
             let sfmcAuthServiceApiUrl = "https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.auth.marketingcloudapis.com/v2/token";
             axios.post(sfmcAuthServiceApiUrl, postBody, {"headers" : headers})
             Utils.logInfo("oauth token is called, waiting for status...");
-            .then((status: any) => {
+            .then((response : any) => {
                 // success
                 Utils.logInfo("Success, got auth token from MC...");
                 let accessToken = response.data.access_token;
