@@ -1,0 +1,1182 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  <link
+  rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+  integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+  crossorigin="anonymous"
+/>
+
+<!-- Icon -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+
+<style>
+
+body {
+    font-size: 13px;
+}
+
+.e1container{
+  margin-top:7px;
+  /* margin-bottom:10px; */
+  padding-top:7px;
+  padding-bottom:15px;
+  padding-left:15px;
+  padding-right:15px;
+  background-color:#eef2f7;
+}
+
+.e1pageheader{
+  padding-left:10px;
+  padding-bottom:7px;
+  font-weight:bold ;
+  font-size:16px;
+  letter-spacing:1px;
+}
+
+.e1error{
+  font-weight:bold ;
+  font-size:12px;
+  letter-spacing:1px;
+  color: red;
+}
+
+
+.e1butonfontsize{
+  font-size:12px;
+  border-color :#0069d9 !important;
+  border-bottom-style:solid;
+}
+
+.e1labelheader{
+  
+  /* font-weight:bold ; */
+  font-size:13px;
+  letter-spacing:1px;
+  margin-top: 10px;
+}
+
+.e1labelheaderPage1 {
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 1px;
+    margin-top: 10px;
+    margin-bottom: 12px;
+}
+
+.e1labelheaderPage2 {
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 1px;
+    margin-top: 3px;
+    margin-bottom: 12px;
+}
+
+.margitop40px{
+  margin-top: 30px;
+}
+.marginbottom40px{
+  margin-bottom: 40px;
+}
+
+.e1labelheader2{
+  
+  /* font-weight:bold ; */
+  font-size:13px;
+  letter-spacing:1px;
+  margin-top: 10px;
+  
+}
+
+.e1labelvalue{
+  font-size:13px;
+  letter-spacing:1px;
+}
+
+.e1input{
+  padding-bottom:0px;
+  padding-left: 4px;
+  padding-top: 4px;
+  width:30%;
+  border-radius: 6px;
+  margin-left: 20px;
+}
+
+.e1inputdd {
+    padding-bottom: 0px;
+    padding-left: 4px;
+    margin-top: 10px;
+    width: 30%;
+    border-radius: 6px;
+    margin-left: 2px;
+    height:26px;
+}   
+
+.e1inputpg1{
+  padding-bottom:0px;
+  padding-left: 4px;
+  padding-top: 4px;
+  width:30%;
+  border-radius: 6px;
+  /* margin-left: 50px; */
+}
+
+.e1input3{
+  padding-bottom:0px;
+  padding-left: 4px;
+  padding-top: 4px;
+  border-radius: 6px;
+  /* margin-left: 20px; */
+  width:160px;
+}
+
+    .e1input120 {
+        padding-bottom: 0px;
+        padding-left: 4px;
+        padding-top: 4px;
+        border-radius: 6px;
+        /* margin-left: 20px; */
+        width: 90px;
+    }
+
+.e1input3dpn{
+  padding-bottom:0px;
+  padding-left: 4px;
+  padding-top: 4px;
+  border-radius: 6px;
+  height: 32px;
+}
+
+.e1input2{
+  padding-bottom:7px;
+  width:60%
+}
+
+.e1linecolor{
+  color: #788592;
+  background-color: #788592;
+  margin-bottom:3px;
+}
+.epaddingbottom10{
+  margin-bottom:7px;
+  padding-left: 20px;
+}
+
+
+.ehidediv{
+  display: none;
+}
+
+.btnborder{
+  border-color: #788952;
+  align-items:flex-end;
+}
+
+.rectangle {
+    height: 50px;
+    /* width: 185px; */
+    background-color: #4BCA81; 
+  }
+  .rectangle-unselected {
+    height: 50px;
+    /* width: 185px; */
+    background-color:#1E67B7;
+  }
+  
+  .rect-first-step{
+      width: 185px;
+  }
+  .rect-second-step{
+      width: 140px;
+  }
+  .rect-third-step{
+      width: 120px;
+  }
+  
+  .triangle-right {
+      width: 0;
+      height: 0;
+      border-top: 25px solid transparent;
+      border-left: 20px solid #4BCA81; 
+      border-bottom: 25px solid transparent;
+  }
+  .triangle-right-unselected {
+      width: 0;
+      height: 0;
+      border-top: 25px solid transparent;
+      border-left: 20px solid #1E67B7;
+      border-bottom: 25px solid transparent;
+  }
+  .triangle-right-inverted {
+      width: 0;
+      height: 0;
+      border-top: 25px solid transparent;
+      border-left: 20px solid #1E67B7;
+      border-bottom: 25px solid transparent;
+  }
+  .triangle-right-inverted-unselected {
+      width: 0;
+      height: 0;
+      border-top: 25px solid transparent;
+      border-left: 20px solid #1E67B7;
+      border-bottom: 25px solid transparent;
+  }
+  .triangle-right-inverted-first{
+      width: 0;
+      height: 0;
+      border-top: 25px solid transparent;
+      border-left: 20px solid #4BCA81; 
+      border-bottom: 25px solid transparent;
+  }
+  .triangle-right-inverted-first-unselected{
+      width: 0;
+      height: 0;
+      border-top: 25px solid transparent;
+      border-left: 20px solid #1E67B7;
+      border-bottom: 25px solid transparent;
+  }
+  
+  .div{
+      display:flex;
+  }
+  .divWizardHead{
+      background-color: #a8b9d0;
+  }
+  
+  .triangle-right-cover-unselected{
+      background-color: #a8b9d0;
+  }
+  .lblWizardHeading{
+      font-weight: bold;
+      color: #fff;
+      padding-top: 12PX !important;
+      padding-left: 5PX !important;
+      font-size: 15px !important;
+  }
+
+    .paddingleft5 {
+        padding-left: 5px !important;
+    }
+  .triangle-right-cover{
+      background-color:#1E67B7;
+  }
+  .triangle-right-cover-green{
+      background-color: #4BCA81; 
+  }
+  .triangle-right-unselected-cover{
+      background-color: #1E67B7;
+  }
+  .triangle-right-cover-first{
+      background-color: #4BCA81; 
+  }
+  .triangle-right-cover-first-unselected{
+      background-color:  #1E67B7;
+  }
+  .triangle-right-inverted-cover{
+      background-color:   #4BCA81; 
+  }
+  .triangle-right-inverted-cover-unselected{
+      background-color:   #1E67B7;
+  }
+  .triangle-right-inverted-cover-unselected-green{
+      background-color:   #4BCA81; 
+  }
+  .triangle-right-inverted-cover-first{
+      background-color:   #4BCA81; 
+  }
+  .triangle-right-inverted-cover-first-unselected{
+      background-color:  #1E67B7;
+  }
+
+  .greenBack{
+    border-left: 20px solid #4BCA81;
+    background-color:   #4BCA81;
+  }
+  .invertedGreenBack{
+    border-left: 20px solid #4BCA81;
+  }
+  /* .badge{
+      color: #1E67B7;
+      background-color: #fff;
+  } */
+  .badge {
+      margin-top: -3px;
+      display: inline-block;
+      min-width: 10px;
+      padding: 2px 4px;
+      font-size: 10px;
+      font-weight: 700;
+      line-height: 1;
+      color: #1E67B7;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: middle;
+      background-color: #fff;
+      border-radius: 9px;
+  }
+  
+  .btn-primary {
+    background-color: #fff;
+    border: 1px solid #0069d9;
+    color: #0069d9;
+  }
+  
+  .btn-primary:hover {
+    background-color:#e6e6e6;
+    border: 1px solid #0056b3;
+    color: #0056b3;
+  }
+  .btn-primary:active {
+    background-color:#e6e6e6;
+    border: 1px solid #0056b3;
+    color: #0056b3;
+  }
+  .btn-primary:focus {
+    background-color:#e6e6e6;
+    border: 1px solid #0056b3;
+    color: #0056b3;
+  }
+  
+  .btn-xs {
+      padding: 1px 5px;
+      font-size: 12px;
+      line-height: 1.5;
+      border-radius: 3px;
+  }
+  .btn-sm {
+      padding: 5px 10px;
+      font-size: 12px;
+      line-height: 1.5;
+      border-radius: 3px;
+  }
+  .elRowPg1{
+    display: grid;
+    margin-left: 30px;
+  }
+  .paddingZero{
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+  .marginLeft20px{
+    margin-left: 20px !important;
+    height: 32px;
+  }
+  .marginLeft14px{
+    margin-left:14px;
+  }
+  label {
+      
+      margin-bottom: 0px;
+  }
+</style>
+</head>
+  <body>
+    <div  class='row'>
+      <div class='col-md-1'></div>
+      <div class='col-md-10' id="mydiv"></div>
+      <div class='col-md-1'></div>
+    </div>
+
+    <script type="text/babel">
+        function AddLogorow(abcd, second){
+          return (
+            <div>
+              <div><img src='hearsay.png' width='50' height ='50' /><label class='e1pageheader'>Hearsay Systems</label></div>
+            </div>
+          );
+        }
+
+        function AddButtonBlock(cancelclick, nextclick, nextbtntext,btnclass){
+          return (
+            <div class='e1container'>
+                    <div  class='row'>
+                      <div class='col-md-2 pull-left'><button onClick={cancelclick} class='btn btn-link e1butonfontsize float-left'>Cancel</button></div>
+                      <div class='col-md-7' id="mydiv"></div>
+                      <div class='col-md-3'>
+                        <button onClick={nextclick} class={btnclass}>{nextbtntext}</button></div>
+                    </div>
+                </div>
+          );
+        }
+
+		
+		
+		
+        function AddNewBlock(controlname, controlvalue, handler,labelname , divcssclass, secondStepDropdown){
+          return (
+            <div class={divcssclass}>
+                <div class='col-md-1 elRowPg1'><label class='e1labelheaderPage1'>{labelname}</label></div>
+                    <div class='col-md-10'>
+                        <select name={controlname} value={controlvalue} onChange={handler} class='e1inputdd col-md-11'>
+                            <option value="">--Select--</option>
+                            <option value="birthdate">Birth Date</option>
+                            <option value="email">Email</option>
+                            <option value="firstname">First Name</option>
+                            <option value="lastname">Last Name</option>
+                            <option value="phone">Phone</option>
+                            <option value="preferredname">Preferred Name</option>
+                            <option value="title">Title</option>
+                        </select>
+                    </div>
+                    <div class='col-md-1'></div>
+                </div>
+          )
+        }
+
+
+        function AddCustomFieldBlock(fieldLabelControlName, typeControllnName, lengthControlName, btnName, fieldLabelControlValue, typeControlValue, lengthControlValue, handler , FieldObjectHandler , divcssclass, noOfField){
+          
+
+
+          return (
+            <div class={divcssclass}>
+                <div class='col-md-1 elRowPg1'>
+                    <label class="e1labelheaderPage1">{noOfField}</label>
+                </div>
+                <div class='col-md-1 '>
+                    <label class="e1labelheaderPage2">Field</label>
+                </div>
+              <div class='col-md-2 paddingZero' >
+                <input class='e1input3' name={fieldLabelControlName} value={fieldLabelControlValue} onChange={handler}  type="text" maxlength="30" />
+              </div>
+              <div class='col-md-1 paddingZero'>
+                  <label class="e1labelheaderPage2">Type</label>
+              </div>
+              <div class='col-md-2 paddingZero'>
+                  <select class="e1input120" name={typeControllnName} value={typeControlValue} onChange={handler}>
+                      <option value="0" selected>--Select--</option>
+                      <option value="1">Integer</option>
+                      <option value="2">String</option>
+                      <option value="3">Date</option>
+                  </select>
+              </div>
+                <div class='col-md-1 paddingZero'>
+                    <label class="e1labelheaderPage2">Length</label>
+                </div>
+                <div class='col-md-1 paddingZero'>
+                    <input class="e1input120" name={lengthControlName} value={lengthControlValue} type="text" onChange={handler} maxlength="2" />
+                </div>
+                <div class='col-md-2 paddingleft5'>
+                    <button name={btnName} onClick={FieldObjectHandler} class="btn btn-primary btn-sm marginLeft20px">Save</button>
+                </div>
+              
+            </div>
+            
+          )
+        }
+        
+
+        function generateWizardStep(firstDivCover, firstDiv, secondDiv, thirdDivCover, thirdDiv, title, size, isStanby, stepNum){
+          if(isStanby==true){
+            return (
+            <div class={"div"} >
+              <div class={firstDivCover}><div class={firstDiv}></div></div>
+              <div class={secondDiv} style={{width:size}}><label class="lblWizardHeading" ><i class="fa fa-check-circle" aria-hidden="true"></i> {title}</label></div>
+              <div class={thirdDivCover}><div class={thirdDiv}></div></div>  
+            </div>
+          );
+          } else{
+            return (
+            <div class={"div"} >
+              <div class={firstDivCover}><div class={firstDiv}></div></div>
+              <div class={secondDiv} style={{width:size}}><label class="lblWizardHeading" ><span class="badge">{stepNum}</span> {title}</label></div>
+              <div class={thirdDivCover}><div class={thirdDiv}></div></div>  
+            </div>
+          );
+          }
+        }
+
+
+        function wizardNavigation(step){
+          const triangle_right_inverted_cover_first="triangle-right-inverted-cover-first ";
+          const triangle_right_inverted_cover_first_unselected="triangle-right-inverted-cover-first-unselected ";
+          const triangle_right_inverted_cover="triangle-right-inverted-cover ";
+          const triangle_right_inverted_first_unselected="triangle-right-inverted-first-unselected ";
+          const triangle_right_inverted="triangle-right-inverted ";
+          const triangle_right_inverted_unselected="triangle-right-inverted-unselected ";
+          const triangle_right_unselected="triangle-right-unselected ";
+          const triangle_right_cover_last="triangle-right-cover-last";
+          const triangle_right="triangle-right ";
+          const triangle_right_inverted_cover_unselected="triangle-right-inverted-cover-unselected ";
+          const triangle_right_unselected_cover="triangle-right-unselected-cover";
+          const triangle_right_unselected_cover_last="triangle-right-unselected-cover-last";
+          const triangle_right_cover="triangle-right-cover ";
+          const triangle_right_inverted_first="triangle-right-inverted-first ";
+          const rectangle_unselected="rectangle-unselected div";
+          const rectangle="rectangle div ";
+          const lblWizardHeading="lblWizardHeading ";
+          const greenBack="greenBack";
+          const invertedGreenBack="invertedGreenBack";
+          const triangle_right_cover_green="triangle-right-cover-green";
+          const triangle_right_inverted_cover_unselected_green="triangle-right-inverted-cover-unselected-green";
+
+
+          if(step==1){
+              return ( 
+                  <div class="div divWizardHead"> 
+                    <div class="div divStep1">
+                    {generateWizardStep(triangle_right_inverted_cover_first_unselected, triangle_right_inverted_first_unselected, rectangle_unselected, triangle_right_unselected_cover, triangle_right_unselected, 'ORG. PREFERENCES', "185px", false, 1)}
+                    </div>
+                    <div class="div divStep2" >
+                      {generateWizardStep(triangle_right_inverted_cover_unselected, triangle_right_inverted_unselected, rectangle_unselected, triangle_right_unselected_cover, triangle_right_unselected, 'DATA CONFIG', "140px", false, 2)}
+                    </div>
+                    <div class="div divStep3" >
+                      {generateWizardStep(triangle_right_inverted_cover_unselected, triangle_right_inverted_unselected, rectangle_unselected, triangle_right_unselected_cover_last, triangle_right_unselected, 'SUMMARY', "120px", false, 3)}
+                    </div>
+                  </div> 
+                 );
+          } else if(step==2){
+            return ( 
+              <div class="div divWizardHead"> 
+                    <div class="div divStep1">
+                    {generateWizardStep(triangle_right_inverted_cover_first, triangle_right_inverted_first, rectangle, triangle_right_cover, triangle_right, 'ORG. PREFERENCES', "185px", true, 1)}
+                    </div>
+                    <div class="div divStep2" >
+                      {generateWizardStep(triangle_right_inverted_cover_unselected, triangle_right_inverted_unselected, rectangle_unselected, triangle_right_unselected_cover, triangle_right_unselected, 'DATA CONFIG', "140px", false, 2)}
+                    </div>
+                    <div class="div divStep3" >
+                      {generateWizardStep(triangle_right_inverted_cover_unselected, triangle_right_inverted_unselected, rectangle_unselected, triangle_right_unselected_cover_last, triangle_right_unselected, 'SUMMARY', "120px", false, 3)}
+                    </div>
+                  </div> 
+                 );
+          } else if(step==3){
+            return ( 
+              <div class="div divWizardHead"> 
+                <div class="div divStep1">
+                    {generateWizardStep(triangle_right_inverted_cover_first, triangle_right_inverted_first, rectangle, triangle_right_cover_green, triangle_right, 'ORG. PREFERENCES', "185px", true, 1)}
+                    </div>
+                    <div class="div divStep2" >
+                      {generateWizardStep(triangle_right_inverted_cover_unselected_green, triangle_right , rectangle, triangle_right_cover, triangle_right, 'DATA CONFIG', "140px", true, 2)}
+                    </div>
+                    <div class="div divStep3" >
+                      {generateWizardStep(triangle_right_inverted_cover_unselected, triangle_right_inverted_unselected, rectangle_unselected, triangle_right_unselected_cover_last, triangle_right_unselected, 'SUMMARY', "120px", false, 3)}  
+                    </div>
+                  </div>
+                 );
+            }
+        }
+
+
+      function expandCustomFieldObject(cfo){
+         
+        
+        if(cfo.length==0){
+          return (
+            <div></div>
+          );
+        } else {
+          return ( 
+                <div>
+                  Field Label : <span>{cfo.FieldName}</span> &nbsp;&nbsp;
+                  Type : <span>{cfo.FieldType}</span> &nbsp;&nbsp;
+                  Length : <span>{cfo.FieldLength}</span> &nbsp;&nbsp;
+                </div>
+                );
+        }
+        
+      }
+
+      class HearsayPage1 extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            orgid: '',
+            refid: 0,
+            reftext: "First",
+            page:1,
+            temp1: '1',
+            temp2: '1',
+            temp3: '1',
+            temp4: '1',
+
+            temp5: '1',
+            temp6: '1',
+            temp7: '1',
+            temp8: '1',
+            temp9: '1',
+            temp10: '1',
+
+            temp1text: '',
+            temp2text: '',
+            temp3text: '',
+            temp4text: '',            
+
+            temp5text: '',            
+            temp6text: '',            
+            temp7text: '',            
+            temp8text: '',            
+            temp9text: '',            
+            temp10text: '',            
+
+            FieldCounter:4,
+
+            Field5Css:"row epaddingbottom10 ehidediv",
+            Field6Css:"row epaddingbottom10 ehidediv",
+            Field7Css:"row epaddingbottom10 ehidediv",
+            Field8Css:"row epaddingbottom10 ehidediv",
+            Field9Css:"row epaddingbottom10 ehidediv",
+            Field10Css:"row epaddingbottom10 ehidediv",
+
+            // FieldContent5:'',
+            // FieldContent6:'',
+            // FieldContent7:'',
+            // FieldContent8:'',
+            // FieldContent9:'',
+            // FieldContent10:''
+
+            firstStepDropdown:[],
+            secondStepDropdown:[], 
+            artemp5:[],
+            artemp6:[],
+            artemp7:[],
+            artemp8:[],
+            artemp9:[],
+            artemp10:[],
+            temp5FieldLabel:"",
+            temp6FieldLabel:"",
+            temp7FieldLabel:"",
+            temp8FieldLabel:"",
+            temp9FieldLabel:"",
+            temp10FieldLabel:"",
+            temp5DataType:"",
+            temp6DataType:"",
+            temp7DataType:"",
+            temp8DataType:"",
+            temp9DataType:"",
+            temp10DataType:"",
+            temp5Length:"",
+            temp6Length:"",
+            temp7Length:"",
+            temp8Length:"",
+            temp9Length:"",
+            temp10Length:"",
+            blnTemp5:false,
+            blnTemp6:false,
+            blnTemp7:false,
+            blnTemp8:false,
+            blnTemp9:false,
+            blnTemp10:false,
+            
+
+            
+            
+            
+            };
+
+            
+          this.handleChangeBack = this.handleChangeBack.bind(this);  
+          this.handleChangeNext = this.handleChangeNext.bind(this);
+          this.handleChangeCancel = this.handleChangeCancel.bind(this);
+          this.handleNewFieldClick = this.handleNewFieldClick.bind(this);
+        }
+
+        componentDidMount() {
+
+        }
+
+        handleNewFieldClick(event){
+          const counter=this.state.FieldCounter+1;
+          const lblname ='temp'+counter;
+
+          if(counter>10){
+            alert('Maximum limit exceeded (limit: 10)')            
+          }
+          else{
+            if(counter==5){
+              const stemp2='row epaddingbottom10';
+              this.setState({Field5Css: stemp2});
+          }
+          else if(counter==6){
+            const stemp2='row epaddingbottom10';
+            this.setState({Field6Css: stemp2});
+          }          
+          else if(counter==7){
+            const stemp2='row epaddingbottom10';
+            this.setState({Field7Css: stemp2});
+          }                    
+          else if(counter==8){
+            const stemp2='row epaddingbottom10';
+            this.setState({Field8Css: stemp2});
+          }                   
+          else if(counter==9){
+            const stemp2='row epaddingbottom10';
+            this.setState({Field9Css: stemp2});
+          }                                                   
+          else if(counter==10){
+            const stemp2='row epaddingbottom10';
+            this.setState({Field10Css: stemp2});
+          }                              
+          this.setState({FieldCounter: counter});
+          }
+        }
+
+        handleChangeCancel(event) {
+          alert('Cancel button clicked');
+        }
+
+        
+
+
+
+        handleChangeBack(event){
+          const ipage = this.state.page - 1;
+          this.setState({page: ipage});
+        }
+
+        handleChangeNext(event) {
+          
+          if(this.state.page==3){
+            var DataConfig={
+              dataConfig1:this.state.temp1text,
+              dataConfig2:this.state.temp2text,
+              dataConfig3:this.state.temp3text,
+              dataConfig4:this.state.temp4text,
+              dataConfig5:this.state.artemp5,
+              dataConfig6:this.state.artemp6,
+              dataConfig7:this.state.artemp7,
+              dataConfig8:this.state.artemp8,
+              dataConfig9:this.state.artemp9,
+              dataConfig10:this.state.artemp10
+            }
+             
+            var jsonObject={
+              orgId:this.state.orgid,
+              refid:this.state.refid,
+              dataConfig:DataConfig
+            }
+             
+          }
+
+          //Validation
+           
+          var ValidationStatus=true;
+          var validateMessages=[];
+
+          if(this.state.page==1){
+            if(this.state.orgid=="" || this.state.orgid==null || this.state.orgid==" "){
+            ValidationStatus=false;
+                ReactDOM.render(<p style={{color: "red" }}>Hearsay Org ID is mandatory.</p>, document.getElementById('valMsgOrgId'));
+            } else{
+                ReactDOM.render(<p> </p>, document.getElementById('valMsgOrgId'));
+            }
+
+            if(this.state.refid==0 || this.state.refid=="0"){
+              ValidationStatus=false;
+              ReactDOM.render(<p style={{color: "red"}}>Reference ID is mandatory.</p>, document.getElementById('valMsgRefId'));
+            } else{
+              ReactDOM.render(<p></p>, document.getElementById('valMsgRefId'));
+            }
+          } else if(this.state.page==2){
+
+            if(this.state.temp1text=="" && this.state.temp2text=="" && this.state.temp3text=="" && this.state.temp4text=="")
+              ValidationStatus=false;
+              ReactDOM.render(<p style={{color: "red"}}>Data config data is mandatory.</p>, document.getElementById('valMsgPageTwo'));
+          }
+
+          if(ValidationStatus==true){
+
+            
+            let ipage = this.state.page + 1;
+            if(ipage==4){
+              //reset to first page
+              ipage=1;
+              //reset all values
+              this.setState({orgid: ''});
+              this.setState({refid: 1});
+              this.setState({reftext: 'First'});
+              this.setState({temp1: '1'});
+              this.setState({temp2: '1'});
+              this.setState({temp3: '1'});
+              this.setState({temp4: '1'});
+              this.setState({temp5: '1'});
+
+              this.setState({temp6: '1'});
+              this.setState({temp7: '1'});
+              this.setState({temp8: '1'});
+              this.setState({temp9: '1'});
+              this.setState({temp10: '1'});
+
+              this.setState({temp1text: ''});
+              this.setState({temp2text: ''});
+              this.setState({temp3text: ''});
+              this.setState({temp4text: ''});
+
+              this.setState({temp5text: ''});
+              this.setState({temp6text: ''});
+              this.setState({temp7text: ''});
+              this.setState({temp8text: ''});
+              this.setState({temp9text: ''});
+              this.setState({temp10text: ''});
+
+
+              this.setState({FieldContent5: ''});
+              this.setState({FieldContent6: ''});
+              this.setState({FieldContent7: ''});
+              this.setState({FieldContent8: ''});
+              this.setState({FieldContent9: ''});
+              this.setState({FieldContent10: ''});
+
+              this.setState({FieldCounter: 4});
+
+              this.setState({artemp5: []});
+              this.setState({artemp6: []});
+              this.setState({artemp7: []});
+              this.setState({artemp8: []});
+              this.setState({artemp9: []});
+              this.setState({artemp10: []});
+              this.setState({temp5FieldLabel: ''});
+              this.setState({temp6FieldLabel: ''});
+              this.setState({temp7FieldLabel: ''});
+              this.setState({temp8FieldLabel: ''});
+              this.setState({temp9FieldLabel: ''});
+              this.setState({temp10FieldLabel: ''});
+              this.setState({temp5DataType: ''});
+              this.setState({temp6DataType: ''});
+              this.setState({temp7DataType: ''});
+              this.setState({temp8DataType: ''});
+              this.setState({temp9DataType: ''});
+              this.setState({temp10DataType: ''});
+              this.setState({temp5Length: ''});
+              this.setState({temp6Length: ''});
+              this.setState({temp7Length: ''});
+              this.setState({temp8Length: ''});
+              this.setState({temp9Length: ''});
+              this.setState({temp10Length: ''});
+              this.setState({blnTemp5: false});
+              this.setState({blnTemp6: false});
+              this.setState({blnTemp7: false});
+              this.setState({blnTemp8: false});
+              this.setState({blnTemp9: false});
+              this.setState({blnTemp10: false});
+              
+
+            }
+            this.setState({page: ipage});
+            
+          }
+
+          
+        }
+
+
+        updateCustomFieldObject = (event) => {
+          let nam = event.target.name;
+
+          if(nam=="temp5Button"){
+            var Object5={
+              FieldName:this.state.temp5FieldLabel,
+              FieldType:this.state.temp5DataType,
+              FieldLength:this.state.temp5Length
+            }
+            this.setState({artemp5:Object5});
+            
+          } else if(nam=="temp6Button"){
+            var Object6={
+              FieldName:this.state.temp6FieldLabel,
+              FieldType:this.state.temp6DataType,
+              FieldLength:this.state.temp6Length
+            }
+            this.setState({artemp6:Object6});
+
+          }else if(nam=="temp7Button"){
+            var Object7={
+              FieldName:this.state.temp7FieldLabel,
+              FieldType:this.state.temp7DataType,
+              FieldLength:this.state.temp7Length
+            }
+            this.setState({artemp7:Object7});
+
+          }else if(nam=="temp8Button"){
+            var Object8={
+              FieldName:this.state.temp8FieldLabel,
+              FieldType:this.state.temp8DataType,
+              FieldLength:this.state.temp8Length
+            }
+            this.setState({artemp8:Object8});
+
+          }else if(nam=="temp9Button"){
+            var Object9={
+              FieldName:this.state.temp9FieldLabel,
+              FieldType:this.state.temp9DataType,
+              FieldLength:this.state.temp9Length
+            }
+            this.setState({artemp9:Object9});
+
+          }else if(nam=="temp10Button"){
+            var Object10={
+              FieldName:this.state.temp10FieldLabel,
+              FieldType:this.state.temp10DataType,
+              FieldLength:this.state.temp10Length
+            }
+            this.setState({artemp10:Object10});
+
+          }
+
+          
+
+        }
+
+
+        
+
+        myChangeHandler = (event) => {
+          let nam = event.target.name;
+          let val = event.target.value;
+
+          //alert(nam + '--' + val);
+          //alert(this.state.temp5 + '--name: ' + nam + 'value-> ' + val);
+          this.setState({[nam]: val});
+
+          if(nam=="orgid"){
+            //    alert('In the loop');
+                ReactDOM.render(<p></p>, document.getElementById('valMsgOrgId'));
+          }
+
+          //stoe the seleted text also in the state variable
+          if(nam=='refid' || nam=='temp1' || nam=='temp2' || nam=='temp3' || nam=='temp4' || nam=='temp5' || 
+              nam=='temp6' || nam=='temp7' || nam=='temp8' || nam=='temp9' || nam=='temp10'){
+
+            var index = event.nativeEvent.target.selectedIndex;
+            let label = event.nativeEvent.target[index].text;
+
+
+            if(nam=='refid'){
+              this.setState({reftext: label});
+              ReactDOM.render(<p></p>, document.getElementById('valMsgRefId'));
+            }
+            else if(nam=='temp1'){
+              this.setState({temp1text: label});
+            }
+            else if(nam=='temp2'){
+              this.setState({temp2text: label});
+            }
+            else if(nam=='temp3'){
+              this.setState({temp3text: label});
+            }
+            else if(nam=='temp4'){
+              this.setState({temp4text: label});
+            }                                    
+            else if(nam=='temp5'){
+              this.setState({temp5text: label});
+            }                                    
+            else if(nam=='temp6'){
+              this.setState({temp6text: label});
+            }                                   
+            else if(nam=='temp7'){
+              this.setState({temp7text: label});
+            }                                   
+            else if(nam=='temp8'){
+              this.setState({temp8text: label});
+            }                                   
+            else if(nam=='temp9'){
+              this.setState({temp9text: label});
+            }                                   
+            else if(nam=='temp10'){
+              this.setState({temp10text: label});
+            }                                                                                               
+
+          }
+
+           
+          //Field Label
+          if(nam=="temp5FieldLabel" || nam=="temp6FieldLabel" || nam=="temp7FieldLabel" || nam=="temp8FieldLabel" || nam=="temp9FieldLabel" || nam=="temp10FieldLabel"){
+            if(nam=="temp5FieldLabel"){
+              this.setState({temp5FieldLabel:val});
+            } else if(nam=="temp6FieldLabel"){
+              this.setState({temp6FieldLabel:val});
+            } else if(nam=="temp7FieldLabel"){
+              this.setState({temp7FieldLabel:val});
+            }else if(nam=="temp8FieldLabel"){
+              this.setState({temp8FieldLabel:val});
+            }else if(nam=="temp9FieldLabel"){
+              this.setState({temp9FieldLabel:val});
+            }else if(nam=="temp10FieldLabel"){
+              this.setState({temp10FieldLabel:val});
+            }
+          }
+
+          //Type
+          if(nam=="temp5DataType" || nam=="temp6DataType" || nam=="temp7DataType" || nam=="temp8DataType" || nam=="temp9DataType" || nam=="temp10DataType"){
+            if(nam=="temp5DataType"){
+              this.setState({temp5DataType:val});
+            } else if(nam=="temp6DataType"){
+              this.setState({temp6DataType:val});
+            } else if(nam=="temp7DataType"){
+              this.setState({temp7DataType:val});
+            }else if(nam=="temp8DataType"){
+              this.setState({temp8DataType:val});
+            }else if(nam=="temp9DataType"){
+              this.setState({temp9DataType:val});
+            }else if(nam=="temp10DataType"){
+              this.setState({temp10DataType:val});
+            }
+          }
+
+
+          //Length
+          if(nam=="temp5Length" || nam=="temp6Length" || nam=="temp7Length" || nam=="temp8Length" || nam=="temp9Length" || nam=="temp10Length"){
+            if(nam=="temp5Length"){
+              this.setState({temp5Length:val});
+            } else if(nam=="temp6Length"){
+              this.setState({temp6Length:val});
+            } else if(nam=="temp7Length"){
+              this.setState({temp7Length:val});
+            }else if(nam=="temp8Length"){
+              this.setState({temp8Length:val});
+            }else if(nam=="temp9Length"){
+              this.setState({temp9Length:val});
+            }else if(nam=="temp10Length"){
+              this.setState({temp10Length:val});
+            }
+          }
+        }
+
+        render() {
+          if(this.state.page==1) {
+            return (
+              <div>		  
+		  {wizardNavigation(1)}
+		  {AddLogorow()}			  
+                <div class='e1container'>
+                  <div class="row epaddingbottom10">
+                    <div class="col-md-11 elRowPg1">
+                      <label class='e1labelheaderPage1 margitop40px'>Hearsay Org ID</label>
+                      <input name='orgid' value={this.state.orgid} class='e1inputpg1' maxlength='40' onChange={this.myChangeHandler} />
+                      <span id="valMsgOrgId"></span>
+                    </div>
+                    <div class="col-md-1"></div>
+                  </div>
+                  
+                  <hr class='e1linecolor'/>
+
+                  <div class="row epaddingbottom10">
+                    <div class="col-md-11 elRowPg1" >
+                      <label class='e1labelheaderPage1'>Reference ID</label>
+                      <select name='refid' value={this.state.refid} onChange={this.myChangeHandler} class='e1inputpg1'>
+                          <option value="0">--Select--</option>
+                          <option value="agentid">Agent ID</option>
+                          <option value="emailid">Email ID</option>
+                      </select>
+                      <span id="valMsgRefId"></span>
+                    </div>
+                    <div class="col-md-1"></div>
+                  </div>            
+                  <hr class='e1linecolor'/>
+                </div>
+                {AddButtonBlock(this.handleChangeCancel,this.handleChangeNext,'Next','btn btn-primary btn-sm float-right')}
+              </div>
+            )
+          }
+          else if(this.state.page==2) {
+            debugger;
+            return (
+              <div>                
+		{wizardNavigation(2)}
+		{AddLogorow()}	
+                <div class='e1container'>
+
+                  {AddNewBlock('temp1',this.state.temp1,this.myChangeHandler,'1','row epaddingbottom10', this.state.secondStepDropdown)}
+                  {AddNewBlock('temp2',this.state.temp2,this.myChangeHandler,'2','row epaddingbottom10', this.state.secondStepDropdown)}
+                  {AddNewBlock('temp3',this.state.temp3,this.myChangeHandler,'3','row epaddingbottom10', this.state.secondStepDropdown)}
+                  {AddNewBlock('temp4',this.state.temp4,this.myChangeHandler,'4','row epaddingbottom10', this.state.secondStepDropdown)}
+
+
+                  {AddCustomFieldBlock('temp5FieldLabel','temp5DataType','temp5Length', 'temp5Button' ,this.state.temp5FieldLabel, this.state.temp5DataType, this.state.temp5Length,this.myChangeHandler, this.updateCustomFieldObject,this.state.Field5Css, '5')}
+                  {AddCustomFieldBlock('temp6FieldLabel','temp6DataType','temp6Length','temp6Button' ,this.state.temp6FieldLabel, this.state.temp6DataType, this.state.temp6Length ,this.myChangeHandler, this.updateCustomFieldObject,this.state.Field6Css, '6')}
+                  {AddCustomFieldBlock('temp7FieldLabel','temp7DataType','temp7Length','temp7Button' ,this.state.temp7FieldLabel, this.state.temp7DataType, this.state.temp7Length,this.myChangeHandler, this.updateCustomFieldObject,this.state.Field7Css, '7')}
+                  {AddCustomFieldBlock('temp8FieldLabel','temp8DataType','temp8Length','temp8Button' ,this.state.temp8FieldLabel, this.state.temp8DataType, this.state.temp8Length,this.myChangeHandler, this.updateCustomFieldObject,this.state.Field8Css, '8')}
+                  {AddCustomFieldBlock('temp9FieldLabel','temp9DataType','temp9Length','temp9Button' ,this.state.temp9FieldLabel, this.state.temp9DataType, this.state.temp9Length,this.myChangeHandler, this.updateCustomFieldObject,this.state.Field9Css, '9')}
+                  {AddCustomFieldBlock('temp10FieldLabel','temp10DataType','temp10Length','temp10Button' ,this.state.temp10FieldLabel, this.state.temp10DataType, this.state.temp10Length,this.myChangeHandler, this.updateCustomFieldObject,this.state.Field10Css, '10')}
+
+
+
+                  
+
+                  <div class='row epaddingbottom10'>
+                      <div class='col-md-1 elRowPg1'></div>
+                      <div class='col-md-10'>
+                          <button onClick={this.handleNewFieldClick} class='btn btn-link e1butonfontsize float-left btn-xs'> + Add New Field</button>
+                      </div>
+                        
+                      <div class='col-md-1'></div>
+                  </div>
+                  <div class='row epaddingbottom10'>
+                      <div class='col-md-1'></div>
+                      <div class='col-md-10'>
+                        <span id="valMsgPageTwo"></span>
+                      </div>
+                      <div class='col-md-1'></div>
+                  </div>
+
+                  <hr class='e1linecolor'/>
+                </div>
+                {AddButtonBlock(this.handleChangeCancel,this.handleChangeNext,'Next','btn btn-primary btn-sm float-right')}
+              </div>
+            )
+          }
+          else if(this.state.page==3) {
+            return (
+              <div>
+               	{wizardNavigation(3)}
+		{AddLogorow()}
+                <div class='e1container'>
+
+                    <div class="row epaddingbottom10">
+                        <div class="col-md-11 elRowPg1">
+                            <label class='e1labelheaderPage1 margitop40px'>Hearsay Org ID</label>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    <div class="row epaddingbottom10">
+                        <div class="col-md-11 elRowPg1">
+                            <label class='e1labelvalue'>{this.state.orgid}</label>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+
+                    <div class="row epaddingbottom10">
+                        <div class="col-md-11 elRowPg1">
+                            <label class='e1labelheaderPage1 margitop40px'>Hearsay Reference ID</label>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    <div class="row epaddingbottom10">
+                        <div class="col-md-11 elRowPg1">
+                            <label class='e1labelvalue'>{this.state.reftext}</label>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+
+
+                    <div class="row epaddingbottom10">
+                        <div class="col-md-11 elRowPg1">
+                            <label class='e1labelheaderPage1 margitop40px'>Data Config Templates</label>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    <div class="row epaddingbottom10">
+                        <div class="col-md-11 elRowPg1">
+                            <label class='e1labelvalue'>{this.state.temp1text} <br /> {this.state.temp2text}  <br /> {this.state.temp3text}  <br /> {this.state.temp4text}  <br />  {expandCustomFieldObject(this.state.artemp5)}  {expandCustomFieldObject(this.state.artemp6)}  {expandCustomFieldObject(this.state.artemp7)}  {expandCustomFieldObject(this.state.artemp8)}  {expandCustomFieldObject(this.state.artemp9)}  {expandCustomFieldObject(this.state.artemp10)}</label>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                </div>
+                {AddButtonBlock(this.handleChangeCancel,this.handleChangeNext,'Done','btn btn-primary btn-sm float-right')}
+              </div>
+            )
+          }          
+        }
+      }
+
+      ReactDOM.render(<HearsayPage1 />, document.getElementById('mydiv'))
+    </script>
+  </body>
+</html>
