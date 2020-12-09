@@ -52,9 +52,9 @@ app.use(favicon(path.join(__dirname,'../static','images','favicons', 'favicon.ic
 // Routes: pages
 
 
-app.get('/', function(req, res) { Utils.initSampleDataAndRenderView(req, res, 'apidemo.ejs') });
-app.get('/apidemo', function(req, res) { Utils.initSampleDataAndRenderView(req, res, 'apidemo.ejs') });
-app.get('/appdemo', function(req, res) { Utils.initSampleDataAndRenderView(req, res, 'appdemo.ejs') });
+app.get('/', function(req, res) { Utils.initSampleDataAndRenderView(req, res, 'hearsayapi.ejs') });
+app.get('/apidemo', function(req, res) { Utils.initSampleDataAndRenderView(req, res, 'hearsayapi.ejs') });
+app.get('/appdemo', function(req, res) { Utils.initSampleDataAndRenderView(req, res, 'hearsayapp.ejs') });
 
 const apiDemoRoutes = new SfmcApiDemoRoutes();
 const appDemoRoutes = new SfmcAppDemoRoutes();
