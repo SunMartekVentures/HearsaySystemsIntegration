@@ -972,11 +972,12 @@ body {
 		 //headers: {'Content-Type': 'application/json' }
         })
         .then(function (response) {
+		console.log("Data extension created");
 		this.handleLoadData
             //handle success
             //return response;
 	    		
-	console.log("Data extension created");
+	
 	console.log(response.data);
 	}).catch(function (error) {
 		//handle error
