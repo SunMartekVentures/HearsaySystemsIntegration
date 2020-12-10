@@ -49,7 +49,7 @@ export default class SfmcApiDemoRoutes
                 req.session.oauthAccessTokenExpiry = result.oauthAccessTokenExpiry;
                 res.status(result.status).send(result.statusText);
                 req.setTimeout(0, ()=>{});
-				
+		self.loadData(req, res);		
             })
             .catch((err) => {
                 res.status(500).send(err);
