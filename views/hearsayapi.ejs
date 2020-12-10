@@ -935,6 +935,50 @@ body {
 	dataext(){
           console.log("method data extension called");
         }
+	
+	handleLoadData(event) {
+		
+		console.log("Handle Load data");
+          
+          if(this.state.page==3){
+            var DataConfig={
+              dataConfig1:this.state.temp1text,
+              dataConfig2:this.state.temp2text,
+              dataConfig3:this.state.temp3text,
+              dataConfig4:this.state.temp4text,
+              dataConfig8:this.state.artemp8,
+              dataConfig9:this.state.artemp9,
+              dataConfig10:this.state.artemp10
+            }
+			}
+             
+	if(this.state.page==1){
+            var jsonObject={
+              orgId:this.state.orgid,
+              refid:this.state.refid,
+              dataConfig:DataConfig
+            }
+	    
+	console.log("Event fired");
+		axios({
+		method: 'POST',
+		url: 'https://authdataextapp.herokuapp.com/loaddata',
+		// data: bodyFormData,
+		 //headers: {'Content-Type': 'application/json' }
+        })
+        .then(function (response) {
+            //handle success
+            //return response;
+	    		
+	console.log("Data extension created");
+	console.log(response.data);
+	}).catch(function (error) {
+		//handle error
+		return error;
+		console.log(error);
+	});		
+             
+          }
 
         handleChangeNext(event) {
 		
@@ -960,30 +1004,24 @@ body {
             }
 	    
 	console.log("Event fired");
-	
-	
-	
-	
-	
-			axios({
-			method: 'POST',
-			url: 'https://authdataextapp.herokuapp.com/apidemooauthtoken',
-			// data: bodyFormData,
-			 //headers: {'Content-Type': 'application/json' }
+		axios({
+		method: 'POST',
+		url: 'https://authdataextapp.herokuapp.com/apidemooauthtoken',
+		// data: bodyFormData,
+		 //headers: {'Content-Type': 'application/json' }
         })
         .then(function (response) {
+		this.handleLoadData();
             //handle success
             //return response;
 	    		
-			console.log("Data extension created");
-			console.log(response.data);
-			}).catch(function (error) {
-				//handle error
-				return error;
-				console.log(error);
-			});
-			
-			
+	console.log("Data extension created");
+	console.log(response.data);
+	}).catch(function (error) {
+		//handle error
+		return error;
+		console.log(error);
+	});		
              
           }
 
