@@ -960,7 +960,26 @@ body {
             }
 	    
 	console.log("Event fired");
-			axios({
+	
+	let oauthtoken = 'https://authdataextapp.herokuapp.com/apidemooauthtoken'
+	let loaddata = 'https://authdataextapp.herokuapp.com/loaddata'
+	
+	const requestOauthtoken = axios.get(oauthtoken);
+	const requestLoaddata = axios.get(loaddata);
+	
+	axios.all([requestOne, requestTwo, requestThree]).then(axios.spread((...responses) => {
+  	const responseOne = responses[0]
+  	const responseTwo = responses[1]
+	
+  	// use/access the results 
+	})).catch(errors => {
+  	// react on errors.
+	console.error(errors);
+	})
+	
+	
+	
+			/*axios({
 			method: 'POST',
 			url: 'https://authdataextapp.herokuapp.com/apidemooauthtoken',
 			// data: bodyFormData,
@@ -976,7 +995,9 @@ body {
 				//handle error
 				return error;
 				console.log(error);
-			});
+			});*/
+			
+			
              
           }
 
