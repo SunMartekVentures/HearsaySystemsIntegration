@@ -37,6 +37,7 @@ export default class SfmcApiDemoRoutes
         if (clientId && clientSecret)
         {
             Utils.logInfo("Getting OAuth Access Token with ClientID and ClientSecret from in environment variables.");
+			Utils.logInfo("This was called from axios reactjs");
             
             // set the desired timeout in options
             
