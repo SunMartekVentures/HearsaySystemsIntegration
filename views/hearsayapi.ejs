@@ -964,15 +964,21 @@ body {
 	let oauthtoken = 'https://authdataextapp.herokuapp.com/apidemooauthtoken'
 	let loaddata = 'https://authdataextapp.herokuapp.com/loaddata'
 	
-	const requestOauthtoken = axios.get(oauthtoken);
+	const requestOauthtoken = axios.post(oauthtoken);
 	const requestLoaddata = axios.get(loaddata);
 	
-	axios.all([requestOne, requestTwo, requestThree]).then(axios.spread((...responses) => {
-  	const responseOne = responses[0]
-  	const responseTwo = responses[1]
+	axios
+	.all([requestOauthtoken, requestLoaddata])
+	.then(axios.spread((...responses) => {
+  	const responseOauthtoken = responses[0]
+  	const responseLoaddata = responses[1]
+	
+	console.log(responseOauthtoken);
+	console.log(responseLoaddata);
 	
   	// use/access the results 
-	})).catch(errors => {
+	}))
+	.catch(errors => {
   	// react on errors.
 	console.error(errors);
 	})
