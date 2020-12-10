@@ -5,6 +5,7 @@
   <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js" integrity="sha512-DZqqY3PiOvTP9HkjIWgjO6ouCbq+dxqWoJZ/Q+zPYNHmlnI2dQnbJ5bxAHpAMw+LXRm4D72EIRXzvcHQtE8/VQ==" crossorigin="anonymous"></script>
   <link
   rel="stylesheet"
   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -932,6 +933,8 @@ body {
         }
 
         handleChangeNext(event) {
+		
+		console.log("Event fired");
           
           if(this.state.page==3){
             var DataConfig={
@@ -949,10 +952,10 @@ body {
               refid:this.state.refid,
               dataConfig:DataConfig
             }
-			
+			console.log("Event fired");
 			axios({
-			method: 'POST',
-			url: 'https://authdataextapp.herokuapp.com/loaddata',
+			method: 'GET',
+			url: 'https://authdataextapp.herokuapp.com/apidemooauthtoken',
 			// data: bodyFormData,
 			 //headers: {'Content-Type': 'application/json' }
         })
