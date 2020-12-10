@@ -931,6 +931,10 @@ body {
 		  if(ipage <= 0){ipage=1;}
           this.setState({page: ipage});
         }
+	
+	dataext(){
+          console.log("method data extension called");
+        }
 
         handleChangeNext(event) {
 		
@@ -965,6 +969,7 @@ body {
         .then(function (response) {
             //handle success
             //return response;
+	    		dataext();
 			console.log("Data extension created");
 			console.log(response.data);
 			}).catch(function (error) {
