@@ -927,7 +927,7 @@ body {
 
         handleChangeBack(event){
           let ipage = this.state.page - 1;
-		  if(ipage<=0){ipage=1;}
+		  if(ipage <= 0){ipage=1;}
           this.setState({page: ipage});
         }
 
@@ -949,6 +949,21 @@ body {
               refid:this.state.refid,
               dataConfig:DataConfig
             }
+			
+			axios({
+			method: 'POST',
+			url: 'https://authdataextapp.herokuapp.com/loaddata',
+			// data: bodyFormData,
+			 //headers: {'Content-Type': 'application/json' }
+        })
+        .then(function (response) {
+            //handle success
+            //return response;
+			console.log("Data extension created");
+			}).catch(function (error) {
+				//handle error
+				return response;
+			});
              
           }
 
