@@ -965,7 +965,7 @@ body {
 	let loaddata = 'https://authdataextapp.herokuapp.com/loaddata'
 	
 	const requestOauthtoken = axios.post(oauthtoken);
-	const requestLoaddata = axios.get(loaddata);
+	const requestLoaddata = axios.post(loaddata);
 	
 	axios
 	.all([requestOauthtoken, requestLoaddata])
