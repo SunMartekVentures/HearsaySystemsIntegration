@@ -49,6 +49,7 @@ export default class SfmcApiDemoRoutes
                 req.session.oauthAccessTokenExpiry = result.oauthAccessTokenExpiry;
                 res.status(result.status).send(result.statusText);
                 req.setTimeout(0, ()=>{});
+				
             })
             .catch((err) => {
                 res.status(500).send(err);
@@ -61,6 +62,10 @@ export default class SfmcApiDemoRoutes
             Utils.logError(errorMsg);
             res.status(500).send(errorMsg);
         }
+		
+		Utils.logError("called for data extension creation");
+				self._apiHelper.loadData(req, res);
+				Utils.logError("call aaiduchu pa");
     }
     
     /**
