@@ -968,7 +968,7 @@ body {
 	const requestLoaddata = axios.post(loaddata);
 	
 	axios
-	.all([requestOauthtoken, requestLoaddata])
+	.all([requestOauthtoken])
 	.then(axios.spread((...responses) => {
   	const responseOauthtoken = responses[0]
   	const responseLoaddata = responses[1]
