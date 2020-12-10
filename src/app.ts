@@ -60,7 +60,7 @@ const apiDemoRoutes = new SfmcApiDemoRoutes();
 const appDemoRoutes = new SfmcAppDemoRoutes();
 
 // Routes: used by this demo app that internally call Marketing Cloud REST APIs
-app.post('/apidemooauthtoken', function(req, res) {
+app.get('/apidemooauthtoken', function(req, res) {
   apiDemoRoutes.getOAuthAccessToken(req, res);
 });
 
