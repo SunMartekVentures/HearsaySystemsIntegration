@@ -32,7 +32,7 @@ export default class SfmcApiHelper
             'client_secret': clientSecret
         };
 
-        return self.getOAuthTokenHelper(headers, postBody);
+         self.getOAuthTokenHelper(headers, postBody);
     }
 
     /**
