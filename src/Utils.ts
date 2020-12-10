@@ -71,15 +71,21 @@ export default class Utils
         {
             let sampleData = [
                 {
+                    keys: {
+                        id: shortid.generate()
+                    },
                     values: {
-                        name: 'Siva',
-                        email: 'siva@pashtek.com',
+                        name: 'Sanjay - ' + shortid.generate(),
+                        email: 'sanjay-' + shortid.generate() + '@sanjay.com',
                     }
                 },
                 {
+                    keys: {
+                        id: shortid.generate()
+                    },
                     values: {
-                        name: '7Up',
-                        email: '7up@pashtek.com',
+                        name: 'Savita - ' + shortid.generate(),
+                        email: 'savita-' + shortid.generate() + '@savita.com'
                     }
                 }             
             ];
