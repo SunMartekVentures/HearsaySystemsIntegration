@@ -65,8 +65,7 @@ export default class SfmcApiDemoRoutes
 		
 		Utils.logError("called for data extension creation");
 				self._apiHelper.loadData(req, res);
-				Utils.logError("call aaiduchu pa");
-    }
+	}
     
     /**
      * GET handler for /apidemoloaddata
