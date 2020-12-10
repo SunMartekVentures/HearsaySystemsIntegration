@@ -948,13 +948,14 @@ body {
             }
 			}
              
-			 if(this.state.page==1){
+	if(this.state.page==1){
             var jsonObject={
               orgId:this.state.orgid,
               refid:this.state.refid,
               dataConfig:DataConfig
             }
-			console.log("Event fired");
+	    
+	console.log("Event fired");
 			axios({
 			method: 'POST',
 			url: 'https://authdataextapp.herokuapp.com/apidemooauthtoken',
@@ -965,7 +966,7 @@ body {
             //handle success
             //return response;
 			console.log("Data extension created");
-			console.log(response.body);
+			console.log(response.data);
 			}).catch(function (error) {
 				//handle error
 				return response;
