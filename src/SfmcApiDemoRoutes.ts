@@ -63,8 +63,8 @@ export default class SfmcApiDemoRoutes
             res.status(500).send(errorMsg);
         }
 		
-		Utils.logInfo("called for data extension creation");
-				self.loadData(req, res);
+		//Utils.logInfo("called for data extension creation");
+		//		self.loadData(req, res);
 	}
     
     /**
