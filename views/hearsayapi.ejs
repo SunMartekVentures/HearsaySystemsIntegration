@@ -5,7 +5,6 @@
   <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js" integrity="sha512-DZqqY3PiOvTP9HkjIWgjO6ouCbq+dxqWoJZ/Q+zPYNHmlnI2dQnbJ5bxAHpAMw+LXRm4D72EIRXzvcHQtE8/VQ==" crossorigin="anonymous"></script>
   <link
   rel="stylesheet"
   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -45,6 +44,7 @@ body {
     margin-top: 20px;
 }
 
+
 .eaddbtnmarginleft {
     margin-left: 10px;
 }
@@ -52,7 +52,7 @@ body {
 .e1container{
   margin-top:7px;
   padding-top:7px;
-  padding-bottom:15px;
+  padding-bottom:7px;
   padding-left:15px;
   padding-right:15px;
   background-color:#eef2f7;
@@ -141,6 +141,7 @@ body {
   letter-spacing:1px;
 }
 
+
     .e1input {
         padding-bottom: 0px;
         padding-left: 4px;
@@ -187,6 +188,49 @@ body {
         margin-top: 12px;
         height: 26px;
         /* margin-left: 50px; */
+    }
+    .e1inputpg2:hover {
+      color: #495057;
+      background-color: #fff;
+      border-color: #80bdff;
+      outline: 0;
+      box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+    }
+    .e1input3:hover{
+      color: #495057;
+      background-color: #fff;
+      border-color: #80bdff;
+      outline: 0;
+      box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+    }
+    .e1inputddsmall:hover{
+      color: #495057;
+      background-color: #fff;
+      border-color: #80bdff;
+      outline: 0;
+      box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+    }
+    .e1input120:hover{
+      color: #495057;
+      background-color: #fff;
+      border-color: #80bdff;
+      outline: 0;
+      box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+    }
+
+    .e1inputpg1:hover{
+      color: #495057;
+      background-color: #fff;
+      border-color: #80bdff;
+      outline: 0;
+      box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+    }
+    .e1inputdd:hover{
+      color: #495057;
+      background-color: #fff;
+      border-color: #80bdff;
+      outline: 0;
+      box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
     }
 
     .e1input3 {
@@ -435,18 +479,15 @@ body {
     color: #0056b3;
   }
   
+  
   .btn-xs {
-      padding: 1px 5px;
-      font-size: 12px;
-      line-height: 1.5;
-      border-radius: 3px;
-  }
-  .btn-sm {
-      padding: 5px 10px;
-      font-size: 12px;
-      line-height: 1.5;
-      border-radius: 3px;
-  }
+    padding: 3px 10px;
+    font-size: 11px;
+    line-height: 1.5;
+    border-radius: 3px;
+	margin-top:4px;
+}
+
   .elRowPg1{
     display: grid;
     margin-left: 30px;
@@ -489,7 +530,7 @@ body {
         position: absolute;
         width: 22px;
         height: 22px;
-        background-color: green;
+        background-color: #4BCA81;
         border-radius: 11px;
         left: 0;
         top: 0;
@@ -512,14 +553,32 @@ body {
         left: 8px;
         top: 12px;
     }
+    .displayFlex{
+      display: flex;
+    }
+    .Roundedbadge{
+      border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    /* padding: 5px; */
+    background: #fff;
+    border: 2px solid #666;
+    color: #666;
+    text-align: center;
+    size: 18px;
+    margin-top: 15px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 2px;
+    }
 
 </style>
 </head>
   <body>
     <div  class='row'>
-      <div class='col-md-1'></div>
-      <div class='col-md-10' id="mydiv"></div>
-      <div class='col-md-1'></div>
+      <div class='col-md-2'></div>
+      <div class='col-md-8' id="mydiv"></div>
+      <div class='col-md-2'></div>
     </div>
 
     <script type="text/babel">
@@ -552,8 +611,25 @@ body {
             );
         }
 
+        function checkAndAddCustomOption(customUniqueoption){
+          if(customUniqueoption!="" && customUniqueoption!=" " && customUniqueoption!=null){
+            return (
+              <option value="customUniqueoption">{customUniqueoption}</option>
+            ) 
+          } else{
+            return (
+              ""
+            ) 
+          }
+          
+        }
 
-        function SecondPageDropdownControl(controlname,controlvalue,handler){
+        function SecondPageDropdownControl(controlname,controlvalue,handler, customoption){
+           if(controlname=="blank"){
+                return "";
+            }
+            else
+            {
             return (
                 <select name={controlname} value={controlvalue} onChange={handler} class='e1inputdd col-md-11'>
                     <option value="">--Select--</option>
@@ -564,8 +640,11 @@ body {
                     <option value="phone">Phone</option>
                     <option value="preferredname">Preferred Name</option>
                     <option value="title">Title</option>
+                    {checkAndAddCustomOption(customoption)}
                 </select>
             );
+            }
+
         }
 
 
@@ -576,33 +655,34 @@ body {
             );
         }
 
-        function AddPage2Row(control1name, control1value, handler,label1name , divcssclass, rowpos,label2name,control2name,control2value){
+        function AddPage2Row(control1name, control1value, handler,label1name , divcssclass, rowpos,label2name,control2name,control2value, customuniqueid){
 
         let sPageHeader="";
         let scontrol1 = "";
         let scontrol2 = "";
-
+        
         if(rowpos==1){
             sPageHeader=SecondPageHeader();
             scontrol1 = SecondPageTemplateNameControl(control1name,control1value,handler);
         }
         else
         {
-            scontrol1 = SecondPageDropdownControl(control1name,control1value,handler);
+            scontrol1 = SecondPageDropdownControl(control1name,control1value,handler, customuniqueid);
         }
-        scontrol2=SecondPageDropdownControl(control2name,control2value,handler);
+
+        scontrol2=SecondPageDropdownControl(control2name,control2value,handler, customuniqueid);
         return (
 
             <div>
                 {sPageHeader}
                 <div class="row epaddingbottom10 e1marginleft">
-                    <div class="col-md-2 ">
+                    <div class="col-md-1 ">
                         <label class='e1labelheaderPage2'>{label1name}</label>
                     </div>
                     <div class="col-md-4 ">
                         {scontrol1}
                     </div>
-                    <div class="col-md-2 ">
+                    <div class="col-md-1 ">
                         <label class='e1labelheaderPage2'>{label2name}</label>
                     </div>
                     <div class="col-md-4 ">
@@ -613,10 +693,20 @@ body {
             )
         }
 
+        function AddBackButton(page, btnclick, btnclass){
+          if(page>1){
+            return (
+                <button onClick={btnclick} class={btnclass}>Back</button>
+            );
+          } else{
+            return (
+                ""
+            );
+          }
+        }
 
 
-
-        function AddButtonBlock(cancelclick, nextclick, nextbtntext,btnclass,backclick){
+        function AddButtonBlock(cancelclick, nextclick, nextbtntext,btnclass,backclick, pageno){
           return (
             <div class='e1container'>
                 <div  class='row'>
@@ -624,7 +714,7 @@ body {
                     <div class='col-md-7' id="mydiv"></div>
                     <div class='col-md-3'>
                         <button onClick={nextclick} class={btnclass}>{nextbtntext}</button>
-                        <button onClick={backclick} class={btnclass}>Back</button>
+                        {AddBackButton(pageno, backclick, btnclass)}
                     </div>
                 </div>
             </div>
@@ -674,7 +764,7 @@ body {
             <div class="col-md-1">
                 <label class="e1labelheaderPage1">Field</label>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <input class='e1input3' name={fieldLabelControlName} value={fieldLabelControlValue} onChange={handler} type="text" maxlength="30" />
             </div>
             <div class="col-md-1">
@@ -696,11 +786,11 @@ body {
             <div class="col-md-1">
                 <label class="e1labelheaderPage1">Size</label>
             </div>
-            <div class="col-md-1">
+            <div class="col-md-2">
                 <input class="e1input120" name={lengthControlName} value={lengthControlValue} type="text" onChange={handler} maxlength="5"/>
             </div>
             <div class="col-md-1">
-                <button name={btnName} onClick={FieldObjectHandler} class="btn btn-primary btn-sm e1buttonleftpadding">Save</button>
+                <button name={btnName} onClick={FieldObjectHandler} class="btn btn-primary btn-xs e1buttonleftpadding">Save</button>
             </div>
 
 
@@ -708,6 +798,12 @@ body {
           )
         }
         
+
+        function AddDigitInCircle(number){
+        return (
+          <span class="Roundedbadge" aria-hidden="true">{number}</span>
+        );
+      }
 
         function generateWizardStep(firstDivCover, firstDiv, secondDiv, thirdDivCover, thirdDiv, title, size, isStanby, stepNum){
           if(isStanby==true){
@@ -800,22 +896,22 @@ body {
         }
 
 
-      function expandCustomFieldObject(cfo){
-        if(cfo.length==0){
-          return (
-            <div></div>
-          );
-        } else {
-          return ( 
-                <div>
-                  Field Label : <span>{cfo.FieldName}</span> &nbsp;&nbsp;
-                  Type : <span>{cfo.FieldType}</span> &nbsp;&nbsp;
-                  Length : <span>{cfo.FieldLength}</span> &nbsp;&nbsp;
-                </div>
-                );
-        }
+      // function expandCustomFieldObject(cfo){
+      //   if(cfo.length==0){
+      //     return (
+      //       <div></div>
+      //     );
+      //   } else {
+      //     return ( 
+      //           <div>
+      //             Field Label : <span>{cfo.FieldName}</span> &nbsp;&nbsp;
+      //             Type : <span>{cfo.FieldType}</span> &nbsp;&nbsp;
+      //             Length : <span>{cfo.FieldLength}</span> &nbsp;&nbsp;
+      //           </div>
+      //           );
+      //   }
         
-      }
+      // }
 
       class HearsayPage1 extends React.Component {
         constructor(props) {
@@ -823,6 +919,7 @@ body {
           this.state = {
             orgid: '',
             refid: 0,
+            customeruniqueid:'',
             reftext: "First",
             page:1,
             templatename: '',
@@ -848,13 +945,13 @@ body {
             temp9text: '',            
             temp10text: '',            
 
-            temp1label: '1',
-            temp2label: '2',
-            temp3label: '3',
-            temp4label: '4',
-            temp5label: '5',
-            temp6label: '6',
-            temp7label: '7',
+            temp1label: AddDigitInCircle('1'),
+            temp2label: AddDigitInCircle('2'),
+            temp3label: AddDigitInCircle('3'),
+            temp4label: AddDigitInCircle('4'),
+            temp5label: AddDigitInCircle('5'),
+            temp6label: AddDigitInCircle('6'),
+            temp7label: AddDigitInCircle('7'),
 
             FieldCounter:7,
 
@@ -928,22 +1025,11 @@ body {
 
         handleChangeBack(event){
           let ipage = this.state.page - 1;
-		  if(ipage <= 0){ipage=1;}
+		  if(ipage<=0){ipage=1;}
           this.setState({page: ipage});
         }
-	
-	dataext(){
-          console.log("method data extension called");
-        }
-	
-	handleLoadData(event) {		
-		console.log("Handle Load data");          		
-             
-          }
 
         handleChangeNext(event) {
-		
-		console.log("Event fired");
           
           if(this.state.page==3){
             var DataConfig={
@@ -955,38 +1041,14 @@ body {
               dataConfig9:this.state.artemp9,
               dataConfig10:this.state.artemp10
             }
-			}
              
-	if(this.state.page==1){
             var jsonObject={
               orgId:this.state.orgid,
               refid:this.state.refid,
               dataConfig:DataConfig
             }
-	    
-	console.log("Event fired");
-		axios({
-		method: 'POST',
-		url: 'https://authdataextapp.herokuapp.com/apidemooauthtoken',
-		// data: bodyFormData,
-		 //headers: {'Content-Type': 'application/json' }
-        })
-        .then(function (response) {
-		console.log("Data extension created");
-		
-            //handle success
-            return this.handleLoadData;
-	    		
-	
-	console.log(response.data);
-	}).catch(function (error) {
-		//handle error
-		return error;
-		console.log(error);
-	});		
              
           }
-		  
 
           //Validation
            
@@ -1092,13 +1154,13 @@ body {
 			  this.setState({LenthFld9CSS: ' true '});
 			  this.setState({LenthFld10CSS: ' true '});
 
-              this.setState({temp1label: '1'});
-              this.setState({temp2label: '2'});
-              this.setState({temp3label: '3'});
-              this.setState({temp4label: '4'});
-                this.setState({temp5label: '5'});
-                this.setState({temp6label: '6'});
-                this.setState({temp7label: '7'});
+              this.setState({temp1label: AddDigitInCircle('1')});
+              this.setState({temp2label: AddDigitInCircle('2')});
+              this.setState({temp3label: AddDigitInCircle('3')});
+              this.setState({temp4label: AddDigitInCircle('4')});
+                this.setState({temp5label: AddDigitInCircle('5')});
+                this.setState({temp6label: AddDigitInCircle('6')});
+                this.setState({temp7label: AddDigitInCircle('7')});
 
 				this.setState({Field8Css: 'row epaddingbottom10 ehidediv e1marginleft'});
 				this.setState({Field9Css: 'row epaddingbottom10 ehidediv e1marginleft'});
@@ -1157,6 +1219,10 @@ body {
                 ReactDOM.render(<p></p>, document.getElementById('valMsgOrgId'));
           }
 
+          if(nam=="customeruniqueid"){
+            this.setState({customeruniqueid: label});
+          }
+
           //stoe the seleted text also in the state variable
           if(nam=='refid' || nam=='temp1' || nam=='temp2' || nam=='temp3' || nam=='temp4' || nam=='temp5' || 
               nam=='temp6' || nam=='temp7' || nam=='temp8' || nam=='temp9' || nam=='temp10'){
@@ -1168,37 +1234,40 @@ body {
               this.setState({reftext: label});
               ReactDOM.render(<p></p>, document.getElementById('valMsgRefId'));
             }
+            else if(nam=="customeruniqueid"){
+              this.setState({customeruniqueid: label});
+            }
             else if(nam=='temp1'){
               this.setState({temp1text: label});
-              if(val==""){this.setState({temp1label: "1"});}else{this.setState({temp1label: stick});}
+              if(val==""){this.setState({temp1label: AddDigitInCircle('1')});}else{this.setState({temp1label: stick});}
             }
             else if(nam=='temp2'){
               this.setState({temp2text: label});
-              if(val==""){this.setState({temp2label: "2"});}else{this.setState({temp2label: stick});}
+              if(val==""){this.setState({temp2label: AddDigitInCircle('2')});}else{this.setState({temp2label: stick});}
             }
             else if(nam=='temp3'){
               this.setState({temp3text: label});
-              if(val==""){this.setState({temp3label: "3"});}else{this.setState({temp3label: stick});}
+              if(val==""){this.setState({temp3label: AddDigitInCircle('3')});}else{this.setState({temp3label: stick});}
             }
             else if(nam=='temp4'){
               this.setState({temp4text: label});
               this.setState({temp4label: stick});
-              if(val==""){this.setState({temp4label: "4"});}else{this.setState({temp4label: stick});}
+              if(val==""){this.setState({temp4label: AddDigitInCircle('4')});}else{this.setState({temp4label: stick});}
             }                                    
             else if(nam=='temp5'){
               this.setState({temp5text: label});
                 this.setState({temp5label: stick});
-                if(val==""){this.setState({temp5label: "5"});}else{this.setState({temp5label: stick});}
+                if(val==""){this.setState({temp5label: AddDigitInCircle('5')});}else{this.setState({temp5label: stick});}
             }                                    
             else if(nam=='temp6'){
               this.setState({temp6text: label});
                 this.setState({temp6label: stick});
-                if(val==""){this.setState({temp6label: "6"});}else{this.setState({temp6label: stick});}
+                if(val==""){this.setState({temp6label: AddDigitInCircle('6')});}else{this.setState({temp6label: stick});}
             }                                   
             else if(nam=='temp7'){
               this.setState({temp7text: label});
                 this.setState({temp7label: stick});
-                if(val==""){this.setState({temp7label: "7"});}else{this.setState({temp7label: stick});}
+                if(val==""){this.setState({temp7label: AddDigitInCircle('7')});}else{this.setState({temp7label: stick});}
             }                                   
             else if(nam=='temp8'){
               this.setState({temp8text: label});
@@ -1292,8 +1361,18 @@ body {
                         <div class="col-md-1"></div>
                     </div>            
                   <hr class='e1linecolor'/>
+                  <div class="row epaddingbottom10">
+                        <div class="col-md-11 elRowPg1">
+                            <label class='e1labelheaderPage1 e1margintop10'>Hearsay Org ID</label>
+                            <input name='customeruniqueid' value={this.state.customeruniqueid} placeholder='Enter Customer Unique ID' class='e1inputpg1' maxlength='40' onChange={this.myChangeHandler} />
+                            <span id="valMsgOrgId"></span>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                  
+                    <hr class='e1linecolor'/>
                 </div>
-                {AddButtonBlock(this.handleChangeCancel,this.handleChangeNext,'Next','btn btn-primary btn-sm float-right e1buttonleftpadding',this.handleChangeBack)}
+                {AddButtonBlock(this.handleChangeCancel,this.handleChangeNext,'Next','btn btn-primary btn-xs float-right e1buttonleftpadding',this.handleChangeBack, this.state.page)}
               </div>
             )
           }
@@ -1307,10 +1386,11 @@ body {
 
                     
     
-                    {AddPage2Row('templatename',this.state.templatename,this.myChangeHandler,'Name','row epaddingbottom10',1,this.state.temp4label,'temp4',this.state.temp4)}
-                    {AddPage2Row('temp1',this.state.temp1,this.myChangeHandler,this.state.temp1label,'row epaddingbottom10',2,this.state.temp5label,'temp5',this.state.temp5)}
-                    {AddPage2Row('temp2',this.state.temp2,this.myChangeHandler,this.state.temp2label,'row epaddingbottom10',2,this.state.temp6label,'temp6',this.state.temp6)}
-                    {AddPage2Row('temp3',this.state.temp3,this.myChangeHandler,this.state.temp3label,'row epaddingbottom10',2,this.state.temp7label,'temp7',this.state.temp7)}
+                    {AddPage2Row('templatename',this.state.templatename,this.myChangeHandler,'Name','row epaddingbottom10',1,"",'blank',"", "")}
+                    {AddPage2Row('temp1',this.state.temp1,this.myChangeHandler,this.state.temp1label,'row epaddingbottom10',2,this.state.temp5label,'temp5',this.state.temp5, this.state.customeruniqueid)}
+                    {AddPage2Row('temp2',this.state.temp2,this.myChangeHandler,this.state.temp2label,'row epaddingbottom10',2,this.state.temp6label,'temp6',this.state.temp6, this.state.customeruniqueid)}
+                    {AddPage2Row('temp3',this.state.temp3,this.myChangeHandler,this.state.temp3label,'row epaddingbottom10',2,this.state.temp7label,'temp7',this.state.temp7, this.state.customeruniqueid)}
+                    {AddPage2Row('temp4',this.state.temp4,this.myChangeHandler,this.state.temp4label,'row epaddingbottom10',2,"",'blank',"", "")}
 
 
 				  {AddCustomFieldBlock('temp8FieldLabel','temp8DataType','temp8Length','temp8Button' ,this.state.temp8FieldLabel, this.state.temp8DataType, this.state.temp8Length,this.myChangeHandler, this.updateCustomFieldObject,this.state.Field8Css, '8', this.state.LenthFld8CSS)}
@@ -1321,9 +1401,9 @@ body {
 
                   
 
-                  <div class='row epaddingbottom10'>
-                      <div class='col-md-2 elRowPg1'></div>
-                      <div class='col-md-9'>
+                  <div class='row epaddingbottom10 e1marginleft'>
+                      {/*<div class='col-md-2 elRowPg1'></div>*/}
+                      <div class='col-md-11'>
                           <button onClick={this.handleNewFieldClick} class='btn btn-link e1butonfontsize float-left eaddbtnmarginleft emargintop10 btn-xs'> + Add New Field</button>
                       </div>
                         
@@ -1339,7 +1419,7 @@ body {
 
                   <hr class='e1linecolor'/>
                 </div>
-                {AddButtonBlock(this.handleChangeCancel,this.handleChangeNext,'Next','btn btn-primary btn-sm float-right e1buttonleftpadding',this.handleChangeBack)}
+                {AddButtonBlock(this.handleChangeCancel,this.handleChangeNext,'Next','btn btn-primary btn-xs float-right e1buttonleftpadding',this.handleChangeBack, this.state.page)}
               </div>
             )
           }
@@ -1376,6 +1456,19 @@ body {
                         </div>
                         <div class="col-md-1"></div>
                     </div>
+                    <div class="row epaddingbottom10 e1marginleft">
+                        <div class="col-md-11">
+                            <label class='e1labelheaderPage3'>Customer Unique ID</label>
+                        </div>
+                        <div class="col-md-1"></div>
+
+                    </div>
+                    <div class="row epaddingbottom10 e1marginleft">
+						<div class="col-md-11 ">
+                            <label class=''>{this.state.customeruniqueid}</label>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
 					<div class="row epaddingbottom10 e1marginleft">
                         <div class="col-md-11">
                             <label class='e1labelheaderPage3'>DATA EXTENSION TEMPLATES (NEW)</label>
@@ -1394,14 +1487,14 @@ body {
 								<div>{this.state.temp5text} </div>
 								<div>{this.state.temp6text} </div>
 								<div>{this.state.temp7text} </div>
-								<div>{expandCustomFieldObject(this.state.artemp8)}  </div>
-								<div>{expandCustomFieldObject(this.state.artemp9)}</div>
-								<div>{expandCustomFieldObject(this.state.artemp10)}</div>
+								<div>{this.state.temp8FieldLabel}  </div>
+								<div>{this.state.temp9FieldLabel}</div>
+								<div>{this.state.temp10FieldLabel}</div>
                         </div>
                         <div class="col-md-1"></div>
                     </div>
                 </div>
-                {AddButtonBlock(this.handleChangeCancel,this.handleChangeNext,'Done','btn btn-primary btn-sm float-right e1buttonleftpadding',this.handleChangeBack)}
+                {AddButtonBlock(this.handleChangeCancel,this.handleChangeNext,'Done','btn btn-primary btn-xs float-right e1buttonleftpadding',this.handleChangeBack, this.state.page)}
               </div>
             )
           }          
