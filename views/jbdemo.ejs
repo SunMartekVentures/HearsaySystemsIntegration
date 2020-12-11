@@ -370,7 +370,28 @@ label {
           </div>
         )
       }
-
+      
+	function DropdownValues1(controlname, controlvalue, handler, classcss, erhandler){
+        return(
+          <div class="col-md-4 selectInput" >
+              <select name={controlname} value={controlvalue} onChange={handler} class={classcss}>
+                                  <option value="0">--Select--</option>
+                                  <option value="name">Customer Id</option>
+                                  <option value="email">Customer Name</option>
+                                  <option value="firstname">First Name</option>
+                                  <option value="lastname">Last Name</option>
+                                  <option value="title">Email Address</option>
+                                  <option value="phone">Mobile Phone</option>
+                                  <option value="birthdate">Last Purchase Date</option>
+                                  <option value="preferredname">Address</option>
+				  <option value="city">City</option>
+				  <option value="state">State</option>
+				  <option value="zip">Zip</option>
+              </select>
+              <span class="clsValidation">{erhandler}</span>
+            </div>
+        )
+      }
       
 
       function DropdownValues(controlname, controlvalue, handler, classcss, erhandler){
