@@ -29,7 +29,7 @@ body {
   margin-top:7px;
   /* margin-bottom:10px; */
   padding-top:7px;
-  padding-bottom:15px;
+  padding-bottom:7px;
   padding-left:15px;
   padding-right:15px;
   /* background-color:#eef2f7; */
@@ -81,18 +81,6 @@ body {
   border-radius: 6px;
   margin-top: 12px;
   height: 26px;
-  /* padding-bottom: 0px;
-    padding-left: 4px;
-    width: 220px;
-    border-radius: 6px;
-    height: 26px; */
-
-  /* padding-bottom:0px;
-  padding-left: 4px;
-  padding-top: 4px;
-  width:64%;
-  border-radius: 6px;
-  margin-bottom: 12px; */
 }
 .e1input3{
   padding-bottom:0px;
@@ -102,6 +90,28 @@ body {
   /* margin-left: 20px; */
   width:160px;
 }
+.e1inputpg1:hover{
+  color: #495057;
+  background-color: #fff;
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+.e1inputpg2:hover{
+  color: #495057;
+  background-color: #fff;
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+.e1input3:hover{
+  color: #495057;
+  background-color: #fff;
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
 .e1linecolor{
   color: #788592;
   background-color: #788592;
@@ -135,9 +145,9 @@ body {
   border: 1px solid #0056b3;
   color: #0056b3;
 }
-.btn-sm {
-    padding: 5px 10px;
-    font-size: 12px;
+.btn-xs {
+    padding: 3px 10px;
+    font-size: 11px;
     line-height: 1.5;
     border-radius: 3px;
 }
@@ -202,7 +212,7 @@ label {
         position: absolute;
         width: 22px;
         height: 22px;
-        background-color: green;
+        background-color: #4BCA81;
         border-radius: 11px;
         left: 0;
         top: 0;
@@ -232,6 +242,13 @@ label {
     margin-top: 12px;
     margin-bottom: 12px;
     }
+    .e1labelheaderPage2 {
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 1px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    }
     .selectInput{
       display: grid;
     }
@@ -244,13 +261,40 @@ label {
     .SecondPageLabel{
       margin-bottom: -20px;
     }
+    .Roundedbadge{
+      border-radius: 50%;
+    width: 22px;
+    height: 23px;
+    /* padding: 5px; */
+    background: #fff;
+    border: 2px solid #666;
+    color: #666;
+    text-align: center;
+    size: 18px;
+    margin-top: 15px;
+    }
+    .RoundedbadgeBlack{
+      border-radius: 50%;
+    width: 22px;
+    height: 23px;
+    /* padding: 5px; */
+    background: #666;
+    border: 2px solid #666;
+    color: #666;
+    text-align: center;
+    size: 18px;
+    margin-top: 15px;
+    }
+    .displayFlex{
+      display: flex;
+    }
 </style>
 </head>
   <body>
     <div  class='row'>
-      <div class='col-md-1'></div>
-      <div class='col-md-10' id="mydiv"></div>
-      <div class='col-md-1'></div>
+      <div class='col-md-2'></div>
+      <div class='col-md-8' id="mydiv"></div>
+      <div class='col-md-2'></div>
     </div>
 
     <script type="text/babel">
@@ -262,7 +306,21 @@ label {
         );
       }
 
-      function AddButtonBlock(cancelclick, nextclick, nextbtntext,btnclass, backclick){
+      function AddBackButton(page, btnclick, btnclass){
+          if(page>1){
+            return (
+                <button onClick={btnclick} class={btnclass}>Back</button>
+            );
+          } else{
+            return (
+                ""
+            );
+          }
+        }
+
+
+
+      function AddButtonBlock(cancelclick, nextclick, nextbtntext,btnclass, backclick, pageno){
         return (
           <div class='e1container'>
                   <div  class='row'>
@@ -270,7 +328,7 @@ label {
                     <div class='col-md-7' id="mydiv"></div>
                     <div class='col-md-3'>
                       <button onClick={nextclick} class={btnclass}>{nextbtntext}</button>
-                      <button onClick={backclick} class={btnclass}>Back</button>
+                      {AddBackButton(pageno, backclick, btnclass)}
                       </div>
                   </div>
               </div>
@@ -289,9 +347,15 @@ label {
       }
 
       function AddDigitInCircle(number){
-        return (
-          <label class="e1labelheaderPage2">{number}</label>
-        );
+        if(number=="1" || number=="2" || number=="3" || number=="4"){
+          return (
+          <span class="Roundedbadge" aria-hidden="true">{number}</span>
+          );
+        } else{
+          return (
+          <span class="RoundedbadgeBlack" aria-hidden="true"> </span>
+          );
+        }
       }
 
       function ShowLeadsActivity(labelname, fieldcontrolname,  fieldvalue, handler, divcssclass, errorhandler){
@@ -676,7 +740,7 @@ label {
                   
                               
                   <hr class='e1linecolor'/>
-                  {AddButtonBlock(this.handleCancelBtnClick,this.handleChangeNext,'Next','btn btn-primary btn-sm e1buttonleftpadding float-right', this.handleChangeBack)}
+                  {AddButtonBlock(this.handleCancelBtnClick,this.handleChangeNext,'Next','btn btn-primary btn-xs e1buttonleftpadding float-right', this.handleChangeBack, this.state.page)}
                 </div>
             
                 
@@ -686,54 +750,59 @@ label {
               <div class='e1container'>
                 {AddLogorow()}
                 <div class="row epaddingbottom10 e1marginleft">
-                  <div class="col-md-2 ">
+                  <div class="col-md-1 ">
                   </div>
                   <div class="col-md-4 SecondPageLabel">
                     <label class="e1labelheaderPage1">Journey Source</label>
                   </div>
+                  <div class="col-md-1 ">
+                  </div>
+                  <div class="col-md-4 SecondPageLabel">
+                    <label class="e1labelheaderPage1">Hearsay</label>
+                  </div>
                 </div>
                 <div class="row epaddingbottom10 e1marginleft">
-                  <div class="col-md-2 ">
+                  <div class="col-md-1 displayFlex">
                   {this.state.iconText1}
                   </div>
                     {DropdownValues("control1", this.state.control1, this.myChangeHandler, "e1inputpg2", this.state.erControl1, this.state.iconText1)}
-                  <div class="col-md-2 ">
+                  <div class="col-md-1  displayFlex">
                     {this.state.iconText5}
                   </div>
                     {DropdownValues("control5", this.state.control5, this.myChangeHandler, "e1inputpg2", this.state.erControl5)}
                 </div>
                 <div class="row epaddingbottom10 e1marginleft">
-                  <div class="col-md-2 ">
+                  <div class="col-md-1  displayFlex">
                   {this.state.iconText2}
                   </div>
                     {DropdownValues("control2", this.state.control2, this.myChangeHandler, "e1inputpg2", this.state.erControl2)}
-                  <div class="col-md-2 ">
+                  <div class="col-md-1  displayFlex">
                     {this.state.iconText6}
                   </div>
                     {DropdownValues("control6", this.state.control6, this.myChangeHandler, "e1inputpg2", this.state.erControl6)}
                 </div>
                 <div class="row epaddingbottom10 e1marginleft">
-                  <div class="col-md-2 ">
+                  <div class="col-md-1  displayFlex">
                   {this.state.iconText3}
                   </div>
                     {DropdownValues("control3", this.state.control3, this.myChangeHandler, "e1inputpg2", this.state.erControl3)}
-                  <div class="col-md-2 ">
+                  <div class="col-md-1  displayFlex">
                     {this.state.iconText7}
                   </div>
                     {DropdownValues("control7", this.state.control7, this.myChangeHandler, "e1inputpg2", this.state.erControl7)}
                 </div>
                 <div class="row epaddingbottom10 e1marginleft">
-                  <div class="col-md-2 ">
+                  <div class="col-md-1  displayFlex">
                   {this.state.iconText4}
                   </div>
                     {DropdownValues("control4", this.state.control4, this.myChangeHandler, "e1inputpg2", this.state.erControl4)}
-                  <div class="col-md-2 ">
+                  <div class="col-md-1  displayFlex">
                     {this.state.iconText8}
                   </div>
                     {DropdownValues("control8", this.state.control8, this.myChangeHandler, "e1inputpg2", this.state.erControl8)}
                 </div>
                 <hr class='e1linecolor'/>
-                  {AddButtonBlock(this.handleCancelBtnClick,this.handleChangeNext,'Done','btn btn-primary btn-sm e1buttonleftpadding float-right', this.handleChangeBack)}
+                  {AddButtonBlock(this.handleCancelBtnClick,this.handleChangeNext,'Done','btn btn-primary btn-xs e1buttonleftpadding float-right', this.handleChangeBack, this.state.page)}
                 </div>
             
                 
