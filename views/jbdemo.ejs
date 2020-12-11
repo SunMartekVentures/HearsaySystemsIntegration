@@ -1,0 +1,751 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  <link
+  rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+  integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+  crossorigin="anonymous"
+/>
+
+<!-- Icon -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+
+
+
+<style>
+
+body {
+    font-size: 13px;
+}
+.e1container{
+  margin-top:7px;
+  /* margin-bottom:10px; */
+  padding-top:7px;
+  padding-bottom:15px;
+  padding-left:15px;
+  padding-right:15px;
+  /* background-color:#eef2f7; */
+}
+.e1pageheader{
+  padding-left:10px;
+  padding-bottom:7px;
+  font-weight:bold ;
+  font-size:16px;
+  letter-spacing:1px;
+}
+.e1butonfontsize{
+  font-size:12px;
+  border-color :#0069d9 !important;
+  border-bottom-style:solid;
+}
+.e1labelheader{
+  font-size:13px;
+  letter-spacing:1px;
+  margin-top: 10px;
+}
+.e1labelheaderPage1 {
+  font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 1px;
+    margin-top: 5px;
+    margin-bottom: 12px;
+}
+.e1input{
+  padding-bottom:0px;
+  padding-left: 4px;
+  padding-top: 4px;
+  width:30%;
+  border-radius: 6px;
+  margin-left: 20px;
+}
+.e1inputpg1{
+  padding-bottom: 0px;
+  padding-left: 4px;
+  width: 220px;
+  border-radius: 6px;
+  height: 26px;
+  /* margin-left: 50px; */
+}
+.e1inputpg2{
+  padding-bottom: 0px;
+  padding-left: 4px;
+  width: 220px;
+  border-radius: 6px;
+  margin-top: 12px;
+  height: 26px;
+  /* padding-bottom: 0px;
+    padding-left: 4px;
+    width: 220px;
+    border-radius: 6px;
+    height: 26px; */
+
+  /* padding-bottom:0px;
+  padding-left: 4px;
+  padding-top: 4px;
+  width:64%;
+  border-radius: 6px;
+  margin-bottom: 12px; */
+}
+.e1input3{
+  padding-bottom:0px;
+  padding-left: 4px;
+  padding-top: 4px;
+  border-radius: 6px;
+  /* margin-left: 20px; */
+  width:160px;
+}
+.e1linecolor{
+  color: #788592;
+  background-color: #788592;
+  margin-bottom:3px;
+  margin-top: 25px;
+}
+.epaddingbottom10{
+  margin-bottom:7px;
+  padding-left: 30px;
+}
+.ehidediv{
+  display: none;
+}
+.btn-primary {
+  background-color: #fff;
+  border: 1px solid #0069d9;
+  color: #0069d9;
+}
+.btn-primary:hover {
+  background-color:#e6e6e6;
+  border: 1px solid #0056b3;
+  color: #0056b3;
+}
+.btn-primary:active {
+  background-color:#e6e6e6;
+  border: 1px solid #0056b3;
+  color: #0056b3;
+}
+.btn-primary:focus {
+  background-color:#e6e6e6;
+  border: 1px solid #0056b3;
+  color: #0056b3;
+}
+.btn-sm {
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+}
+.elRowPg1{
+  display: grid;
+  margin-left: 30px;
+}
+.elRowPg2{
+  /* display: grid; */
+   margin-left: 15px; 
+}
+label {
+    margin-bottom: 0px;
+}
+.clsValidation{
+  font-size: 13px;
+  letter-spacing: 1px;
+  color: red;
+  margin-left: 10px;
+}
+.leadActivityBlock{
+  height: 66px;
+}
+.fa-check-circle{
+  font-size: 2em;
+  color: #4BCA81;
+}
+.badge {
+  border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    padding: 5px;
+    background: #fff;
+    border: 2px solid #666;
+    color: #666;
+    text-align: center;
+    size: 18px;
+    /* display: inline-block;
+    min-width: 10px;
+    padding: 6px 9px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    background-color: #777;
+    border-radius: 10px; */
+}
+.checkmark {
+        display: inline-block;
+        width: 22px;
+        height: 22px;
+        -ms-transform: rotate(45deg); /* IE 9 */
+        -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
+        transform: rotate(45deg);
+        margin-top: 15px;
+    }
+
+    .checkmark_circle {
+        position: absolute;
+        width: 22px;
+        height: 22px;
+        background-color: green;
+        border-radius: 11px;
+        left: 0;
+        top: 0;
+    }
+
+    .checkmark_stem {
+        position: absolute;
+        width: 3px;
+        height: 9px;
+        background-color: #fff;
+        left: 11px;
+        top: 6px;
+    }
+
+    .checkmark_kick {
+        position: absolute;
+        width: 3px;
+        height: 3px;
+        background-color: #fff;
+        left: 8px;
+        top: 12px;
+    }
+    .e1labelheaderPage2 {
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 1px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    }
+    .selectInput{
+      display: grid;
+    }
+    .e1cancelbuton {
+    font-size: 12px;
+    }
+    .e1buttonleftpadding {
+        margin-left: 4px;
+    }
+    .SecondPageLabel{
+      margin-bottom: -20px;
+    }
+</style>
+</head>
+  <body>
+    <div  class='row'>
+      <div class='col-md-1'></div>
+      <div class='col-md-10' id="mydiv"></div>
+      <div class='col-md-1'></div>
+    </div>
+
+    <script type="text/babel">
+      function AddLogorow(abcd, second){
+        return (
+          <div>
+            <div><img src='https://github.com/Sivaskandharuban/authmcdataext/blob/master/views/hearsay.png?raw=true' width='50' height ='50' /><label class='e1pageheader'>Hearsay Systems</label></div>
+          </div>
+        );
+      }
+
+      function AddButtonBlock(cancelclick, nextclick, nextbtntext,btnclass, backclick){
+        return (
+          <div class='e1container'>
+                  <div  class='row'>
+                    <div class='col-md-2 pull-left'><button onClick={cancelclick} class='btn btn-link e1cancelbuton float-left'>Cancel</button></div>
+                    <div class='col-md-7' id="mydiv"></div>
+                    <div class='col-md-3'>
+                      <button onClick={nextclick} class={btnclass}>{nextbtntext}</button>
+                      <button onClick={backclick} class={btnclass}>Back</button>
+                      </div>
+                  </div>
+              </div>
+        );
+      }
+
+
+      function AddTextLabels(){
+        return (
+            <span class="checkmark">
+                <div class="checkmark_circle"></div>
+                <div class="checkmark_stem"></div>
+                <div class="checkmark_kick"></div>
+            </span>
+        );
+      }
+
+      function AddDigitInCircle(number){
+        return (
+          <label class="e1labelheaderPage2">{number}</label>
+        );
+      }
+
+      function ShowLeadsActivity(labelname, fieldcontrolname,  fieldvalue, handler, divcssclass, errorhandler){
+        return (
+          <div class={divcssclass}>
+            <div class="col-md-11 elRowPg1">
+              <label class='e1labelheaderPage1'>{labelname}</label>
+              <input name={fieldcontrolname} value={fieldvalue} class='e1inputpg1' maxlength='40' onChange={handler} />
+              <span class="clsValidation">{errorhandler}</span>
+            </div>
+            <div class="col-md-1"></div>
+          </div>
+        )
+      }
+
+      
+
+      function DropdownValues(controlname, controlvalue, handler, classcss, erhandler){
+        return(
+          <div class="col-md-4 selectInput" >
+              <select name={controlname} value={controlvalue} onChange={handler} class={classcss}>
+                                  <option value="0">--Select--</option>
+                                  <option value="name">Name</option>
+                                  <option value="email">Email</option>
+                                  <option value="firstname">First Name</option>
+                                  <option value="lastname">Last Name</option>
+                                  <option value="title">Title</option>
+                                  <option value="phone">Phone</option>
+                                  <option value="birthdate">Birth Date</option>
+                                  <option value="preferredname">Preferred Name</option>
+              </select>
+              <span class="clsValidation">{erhandler}</span>
+            </div>
+        )
+      }
+
+      class HearsayPage1 extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            integrationType:"0",
+            leadsActivity:"",
+            erIntegrationType:"",
+            erleadsActivity:"",
+            page:1,
+            /* iControl1:"badge",
+            iControl2:"badge",
+            iControl3:"badge",
+            iControl4:"badge",
+            iControl5:"badge",
+            iControl6:"badge",
+            iControl7:"badge",
+            iControl8:"badge", */
+            iconText1:AddDigitInCircle("1"),
+            iconText2:AddDigitInCircle("2"),
+            iconText3:AddDigitInCircle("3"),
+            iconText4:AddDigitInCircle("4"),
+            iconText5:AddDigitInCircle("5"),
+            iconText6:AddDigitInCircle("6"),
+            iconText7:AddDigitInCircle("7"),
+            iconText8:AddDigitInCircle("8"),
+            control1:"0",
+            control2:"0",
+            control3:"0",
+            control4:"0",
+            control5:"0",
+            control6:"0",
+            control7:"0",
+            control8:"0",
+            erControl1:"",
+            erControl2:"",
+            erControl3:"",
+            erControl4:"",
+            erControl5:"",
+            erControl6:"",
+            erControl7:"",
+            erControl8:"",
+
+            
+            
+            
+            
+            
+            fieldCss:"row epaddingbottom10 ehidediv"
+            };
+          this.handleChangeNext = this.handleChangeNext.bind(this);
+          this.handleChangeBack = this.handleChangeBack.bind(this);
+        }
+
+        handleChangeBack(event) {
+          debugger;
+          var ipage=this.state.page - 1;
+          if(ipage<=0){ipage=1;}
+          this.setState({page: ipage});
+        }
+
+        handleCancelBtnClick() {
+          alert("Cancel button clicked");
+        }
+
+        // handleChangeBack(event){
+        //   alert("Back button pressed");
+        //   debugger;
+        //   let ipage = this.state.page - 1;
+		    //   if(ipage<=0){ipage=1;}
+        //   this.setState({page: ipage});
+        // }
+
+        handleChangeNext(event) {
+          //validation
+          debugger;
+
+          if(this.state.page==1){
+            var isValidated=true;
+            if(this.state.integrationType=="0"){
+              this.setState({erIntegrationType:"Integration Type is mandatory"});
+              isValidated=false;
+            } else{
+              this.setState({erIntegrationType:""});
+            }
+
+            if(this.state.integrationType=="currentJourney"){
+              if(this.state.leadsActivity=="" ||this.state.leadsActivity==" " ||this.state.leadsActivity==null){
+                this.setState({erleadsActivity:"Leads Activity Label is mandatory"});
+                isValidated=false;
+              } else{
+                this.setState({erleadsActivity:""});
+              }
+            }
+
+            //Save Data
+            if(isValidated){
+              //alert('Done button clicked');
+              if(this.state.page==1){
+                this.setState({page:2});
+              }
+              
+            } else{
+              return false;
+            }
+          } else if(this.state.page==2){
+            var valMessage="The field is mandatory.";
+            var Page2IsValidated=true;
+            if(this.state.control1=="0"){
+              this.setState({erControl1:valMessage});
+              Page2IsValidated=false;
+            } else{
+              this.setState({erControl1:""});
+            }
+            if(this.state.control2=="0"){
+              this.setState({erControl2:valMessage});
+              Page2IsValidated=false;
+            } else{
+              this.setState({erControl2:""});
+            }
+            if(this.state.control3=="0"){
+              this.setState({erControl3:valMessage});
+              Page2IsValidated=false;
+            } else{
+              this.setState({erControl3:""});
+            }
+            if(this.state.control4=="0"){
+              this.setState({erControl4:valMessage});
+              Page2IsValidated=false;
+            } else{
+              this.setState({erControl4:""});
+            }
+            if(this.state.control5=="0"){
+              this.setState({erControl5:valMessage});
+              Page2IsValidated=false;
+            } else{
+              this.setState({erControl5:""});
+            }
+            if(this.state.control6=="0"){
+              this.setState({erControl6:valMessage});
+              Page2IsValidated=false;
+            } else{
+              this.setState({erControl6:""});
+            }
+            if(this.state.control7=="0"){
+              this.setState({erControl7:valMessage});
+              Page2IsValidated=false;
+            } else{
+              this.setState({erControl7:""});
+            }
+            if(this.state.control8=="0"){
+              this.setState({erControl8:valMessage});
+              Page2IsValidated=false;
+            } else{
+              this.setState({erControl8:""});
+            }
+
+            if(this.state.control1!="0" || this.state.control2!="0" || this.state.control3!="0" || this.state.control4!="0" || this.state.control5!="0" || this.state.control6!="0" || this.state.control7!="0" || this.state.control8!="0"){
+              
+              this.setState({integrationType:"0"});
+              this.setState({leadsActivity:""});
+              this.setState({erIntegrationType:""});
+              this.setState({erleadsActivity:""});
+              this.setState({page:1});
+              /* this.setState({iControl1:"badge"});
+              this.setState({iControl2:"badge"});
+              this.setState({iControl3:"badge"});
+              this.setState({iControl4:"badge"});
+              this.setState({iControl5:"badge"});
+              this.setState({iControl6:"badge"});
+              this.setState({iControl7:"badge"});
+              this.setState({iControl8:"badge"}); */
+              this.setState({iconText1:AddDigitInCircle("1")});
+              this.setState({iconText2:AddDigitInCircle("2")});
+              this.setState({iconText3:AddDigitInCircle("3")});
+              this.setState({iconText4:AddDigitInCircle("4")});
+              this.setState({iconText5:AddDigitInCircle("5")});
+              this.setState({iconText6:AddDigitInCircle("6")});
+              this.setState({iconText7:AddDigitInCircle("7")});
+              this.setState({iconText8:AddDigitInCircle("8")});
+              this.setState({control1:"0"});
+              this.setState({control2:"0"});
+              this.setState({control3:"0"});
+              this.setState({control4:"0"});
+              this.setState({control5:"0"});
+              this.setState({control6:"0"});
+              this.setState({control7:"0"});
+              this.setState({control8:"0"});
+              this.setState({erControl1:""});
+              this.setState({erControl2:""});
+              this.setState({erControl3:""});
+              this.setState({erControl4:""});
+              this.setState({erControl5:""});
+              this.setState({erControl6:""});
+              this.setState({erControl7:""});
+              this.setState({erControl8:""});
+              this.setState({fieldCss:"row epaddingbottom10 ehidediv"});
+              alert("Saved Successdully");
+            }
+          }
+        }
+
+
+        
+
+        myChangeHandler = (event) => {
+          let nam = event.target.name;
+          let val = event.target.value;
+          var validationMessage="The field is mandatory.";
+          debugger;
+          if(nam=="integrationType"){
+
+            if(val=="0"){
+              this.setState({erIntegrationType: "Integration Type is mandatory"});
+            } else{
+              this.setState({erIntegrationType: ""});
+            }
+
+            this.setState({integrationType: val});
+            if(val=="currentJourney"){
+              this.setState({fieldCss: "row epaddingbottom10"});
+            } else{
+              this.setState({fieldCss: "row epaddingbottom10 ehidediv"});
+            }
+          }
+
+          if(nam=="leadsActivity"){
+            if(val=="" ||val==" " || val==null ){
+              this.setState({erleadsActivity: "Leads Activity Label is mandatory"});
+            } else{
+              this.setState({erleadsActivity: ""});
+            }
+            this.setState({leadsActivity: val});
+          }
+
+          //validationMessage
+          const icon=AddTextLabels();
+          if(nam=="control1"){
+            if(val=="0"){
+              this.setState({erControl1: validationMessage});
+              this.setState({control1: "0"});
+              this.setState({iconText1:AddDigitInCircle("1")});
+            } else{
+              this.setState({erControl1: ""});
+              this.setState({control1: val});
+              
+              this.setState({iconText1:icon});
+            }
+          }
+          if(nam=="control2"){
+            if(val=="0"){
+              this.setState({erControl2: validationMessage});
+              this.setState({control2: "0"});
+              this.setState({iconText2:AddDigitInCircle("2")});
+            } else{
+              this.setState({erControl2: ""});
+              this.setState({control2: val});
+              this.setState({iconText2:icon});
+            }
+          }
+          if(nam=="control3"){
+            if(val=="0"){
+              this.setState({erControl3: validationMessage});
+              this.setState({control3: "0"});
+              this.setState({iconText3:AddDigitInCircle("3")});
+            } else{
+              this.setState({erControl3: ""});
+              this.setState({control3: val});
+              this.setState({iconText3:icon});
+            }
+          }
+          if(nam=="control4"){
+            if(val=="0"){
+              this.setState({erControl4: validationMessage});
+              this.setState({control4: "0"});
+              this.setState({iconText4:AddDigitInCircle("4")});
+            } else{
+              this.setState({erControl4: ""});
+              this.setState({control4: val});
+              this.setState({iconText4:icon});
+            }
+          }
+          if(nam=="control5"){
+            if(val=="0"){
+              this.setState({erControl5: validationMessage});
+              this.setState({control5: "0"});
+              this.setState({iconText5:AddDigitInCircle("5")});
+            } else{
+              this.setState({erControl5: ""});
+              this.setState({control5: val});
+              this.setState({iconText5:icon});
+            }
+          }
+          if(nam=="control6"){
+            if(val=="0"){
+              this.setState({erControl6: validationMessage});
+              this.setState({control6: "0"});
+              this.setState({iconText6:AddDigitInCircle("6")});
+            } else{
+              this.setState({erControl6: ""});
+              this.setState({control6: val});
+              this.setState({iconText6:icon});
+            }
+          }
+          if(nam=="control7"){
+            if(val=="0"){
+              this.setState({erControl7: validationMessage});
+              this.setState({control7: "0"});
+              this.setState({iconText7:AddDigitInCircle("7")});
+            } else{
+              this.setState({erControl7: ""});
+              this.setState({control7: val});
+              this.setState({iconText7:icon});
+            }
+          }
+          if(nam=="control8"){
+            if(val=="0"){
+              this.setState({erControl8: validationMessage});
+              this.setState({control8: "0"});
+              this.setState({iconText8:AddDigitInCircle("8")});
+            } else{
+              this.setState({erControl8: ""});
+              this.setState({control8: val});
+              this.setState({iconText8:icon});
+            }
+          }
+        }
+
+        render() {
+          if(this.state.page==1){
+            return (
+              <div class='e1container'>
+                  {AddLogorow()}
+                  <div class="row epaddingbottom10">
+                    <div class="col-md-11 elRowPg1" >
+                      <label class='e1labelheaderPage1'>Integration Type</label>
+                      <select name='integrationType' value={this.state.integrationType} onChange={this.myChangeHandler} class='e1inputpg1'>
+                          <option value="0">--Select--</option>
+                          <option value="companyTemplate">Company Template</option>
+                          <option value="currentJourney">Current Journey</option>
+                      </select>
+                      <span class="clsValidation">{this.state.erIntegrationType}</span>
+                    </div>
+                    <div class="col-md-1"></div>
+                  </div>
+                  <div class="leadActivityBlock">{ShowLeadsActivity("Leads Activity Label", "leadsActivity", this.state.leadsActivity, this.myChangeHandler, this.state.fieldCss, this.state.erleadsActivity)}</div>
+                  
+                              
+                  <hr class='e1linecolor'/>
+                  {AddButtonBlock(this.handleCancelBtnClick,this.handleChangeNext,'Next','btn btn-primary btn-sm e1buttonleftpadding float-right', this.handleChangeBack)}
+                </div>
+            
+                
+            ) 
+          } else if(this.state.page==2){
+            return (
+              <div class='e1container'>
+                {AddLogorow()}
+                <div class="row epaddingbottom10 e1marginleft">
+                  <div class="col-md-2 ">
+                  </div>
+                  <div class="col-md-4 SecondPageLabel">
+                    <label class="e1labelheaderPage1">Journey Source</label>
+                  </div>
+                </div>
+                <div class="row epaddingbottom10 e1marginleft">
+                  <div class="col-md-2 ">
+                  {this.state.iconText1}
+                  </div>
+                    {DropdownValues("control1", this.state.control1, this.myChangeHandler, "e1inputpg2", this.state.erControl1, this.state.iconText1)}
+                  <div class="col-md-2 ">
+                    {this.state.iconText5}
+                  </div>
+                    {DropdownValues("control5", this.state.control5, this.myChangeHandler, "e1inputpg2", this.state.erControl5)}
+                </div>
+                <div class="row epaddingbottom10 e1marginleft">
+                  <div class="col-md-2 ">
+                  {this.state.iconText2}
+                  </div>
+                    {DropdownValues("control2", this.state.control2, this.myChangeHandler, "e1inputpg2", this.state.erControl2)}
+                  <div class="col-md-2 ">
+                    {this.state.iconText6}
+                  </div>
+                    {DropdownValues("control6", this.state.control6, this.myChangeHandler, "e1inputpg2", this.state.erControl6)}
+                </div>
+                <div class="row epaddingbottom10 e1marginleft">
+                  <div class="col-md-2 ">
+                  {this.state.iconText3}
+                  </div>
+                    {DropdownValues("control3", this.state.control3, this.myChangeHandler, "e1inputpg2", this.state.erControl3)}
+                  <div class="col-md-2 ">
+                    {this.state.iconText7}
+                  </div>
+                    {DropdownValues("control7", this.state.control7, this.myChangeHandler, "e1inputpg2", this.state.erControl7)}
+                </div>
+                <div class="row epaddingbottom10 e1marginleft">
+                  <div class="col-md-2 ">
+                  {this.state.iconText4}
+                  </div>
+                    {DropdownValues("control4", this.state.control4, this.myChangeHandler, "e1inputpg2", this.state.erControl4)}
+                  <div class="col-md-2 ">
+                    {this.state.iconText8}
+                  </div>
+                    {DropdownValues("control8", this.state.control8, this.myChangeHandler, "e1inputpg2", this.state.erControl8)}
+                </div>
+                <hr class='e1linecolor'/>
+                  {AddButtonBlock(this.handleCancelBtnClick,this.handleChangeNext,'Done','btn btn-primary btn-sm e1buttonleftpadding float-right', this.handleChangeBack)}
+                </div>
+            
+                
+            ) 
+          }
+                 
+        }
+      }
+
+      
+
+      ReactDOM.render(<HearsayPage1 />, document.getElementById('mydiv'))
+    </script>
+  </body>
+</html>
