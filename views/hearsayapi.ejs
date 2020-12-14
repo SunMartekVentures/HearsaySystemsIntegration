@@ -445,10 +445,16 @@
           this.handleChangeCancel = this.handleChangeCancel.bind(this);
           this.handleNewFieldClick = this.handleNewFieldClick.bind(this);
         }
+	
+	function loaddata(){
+	console.log("load data function called");
+	}
 
         componentDidMount() {
 
         }
+	
+	 
 
         handleNewFieldClick(event){
           const counter=this.state.FieldCounter+1;
@@ -516,7 +522,8 @@
                   .then(function (response) {
                   //handle success
                   //return response;	
-		  console.log(response.data);
+		  //console.log(response.data);
+		  loaddata();
                   });
 		  }
              
