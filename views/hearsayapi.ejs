@@ -352,6 +352,18 @@
 	
 	function loaddata(){
 	console.log("load data function called");
+	
+	axios({
+			          method: 'POST',
+			          url: 'https://authdataextapp.herokuapp.com/loaddata',
+			          // data: bodyFormData,
+			          //headers: {'Content-Type': 'application/json' }
+                })
+                  .then(function (response) {
+                  //handle success
+                  //return response;	
+		  console.log(response.data);		  
+                  });
 	}
 
 
