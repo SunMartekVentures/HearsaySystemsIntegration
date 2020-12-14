@@ -56,7 +56,6 @@ app.get('/', function(req, res) { Utils.initSampleDataAndRenderView(req, res, 'h
 app.get('/apidemo', function(req, res) { Utils.initSampleDataAndRenderView(req, res, 'hearsayapi.ejs') });
 app.get('/appdemo', function(req, res) { Utils.initSampleDataAndRenderView(req, res, 'hearsayapp.ejs') });
 app.get('/jbdemo', function(req, res) { Utils.initSampleDataAndRenderView(req, res, 'jbdemo.ejs') });
-app.get('/', function(req, res) { Utils.initSampleDataAndRenderView(req, res, 'hearsay.css') });
 
 const apiDemoRoutes = new SfmcApiDemoRoutes();
 const appDemoRoutes = new SfmcAppDemoRoutes();
