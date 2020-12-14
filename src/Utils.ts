@@ -85,8 +85,8 @@ export default class Utils
                         id: shortid.generate()
                     },
                     values: {
-                        orgId : 'Sanjay - ' + shortid.generate(),
-                        referenceField: 'sanjay-' + shortid.generate() + '@sanjay.com'
+                        orgId : 'siva - ' + shortid.generate(),
+                        referenceField: 'siva-' + shortid.generate() + '@siva.com'
                     }
                 }             
             ];
