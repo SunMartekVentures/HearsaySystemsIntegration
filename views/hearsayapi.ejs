@@ -493,6 +493,7 @@
               dataConfig10:this.state.artemp10
             }
              
+	      if(this.state.page==1){
             var jsonObject={
               orgId:this.state.orgid,
               refid:this.state.refid,
@@ -512,6 +513,7 @@
                   //return response;	
 		  console.log(response.data);
                   });
+		  }
              
           }
 
