@@ -585,7 +585,7 @@ body {
         function AddLogorow(abcd, second){
           return (
                 <div class="e1logorowpadding">
-                    <div><img src="https://github.com/Sivaskandharuban/authmcdataext/blob/master/views/hearsay.png?raw=true" width='50' height='50' /><label class='e1pageheader'>Hearsay Systems - Organization Preferences</label></div>
+                    <div><img src='hearsay.png' width='50' height='50' /><label class='e1pageheader'>Hearsay Systems - Organization Preferences</label></div>
                 </div>);
         }
 
@@ -1047,10 +1047,10 @@ body {
               refid:this.state.refid,
               dataConfig:DataConfig
             }
-
-            axios({
+			
+			axios({
 			          method: 'GET',
-			          url: 'https://dataintapicall.herokuapp.com/api/apidemooauthtoken',
+			          url: 'https://authdataextapp.herokuapp.com/api/apidemooauthtoken',
 			          // data: bodyFormData,
 			          //headers: {'Content-Type': 'application/json' }
                 })
