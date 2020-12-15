@@ -365,6 +365,24 @@
 		  console.log(response.data);		  
                   });
 	}
+	
+	function loaddataforpage2(jsonObject){	
+	
+	console.log("load data for page 2 function called");
+	
+	
+	axios({
+			          method: 'POST',
+			          url: 'https://dataintapicall.herokuapp.com/loaddatafortemp',
+			           data: jsonObject,
+			          headers: {'Content-Type': 'application/json' }
+                })
+                  .then(function (response) {
+                  //handle success
+                  //return response;	
+		  console.log(response.data);		  
+                  });
+	}
 
 
       // function expandCustomFieldObject(cfo){
@@ -528,7 +546,7 @@
 	    	}
 	    ];
 		
-		loaddata(DataConfig);
+		loaddataforpage2(DataConfig);
 	    }
 	    
 	    
