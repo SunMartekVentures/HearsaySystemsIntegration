@@ -348,22 +348,10 @@
             }
         }
 	
-	function loaddata(jsonObject){
+	function loaddata(jsonObject){	
+	
 	console.log("load data function called");
 	
-	var hearsayOrgId = jsonObject.orgid;
-	var hearsayRefId = jsonObject.refid;
-	var CUID = jsonObject.cuid;
-	
-	
-	
-	console.log("getting values from fields : " + hearsayOrgId + hearsayRefId + CUID);
-	
-	//var ={
-             // orgId:this.state.orgid,
-             // refid:this.state.refid,
-             // cuid:this.state.customeruniqueid
-           // }
 	
 	axios({
 			          method: 'POST',
@@ -518,20 +506,34 @@
 
         handleChangeNext(event) {
           
-          if(this.state.page==3){
-            var DataConfig={
-              dataConfig1:this.state.temp1text,
-              dataConfig2:this.state.temp2text,
-              dataConfig3:this.state.temp3text,
-              dataConfig4:this.state.temp4text,
-              dataConfig8:this.state.artemp8,
-              dataConfig9:this.state.artemp9,
-              dataConfig10:this.state.artemp10
-            }
+          if(this.state.page==2){
+            var DataConfig=[
+	    
+	    {
+                    keys: {
+                        Name : this.state.templatename,
+                    },
+		    values: {
+              		option1:this.state.temp1text,
+              		option2:this.state.temp2text,
+              		option3:this.state.temp3text,
+			option4:this.state.temp4text,
+	      		option5:this.state.temp5text,
+	      		option6:this.state.temp6text,
+	      		option7:this.state.temp7text,
+             		option8:this.state.temp8FieldLabel,
+              		option9:this.state.temp9FieldLabel,
+              		option10:this.state.temp10FieldLabel
+            		}
+	    	}
+	    ];
+		
+		loaddata(DataConfig);
 	    }
+	    
+	    
              
-	      if(this.state.page==1){
-	      
+	      if(this.state.page==1){	      
 	      let jsonObject = [
                 {
                     keys: {
@@ -542,16 +544,9 @@
               		cuid:this.state.customeruniqueid                        
                     }
                 }                   
-            ];
-	      
-            /*var jsonObject={
-              orgid:this.state.orgid,
-              refid:this.state.refid,
-              cuid:this.state.customeruniqueid
-            }*/
+            ];            
 	    
-	    console.log("Before axios");
-	    
+	    console.log("Before axios");	    
 	    axios({
 			          method: 'POST',
 			          url: 'https://dataintapicall.herokuapp.com/apidemooauthtoken', 
@@ -567,6 +562,7 @@
 		  
                   });
 		  }
+		  
              
           
 
@@ -636,7 +632,7 @@
               this.setState({temp4: '1'});
               this.setState({temp5: '1'});
               this.setState({templatename: ''});
-			  this.setState({customeruniqueid: ''});
+	      this.setState({customeruniqueid: ''});
 			  
 			  
 			  
