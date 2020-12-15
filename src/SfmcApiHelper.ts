@@ -6,8 +6,9 @@ import Utils from './Utils';
 
 export default class SfmcApiHelper
 {
-    // Instance variables    
-    private _deExternalKey = "OrgSetup";
+    // Instance variables 
+    
+    private _deExternalKey = " ";
     private _sfmcDataExtensionApiUrl = "https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.rest.marketingcloudapis.com/hub/v1/dataevents/key:" + this._deExternalKey + "/rowset";
     
     
@@ -118,6 +119,7 @@ export default class SfmcApiHelper
         let self = this;
         let sessionId = req.session.id;
         Utils.logInfo("loadData entered. SessionId = " + sessionId);
+        Utils.logInfo("page 1 " + req,session.page1);
 
         if (req.session.oauthAccessToken)
         {
