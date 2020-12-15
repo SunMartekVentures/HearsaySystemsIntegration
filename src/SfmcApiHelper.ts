@@ -9,7 +9,7 @@ export default class SfmcApiHelper
     // Instance variables 
     private _deExternalKey = "";
     private page1 = true;
-   
+    private _sfmcDataExtensionApiUrl = "https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.rest.marketingcloudapis.com/hub/v1/dataevents/key:" + this._deExternalKey + "/rowset";
     
     SfmcApiHelper(){
     
@@ -21,7 +21,7 @@ export default class SfmcApiHelper
         this._deExternalKey = "page2";
     }
 
-    private _sfmcDataExtensionApiUrl = "https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.rest.marketingcloudapis.com/hub/v1/dataevents/key:" + this._deExternalKey + "/rowset";
+    
     }
     
     
