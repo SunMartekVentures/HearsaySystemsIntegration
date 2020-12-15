@@ -348,7 +348,7 @@
             }
         }
 	
-	function loaddata(sampleData){
+	function loaddata(jsonObject){
 	console.log("load data function called");
 	
 	var hearsayOrgId = jsonObject.orgid;
@@ -532,7 +532,7 @@
              
 	      if(this.state.page==1){
 	      
-	      let sampleData = [
+	      let jsonObject = [
                 {
                     keys: {
                         orgid:this.state.orgid,
