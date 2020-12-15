@@ -113,6 +113,7 @@ export default class SfmcApiHelper
      */
     public loadData(req: express.Request, res: express.Response)
     {
+        Utils.logInfo("request body = " + req.body);
         let self = this;
         let sessionId = req.session.id;
         Utils.logInfo("loadData entered. SessionId = " + sessionId);
