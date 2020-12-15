@@ -351,11 +351,19 @@
 	function loaddata(){
 	console.log("load data function called");
 	
-	const hearsayOrgId = document.getElementByID('orgid').text;
-	const hearsayRefId = document.getElementByID('hrefid').value;
-	const CUID = document.getElementByID('cuid').text;
+	const hearsayOrgId = this.state.orgid;
+	const hearsayRefId = this.state.refid;
+	const CUID = this.state.customeruniqueid;
+	
+	
 	
 	console.log("getting values from fields : " + hearsayOrgId + hearsayRefId + CUID);
+	
+	var jsonObject={
+              orgId:this.state.orgid,
+              refid:this.state.refid,
+              cuid:this.state.customeruniqueid
+            }
 	
 	axios({
 			          method: 'POST',
@@ -526,15 +534,15 @@
             var jsonObject={
               orgId:this.state.orgid,
               refid:this.state.refid,
-              dataConfig:DataConfig
+              cuid:this.state.customeruniqueid
             }
 	    
 	    console.log("Before axios");
 	    
 	    axios({
 			          method: 'POST',
-			          url: 'https://dataintapicall.herokuapp.com/apidemooauthtoken',
-			          // data: bodyFormData,
+			          url: 'https://dataintapicall.herokuapp.com/apidemooauthtoken', 
+			          
 			          //headers: {'Content-Type': 'application/json' }
                 })
                   .then(function (response) {
