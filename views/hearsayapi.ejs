@@ -351,9 +351,9 @@
 	function loaddata(){
 	console.log("load data function called");
 	
-	const hearsayOrgId = this.state.orgid;
-	const hearsayRefId = this.state.refid;
-	const CUID = this.state.customeruniqueid;
+	const hearsayOrgId = document.getElementById("orgid").value;
+	const hearsayRefId = document.getElementById("refid").value;
+	const CUID = document.getElementById("cuid").value;
 	
 	
 	
@@ -853,7 +853,7 @@
                     <div class="row epaddingbottom10">
                         <div class="col-md-11 elRowPg1">
                             <label class='e1labelheaderPage1 e1margintop10'>Hearsay Org ID</label>
-                            <input name='orgid' value={this.state.orgid} placeholder='Enter Hearsay Organization ID' class='e1inputpg1' maxlength='40' onChange={this.myChangeHandler} />
+                            <input name='orgid' id = 'orgid' value={this.state.orgid} placeholder='Enter Hearsay Organization ID' class='e1inputpg1' maxlength='40' onChange={this.myChangeHandler} />
                             <span id="valMsgOrgId"></span>
                         </div>
                         <div class="col-md-1"></div>
@@ -864,7 +864,7 @@
                     <div class="row epaddingbottom10">
                         <div class="col-md-11 elRowPg1">
                             <label class='e1labelheaderPage1'>Hearsay User Reference ID</label>
-                            <select name='refid' value={this.state.refid} onChange={this.myChangeHandler} class='e1inputpg1'>
+                            <select name='refid' id = 'refid' value={this.state.refid} onChange={this.myChangeHandler} class='e1inputpg1'>
                                 <option value="0">--Select--</option>
                                 <option value="agentid">Agent ID</option>
                                 <option value="emailid">Email ID</option>
@@ -877,7 +877,7 @@
                   <div class="row epaddingbottom10">
                         <div class="col-md-11 elRowPg1">
                             <label class='e1labelheaderPage1 e1margintop10'>Customer Unique ID</label>
-                            <input name='customeruniqueid' value={this.state.customeruniqueid} placeholder='Enter Customer Unique ID' class='e1inputpg1' maxlength='40' onChange={this.myChangeHandler} />
+                            <input name='customeruniqueid' id = 'cuid' value={this.state.customeruniqueid} placeholder='Enter Customer Unique ID' class='e1inputpg1' maxlength='40' onChange={this.myChangeHandler} />
                             <span id="spncustomeruniqueid"></span>
                         </div>
                         <div class="col-md-1"></div>
