@@ -348,22 +348,22 @@
             }
         }
 	
-	function loaddata(){
+	function loaddata(jsonObject){
 	console.log("load data function called");
 	
-	var hearsayOrgId = document.getElementById('orgid').value;
-	var hearsayRefId = document.getElementById('refid').value;
-	var CUID = document.getElementById('cuid').value;
+	var hearsayOrgId = jsonObject.orgid;
+	var hearsayRefId = jsonObject.refid;
+	var CUID = jsonObject.customeruniqueid;
 	
 	
 	
 	console.log("getting values from fields : " + hearsayOrgId + hearsayRefId + CUID);
 	
-	var jsonObject={
-              orgId:this.state.orgid,
-              refid:this.state.refid,
-              cuid:this.state.customeruniqueid
-            }
+	//var jsonObject={
+             // orgId:this.state.orgid,
+             // refid:this.state.refid,
+             // cuid:this.state.customeruniqueid
+           // }
 	
 	axios({
 			          method: 'POST',
@@ -532,7 +532,7 @@
              
 	      if(this.state.page==1){
             var jsonObject={
-              orgId:this.state.orgid,
+              orgid:this.state.orgid,
               refid:this.state.refid,
               cuid:this.state.customeruniqueid
             }
@@ -549,7 +549,15 @@
                   //handle success
                   //return response;	
 		  //console.log(response.data);
-		  loaddata();
+		  
+		  var jsonObject={
+              orgid:this.state.orgid,
+              refid:this.state.refid,
+              cuid:this.state.customeruniqueid
+            	}
+		
+		  loaddata(jsonObject);
+		  
                   });
 		  }
              
