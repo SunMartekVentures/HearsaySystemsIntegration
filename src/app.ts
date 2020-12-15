@@ -67,6 +67,9 @@ app.post('/apidemooauthtoken', function(req, res) {
 
 app.post('/loaddata', function(req, res) {
   apiDemoRoutes.loadData(req, res); });
+
+app.post('/loaddatafortemp', function(req, res) {
+  apiDemoRoutes.loadDataForPage2(req, res); });
     
 // Routes: called when this demo app runs as a Marketing Cloud app in an IFRAME in the Marketing Cloud web UI
 app.post('/appdemoauthtoken', function(req, res) {
