@@ -77,6 +77,6 @@ export default class SfmcApiDemoRoutes
     {
         let self = this;
         Utils.logInfo("loadData route entered.");
-        self._apiHelper.loadData(req, res, jsonObject);
+        self._apiHelper.loadData(req, res);
     }
 }
