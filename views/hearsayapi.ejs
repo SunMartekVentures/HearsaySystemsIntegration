@@ -348,7 +348,7 @@
             }
         }
 	
-	function loaddata(jsonObject){
+	function loaddata(sampleData){
 	console.log("load data function called");
 	
 	var hearsayOrgId = jsonObject.orgid;
@@ -359,7 +359,7 @@
 	
 	console.log("getting values from fields : " + hearsayOrgId + hearsayRefId + CUID);
 	
-	//var jsonObject={
+	//var ={
              // orgId:this.state.orgid,
              // refid:this.state.refid,
              // cuid:this.state.customeruniqueid
@@ -531,11 +531,24 @@
 	    }
              
 	      if(this.state.page==1){
-            var jsonObject={
+	      
+	      let sampleData = [
+                {
+                    keys: {
+                        orgid:this.state.orgid,
+                    },
+                    values: {
+                        refid:this.state.refid,
+              		cuid:this.state.customeruniqueid                        
+                    }
+                }                   
+            ];
+	      
+            /*var jsonObject={
               orgid:this.state.orgid,
               refid:this.state.refid,
               cuid:this.state.customeruniqueid
-            }
+            }*/
 	    
 	    console.log("Before axios");
 	    
