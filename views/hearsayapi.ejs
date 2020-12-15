@@ -368,8 +368,8 @@
 	axios({
 			          method: 'POST',
 			          url: 'https://dataintapicall.herokuapp.com/loaddata',
-			          // data: bodyFormData,
-			          //headers: {'Content-Type': 'application/json' }
+			           data: jsonObject,
+			          headers: {'Content-Type': 'application/json' }
                 })
                   .then(function (response) {
                   //handle success
