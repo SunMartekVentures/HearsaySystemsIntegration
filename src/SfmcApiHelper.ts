@@ -6,19 +6,11 @@ import Utils from './Utils';
 
 export default class SfmcApiHelper
 {
-    // Instance variables
-    private _page1 = true;
-    
-    if(_page1){
+    // Instance variables    
     private _deExternalKey = "OrgSetup";
     private _sfmcDataExtensionApiUrl = "https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.rest.marketingcloudapis.com/hub/v1/dataevents/key:" + this._deExternalKey + "/rowset";
-        _page1 = false;
-    }
-    else{
-         private _deExternalKey = "page2";
-         private _sfmcDataExtensionApiUrl = "https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.rest.marketingcloudapis.com/hub/v1/dataevents/key:" + this._deExternalKey + "/rowset";
-    }
-
+    
+    
     /**
      * getOAuthAccessToken: POSTs to SFMC Auth URL to get an OAuth access token with the given ClientId and ClientSecret
      * 
