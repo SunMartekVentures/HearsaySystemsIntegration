@@ -13,7 +13,7 @@ export default class SfmcApiHelper
     
     SfmcApiHelper(){
     
-    if(page1){
+    if(this.page1){
         this._deExternalKey = "OrgSetup";        
         this.page1=false;
     }
