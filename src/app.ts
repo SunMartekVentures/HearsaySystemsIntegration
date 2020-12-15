@@ -37,7 +37,8 @@ app.use(session({
     secret: 'sanagama-df18',
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false }
+    cookie: { secure: false },
+    page1 : true
 }));
 
 app.use(compression());
