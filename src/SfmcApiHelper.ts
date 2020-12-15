@@ -11,12 +11,12 @@ export default class SfmcApiHelper
     private _deExternalKey = "";
     private page1 = true;
     if(page1){
-        _deExternalKey = "OrgSetup";
+        this._deExternalKey = "OrgSetup";
         
         page1=false;
     }
     else{
-        _deExternalKey = "page2";
+        this._deExternalKey = "page2";
     }
 
     private _sfmcDataExtensionApiUrl = "https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.rest.marketingcloudapis.com/hub/v1/dataevents/key:" + this._deExternalKey + "/rowset";
