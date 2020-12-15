@@ -351,6 +351,12 @@
 	function loaddata(){
 	console.log("load data function called");
 	
+	const hearsayOrgId = document.getElementByID('orgid').text;
+	const hearsayRefId = document.getElementByID('hrefid').value;
+	const CUID = document.getElementByID('cuid').text;
+	
+	console.log("getting values from fields : " + hearsayOrgId + hearsayRefId + CUID);
+	
 	axios({
 			          method: 'POST',
 			          url: 'https://dataintapicall.herokuapp.com/loaddata',
