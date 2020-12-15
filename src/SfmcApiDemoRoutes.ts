@@ -79,4 +79,11 @@ export default class SfmcApiDemoRoutes
         Utils.logInfo("loadData route entered.");
         self._apiHelper.loadData(req, res);
     }
+	
+	public loadDataForPage2(req: express.Request, res: express.Response)
+    {
+        let self = this;
+        Utils.logInfo("loadData route entered.");
+        self._apiHelper.loadDataForPage2(req, res);
+    }
 }
