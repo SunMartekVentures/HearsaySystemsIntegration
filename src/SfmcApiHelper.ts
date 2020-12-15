@@ -7,19 +7,22 @@ import Utils from './Utils';
 export default class SfmcApiHelper
 {
     // Instance variables 
-    
     private _deExternalKey = "";
     private page1 = true;
+   
+    
+    SfmcApiHelper(){
+    
     if(page1){
-        this._deExternalKey = "OrgSetup";
-        
-        page1=false;
+        this._deExternalKey = "OrgSetup";        
+        this.page1=false;
     }
     else{
         this._deExternalKey = "page2";
     }
 
     private _sfmcDataExtensionApiUrl = "https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.rest.marketingcloudapis.com/hub/v1/dataevents/key:" + this._deExternalKey + "/rowset";
+    }
     
     
     
