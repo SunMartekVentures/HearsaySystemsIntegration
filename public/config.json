@@ -21,7 +21,7 @@
                 }									
 			],
           "outArguments": [],
-          "url": "https://<your-domain-here>/journeybuilder/execute",
+          "url": "https://dataintapicall.herokuapp.com/jbdemo/journeybuilder/execute",
            "verb": "POST",
             "body": "",
             "header": "",
@@ -31,24 +31,24 @@
         }
     },
     "configurationArguments": {
-      "applicationExtensionKey": "__application_key_from_appcenter_here__",
+      "applicationExtensionKey": "a45048af-9afd-44ba-ad90-3a63b8c8b557",
       "save": {
-        "url": "https://<your-domain-here>/journeybuilder/save",
+        "url": "https://dataintapicall.herokuapp.com/jbdemo/journeybuilder/save",
           "verb": "POST",
         "useJwt": true
        },
        "publish": {
-        "url": "https://<your-domain-here>/journeybuilder/publish",
+        "url": "https://dataintapicall.herokuapp.com/jbdemo/journeybuilder/publish",
            "verb": "POST",
         "useJwt": true
        },
       "stop": {
-        "url": "https://<your-domain-here>/journeybuilder/stop",
+        "url": "https://dataintapicall.herokuapp.com/jbdemo/journeybuilder/stop",
            "verb": "POST",
         "useJwt": true
       },
       "validate": {
-        "url": "https://<your-domain-here>/journeybuilder/validate",
+        "url": "https://dataintapicall.herokuapp.com/jbdemo/journeybuilder/validate",
         "verb": "POST",
         "useJwt": true
       }
