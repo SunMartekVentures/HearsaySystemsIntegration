@@ -5,12 +5,6 @@
   <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js" 
-  integrity="sha512-DZqqY3PiOvTP9HkjIWgjO6ouCbq+dxqWoJZ/Q+zPYNHmlnI2dQnbJ5bxAHpAMw+LXRm4D72EIRXzvcHQtE8/VQ==" 
-  crossorigin="anonymous">
-  </script>
-  
   <link
   rel="stylesheet"
   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -18,11 +12,9 @@
   crossorigin="anonymous"
 />
 
-
-
 <!-- Icon -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="/css/hearsay.css" />  
+<link rel="stylesheet" href="hearsay.css">
 
 </head>
   <body>
@@ -33,10 +25,11 @@
     </div>
 
     <script type="text/babel">
+	
         function AddLogorow(abcd, second){
           return (
                 <div class="e1logorowpadding">
-                    <div><img src='https://github.com/Sivaskandharuban/authmcdataext/blob/master/views/hearsay.png?raw=true' width='50' height='50' /><label class='e1pageheader'>Hearsay Systems - Organization Preferences</label></div>
+                    <div><img src='hearsay.png' width='50' height='50' /><label class='e1pageheader'>Hearsay Systems - Organization Preferences</label></div>
                 </div>);
         }
 
@@ -49,7 +42,46 @@
                 </span>
             );
         }
+		function CheckDropDownItemExist(itemname,sel1,sel2,sel3,sel4,sel5,sel6,sel7){
+			if(sel1 != itemname && sel2 != itemname && sel3 != itemname && sel4 != itemname &&
+			sel5 != itemname && sel6 != itemname && sel7 != itemname){
+				//OK Good to go
+			}
+			else{
+				itemname='';
+			}
+			return itemname;
+		}
+		function GetSelectItemName(){
+			return '--Select--';
+		}
+		
+		function GetDropdownListItemsNEW(sel1,sel2,sel3,sel4,sel5,sel6,sel7){
+		    let arrtemp=[];
+			arrtemp.push(GetSelectItemName());
+		
+			let itemelement=CheckDropDownItemExist('Birth Date',sel1,sel2,sel3,sel4,sel5,sel6,sel7);
+			if(itemelement.length >0){arrtemp.push(itemelement);}
+			
+     		itemelement=CheckDropDownItemExist('Email',sel1,sel2,sel3,sel4,sel5,sel6,sel7);
+			if(itemelement.length >0){arrtemp.push(itemelement);}
+			
+     		itemelement=CheckDropDownItemExist('First Name',sel1,sel2,sel3,sel4,sel5,sel6,sel7);
+			if(itemelement.length >0){arrtemp.push(itemelement);}			
 
+     		itemelement=CheckDropDownItemExist('Last Name',sel1,sel2,sel3,sel4,sel5,sel6,sel7);
+			if(itemelement.length >0){arrtemp.push(itemelement);}			
+			
+			itemelement=CheckDropDownItemExist('Phone',sel1,sel2,sel3,sel4,sel5,sel6,sel7);
+			if(itemelement.length >0){arrtemp.push(itemelement);}	
+			
+			itemelement=CheckDropDownItemExist('Preferred Name',sel1,sel2,sel3,sel4,sel5,sel6,sel7);
+			if(itemelement.length >0){arrtemp.push(itemelement);}				
+
+			itemelement=CheckDropDownItemExist('Title',sel1,sel2,sel3,sel4,sel5,sel6,sel7);
+			if(itemelement.length >0){arrtemp.push(itemelement);}							
+			return arrtemp;
+		}
         function SecondPageHeader(){
             return (
                 <div class="row epaddingbottom10">
@@ -75,29 +107,36 @@
           
         }
 
-        function SecondPageDropdownControl(controlname,controlvalue,handler, customoption){
+		
+		function MakeItem(X) {
+			return <option value={X}>{X}</option>;
+		};
+			
+
+        function SecondPageDropdownControl(controlname,controlvalue,handler, customoption,arraylist){
            if(controlname=="blank"){
                 return "";
             }
+            else if(controlname=="temp1")
+            {
+              
+              return (
+                <select disabled name={controlname} value={controlvalue} onChange={handler} class='e1inputdd col-md-11'>
+                  <option value={customoption}>{customoption}</option>
+                </select>
+              );
+            }
             else
             {
-            return (
+              return (
                 <select name={controlname} value={controlvalue} onChange={handler} class='e1inputdd col-md-11'>
-                    <option value="">--Select--</option>
-                    <option value="birthdate">Birth Date</option>
-                    <option value="email">Email</option>
-                    <option value="firstname">First Name</option>
-                    <option value="lastname">Last Name</option>
-                    <option value="phone">Phone</option>
-                    <option value="preferredname">Preferred Name</option>
-                    <option value="title">Title</option>
-                    {checkAndAddCustomOption(customoption)}
+                  {arraylist.map(MakeItem)}
                 </select>
-            );
+              );
             }
 
         }
-
+		
 
 
         function SecondPageTemplateNameControl(controlname,controlvalue,handler){
@@ -106,24 +145,23 @@
             );
         }
 
-        function AddPage2Row(control1name, control1value, handler,label1name , divcssclass, rowpos,label2name,control2name,control2value, customuniqueid){
+        function AddPage2Row(control1name, control1value, handler, label1name,ddl1array, rowpos,label2name,control2name,control2value, customuniqueid,ddl2array){
 
         let sPageHeader="";
         let scontrol1 = "";
         let scontrol2 = "";
-        
         if(rowpos==1){
             sPageHeader=SecondPageHeader();
             scontrol1 = SecondPageTemplateNameControl(control1name,control1value,handler);
         }
         else
         {
-            scontrol1 = SecondPageDropdownControl(control1name,control1value,handler, customuniqueid);
+            scontrol1 = SecondPageDropdownControl(control1name,control1value,handler, customuniqueid,ddl1array);
         }
 
-        scontrol2=SecondPageDropdownControl(control2name,control2value,handler, customuniqueid);
+        scontrol2=SecondPageDropdownControl(control2name,control2value,handler, customuniqueid,ddl2array);
+		
         return (
-
             <div>
                 {sPageHeader}
                 <div class="row epaddingbottom10 e1marginleft">
@@ -158,7 +196,6 @@
 
 
         function AddButtonBlock(cancelclick, nextclick, nextbtntext,btnclass,backclick, pageno){
-	
           return (
             <div class='e1container'>
                 <div  class='row'>
@@ -171,38 +208,10 @@
                 </div>
             </div>
           );
-	 
         }
 
 		
 		
-
-		
-        function AddNewBlock(controlname, controlvalue, handler,labelname , divcssclass){
-          //let templabelname=labelname;
-          //templabelname=AddTextLabels();
-
-          return (
-            <div class={divcssclass}>
-                <div class='col-md-1 elRowPg1'><label class='e1labelheaderPage1'>{labelname}</label></div>
-                <div class='col-md-10'>
-                    <select name={controlname} value={controlvalue} onChange={handler} class='e1inputdd'>
-                        <option value="">--Select--</option>
-                        <option value="birthdate">Birth Date</option>
-                        <option value="email">Email</option>
-                        <option value="firstname">First Name</option>
-                        <option value="lastname">Last Name</option>
-                        <option value="phone">Phone</option>
-                        <option value="preferredname">Preferred Name</option>
-                        <option value="title">Title</option>
-                    </select>
-                </div>
-                <div class='col-md-1'></div>
-            </div>
-          )
-        }
-
-
 
 
         function AddCustomFieldBlock(fieldLabelControlName, typeControllnName, lengthControlName, btnName, 
@@ -243,7 +252,7 @@
                 <input class="e1input120" name={lengthControlName} value={lengthControlValue} type="text" onChange={handler} maxlength="5"/>
             </div>
             <div class="col-md-1">
-                <button name={btnName} onClick={FieldObjectHandler} class="btn btn-primary btn-xs e1buttonleftpadding">Save</button>
+                <button name={btnName} onClick={FieldObjectHandler} class="btn btn-primary btn-xs e1buttonleftpadding">Edit</button>
             </div>
 
 
@@ -258,131 +267,263 @@
         );
       }
 
-        function generateWizardStep(firstDivCover, firstDiv, secondDiv, thirdDivCover, thirdDiv, title, size, isStanby, stepNum){
-          if(isStanby==true){
-            return (
-            <div class={"div"} >
-              <div class={firstDivCover}><div class={firstDiv}></div></div>
-              <div class={secondDiv} style={{width:size}}><label class="lblWizardHeading" ><i class="fa fa-check-circle" aria-hidden="true"></i> {title}</label></div>
-              <div class={thirdDivCover}><div class={thirdDiv}></div></div>  
-            </div>
+        // function generateWizardStep(firstDivCover, firstDiv, secondDiv, thirdDivCover, thirdDiv, title, size, isStanby, stepNum){
+        //   if(isStanby==true){
+        //     return (
+        //     <div class={"div"} >
+        //       <div class={firstDivCover}><div class={firstDiv}></div></div>
+        //       <div class={secondDiv} style={{width:size}}><label class="lblWizardHeading" ><i class="fa fa-check-circle" aria-hidden="true"></i> {title}</label></div>
+        //       <div class={thirdDivCover}><div class={thirdDiv}></div></div>  
+        //     </div>
+        //   );
+        //   } else{
+        //     return (
+        //     <div class={"div"} >
+        //       <div class={firstDivCover}><div class={firstDiv}></div></div>
+        //       <div class={secondDiv} style={{width:size}}><label class="lblWizardHeading"><span class="badge">{stepNum}</span> {title}</label></div>
+        //       <div class={thirdDivCover}><div class={thirdDiv}></div></div>  
+        //     </div>
+        //   );
+        //   }
+        // }
+
+        function getmarginWidth(step){
+          let margin="56%";
+          if(step==1){
+            margin="44%";
+          } else if(step==2){
+            margin="44%";
+          } else if(step==3){
+            margin="43%";
+          }
+          return margin;
+        }
+
+
+        function GetIcon(){
+          return(
+            
+            <i class="fa fa-check-circle" aria-hidden="true"></i>
           );
+        }
+
+        function getDigitIcon(){
+          return (
+            <span class="badge">2</span>
+          );
+        }
+
+        function GetlabelWithIcon(margincss, labeltext, status, stepno){
+          if(status==true){
+            return (
+            <text x={margincss} y="21%" dominant-baseline="middle" text-anchor="middle" class="wizardTextStyle"> &#xf05d; {labeltext}</text>
+            )
           } else{
             return (
-            <div class={"div"} >
-              <div class={firstDivCover}><div class={firstDiv}></div></div>
-              <div class={secondDiv} style={{width:size}}><label class="lblWizardHeading"><span class="badge">{stepNum}</span> {title}</label></div>
-              <div class={thirdDivCover}><div class={thirdDiv}></div></div>  
-            </div>
-          );
+              
+            <text x={margincss} y="21%" dominant-baseline="middle" text-anchor="middle" class="wizardTextStyle"> {labeltext}</text>
+            )
+          }
+          
+        }
+
+
+        function AsignDigitIcon(stepno, Status){
+          const mystyle = {
+            fontSize:15,
+            fontWeight: "700",
+            strokeWidth: 0
+          };
+          if(Status==false){
+            return (
+              <svg width="100" height="100">
+                  <circle cx="30" cy="23" r="7" stroke-width="4" fill="#fff" />
+                  <text x="30%" y="24%" dominant-baseline="middle"  text-anchor="middle" style={mystyle} class="polygonStyleUnselected">{stepno}</text>
+              </svg>
+            )
+          } else{
+            return (
+              ""
+            )
+          }
+        }
+
+        function getWidthSize(stepno){
+          if(stepno==1){
+            return "240"
+          } 
+          else if(stepno==2){
+            return "220";
+          } else if(stepno==3){
+            return "200";
+          }
+        }
+
+        function getSvgSize(stepno){
+          if(stepno==1){
+            return "202.5,25 182.5,51 0,51 0,25 0,0 182.5,0";
+            //return "240,25 220,51 37.5,51 37.5,25 37.5,0 220,0";
+            //return "240,25 220,51 18.5,51 37.5,25 18.5,0 220,0";
+          } else if(stepno==2){
+            return "185.5,25 162.5,51 0,51 19,25 0,0 162.5,0";
+            //return "220,25 200,51 18.5,51 37.5,25 18.5,0 200,0";
+          } else if(stepno==3){
+            return "185.5,25 162.5,51 0,51 19,25 0,0 162.5,0";
+            //return "200,25 180,51 18.5,51 37.5,25 18.5,0 180,0";
+          }
+        }
+
+        function GetIconSize(stepno){
+          if(stepno==1){
+            return "20"
+          } 
+          else if(stepno==2){
+            return "30";
+          } else if(stepno==3){
+            return "30";
           }
         }
 
 
-        function wizardNavigation(step){
-          const triangle_right_inverted_cover_first="triangle-right-inverted-cover-first ";
-          const triangle_right_inverted_cover_first_unselected="triangle-right-inverted-cover-first-unselected ";
-          const triangle_right_inverted_cover="triangle-right-inverted-cover ";
-          const triangle_right_inverted_first_unselected="triangle-right-inverted-first-unselected ";
-          const triangle_right_inverted="triangle-right-inverted ";
-          const triangle_right_inverted_unselected="triangle-right-inverted-unselected ";
-          const triangle_right_unselected="triangle-right-unselected ";
-          const triangle_right_cover_last="triangle-right-cover-last";
-          const triangle_right="triangle-right ";
-          const triangle_right_inverted_cover_unselected="triangle-right-inverted-cover-unselected ";
-          const triangle_right_unselected_cover="triangle-right-unselected-cover";
-          const triangle_right_unselected_cover_last="triangle-right-unselected-cover-last";
-          const triangle_right_cover="triangle-right-cover ";
-          const triangle_right_inverted_first="triangle-right-inverted-first ";
-          const rectangle_unselected="rectangle-unselected div";
-          const rectangle="rectangle div ";
-          const lblWizardHeading="lblWizardHeading ";
-          const greenBack="greenBack";
-          const invertedGreenBack="invertedGreenBack";
-          const triangle_right_cover_green="triangle-right-cover-green";
-          const triangle_right_inverted_cover_unselected_green="triangle-right-inverted-cover-unselected-green";
+        function GetWizardStep(labelname, stepno, Status){
+          let marginLeft=getmarginWidth(stepno);
+          let SelectionClass=(Status==true)?"polygonStyleSelected":"polygonStyleUnselected";
+          let svgPoints=getSvgSize(stepno)
+          let TotalWidth=getWidthSize(stepno);
+          let RoundedIconWidth=GetIconSize(stepno);
+          let RoundedIconWidthForText=RoundedIconWidth+"%";
+          const mystyle = {
+            fontSize:15,
+            fontWeight: "700",
+            strokeWidth: 0
+          };
 
-
-          if(step==1){
-              return ( 
-                  <div class="div divWizardHead"> 
-                    <div class="div divStep1">
-                    {generateWizardStep(triangle_right_inverted_cover_first_unselected, triangle_right_inverted_first_unselected, rectangle_unselected, triangle_right_unselected_cover, triangle_right_unselected, 'ORG. PREFERENCES', "185px", false, 1)}
-                    </div>
-                    <div class="div divStep2" >
-                      {generateWizardStep(triangle_right_inverted_cover_unselected, triangle_right_inverted_unselected, rectangle_unselected, triangle_right_unselected_cover, triangle_right_unselected, 'DATA CONFIG', "140px", false, 2)}
-                    </div>
-                    <div class="div divStep3" >
-                      {generateWizardStep(triangle_right_inverted_cover_unselected, triangle_right_inverted_unselected, rectangle_unselected, triangle_right_unselected_cover_last, triangle_right_unselected, 'SUMMARY', "120px", false, 3)}
-                    </div>
-                  </div> 
-                 );
-          } else if(step==2){
-            return ( 
-              <div class="div divWizardHead"> 
-                    <div class="div divStep1">
-                    {generateWizardStep(triangle_right_inverted_cover_first, triangle_right_inverted_first, rectangle, triangle_right_cover, triangle_right, 'ORG. PREFERENCES', "185px", true, 1)}
-                    </div>
-                    <div class="div divStep2" >
-                      {generateWizardStep(triangle_right_inverted_cover_unselected, triangle_right_inverted_unselected, rectangle_unselected, triangle_right_unselected_cover, triangle_right_unselected, 'DATA CONFIG', "140px", false, 2)}
-                    </div>
-                    <div class="div divStep3" >
-                      {generateWizardStep(triangle_right_inverted_cover_unselected, triangle_right_inverted_unselected, rectangle_unselected, triangle_right_unselected_cover_last, triangle_right_unselected, 'SUMMARY', "120px", false, 3)}
-                    </div>
-                  </div> 
-                 );
-          } else if(step==3){
-            return ( 
-              <div class="div divWizardHead"> 
-                <div class="div divStep1">
-                    {generateWizardStep(triangle_right_inverted_cover_first, triangle_right_inverted_first, rectangle, triangle_right_cover_green, triangle_right, 'ORG. PREFERENCES', "185px", true, 1)}
-                    </div>
-                    <div class="div divStep2" >
-                      {generateWizardStep(triangle_right_inverted_cover_unselected_green, triangle_right , rectangle, triangle_right_cover, triangle_right, 'DATA CONFIG', "140px", true, 2)}
-                    </div>
-                    <div class="div divStep3" >
-                      {generateWizardStep(triangle_right_inverted_cover_unselected, triangle_right_inverted_unselected, rectangle_unselected, triangle_right_unselected_cover_last, triangle_right_unselected, 'SUMMARY', "120px", false, 3)}  
-                    </div>
-                  </div>
-                 );
-            }
+          if(Status==true){
+            return(
+              <svg height="75" width={TotalWidth} class="svgStyles">
+                <polygon points={svgPoints} class={SelectionClass}  />
+                <svg width="100" height="100">
+                    <text x={RoundedIconWidthForText} y="24%" dominant-baseline="middle"  text-anchor="middle"  class="iconStyle"> &#xf05d; </text>
+                </svg>
+                
+                <text x={marginLeft} y="34%" dominant-baseline="middle" text-anchor="middle" class="wizardTextStyle">   {labelname}</text>
+              </svg>
+            )
+          } else{
+            return(
+              <svg height="75" width={TotalWidth} class="svgStyles">
+                <polygon points={svgPoints} class={SelectionClass}  />
+                <svg width="100" height="100">
+                    <circle cx={RoundedIconWidth} cy="23" r="7" stroke-width="4" fill="#fff" />
+                    <text x={RoundedIconWidthForText} y="24%" dominant-baseline="middle"  text-anchor="middle" style={mystyle} class="polygonStyleUnselected">{stepno}</text>
+                </svg>
+                <g><text class="badge">CLICK ME</text></g>
+                <text x={marginLeft} y="34%" dominant-baseline="middle" text-anchor="middle" class="wizardTextStyle"> {labelname}</text>
+            </svg>
+            )
+          }
         }
-	
-	function loaddata(jsonObject){	
-	
-	console.log("load data function called");
-	
-	
-	axios({
-			          method: 'POST',
-			          url: 'https://dataintapicall.herokuapp.com/loaddata',
-			           data: jsonObject,
-			          headers: {'Content-Type': 'application/json' }
-                })
-                  .then(function (response) {
-                  //handle success
-                  //return response;	
-		  console.log(response.data);		  
-                  });
-	}
-	
-	function loaddataforpage2(jsonObject){	
-	
-	console.log("load data for page 2 function called");
-	
-	
-	axios({
-			          method: 'POST',
-			          url: 'https://dataintapicall.herokuapp.com/loaddatafortemp',
-			           data: jsonObject,
-			          headers: {'Content-Type': 'application/json' }
-                })
-                  .then(function (response) {
-                  //handle success
-                  //return response;	
-		  console.log(response.data);		  
-                  });
-	}
+
+        function wizardNavigationNew(step){
+          if(step==1){
+            return (
+            <div class="wizard">
+              
+              {GetWizardStep("ORG. PREFERENCES", 1, false)}
+              {GetWizardStep("DATA CONFIG", 2, false)}
+              {GetWizardStep("SUMMARY", 3, false)}
+            </div>
+            );
+          } else if(step==2){
+            return (
+            <div class="wizard">
+              
+              {GetWizardStep("ORG. PREFERENCES", 1, true)}
+              {GetWizardStep("DATA CONFIG", 2, false)}
+              {GetWizardStep("SUMMARY", 3, false)}
+            </div>
+            );
+          }else if(step==3){
+            return (
+            <div class="wizard">
+              
+              {GetWizardStep("ORG. PREFERENCES", 1, true)}
+              {GetWizardStep("DATA CONFIG", 2, true)}
+              {GetWizardStep("SUMMARY", 3, false)}
+            </div>
+            );
+          }
+          
+        }
+
+        // function wizardNavigation(step){
+        //   const triangle_right_inverted_cover_first="triangle-right-inverted-cover-first ";
+        //   const triangle_right_inverted_cover_first_unselected="triangle-right-inverted-cover-first-unselected ";
+        //   const triangle_right_inverted_cover="triangle-right-inverted-cover ";
+        //   const triangle_right_inverted_first_unselected="triangle-right-inverted-first-unselected ";
+        //   const triangle_right_inverted="triangle-right-inverted ";
+        //   const triangle_right_inverted_unselected="triangle-right-inverted-unselected ";
+        //   const triangle_right_unselected="triangle-right-unselected ";
+        //   const triangle_right_cover_last="triangle-right-cover-last";
+        //   const triangle_right="triangle-right ";
+        //   const triangle_right_inverted_cover_unselected="triangle-right-inverted-cover-unselected ";
+        //   const triangle_right_unselected_cover="triangle-right-unselected-cover";
+        //   const triangle_right_unselected_cover_last="triangle-right-unselected-cover-last";
+        //   const triangle_right_cover="triangle-right-cover ";
+        //   const triangle_right_inverted_first="triangle-right-inverted-first ";
+        //   const rectangle_unselected="rectangle-unselected div";
+        //   const rectangle="rectangle div ";
+        //   const lblWizardHeading="lblWizardHeading ";
+        //   const greenBack="greenBack";
+        //   const invertedGreenBack="invertedGreenBack";
+        //   const triangle_right_cover_green="triangle-right-cover-green";
+        //   const triangle_right_inverted_cover_unselected_green="triangle-right-inverted-cover-unselected-green";
+
+
+        //   if(step==1){
+        //       return ( 
+        //           <div class="div divWizardHead"> 
+        //             <div class="div divStep1">
+        //             {generateWizardStep(triangle_right_inverted_cover_first_unselected, triangle_right_inverted_first_unselected, rectangle_unselected, triangle_right_unselected_cover, triangle_right_unselected, 'ORG. PREFERENCES', "185px", false, 1)}
+        //             </div>
+        //             <div class="div divStep2" >
+        //               {generateWizardStep(triangle_right_inverted_cover_unselected, triangle_right_inverted_unselected, rectangle_unselected, triangle_right_unselected_cover, triangle_right_unselected, 'DATA CONFIG', "140px", false, 2)}
+        //             </div>
+        //             <div class="div divStep3" >
+        //               {generateWizardStep(triangle_right_inverted_cover_unselected, triangle_right_inverted_unselected, rectangle_unselected, triangle_right_unselected_cover_last, triangle_right_unselected, 'SUMMARY', "120px", false, 3)}
+        //             </div>
+        //           </div> 
+        //          );
+        //   } else if(step==2){
+        //     return ( 
+        //       <div class="div divWizardHead"> 
+        //             <div class="div divStep1">
+        //             {generateWizardStep(triangle_right_inverted_cover_first, triangle_right_inverted_first, rectangle, triangle_right_cover, triangle_right, 'ORG. PREFERENCES', "185px", true, 1)}
+        //             </div>
+        //             <div class="div divStep2" >
+        //               {generateWizardStep(triangle_right_inverted_cover_unselected, triangle_right_inverted_unselected, rectangle_unselected, triangle_right_unselected_cover, triangle_right_unselected, 'DATA CONFIG', "140px", false, 2)}
+        //             </div>
+        //             <div class="div divStep3" >
+        //               {generateWizardStep(triangle_right_inverted_cover_unselected, triangle_right_inverted_unselected, rectangle_unselected, triangle_right_unselected_cover_last, triangle_right_unselected, 'SUMMARY', "120px", false, 3)}
+        //             </div>
+        //           </div> 
+        //          );
+        //   } else if(step==3){
+        //     return ( 
+        //       <div class="div divWizardHead"> 
+        //         <div class="div divStep1">
+        //             {generateWizardStep(triangle_right_inverted_cover_first, triangle_right_inverted_first, rectangle, triangle_right_cover_green, triangle_right, 'ORG. PREFERENCES', "185px", true, 1)}
+        //             </div>
+        //             <div class="div divStep2" >
+        //               {generateWizardStep(triangle_right_inverted_cover_unselected_green, triangle_right , rectangle, triangle_right_cover, triangle_right, 'DATA CONFIG', "140px", true, 2)}
+        //             </div>
+        //             <div class="div divStep3" >
+        //               {generateWizardStep(triangle_right_inverted_cover_unselected, triangle_right_inverted_unselected, rectangle_unselected, triangle_right_unselected_cover_last, triangle_right_unselected, 'SUMMARY', "120px", false, 3)}  
+        //             </div>
+        //           </div>
+        //          );
+        //     }
+        // }
 
 
       // function expandCustomFieldObject(cfo){
@@ -401,10 +542,19 @@
       //   }
         
       // }
+	  
+	  
+	  
+	  
+		
+		
+		
 
       class HearsayPage1 extends React.Component {
         constructor(props) {
           super(props);
+		  
+		  
           this.state = {
             orgid: '',
             refid: 0,
@@ -412,13 +562,13 @@
             reftext: "First",
             page:1,
             templatename: '',
-            temp1: '',
-            temp2: '',
-            temp3: '',
-            temp4: '',
-            temp5: '',
-            temp6: '',
-            temp7: '',
+            temp1: GetSelectItemName(),
+            temp2: GetSelectItemName(),
+            temp3: GetSelectItemName(),
+            temp4: GetSelectItemName(),
+            temp5: GetSelectItemName(),
+            temp6: GetSelectItemName(),
+            temp7: GetSelectItemName(),
             temp8: '',
             temp9: '',
             temp10: '',
@@ -434,19 +584,21 @@
             temp9text: '',            
             temp10text: '',            
 
-            temp1label: AddDigitInCircle('1'),
+            temp1label: AddTextLabels(),
             temp2label: AddDigitInCircle('2'),
             temp3label: AddDigitInCircle('3'),
             temp4label: AddDigitInCircle('4'),
             temp5label: AddDigitInCircle('5'),
             temp6label: AddDigitInCircle('6'),
             temp7label: AddDigitInCircle('7'),
+            temp8label: AddDigitInCircle('8'),
+            temp9label: AddDigitInCircle('9'),
+            temp10label: AddDigitInCircle('10'),
+            
+			
 
             FieldCounter:7,
 
-            //Field5Css:"row epaddingbottom10 ehidediv",
-            //Field6Css:"row epaddingbottom10 ehidediv",
-            //Field7Css:"row epaddingbottom10 ehidediv",
             Field8Css:"row epaddingbottom10 ehidediv e1marginleft",
             Field9Css:"row epaddingbottom10 ehidediv e1marginleft",
             Field10Css:"row epaddingbottom10 ehidediv e1marginleft",
@@ -471,6 +623,15 @@
 			LenthFld8CSS:" true ",
             LenthFld9CSS:" true ",
             LenthFld10CSS:" true ",
+			
+			ArrayList1:GetDropdownListItemsNEW('','','','','','',''),
+			ArrayList2:GetDropdownListItemsNEW('','','','','','',''),
+			ArrayList3:GetDropdownListItemsNEW('','','','','','',''),
+			ArrayList4:GetDropdownListItemsNEW('','','','','','',''),
+			ArrayList5:GetDropdownListItemsNEW('','','','','','',''),
+			ArrayList6:GetDropdownListItemsNEW('','','','','','',''),
+			ArrayList7:GetDropdownListItemsNEW('','','','','','',''),
+		
             };
 
             
@@ -478,15 +639,14 @@
           this.handleChangeNext = this.handleChangeNext.bind(this);
           this.handleChangeCancel = this.handleChangeCancel.bind(this);
           this.handleNewFieldClick = this.handleNewFieldClick.bind(this);
+		  
+		  this.RefreshOtherDropDownLists = this.RefreshOtherDropDownLists.bind(this);
+		  
         }
-	
-	
 
         componentDidMount() {
 
         }
-	
-	 
 
         handleNewFieldClick(event){
           const counter=this.state.FieldCounter+1;
@@ -512,6 +672,8 @@
           alert('Cancel button clicked');
         }
 
+
+
         
 
 
@@ -524,65 +686,24 @@
 
         handleChangeNext(event) {
           
-          if(this.state.page==2){
-            var DataConfig=[
-	    
-	    {
-                    keys: {
-                        Name : this.state.templatename,
-                    },
-		    values: {
-              		option1:this.state.temp1text,
-              		option2:this.state.temp2text,
-              		option3:this.state.temp3text,
-			option4:this.state.temp4text,
-	      		option5:this.state.temp5text,
-	      		option6:this.state.temp6text,
-	      		option7:this.state.temp7text,
-             		option8:this.state.temp8FieldLabel,
-              		option9:this.state.temp9FieldLabel,
-              		option10:this.state.temp10FieldLabel
-            		}
-	    	}
-	    ];
-		
-		loaddataforpage2(DataConfig);
-	    }
-	    
-	    
+          if(this.state.page==3){
+            var DataConfig={
+              dataConfig1:this.state.temp1text,
+              dataConfig2:this.state.temp2text,
+              dataConfig3:this.state.temp3text,
+              dataConfig4:this.state.temp4text,
+              dataConfig8:this.state.artemp8,
+              dataConfig9:this.state.artemp9,
+              dataConfig10:this.state.artemp10
+            }
              
-	      if(this.state.page==1){	      
-	      let jsonObject = [
-                {
-                    keys: {
-                        orgid:this.state.orgid,
-                    },
-                    values: {
-                        refid:this.state.refid,
-              		cuid:this.state.customeruniqueid                        
-                    }
-                }                   
-            ];            
-	    
-	    console.log("Before axios");	    
-	    axios({
-			          method: 'POST',
-			          url: 'https://dataintapicall.herokuapp.com/apidemooauthtoken', 
-			          
-			          //headers: {'Content-Type': 'application/json' }
-                })
-                  .then(function (response) {
-                  //handle success
-                  //return response;	
-		  //console.log(response.data);
-		
-		  loaddata(jsonObject);
-		  
-                  });
-		  }
-		  
+            var jsonObject={
+              orgId:this.state.orgid,
+              refid:this.state.refid,
+              dataConfig:DataConfig
+            }
              
-          
+          }
 
           //Validation
            
@@ -644,20 +765,17 @@
               this.setState({orgid: ''});
               this.setState({refid: 1});
               this.setState({reftext: 'First'});
-              this.setState({temp1: '1'});
-              this.setState({temp2: '1'});
-              this.setState({temp3: '1'});
-              this.setState({temp4: '1'});
-              this.setState({temp5: '1'});
-              this.setState({templatename: ''});
-	      this.setState({customeruniqueid: ''});
 			  
+			  this.setState({templatename: ''});
+			  this.setState({customeruniqueid: ''});
 			  
-			  
-        
-
-              this.setState({temp6: '1'});
-              this.setState({temp7: '1'});
+              this.setState({temp1: GetSelectItemName()});
+              this.setState({temp2: GetSelectItemName()});
+              this.setState({temp3: GetSelectItemName()});
+              this.setState({temp4: GetSelectItemName()});
+              this.setState({temp5: GetSelectItemName()});
+              this.setState({temp6: GetSelectItemName()});
+              this.setState({temp7: GetSelectItemName()});
               this.setState({temp8: '1'});
               this.setState({temp9: '1'});
               this.setState({temp10: '1'});
@@ -706,15 +824,24 @@
               this.setState({temp2label: AddDigitInCircle('2')});
               this.setState({temp3label: AddDigitInCircle('3')});
               this.setState({temp4label: AddDigitInCircle('4')});
-                this.setState({temp5label: AddDigitInCircle('5')});
-                this.setState({temp6label: AddDigitInCircle('6')});
-                this.setState({temp7label: AddDigitInCircle('7')});
+              this.setState({temp5label: AddDigitInCircle('5')});
+              this.setState({temp6label: AddDigitInCircle('6')});
+              this.setState({temp7label: AddDigitInCircle('7')});
 
 				this.setState({Field8Css: 'row epaddingbottom10 ehidediv e1marginleft'});
 				this.setState({Field9Css: 'row epaddingbottom10 ehidediv e1marginleft'});
 				this.setState({Field10Css: 'row epaddingbottom10 ehidediv e1marginleft'});
             }
             this.setState({page: ipage});
+			
+			
+			this.setState({ArrayList1: GetDropdownListItemsNEW()});
+			this.setState({ArrayList2: GetDropdownListItemsNEW()});
+			this.setState({ArrayList3: GetDropdownListItemsNEW()});
+			this.setState({ArrayList4: GetDropdownListItemsNEW()});
+			this.setState({ArrayList5: GetDropdownListItemsNEW()});
+			this.setState({ArrayList6: GetDropdownListItemsNEW()});
+			this.setState({ArrayList7: GetDropdownListItemsNEW()});
           }
         }
 
@@ -722,29 +849,48 @@
           let nam = event.target.name;
 
          if(nam=="temp8Button"){
-            var Object8={
-              FieldName:this.state.temp8FieldLabel,
-              FieldType:this.state.temp8DataType,
-              FieldLength:this.state.temp8Length
+           debugger;
+            
+            //validate and update Icon
+            if(this.state.temp8FieldLabel!="" &&this.state.temp8FieldLabel!=" " &&this.state.temp8DataType!=0 &&this.state.temp8DataType!="0" &&this.state.temp8Length!="" &&this.state.temp8Length!=" "){
+              this.setState({temp8label:AddTextLabels()});
+              var Object8={
+                FieldName:this.state.temp8FieldLabel,
+                FieldType:this.state.temp8DataType,
+                FieldLength:this.state.temp8Length
+              }
+              this.setState({artemp8:Object8});
+            } else{
+              this.setState({artemp8:""});
+              this.setState({temp8label:AddDigitInCircle("8")});
             }
-            this.setState({artemp8:Object8});
-
           }else if(nam=="temp9Button"){
-            var Object9={
-              FieldName:this.state.temp9FieldLabel,
-              FieldType:this.state.temp9DataType,
-              FieldLength:this.state.temp9Length
+            
+            if(this.state.temp9FieldLabel!="" &&this.state.temp9FieldLabel!="" &&this.state.temp9DataType!=0 &&this.state.temp9DataType!="0" &&this.state.temp9Length!="" &&this.state.temp9Length!=" "){
+              this.setState({temp9label:AddTextLabels()});
+              var Object9={
+                FieldName:this.state.temp9FieldLabel,
+                FieldType:this.state.temp9DataType,
+                FieldLength:this.state.temp9Length
+              }
+              this.setState({artemp9:Object9});
+            } else{
+              this.setState({artemp9:""});
+              this.setState({temp9label:AddDigitInCircle("9")});
             }
-            this.setState({artemp9:Object9});
-
           }else if(nam=="temp10Button"){
-            var Object10={
-              FieldName:this.state.temp10FieldLabel,
-              FieldType:this.state.temp10DataType,
-              FieldLength:this.state.temp10Length
+            if(this.state.temp10FieldLabel!="" &&this.state.temp10FieldLabel!="" &&this.state.temp10DataType!=0 &&this.state.temp10DataType!="0" &&this.state.temp10Length!="" &&this.state.temp10Length!=" "){
+              this.setState({temp10label:AddTextLabels()});
+              var Object10={
+                FieldName:this.state.temp10FieldLabel,
+                FieldType:this.state.temp10DataType,
+                FieldLength:this.state.temp10Length
+              }
+              this.setState({artemp10:Object10});
+            } else{
+              this.setState({artemp10:""});
+              this.setState({temp10label:AddDigitInCircle("10")});
             }
-            this.setState({artemp10:Object10});
-
           }
 
           
@@ -752,7 +898,156 @@
         }
 
 
-        
+		RefreshOtherDropDownLists(pos,value) {
+		  let ddl1 = this.state.temp1;
+		  let ddl2 = this.state.temp2;
+		  let ddl3 = this.state.temp3;
+		  let ddl4 = this.state.temp4;
+		  let ddl5 = this.state.temp5;
+		  let ddl6 = this.state.temp6;
+		  let ddl7 = this.state.temp7;
+		  
+//		  alert(ddl1 + ' - ' + ddl2 + ' -- ' + ddl3 + ' -- ' + ddl4 + ' -- ' + ddl5 + ' -- ' + ddl6);
+		  
+		  let ddlselitem =GetSelectItemName();
+
+		   if(pos==1){
+			//first dropdown selected, refresh the other dropdowns
+			ddl1=value;ddl2=ddlselitem;ddl3=ddlselitem;ddl4=ddlselitem;ddl5=ddlselitem;
+			ddl6=ddlselitem;ddl7=ddlselitem;
+			
+				//clear temp state values too
+              this.setState({temp2: ddlselitem});
+              this.setState({temp3: ddlselitem});
+              this.setState({temp4: ddlselitem});
+              this.setState({temp5: ddlselitem});
+              this.setState({temp6: ddlselitem});
+              this.setState({temp7: ddlselitem});
+			  
+				//clear label fields too  
+              this.setState({temp2label: AddDigitInCircle('2')});
+              this.setState({temp3label: AddDigitInCircle('3')});
+              this.setState({temp4label: AddDigitInCircle('4')});
+              this.setState({temp5label: AddDigitInCircle('5')});
+              this.setState({temp6label: AddDigitInCircle('6')});
+              this.setState({temp7label: AddDigitInCircle('7')});
+			  
+			  //clear array list
+			this.setState({ArrayList2: GetDropdownListItemsNEW()});
+			this.setState({ArrayList3: GetDropdownListItemsNEW()});
+			this.setState({ArrayList4: GetDropdownListItemsNEW()});
+			this.setState({ArrayList5: GetDropdownListItemsNEW()});
+			this.setState({ArrayList6: GetDropdownListItemsNEW()});
+			this.setState({ArrayList7: GetDropdownListItemsNEW()});
+			
+			
+			
+			this.setState({ArrayList2: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7)});
+			this.setState({ArrayList3: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7)});
+			this.setState({ArrayList4: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7)});
+			this.setState({ArrayList5: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7)});
+			this.setState({ArrayList6: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7)});
+			this.setState({ArrayList7: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7)});
+			
+
+			
+			  
+		  }
+		  else if(pos==2){
+			ddl2=value;ddl3=ddlselitem;ddl4=ddlselitem;ddl5=ddlselitem;
+			ddl6=ddlselitem;ddl7=ddlselitem;
+			//update the unselected dropdowns
+			
+			this.setState({ArrayList3: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7)});
+			this.setState({ArrayList4: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7)});
+			this.setState({ArrayList5: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7)});
+			this.setState({ArrayList6: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7)});
+			this.setState({ArrayList7: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7)});
+			
+			  //clear label too
+			  this.setState({temp3label: AddDigitInCircle('3')});
+              this.setState({temp4label: AddDigitInCircle('4')});
+              this.setState({temp5label: AddDigitInCircle('5')});
+              this.setState({temp6label: AddDigitInCircle('6')});
+              this.setState({temp7label: AddDigitInCircle('7')});
+			  
+				//clear temp state values too
+              this.setState({temp3: ddlselitem});
+              this.setState({temp4: ddlselitem});
+              this.setState({temp5: ddlselitem});
+              this.setState({temp6: ddlselitem});
+              this.setState({temp7: ddlselitem});
+			
+		  }
+		  else if(pos==3){
+			ddl3=value;;ddl4=ddlselitem;ddl5=ddlselitem;
+			ddl6=ddlselitem;ddl7=ddlselitem;
+			
+			this.setState({ArrayList4: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7)});
+			this.setState({ArrayList5: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7)});
+			this.setState({ArrayList6: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7)});
+			this.setState({ArrayList7: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7)});
+			  //clear label too
+              this.setState({temp4label: AddDigitInCircle('4')});
+              this.setState({temp5label: AddDigitInCircle('5')});
+              this.setState({temp6label: AddDigitInCircle('6')});
+              this.setState({temp7label: AddDigitInCircle('7')});
+			  
+				//clear temp state values too
+              this.setState({temp4: ddlselitem});
+              this.setState({temp5: ddlselitem});
+              this.setState({temp6: ddlselitem});
+              this.setState({temp7: ddlselitem});
+			  
+		  }		  
+		  else if(pos==4){
+			ddl4=value;;ddl5=ddlselitem;
+			ddl6=ddlselitem;ddl7=ddlselitem;
+			
+			this.setState({ArrayList5: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7)});
+			this.setState({ArrayList6: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7)});
+			this.setState({ArrayList7: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7)});
+			  //clear label too
+              this.setState({temp5label: AddDigitInCircle('5')});
+              this.setState({temp6label: AddDigitInCircle('6')});
+              this.setState({temp7label: AddDigitInCircle('7')});
+			  
+				//clear temp state values too
+              this.setState({temp5: ddlselitem});
+              this.setState({temp6: ddlselitem});
+              this.setState({temp7: ddlselitem});
+			  
+		  }		  		  
+		  else if(pos==5){
+			ddl5=value;ddl6=ddlselitem;ddl7=ddlselitem;
+			this.setState({ArrayList6: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7)});
+			this.setState({ArrayList7: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7)});
+			  //clear label too
+              this.setState({temp6label: AddDigitInCircle('6')});
+			  this.setState({temp7label: AddDigitInCircle('7')});
+			  
+				//clear temp state values too
+              this.setState({temp6: ddlselitem});
+              this.setState({temp7: ddlselitem});
+			  
+
+		  }		  		  		  
+		  else if(pos==6){
+			ddl6=value;ddl7=ddlselitem;
+			this.setState({ArrayList7: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7)});
+			  //clear label too
+			  this.setState({temp7label: AddDigitInCircle('7')});
+			  
+				//clear temp state values too
+              this.setState({temp7: ddlselitem});			  
+		  }	
+		  else if(pos==7){
+			ddl7=value;
+			
+		  }
+        }
+		
+		
 
         myChangeHandler = (event) => {
           let nam = event.target.name;
@@ -766,7 +1061,8 @@
                 ReactDOM.render(<p></p>, document.getElementById('valMsgOrgId'));
           }
           if(nam=="customeruniqueid"){
-		    ReactDOM.render(<p></p>, document.getElementById('spncustomeruniqueid'));
+            ReactDOM.render(<p></p>, document.getElementById('spncustomeruniqueid'));
+            this.setState({temp1text:val});
           }
 
           //stoe the seleted text also in the state variable
@@ -782,34 +1078,47 @@
             else if(nam=='temp1'){
               this.setState({temp1text: label});
               if(val==""){this.setState({temp1label: AddDigitInCircle('1')});}else{this.setState({temp1label: stick});}
+			  this.RefreshOtherDropDownLists(1,val);
             }
             else if(nam=='temp2'){
               this.setState({temp2text: label});
               if(val==""){this.setState({temp2label: AddDigitInCircle('2')});}else{this.setState({temp2label: stick});}
+			  
+			  this.RefreshOtherDropDownLists(2,val);  //now refresh the other dropdowns
             }
             else if(nam=='temp3'){
               this.setState({temp3text: label});
               if(val==""){this.setState({temp3label: AddDigitInCircle('3')});}else{this.setState({temp3label: stick});}
+			  
+			  this.RefreshOtherDropDownLists(3,val);  //now refresh the other dropdowns
             }
             else if(nam=='temp4'){
               this.setState({temp4text: label});
               this.setState({temp4label: stick});
               if(val==""){this.setState({temp4label: AddDigitInCircle('4')});}else{this.setState({temp4label: stick});}
+			  
+			  this.RefreshOtherDropDownLists(4,val);  //now refresh the other dropdowns
             }                                    
             else if(nam=='temp5'){
-              this.setState({temp5text: label});
+                this.setState({temp5text: label});
                 this.setState({temp5label: stick});
                 if(val==""){this.setState({temp5label: AddDigitInCircle('5')});}else{this.setState({temp5label: stick});}
+				
+				this.RefreshOtherDropDownLists(5,val);  //now refresh the other dropdowns
             }                                    
             else if(nam=='temp6'){
               this.setState({temp6text: label});
                 this.setState({temp6label: stick});
                 if(val==""){this.setState({temp6label: AddDigitInCircle('6')});}else{this.setState({temp6label: stick});}
+				
+				this.RefreshOtherDropDownLists(6,val);  //now refresh the other dropdowns
             }                                   
             else if(nam=='temp7'){
               this.setState({temp7text: label});
                 this.setState({temp7label: stick});
                 if(val==""){this.setState({temp7label: AddDigitInCircle('7')});}else{this.setState({temp7label: stick});}
+				
+				this.RefreshOtherDropDownLists(7,val);  //now refresh the other dropdowns
             }                                   
             else if(nam=='temp8'){
               this.setState({temp8text: label});
@@ -876,13 +1185,13 @@
             return (
               <div>
                   
-				{wizardNavigation(1)}
+				{wizardNavigationNew(1)}
                 {AddLogorow()}
                 <div class='e1container'>
                     <div class="row epaddingbottom10">
                         <div class="col-md-11 elRowPg1">
                             <label class='e1labelheaderPage1 e1margintop10'>Hearsay Org ID</label>
-                            <input name='orgid' id = 'orgid' value={this.state.orgid} placeholder='Enter Hearsay Organization ID' class='e1inputpg1' maxlength='40' onChange={this.myChangeHandler} />
+                            <input name='orgid' value={this.state.orgid} placeholder='Enter Hearsay Organization ID' class='e1inputpg1' maxlength='40' onChange={this.myChangeHandler} />
                             <span id="valMsgOrgId"></span>
                         </div>
                         <div class="col-md-1"></div>
@@ -893,7 +1202,7 @@
                     <div class="row epaddingbottom10">
                         <div class="col-md-11 elRowPg1">
                             <label class='e1labelheaderPage1'>Hearsay User Reference ID</label>
-                            <select name='refid' id = 'refid' value={this.state.refid} onChange={this.myChangeHandler} class='e1inputpg1'>
+                            <select name='refid' value={this.state.refid} onChange={this.myChangeHandler} class='e1inputpg1'>
                                 <option value="0">--Select--</option>
                                 <option value="agentid">Agent ID</option>
                                 <option value="emailid">Email ID</option>
@@ -906,7 +1215,7 @@
                   <div class="row epaddingbottom10">
                         <div class="col-md-11 elRowPg1">
                             <label class='e1labelheaderPage1 e1margintop10'>Customer Unique ID</label>
-                            <input name='customeruniqueid' id = 'cuid' value={this.state.customeruniqueid} placeholder='Enter Customer Unique ID' class='e1inputpg1' maxlength='40' onChange={this.myChangeHandler} />
+                            <input name='customeruniqueid' value={this.state.customeruniqueid} placeholder='Enter Customer Unique ID' class='e1inputpg1' maxlength='40' onChange={this.myChangeHandler} />
                             <span id="spncustomeruniqueid"></span>
                         </div>
                         <div class="col-md-1"></div>
@@ -921,23 +1230,25 @@
           else if(this.state.page==2) {
             return (
               <div>
-                {wizardNavigation(2)}
+                {wizardNavigationNew(2)}
                 {AddLogorow()}
 				        
                 <div class='e1container'>
 
                     
-    
-                    {AddPage2Row('templatename',this.state.templatename,this.myChangeHandler,'Name','row epaddingbottom10',1,"",'blank',"", "")}
-                    {AddPage2Row('temp1',this.state.temp1,this.myChangeHandler,this.state.temp1label,'row epaddingbottom10',2,this.state.temp5label,'temp5',this.state.temp5, this.state.customeruniqueid)}
-                    {AddPage2Row('temp2',this.state.temp2,this.myChangeHandler,this.state.temp2label,'row epaddingbottom10',2,this.state.temp6label,'temp6',this.state.temp6, this.state.customeruniqueid)}
-                    {AddPage2Row('temp3',this.state.temp3,this.myChangeHandler,this.state.temp3label,'row epaddingbottom10',2,this.state.temp7label,'temp7',this.state.temp7, this.state.customeruniqueid)}
-                    {AddPage2Row('temp4',this.state.temp4,this.myChangeHandler,this.state.temp4label,'row epaddingbottom10',2,"",'blank',"", "")}
+
+					 
+                    {AddPage2Row('templatename',this.state.templatename,this.myChangeHandler,'Name','',1,"",'blank',"", "",'')}
+                    {AddPage2Row('temp1',this.state.temp1,this.myChangeHandler,this.state.temp1label,this.state.ArrayList1,2,this.state.temp5label,'temp5',this.state.temp5, this.state.customeruniqueid,this.state.ArrayList5)}
+					{AddPage2Row('temp2',this.state.temp2,this.myChangeHandler,this.state.temp2label,this.state.ArrayList2,3,this.state.temp6label,'temp6',this.state.temp6, this.state.customeruniqueid,this.state.ArrayList6)}
+					{AddPage2Row('temp3',this.state.temp3,this.myChangeHandler,this.state.temp3label,this.state.ArrayList3,4,this.state.temp7label,'temp7',this.state.temp7, this.state.customeruniqueid,this.state.ArrayList7)}
+					{AddPage2Row('temp4',this.state.temp4,this.myChangeHandler,this.state.temp4label,this.state.ArrayList4,5,"",'blank','', '','')}
+					
 
 
-				  {AddCustomFieldBlock('temp8FieldLabel','temp8DataType','temp8Length','temp8Button' ,this.state.temp8FieldLabel, this.state.temp8DataType, this.state.temp8Length,this.myChangeHandler, this.updateCustomFieldObject,this.state.Field8Css, '8', this.state.LenthFld8CSS)}
-				  {AddCustomFieldBlock('temp9FieldLabel','temp9DataType','temp9Length','temp9Button' ,this.state.temp9FieldLabel, this.state.temp9DataType, this.state.temp9Length,this.myChangeHandler, this.updateCustomFieldObject,this.state.Field9Css, '9', this.state.LenthFld9CSS)}
-				  {AddCustomFieldBlock('temp10FieldLabel','temp10DataType','temp10Length','temp10Button' ,this.state.temp10FieldLabel, this.state.temp10DataType, this.state.temp10Length,this.myChangeHandler, this.updateCustomFieldObject,this.state.Field10Css, '10', this.state.LenthFld10CSS)}
+				  {AddCustomFieldBlock('temp8FieldLabel','temp8DataType','temp8Length','temp8Button' ,this.state.temp8FieldLabel, this.state.temp8DataType, this.state.temp8Length,this.myChangeHandler, this.updateCustomFieldObject,this.state.Field8Css, this.state.temp8label, this.state.LenthFld8CSS)}
+				  {AddCustomFieldBlock('temp9FieldLabel','temp9DataType','temp9Length','temp9Button' ,this.state.temp9FieldLabel, this.state.temp9DataType, this.state.temp9Length,this.myChangeHandler, this.updateCustomFieldObject,this.state.Field9Css, this.state.temp9label, this.state.LenthFld9CSS)}
+				  {AddCustomFieldBlock('temp10FieldLabel','temp10DataType','temp10Length','temp10Button' ,this.state.temp10FieldLabel, this.state.temp10DataType, this.state.temp10Length,this.myChangeHandler, this.updateCustomFieldObject,this.state.Field10Css, this.state.temp9label, this.state.LenthFld10CSS)}
 
 
 
@@ -968,7 +1279,7 @@
           else if(this.state.page==3) {
             return (
               <div>
-                {wizardNavigation(3)}
+                {wizardNavigationNew(3)}
                 {AddLogorow()}
                 <div class='e1container'>
                     <div class="row epaddingbottom10 e1marginleft emargintop10">
