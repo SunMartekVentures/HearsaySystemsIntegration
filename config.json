@@ -1,0 +1,80 @@
+{
+	"workflowApiVersion": "1.1",
+	"metaData": {
+		"icon": "images/sms.png",
+		"category": "message"
+	},
+	"type": "myActivityType",
+	"lang": {
+		"en-US": {
+			"name": "Custom Activity (Workflow API v1.1)",
+			"description": "A custom Journey Builder activity using workflow API v1.1 format."
+		}
+	},
+	"arguments": {
+		"execute": {
+			"inArguments": [{
+				"myInArgument": "inArgument coming from iframe"
+			}],
+			"outArguments": [],
+			"timeout": 100000,
+			"retryCount": 1,
+			"retryDelay": 10000,
+			"concurrentRequests" : 5,
+			"url": "https://some-endpoint.com/execute"
+		}
+	},
+	"configurationArguments": {
+		"save": {
+			"url": "URI/for/your/activity/save"
+		},
+		"publish": {
+			"url": "URI/for/your/activity/publish"
+		},
+		"validate": {
+			"url": "URI/for/your/activity/validate"
+		},
+		"stop": {
+			"url": "URI/for/your/activity/stop"
+		}
+	},
+	"wizardSteps": [{
+			"label": "Step 1",
+			"key": "step1"
+		},
+		{
+			"label": "Step 2",
+			"key": "step2"
+		},
+		{
+			"label": "Step 3",
+			"key": "step3"
+		},
+		{
+			"label": "Step 4",
+			"key": "step4",
+			"active": false
+		}
+	],
+	"userInterfaces": {
+		"configModal": {
+			"height": 200,
+			"width": 300,
+			"fullscreen": true
+		}
+	},
+	"schema": {
+		"arguments": {
+			"execute": {
+				"inArguments": [{
+					"myInArgument": {
+						"dataType": "<some data type>",
+						"isNullable": false,
+						"direction": "in"
+					}
+				}],
+				"outArguments": []
+			}
+		}
+	}
+}
