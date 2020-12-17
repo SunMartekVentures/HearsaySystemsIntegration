@@ -5,7 +5,6 @@
   <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
   <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
-
   <link
   rel="stylesheet"
   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -13,9 +12,14 @@
   crossorigin="anonymous"
 />
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js" 
+  integrity="sha512-DZqqY3PiOvTP9HkjIWgjO6ouCbq+dxqWoJZ/Q+zPYNHmlnI2dQnbJ5bxAHpAMw+LXRm4D72EIRXzvcHQtE8/VQ==" 
+  crossorigin="anonymous">
+  </script>
+
 <!-- Icon -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="/css/hearsay.css" />  
+<link rel="stylesheet" type="text/css" href="/css/hearsay.css" /> 
 
 </head>
   <body>
@@ -30,7 +34,7 @@
         function AddLogorow(abcd, second){
           return (
                 <div class="e1logorowpadding">
-                    <div><img src='hearsay.png' width='50' height='50' /><label class='e1pageheader'>Hearsay Systems - Organization Preferences</label></div>
+                    <div><img src='https://github.com/Sivaskandharuban/authmcdataext/blob/master/views/hearsay.png?raw=true' width='50' height='50' /><label class='e1pageheader'>Hearsay Systems - Organization Preferences</label></div>
                 </div>);
         }
 
@@ -161,7 +165,6 @@
         }
 
         scontrol2=SecondPageDropdownControl(control2name,control2value,handler, customuniqueid,ddl2array);
-		
         return (
             <div>
                 {sPageHeader}
@@ -217,7 +220,7 @@
 
         function AddCustomFieldBlock(fieldLabelControlName, typeControllnName, lengthControlName, btnName, 
                 fieldLabelControlValue, typeControlValue, lengthControlValue, handler , 
-				FieldObjectHandler , divcssclass, noOfField, leninputdisabled){
+				FieldObjectHandler , divcssclass, noOfField, leninputdisabled, buttonlabel){
           return (
 
         <div class={divcssclass}>
@@ -247,13 +250,13 @@
                 </select>
             </div>
             <div class="col-md-1">
-                <label class="e1labelheaderPage1">Size</label>
+                <label class="e1labelheaderPage1 emarginleft10">Size</label>
             </div>
             <div class="col-md-2">
                 <input class="e1input120" name={lengthControlName} value={lengthControlValue} type="text" onChange={handler} maxlength="5"/>
             </div>
             <div class="col-md-1">
-                <button name={btnName} onClick={FieldObjectHandler} class="btn btn-primary btn-xs e1buttonleftpadding">Edit</button>
+                <button name={btnName} onClick={FieldObjectHandler} class="btn btn-primary btn-xs e1buttonleftpadding ">{buttonlabel}</button>
             </div>
 
 
@@ -263,39 +266,22 @@
         
 
         function AddDigitInCircle(number){
+		let cssclass='Roundedbadge';
+		if(number==10){cssclass='Roundedbadge10'}
+		
         return (
-          <span class="Roundedbadge" aria-hidden="true">{number}</span>
+          <span class={cssclass} aria-hidden="true">{number}</span>
         );
       }
-
-        // function generateWizardStep(firstDivCover, firstDiv, secondDiv, thirdDivCover, thirdDiv, title, size, isStanby, stepNum){
-        //   if(isStanby==true){
-        //     return (
-        //     <div class={"div"} >
-        //       <div class={firstDivCover}><div class={firstDiv}></div></div>
-        //       <div class={secondDiv} style={{width:size}}><label class="lblWizardHeading" ><i class="fa fa-check-circle" aria-hidden="true"></i> {title}</label></div>
-        //       <div class={thirdDivCover}><div class={thirdDiv}></div></div>  
-        //     </div>
-        //   );
-        //   } else{
-        //     return (
-        //     <div class={"div"} >
-        //       <div class={firstDivCover}><div class={firstDiv}></div></div>
-        //       <div class={secondDiv} style={{width:size}}><label class="lblWizardHeading"><span class="badge">{stepNum}</span> {title}</label></div>
-        //       <div class={thirdDivCover}><div class={thirdDiv}></div></div>  
-        //     </div>
-        //   );
-        //   }
-        // }
 
         function getmarginWidth(step){
           let margin="56%";
           if(step==1){
-            margin="44%";
+            margin="46%";
           } else if(step==2){
-            margin="44%";
+            margin="46%";
           } else if(step==3){
-            margin="43%";
+            margin="45%";
           }
           return margin;
         }
@@ -313,22 +299,6 @@
             <span class="badge">2</span>
           );
         }
-
-        function GetlabelWithIcon(margincss, labeltext, status, stepno){
-          if(status==true){
-            return (
-            <text x={margincss} y="21%" dominant-baseline="middle" text-anchor="middle" class="wizardTextStyle"> &#xf05d; {labeltext}</text>
-            )
-          } else{
-            return (
-              
-            <text x={margincss} y="21%" dominant-baseline="middle" text-anchor="middle" class="wizardTextStyle"> {labeltext}</text>
-            )
-          }
-          
-        }
-
-
         function AsignDigitIcon(stepno, Status){
           const mystyle = {
             fontSize:15,
@@ -339,7 +309,7 @@
             return (
               <svg width="100" height="100">
                   <circle cx="30" cy="23" r="7" stroke-width="4" fill="#fff" />
-                  <text x="30%" y="24%" dominant-baseline="middle"  text-anchor="middle" style={mystyle} class="polygonStyleUnselected">{stepno}</text>
+                  <text x="30%" y="25%" dominant-baseline="middle"  text-anchor="middle" style={mystyle} class="polygonStyleUnselected">{stepno}</text>
               </svg>
             )
           } else{
@@ -379,32 +349,34 @@
             return "20"
           } 
           else if(stepno==2){
-            return "30";
+            return "34";
           } else if(stepno==3){
-            return "30";
+            return "34";
           }
         }
 
 
-        function GetWizardStep(labelname, stepno, Status){
+        function GetWizardStep(labelname, stepno, Status, onClickHandler){
           let marginLeft=getmarginWidth(stepno);
           let SelectionClass=(Status==true)?"polygonStyleSelected":"polygonStyleUnselected";
+          let pointerClass=(Status==true)?"clsLink":"clsUnlink";
           let svgPoints=getSvgSize(stepno)
           let TotalWidth=getWidthSize(stepno);
           let RoundedIconWidth=GetIconSize(stepno);
           let RoundedIconWidthForText=RoundedIconWidth+"%";
+          let className="svgStyles "+"Div"+stepno + " " + pointerClass;
           const mystyle = {
-            fontSize:15,
+            // fontSize:15,
             fontWeight: "700",
-            strokeWidth: 0
+            strokeWidth: 0,
           };
 
           if(Status==true){
             return(
-              <svg height="75" width={TotalWidth} class="svgStyles">
+              <svg name={stepno} height="75" width={TotalWidth} class={className} onClick={onClickHandler}>
                 <polygon points={svgPoints} class={SelectionClass}  />
                 <svg width="100" height="100">
-                    <text x={RoundedIconWidthForText} y="24%" dominant-baseline="middle"  text-anchor="middle"  class="iconStyle"> &#xf05d; </text>
+                    <text x={RoundedIconWidthForText} y="25%" dominant-baseline="middle"  text-anchor="middle"  class="iconStyle"> &#xf05d; </text>
                 </svg>
                 
                 <text x={marginLeft} y="34%" dominant-baseline="middle" text-anchor="middle" class="wizardTextStyle">   {labelname}</text>
@@ -412,11 +384,11 @@
             )
           } else{
             return(
-              <svg height="75" width={TotalWidth} class="svgStyles">
+              <svg name={stepno}  height="75" width={TotalWidth} class={className} onClick={onClickHandler}>
                 <polygon points={svgPoints} class={SelectionClass}  />
                 <svg width="100" height="100">
                     <circle cx={RoundedIconWidth} cy="23" r="7" stroke-width="4" fill="#fff" />
-                    <text x={RoundedIconWidthForText} y="24%" dominant-baseline="middle"  text-anchor="middle" style={mystyle} class="polygonStyleUnselected">{stepno}</text>
+                    <text x={RoundedIconWidthForText} y="25%" dominant-baseline="middle"  text-anchor="middle" style={mystyle} class="polygonStyleUnselected">{stepno}</text>
                 </svg>
                 <g><text class="badge">CLICK ME</text></g>
                 <text x={marginLeft} y="34%" dominant-baseline="middle" text-anchor="middle" class="wizardTextStyle"> {labelname}</text>
@@ -425,136 +397,86 @@
           }
         }
 
-        function wizardNavigationNew(step){
+        function wizardNavigationNew(step, onchangeHandler){
+          //onclick={onClickHandler(stepno)}
+
           if(step==1){
             return (
             <div class="wizard">
-              
-              {GetWizardStep("ORG. PREFERENCES", 1, false)}
-              {GetWizardStep("DATA CONFIG", 2, false)}
-              {GetWizardStep("SUMMARY", 3, false)}
+              {GetWizardStep("ORG. PREFERENCES", 1, false, onchangeHandler)}
+              {GetWizardStep("DATA CONFIG", 2, false, onchangeHandler)}
+              {GetWizardStep("SUMMARY", 3, false, onchangeHandler)}
             </div>
             );
           } else if(step==2){
             return (
             <div class="wizard">
               
-              {GetWizardStep("ORG. PREFERENCES", 1, true)}
-              {GetWizardStep("DATA CONFIG", 2, false)}
-              {GetWizardStep("SUMMARY", 3, false)}
+              {GetWizardStep("ORG. PREFERENCES", 1, true, onchangeHandler)}
+              {GetWizardStep("DATA CONFIG", 2, false, onchangeHandler)}
+              {GetWizardStep("SUMMARY", 3, false, onchangeHandler)}
             </div>
             );
           }else if(step==3){
             return (
             <div class="wizard">
               
-              {GetWizardStep("ORG. PREFERENCES", 1, true)}
-              {GetWizardStep("DATA CONFIG", 2, true)}
-              {GetWizardStep("SUMMARY", 3, false)}
+              {GetWizardStep("ORG. PREFERENCES", 1, true, onchangeHandler)}
+              {GetWizardStep("DATA CONFIG", 2, true, onchangeHandler)}
+              {GetWizardStep("SUMMARY", 3, false, onchangeHandler)}
             </div>
             );
           }
           
         }
-
-        // function wizardNavigation(step){
-        //   const triangle_right_inverted_cover_first="triangle-right-inverted-cover-first ";
-        //   const triangle_right_inverted_cover_first_unselected="triangle-right-inverted-cover-first-unselected ";
-        //   const triangle_right_inverted_cover="triangle-right-inverted-cover ";
-        //   const triangle_right_inverted_first_unselected="triangle-right-inverted-first-unselected ";
-        //   const triangle_right_inverted="triangle-right-inverted ";
-        //   const triangle_right_inverted_unselected="triangle-right-inverted-unselected ";
-        //   const triangle_right_unselected="triangle-right-unselected ";
-        //   const triangle_right_cover_last="triangle-right-cover-last";
-        //   const triangle_right="triangle-right ";
-        //   const triangle_right_inverted_cover_unselected="triangle-right-inverted-cover-unselected ";
-        //   const triangle_right_unselected_cover="triangle-right-unselected-cover";
-        //   const triangle_right_unselected_cover_last="triangle-right-unselected-cover-last";
-        //   const triangle_right_cover="triangle-right-cover ";
-        //   const triangle_right_inverted_first="triangle-right-inverted-first ";
-        //   const rectangle_unselected="rectangle-unselected div";
-        //   const rectangle="rectangle div ";
-        //   const lblWizardHeading="lblWizardHeading ";
-        //   const greenBack="greenBack";
-        //   const invertedGreenBack="invertedGreenBack";
-        //   const triangle_right_cover_green="triangle-right-cover-green";
-        //   const triangle_right_inverted_cover_unselected_green="triangle-right-inverted-cover-unselected-green";
-
-
-        //   if(step==1){
-        //       return ( 
-        //           <div class="div divWizardHead"> 
-        //             <div class="div divStep1">
-        //             {generateWizardStep(triangle_right_inverted_cover_first_unselected, triangle_right_inverted_first_unselected, rectangle_unselected, triangle_right_unselected_cover, triangle_right_unselected, 'ORG. PREFERENCES', "185px", false, 1)}
-        //             </div>
-        //             <div class="div divStep2" >
-        //               {generateWizardStep(triangle_right_inverted_cover_unselected, triangle_right_inverted_unselected, rectangle_unselected, triangle_right_unselected_cover, triangle_right_unselected, 'DATA CONFIG', "140px", false, 2)}
-        //             </div>
-        //             <div class="div divStep3" >
-        //               {generateWizardStep(triangle_right_inverted_cover_unselected, triangle_right_inverted_unselected, rectangle_unselected, triangle_right_unselected_cover_last, triangle_right_unselected, 'SUMMARY', "120px", false, 3)}
-        //             </div>
-        //           </div> 
-        //          );
-        //   } else if(step==2){
-        //     return ( 
-        //       <div class="div divWizardHead"> 
-        //             <div class="div divStep1">
-        //             {generateWizardStep(triangle_right_inverted_cover_first, triangle_right_inverted_first, rectangle, triangle_right_cover, triangle_right, 'ORG. PREFERENCES', "185px", true, 1)}
-        //             </div>
-        //             <div class="div divStep2" >
-        //               {generateWizardStep(triangle_right_inverted_cover_unselected, triangle_right_inverted_unselected, rectangle_unselected, triangle_right_unselected_cover, triangle_right_unselected, 'DATA CONFIG', "140px", false, 2)}
-        //             </div>
-        //             <div class="div divStep3" >
-        //               {generateWizardStep(triangle_right_inverted_cover_unselected, triangle_right_inverted_unselected, rectangle_unselected, triangle_right_unselected_cover_last, triangle_right_unselected, 'SUMMARY', "120px", false, 3)}
-        //             </div>
-        //           </div> 
-        //          );
-        //   } else if(step==3){
-        //     return ( 
-        //       <div class="div divWizardHead"> 
-        //         <div class="div divStep1">
-        //             {generateWizardStep(triangle_right_inverted_cover_first, triangle_right_inverted_first, rectangle, triangle_right_cover_green, triangle_right, 'ORG. PREFERENCES', "185px", true, 1)}
-        //             </div>
-        //             <div class="div divStep2" >
-        //               {generateWizardStep(triangle_right_inverted_cover_unselected_green, triangle_right , rectangle, triangle_right_cover, triangle_right, 'DATA CONFIG', "140px", true, 2)}
-        //             </div>
-        //             <div class="div divStep3" >
-        //               {generateWizardStep(triangle_right_inverted_cover_unselected, triangle_right_inverted_unselected, rectangle_unselected, triangle_right_unselected_cover_last, triangle_right_unselected, 'SUMMARY', "120px", false, 3)}  
-        //             </div>
-        //           </div>
-        //          );
-        //     }
-        // }
-
-
-      // function expandCustomFieldObject(cfo){
-      //   if(cfo.length==0){
-      //     return (
-      //       <div></div>
-      //     );
-      //   } else {
-      //     return ( 
-      //           <div>
-      //             Field Label : <span>{cfo.FieldName}</span> &nbsp;&nbsp;
-      //             Type : <span>{cfo.FieldType}</span> &nbsp;&nbsp;
-      //             Length : <span>{cfo.FieldLength}</span> &nbsp;&nbsp;
-      //           </div>
-      //           );
-      //   }
-        
-      // }
-	  
-	  
-	  
-	  
 		
+		function loaddata(jsonObject){
+		console.log("load data function called");
+	
+		var hearsayOrgId = jsonObject.orgid;
+		var hearsayRefId = jsonObject.refid;
+		var CUID = jsonObject.cuid;
+	
+	
+	
+	console.log("getting values from fields : " + hearsayOrgId + hearsayRefId + CUID);
+	
+	axios({
+			          method: 'POST',
+			          url: 'https://dataintapicall.herokuapp.com/loaddata',
+			           data: jsonObject,
+			          headers: {'Content-Type': 'application/json' }
+                })
+                  .then(function (response) {
+                  //handle success
+                  //return response;	
+		  console.log(response.data);		  
+                  });
+	}
+	
+	function loaddataforpage2(jsonObject){	
+	
+	console.log("load data for page 2 function called");
+	
+	
+	axios({
+			          method: 'POST',
+			          url: 'https://dataintapicall.herokuapp.com/loaddatafortemp',
+			           data: jsonObject,
+			          headers: {'Content-Type': 'application/json' }
+                })
+                  .then(function (response) {
+                  //handle success
+                  //return response;	
+		  console.log(response.data);		  
+                  });
+	}
 		
 		
 
-      class HearsayPage1 extends React.Component {
+     class HearsayPage1 extends React.Component {
         constructor(props) {
           super(props);
-		  
 		  
           this.state = {
             orgid: '',
@@ -596,11 +518,9 @@
             temp9label: AddDigitInCircle('9'),
             temp10label: AddDigitInCircle('10'),
             
-			
-
             FieldCounter:7,
 
-            Field8Css:"row epaddingbottom10 ehidediv e1marginleft",
+            Field8Css:"row epaddingbottom10 ehidediv e1marginleft emargintop10",
             Field9Css:"row epaddingbottom10 ehidediv e1marginleft",
             Field10Css:"row epaddingbottom10 ehidediv e1marginleft",
 
@@ -611,6 +531,10 @@
             temp8FieldLabel:"",
             temp9FieldLabel:"",
             temp10FieldLabel:"",
+			
+            temp8ButtonLabel:"Save",
+            temp9ButtonLabel:"Save",
+            temp10ButtonLabel:"Save",			
 
             temp8DataType:"",
             temp9DataType:"",
@@ -641,7 +565,8 @@
           this.handleChangeCancel = this.handleChangeCancel.bind(this);
           this.handleNewFieldClick = this.handleNewFieldClick.bind(this);
 		  
-		  this.RefreshOtherDropDownLists = this.RefreshOtherDropDownLists.bind(this);
+      this.RefreshOtherDropDownLists = this.RefreshOtherDropDownLists.bind(this);
+      this.redirectFromWizardSteps=this.redirectFromWizardSteps.bind(this);
 		  
         }
 
@@ -655,8 +580,10 @@
             alert('Maximum limit exceeded (limit: 10)')            
           }
           else{
-              const stemp2='row epaddingbottom10 e1marginleft emargintop10';
+              let stemp2='row epaddingbottom10 e1marginleft';
               if(counter==8){
+			    stemp2='row epaddingbottom10 e1marginleft emargintop10';
+			  
                 this.setState({Field8Css: stemp2});
               }                   
               else if(counter==9){
@@ -687,22 +614,62 @@
 
         handleChangeNext(event) {
           
-          if(this.state.page==3){
-            var DataConfig={
-              dataConfig1:this.state.temp1text,
-              dataConfig2:this.state.temp2text,
-              dataConfig3:this.state.temp3text,
-              dataConfig4:this.state.temp4text,
-              dataConfig8:this.state.artemp8,
-              dataConfig9:this.state.artemp9,
-              dataConfig10:this.state.artemp10
-            }
+          if(this.state.page==2){
+            var DataConfig=[
+	    
+	    {
+                    keys: {
+                        Name : this.state.templatename,
+                    },
+		    values: {
+              		option1:this.state.temp1text,
+              		option2:this.state.temp2text,
+              		option3:this.state.temp3text,
+					option4:this.state.temp4text,
+					option5:this.state.temp5text,
+					option6:this.state.temp6text,
+					option7:this.state.temp7text,
+             		option8:this.state.temp8FieldLabel,
+              		option9:this.state.temp9FieldLabel,
+              		option10:this.state.temp10FieldLabel
+            		}
+	    	}
+	    ];
+		
+		loaddataforpage2(DataConfig);
+	    }
+	    
+	    
              
-            var jsonObject={
-              orgId:this.state.orgid,
-              refid:this.state.refid,
-              dataConfig:DataConfig
-            }
+	      if(this.state.page==1){	      
+	      let jsonObject = [
+                {
+                    keys: {
+                        orgid:this.state.orgid,
+                    },
+                    values: {
+                        refid:this.state.refid,
+              		cuid:this.state.customeruniqueid                        
+                    }
+                }                   
+            ];            
+	    
+	    console.log("Before axios");	    
+	    axios({
+			          method: 'POST',
+			          url: 'https://dataintapicall.herokuapp.com/apidemooauthtoken', 
+			          
+			          //headers: {'Content-Type': 'application/json' }
+                })
+                  .then(function (response) {
+                  //handle success
+                  //return response;	
+		  //console.log(response.data);
+		
+		  loaddata(jsonObject);
+		  
+                  });
+		  }
              
           }
 
@@ -809,13 +776,19 @@
               this.setState({temp8FieldLabel: ''});
               this.setState({temp9FieldLabel: ''});
               this.setState({temp10FieldLabel: ''});
+			  
               this.setState({temp8DataType: ''});
               this.setState({temp9DataType: ''});
               this.setState({temp10DataType: ''});
+			  
               this.setState({temp8Length: ''});
               this.setState({temp9Length: ''});
               this.setState({temp10Length: ''});
 			  
+			  
+			  this.setState({temp8ButtonLabel: 'Save'});
+              this.setState({temp9ButtonLabel: 'Save'});
+              this.setState({temp10ButtonLabel: 'Save'});
 			  
 			  this.setState({LenthFld8CSS: ' true '});
 			  this.setState({LenthFld9CSS: ' true '});
@@ -829,7 +802,7 @@
               this.setState({temp6label: AddDigitInCircle('6')});
               this.setState({temp7label: AddDigitInCircle('7')});
 
-				this.setState({Field8Css: 'row epaddingbottom10 ehidediv e1marginleft'});
+				this.setState({Field8Css: 'row epaddingbottom10 ehidediv e1marginleft emargintop10'});
 				this.setState({Field9Css: 'row epaddingbottom10 ehidediv e1marginleft'});
 				this.setState({Field10Css: 'row epaddingbottom10 ehidediv e1marginleft'});
             }
@@ -861,9 +834,11 @@
                 FieldLength:this.state.temp8Length
               }
               this.setState({artemp8:Object8});
+			  this.setState({temp8ButtonLabel:'Save'});
             } else{
+			  this.setState({artemp8:""});
               this.setState({artemp8:""});
-              this.setState({temp8label:AddDigitInCircle("8")});
+              this.setState({temp8ButtonLabel:'Edit'});
             }
           }else if(nam=="temp9Button"){
             
@@ -875,9 +850,11 @@
                 FieldLength:this.state.temp9Length
               }
               this.setState({artemp9:Object9});
+    		  this.setState({temp9ButtonLabel:'Save'});
             } else{
               this.setState({artemp9:""});
               this.setState({temp9label:AddDigitInCircle("9")});
+			  this.setState({temp9ButtonLabel:'Edit'});
             }
           }else if(nam=="temp10Button"){
             if(this.state.temp10FieldLabel!="" &&this.state.temp10FieldLabel!="" &&this.state.temp10DataType!=0 &&this.state.temp10DataType!="0" &&this.state.temp10Length!="" &&this.state.temp10Length!=" "){
@@ -888,9 +865,11 @@
                 FieldLength:this.state.temp10Length
               }
               this.setState({artemp10:Object10});
+			  this.setState({temp10ButtonLabel:'Save'});
             } else{
               this.setState({artemp10:""});
               this.setState({temp10label:AddDigitInCircle("10")});
+			  this.setState({temp10ButtonLabel:'Edit'});
             }
           }
 
@@ -1181,12 +1160,32 @@
           }
         }
 
+        redirectFromWizardSteps(event){
+          let Clsname = event.currentTarget.classList[1];
+          const CurrentPageNo=this.state.page;
+          var RedirectingPageNo=0;
+          debugger;
+          if(Clsname=="Div1"){
+            RedirectingPageNo=1;
+          } else if(Clsname=="Div2"){
+            RedirectingPageNo=2;
+          } else if(Clsname=="Div3"){
+            RedirectingPageNo=3;
+          }
+
+          if(RedirectingPageNo<=CurrentPageNo){
+            this.setState({page:RedirectingPageNo});
+          }
+          
+        }
+
+
         render() {
           if(this.state.page==1) {
             return (
               <div>
                   
-				{wizardNavigationNew(1)}
+				{wizardNavigationNew(1, this.redirectFromWizardSteps)}
                 {AddLogorow()}
                 <div class='e1container'>
                     <div class="row epaddingbottom10">
@@ -1231,7 +1230,7 @@
           else if(this.state.page==2) {
             return (
               <div>
-                {wizardNavigationNew(2)}
+                {wizardNavigationNew(2, this.redirectFromWizardSteps)}
                 {AddLogorow()}
 				        
                 <div class='e1container'>
@@ -1247,21 +1246,21 @@
 					
 
 
-				  {AddCustomFieldBlock('temp8FieldLabel','temp8DataType','temp8Length','temp8Button' ,this.state.temp8FieldLabel, this.state.temp8DataType, this.state.temp8Length,this.myChangeHandler, this.updateCustomFieldObject,this.state.Field8Css, this.state.temp8label, this.state.LenthFld8CSS)}
-				  {AddCustomFieldBlock('temp9FieldLabel','temp9DataType','temp9Length','temp9Button' ,this.state.temp9FieldLabel, this.state.temp9DataType, this.state.temp9Length,this.myChangeHandler, this.updateCustomFieldObject,this.state.Field9Css, this.state.temp9label, this.state.LenthFld9CSS)}
-				  {AddCustomFieldBlock('temp10FieldLabel','temp10DataType','temp10Length','temp10Button' ,this.state.temp10FieldLabel, this.state.temp10DataType, this.state.temp10Length,this.myChangeHandler, this.updateCustomFieldObject,this.state.Field10Css, this.state.temp9label, this.state.LenthFld10CSS)}
+				  {AddCustomFieldBlock('temp8FieldLabel','temp8DataType','temp8Length','temp8Button' ,this.state.temp8FieldLabel, this.state.temp8DataType, this.state.temp8Length,this.myChangeHandler, this.updateCustomFieldObject,this.state.Field8Css, this.state.temp8label, this.state.LenthFld8CSS,this.state.temp8ButtonLabel)}
+				  {AddCustomFieldBlock('temp9FieldLabel','temp9DataType','temp9Length','temp9Button' ,this.state.temp9FieldLabel, this.state.temp9DataType, this.state.temp9Length,this.myChangeHandler, this.updateCustomFieldObject,this.state.Field9Css, this.state.temp9label, this.state.LenthFld9CSS,this.state.temp9ButtonLabel)}
+				  {AddCustomFieldBlock('temp10FieldLabel','temp10DataType','temp10Length','temp10Button' ,this.state.temp10FieldLabel, this.state.temp10DataType, this.state.temp10Length,this.myChangeHandler, this.updateCustomFieldObject,this.state.Field10Css, this.state.temp10label, this.state.LenthFld10CSS,this.state.temp10ButtonLabel)}
 
 
 
                   
 
-                  <div class='row epaddingbottom10 e1marginleft'>
-                      {/*<div class='col-md-2 elRowPg1'></div>*/}
+                  <div class='row epaddingbottom10 emargintop10 e1marginleft'>
+					   <div class='col-md-1'></div>
                       <div class='col-md-11'>
-                          <button onClick={this.handleNewFieldClick} class='btn btn-link e1butonfontsize float-left eaddbtnmarginleft emargintop10 btn-xs'> + Add New Field</button>
+                          <button onClick={this.handleNewFieldClick} class='btn btn-link e1butonfontsize float-left  emargintop10 btn-xs'> + Add New Field</button>
                       </div>
                         
-                      <div class='col-md-1'></div>
+                      
                   </div>
                   <div class='row epaddingbottom10'>
                       <div class='col-md-1'></div>
@@ -1280,7 +1279,7 @@
           else if(this.state.page==3) {
             return (
               <div>
-                {wizardNavigationNew(3)}
+                {wizardNavigationNew(3, this.redirectFromWizardSteps)}
                 {AddLogorow()}
                 <div class='e1container'>
                     <div class="row epaddingbottom10 e1marginleft emargintop10">
