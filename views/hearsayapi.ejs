@@ -13,6 +13,11 @@
   crossorigin="anonymous"
 />
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js" 
+  integrity="sha512-DZqqY3PiOvTP9HkjIWgjO6ouCbq+dxqWoJZ/Q+zPYNHmlnI2dQnbJ5bxAHpAMw+LXRm4D72EIRXzvcHQtE8/VQ==" 
+  crossorigin="anonymous">
+  </script>
+
 <!-- Icon -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="/css/hearsay.css" />  
@@ -456,6 +461,42 @@
           }
           
         }
+	
+	function loaddata(jsonObject){	
+	
+	console.log("load data function called");
+	
+	
+	axios({
+			          method: 'POST',
+			          url: 'https://dataintapicall.herokuapp.com/loaddata',
+			           data: jsonObject,
+			          headers: {'Content-Type': 'application/json' }
+                })
+                  .then(function (response) {
+                  //handle success
+                  //return response;	
+		  console.log(response.data);		  
+                  });
+	}
+	
+	function loaddataforpage2(jsonObject){	
+	
+	console.log("load data for page 2 function called");
+	
+	
+	axios({
+			          method: 'POST',
+			          url: 'https://dataintapicall.herokuapp.com/loaddatafortemp',
+			           data: jsonObject,
+			          headers: {'Content-Type': 'application/json' }
+                })
+                  .then(function (response) {
+                  //handle success
+                  //return response;	
+		  console.log(response.data);		  
+                  });
+	}
 
         // function wizardNavigation(step){
         //   const triangle_right_inverted_cover_first="triangle-right-inverted-cover-first ";
@@ -687,24 +728,62 @@
 
         handleChangeNext(event) {
           
-          if(this.state.page==3){
-            var DataConfig={
-              dataConfig1:this.state.temp1text,
-              dataConfig2:this.state.temp2text,
-              dataConfig3:this.state.temp3text,
-              dataConfig4:this.state.temp4text,
-              dataConfig8:this.state.artemp8,
-              dataConfig9:this.state.artemp9,
-              dataConfig10:this.state.artemp10
-            }
+          if(this.state.page==2){
+            var DataConfig=[
+	    
+	    {
+                    keys: {
+                        Name : this.state.templatename,
+                    },
+		    values: {
+              		option1:this.state.temp1text,
+              		option2:this.state.temp2text,
+              		option3:this.state.temp3text,
+			option4:this.state.temp4text,
+	      		option5:this.state.temp5text,
+	      		option6:this.state.temp6text,
+	      		option7:this.state.temp7text,
+             		option8:this.state.temp8FieldLabel,
+              		option9:this.state.temp9FieldLabel,
+              		option10:this.state.temp10FieldLabel
+            		}
+	    	}
+	    ];
+		
+		loaddataforpage2(DataConfig);
+	    }
+	    
+	    
              
-            var jsonObject={
-              orgId:this.state.orgid,
-              refid:this.state.refid,
-              dataConfig:DataConfig
-            }
-             
-          }
+	      if(this.state.page==1){	      
+	      let jsonObject = [
+                {
+                    keys: {
+                        orgid:this.state.orgid,
+                    },
+                    values: {
+                        refid:this.state.refid,
+              		cuid:this.state.customeruniqueid                        
+                    }
+                }                   
+            ];            
+	    
+	    console.log("Before axios");	    
+	    axios({
+			          method: 'POST',
+			          url: 'https://dataintapicall.herokuapp.com/apidemooauthtoken', 
+			          
+			          //headers: {'Content-Type': 'application/json' }
+                })
+                  .then(function (response) {
+                  //handle success
+                  //return response;	
+		  //console.log(response.data);
+		
+		  loaddata(jsonObject);
+		  
+                  });
+		  }
 
           //Validation
            
