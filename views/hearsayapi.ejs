@@ -608,7 +608,9 @@
 
         handleChangeBack(event){
           let ipage = this.state.page - 1;
-		  if(ipage<=0){ipage=1;}
+		  if(ipage<=0){
+		  ipage=1;
+		  }
           this.setState({page: ipage});
         }
 
@@ -671,7 +673,7 @@
                   });
 		  }
              
-          }
+          
 
           //Validation
            
