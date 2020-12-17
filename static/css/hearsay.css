@@ -19,8 +19,20 @@ body {
     margin-bottom: 7px;
 }
 
+.epaddingbottom12 {
+    margin-bottom: 12px;
+}
+
+.emargintop10minus {
+    margin-top: -10px;
+}
+
 .emargintop10 {
     margin-top: 20px;
+}
+
+.emarginleft10 {
+    margin-top: 10px;
 }
 
 .emargintop24 {
@@ -97,7 +109,6 @@ body {
     font-size: 13px;
     letter-spacing: 1px;
     margin-top: 12px;
-    margin-bottom: 12px;
 }
 
 .e1labelheaderPage3 {
@@ -185,6 +196,7 @@ body {
       border-color: #80bdff;
       outline: 0;
       box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+	  
     }
     .e1inputddsmall:hover{
       color: #495057;
@@ -222,7 +234,7 @@ body {
         padding-top: 4px;
         border-radius: 6px;
         /* margin-left: 20px; */
-        width: 160px;
+        width: 150px;
         border-color: #c0c0c0 !important;
     }
 
@@ -542,7 +554,7 @@ body {
     .Roundedbadge{
       border-radius: 50%;
     width: 22px;
-    height: 22px;
+    height: 18px;
     /* padding: 5px; */
     background: #fff;
     border: 2px solid #666;
@@ -554,3 +566,61 @@ body {
     padding-right: 5px;
     padding-bottom: 2px;
     }
+	
+	    .Roundedbadge10{
+      border-radius: 50%;
+    width: 22px;
+    height: 28px;
+    /* padding: 5px; */
+    background: #fff;
+    border: 2px solid #666;
+    color: #666;
+    text-align: center;
+    size: 18px;
+    margin-top: 15px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 2px;
+    }
+	
+    .valMessage{
+      color: red;
+    }
+    .svgStyles{
+      font-weight: bold;
+      margin-right: -57px;
+    }
+    .wizardTextStyle{
+      font-weight: 700;
+      fill: #fff;
+      font-size: 15px;
+      font-family: -1apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+	  letter-spacing:1px;
+    }
+	
+    .polygonStyleSelected{
+      fill: #4BCA81;
+      stroke: #AEB5BE;
+      stroke-width: 1;
+      
+    }
+    .polygonStyleUnselected{
+      fill: #1E67B7;
+      stroke: #AEB5BE;
+      stroke-width: 1;
+    }
+    .wizard{
+      background-color: #a8b9d0;
+      height: 51px;
+    }
+    .iconStyle{
+      fill: #fff;
+      font-size: 15px;
+    }
+    svg text {
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji", FontAwesome;
+    }
+    .clsLink{
+      cursor: pointer;
+    }
+    
