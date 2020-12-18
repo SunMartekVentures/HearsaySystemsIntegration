@@ -658,7 +658,7 @@
 		  
 		  var responseData = response.data;
 		  
-		  console.log(JSON.parse(response.data.access_token));
+		  console.log(response.data[0].access_token);
 		
 		  loaddata(jsonObject);
 		  console.log("authentication token obtained and row has been created");
