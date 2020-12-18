@@ -432,7 +432,7 @@
 		
 		function loaddata(jsonObject){
 		console.log("load data function called");	
-		console.log("cuid " + JSON.parse(jsonObject.values.cuid));
+		
 	axios({
 			          method: 'POST',
 			          url: 'https://dataintapicall.herokuapp.com/loaddata',
@@ -655,6 +655,10 @@
                   //handle success
                   //return response;	
 		  //console.log(response.data);
+		  
+		  responseData = response.data;
+		  
+		  console.log(response.data.access_token);
 		
 		  loaddata(jsonObject);
 		  console.log("authentication token obtained and row has been created");
