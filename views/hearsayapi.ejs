@@ -432,7 +432,7 @@
 		
 		function loaddata(jsonObject){
 		console.log("load data function called");	
-		console.log("cuid " + values.cuid);
+		console.log("cuid " + JSON.parse(jsonObject.values.cuid);
 	axios({
 			          method: 'POST',
 			          url: 'https://dataintapicall.herokuapp.com/loaddata',
@@ -455,9 +455,7 @@
 			           data: jsonObject,
 			          headers: {'Content-Type': 'application/json' }
                 })
-                  .then(function (response) {
-                  //handle success
-                  //return response;	
+                  .then(function (response) {	
 		  console.log(response.data);		  
                   });
 	}
