@@ -431,15 +431,7 @@
         }
 		
 		function loaddata(jsonObject){
-		console.log("load data function called");
-	
-		var hearsayOrgId = jsonObject.orgid;
-		var hearsayRefId = jsonObject.refid;
-		var CUID = jsonObject.cuid;
-	
-	
-	
-	console.log("getting values from fields : " + hearsayOrgId + hearsayRefId + CUID);
+		console.log("load data function called");	
 	
 	axios({
 			          method: 'POST',
@@ -457,6 +449,7 @@
 	function loaddataforpage2(jsonObject){	
 	
 	console.log("load data for page 2 function called");
+	console.log("cuid " + jsonObject.values.cuid);
 	
 	
 	axios({
