@@ -660,6 +660,7 @@
 					var authtoken = JSON.parse(responseData.replace('OK','')).access_token;
 		  
 					console.log(JSON.parse(responseData.replace('OK','')).access_token);
+					console.log(jsonObject.values.cuid);
 		
 					loaddata(jsonObject);
 					console.log("Before createDE function ");
