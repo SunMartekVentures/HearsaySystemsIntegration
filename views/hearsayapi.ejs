@@ -459,6 +459,10 @@
 		  console.log(response.data);		  
                   });
 	}
+	
+	function createDE(oauthtoken){
+		console.log("createDE function called "+oauthtoken);
+	}
 		
 		
 
@@ -651,17 +655,16 @@
 			          
 			          //headers: {'Content-Type': 'application/json' }
                 })
-                  .then(function (response) {
-                  //handle success
-                  //return response;	
-		  //console.log(response.data);
+                  .then(function (response) {		  
+					var responseData = response.data;
+					var authtoken = JSON.parse(responseData.replace('OK','')).access_token;
 		  
-		  var responseData = response.data;
-		  
-		  console.log(JSON.parse(responseData.replace('OK','')).access_token);
+					console.log(JSON.parse(responseData.replace('OK','')).access_token);
 		
-		  loaddata(jsonObject);
-		  console.log("authentication token obtained and row has been created");
+					loaddata(jsonObject);
+					console.log("Before createDE function ");
+					createDE(authtoken);
+					console.log("authentication token obtained and row has been created");
 		  
                   });
 		  }
