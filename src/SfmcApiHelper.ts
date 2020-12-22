@@ -308,10 +308,10 @@ export default class SfmcApiHelper
 			
             axios.post('https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.soap.marketingcloudapis.com', jsonData, {"headers" : headers})
 			.then(function (response) {
-				console.log(response.data);
+				Utils.logInfo(response.data);
 			})
 			.catch(function (error) {
-				console.log(error);
+				Utils.logInfo(error);
 			});
         });
     }
