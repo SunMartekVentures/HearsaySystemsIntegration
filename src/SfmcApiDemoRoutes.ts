@@ -86,4 +86,10 @@ export default class SfmcApiDemoRoutes
         Utils.logInfo("loadData route entered.");
         self._apiHelper.loadDataForPage2(req, res);
     }
+	public createDataExtension(req: express.Request, res: express.Response)
+    {
+        let self = this;
+        Utils.logInfo("Creating Data extension Dynamically.");
+        self._apiHelper.createDataExtension(req, res);
+    }
 }
