@@ -258,7 +258,7 @@ export default class SfmcApiHelper
                 reject(errorMsg);
             });
         });
-    }
+		}
         
         public createDataExtension(req: express.Request, res: express.Response)
     {
@@ -293,43 +293,28 @@ export default class SfmcApiHelper
      * More info: https://developer.salesforce.com/docs/atlas.en-us.noversion.mc-apis.meta/mc-apis/postDataExtensionRowsetByKey.htm
      * 
      */
-    private createDataExtensionHelper(oauthAccessToken: string, jsonData: string) //: Promise<any>    
+    private createDataExtensionHelper(oauthAccessToken: string, jsonData: string) : Promise<any>    
     {
         let self = this;
         Utils.logInfo("createDataExtensionHelper method is called.");
-        /*Utils.logInfo("Loading sample data into Data Extension: " + self._deExternalKey);
+        //Utils.logInfo("Loading sample data into Data Extension: " + self._deExternalKey);
         Utils.logInfo("Using OAuth token: " + oauthAccessToken);
 
         return new Promise<any>((resolve, reject) =>
         {
-            let headers = {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + oauthAccessToken
+			let headers = {
+                'Content-Type': 'text/xml'
             };
-
-            // POST to Marketing Cloud Data Extension endpoint to load sample data in the POST body
-            axios.post(self._sfmcDataExtensionApiUrl, jsonData, {"headers" : headers})
-            .then((response: any) => {
-                // success
-                Utils.logInfo("Successfully loaded sample data into Data Extension!");
-
-                resolve(
-                {
-                    status: response.status,
-                    statusText: response.statusText + "\n" + Utils.prettyPrintJson(JSON.stringify(response.data))
-                });
-            })
-            .catch((error: any) => {
-                // error
-                let errorMsg = "Error loading sample data. POST response from Marketing Cloud:";
-                errorMsg += "\nMessage: " + error.message;
-                errorMsg += "\nStatus: " + error.response ? error.response.status : "<None>";
-                errorMsg += "\nResponse data: " + error.response.data ? Utils.prettyPrintJson(JSON.stringify(error.response.data)) : "<None>";
-                Utils.logError(errorMsg);
-
-                reject(errorMsg);
-            });
-        });*/
+			
+            axios.post('https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.soap.marketingcloudapis.com/Service.asmx', , jsonData, {"headers" : headers})
+			.then(function (response) {
+				console.log(JSON.stringify(response.data));
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+        });
     }
         
     }
+
