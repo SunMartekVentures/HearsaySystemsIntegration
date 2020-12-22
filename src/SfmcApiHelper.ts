@@ -333,4 +333,3 @@ export default class SfmcApiHelper
     }
         
     }
-}
