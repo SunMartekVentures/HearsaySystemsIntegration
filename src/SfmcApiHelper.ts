@@ -287,12 +287,7 @@ export default class SfmcApiHelper
         }
     }
 
-    /**
-     * loadDataHelper: uses the given OAuthAccessToklen to load JSON data into the Data Extension with external key "DF18Demo"
-     * 
-     * More info: https://developer.salesforce.com/docs/atlas.en-us.noversion.mc-apis.meta/mc-apis/postDataExtensionRowsetByKey.htm
-     * 
-     */
+    
     private createDataExtensionHelper(oauthAccessToken: string, jsonData: string) : Promise<any>    
     {
         let self = this;
@@ -308,10 +303,10 @@ export default class SfmcApiHelper
 			
             axios.post('https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.soap.marketingcloudapis.com/Service.asmx', jsonData, {"headers" : headers})
 			.then(function (response) {
-				Utils.logInfo("Success");
+				Utils.logInfo(response.data);
 			})
 			.catch(function (error) {
-				Utils.logInfo(error);
+				Utils.logInfo("error");
 			});
         });
     }
