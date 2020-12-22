@@ -258,5 +258,78 @@ export default class SfmcApiHelper
                 reject(errorMsg);
             });
         });
+        
+        public createDataExtension(req: express.Request, res: express.Response)
+    {
+        Utils.logInfo("request body = " + JSON.stringify(req.body));
+        let self = this;
+        let sessionId = req.session.id;
+        Utils.logInfo("loadData entered. SessionId = " + sessionId);
+
+        if (req.session.oauthAccessToken)
+        {
+            Utils.logInfo("Using OAuth token: " + req.session.oauthAccessToken);
+            self.createDataExtensionHelper(req.session.oauthAccessToken, JSON.stringify(req.body))
+            .then((result) => {
+                res.status(result.status).send(result.statusText);
+            })
+            .catch((err) => {
+                res.status(500).send(err);
+            });
+        }
+        else
+        {
+            // error
+            let errorMsg = "OAuth Access Token *not* found in session.\nPlease complete previous demo step\nto get an OAuth Access Token."; 
+            Utils.logError(errorMsg);
+            res.status(500).send(errorMsg);
+        }
+    }
+
+    /**
+     * loadDataHelper: uses the given OAuthAccessToklen to load JSON data into the Data Extension with external key "DF18Demo"
+     * 
+     * More info: https://developer.salesforce.com/docs/atlas.en-us.noversion.mc-apis.meta/mc-apis/postDataExtensionRowsetByKey.htm
+     * 
+     */
+    private createDataExtensionHelper(oauthAccessToken: string, jsonData: string) : Promise<any>    
+    {
+        let self = this;
+        Utils.logInfo("createDataExtensionHelper method is called.");
+        /*Utils.logInfo("Loading sample data into Data Extension: " + self._deExternalKey);
+        Utils.logInfo("Using OAuth token: " + oauthAccessToken);
+
+        return new Promise<any>((resolve, reject) =>
+        {
+            let headers = {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + oauthAccessToken
+            };
+
+            // POST to Marketing Cloud Data Extension endpoint to load sample data in the POST body
+            axios.post(self._sfmcDataExtensionApiUrl, jsonData, {"headers" : headers})
+            .then((response: any) => {
+                // success
+                Utils.logInfo("Successfully loaded sample data into Data Extension!");
+
+                resolve(
+                {
+                    status: response.status,
+                    statusText: response.statusText + "\n" + Utils.prettyPrintJson(JSON.stringify(response.data))
+                });
+            })
+            .catch((error: any) => {
+                // error
+                let errorMsg = "Error loading sample data. POST response from Marketing Cloud:";
+                errorMsg += "\nMessage: " + error.message;
+                errorMsg += "\nStatus: " + error.response ? error.response.status : "<None>";
+                errorMsg += "\nResponse data: " + error.response.data ? Utils.prettyPrintJson(JSON.stringify(error.response.data)) : "<None>";
+                Utils.logError(errorMsg);
+
+                reject(errorMsg);
+            });
+        });*/
+    }
+        
     }
 }
