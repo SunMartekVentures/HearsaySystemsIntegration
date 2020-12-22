@@ -293,7 +293,7 @@ export default class SfmcApiHelper
      * More info: https://developer.salesforce.com/docs/atlas.en-us.noversion.mc-apis.meta/mc-apis/postDataExtensionRowsetByKey.htm
      * 
      */
-    private createDataExtensionHelper(oauthAccessToken: string, jsonData: string) : Promise<any>    
+    private createDataExtensionHelper(oauthAccessToken: string, jsonData: string) //: Promise<any>    
     {
         let self = this;
         Utils.logInfo("createDataExtensionHelper method is called.");
