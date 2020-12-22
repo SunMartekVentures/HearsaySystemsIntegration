@@ -258,6 +258,7 @@ export default class SfmcApiHelper
                 reject(errorMsg);
             });
         });
+    }
         
         public createDataExtension(req: express.Request, res: express.Response)
     {
