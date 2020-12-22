@@ -481,9 +481,213 @@
                   });
 	}
 	
-	function createDE(oauthtoken){
+	function createDE(oauthtoken, customeruniqueid){
 		console.log("createDE function called "+oauthtoken);
-		}
+		
+		var axios = require('axios');
+var data = '<?xml version="1.0" encoding="UTF-8"?>
+
+\n<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+\n    <s:Header>
+\n        <a:Action s:mustUnderstand="1">Create</a:Action>
+\n        <a:To s:mustUnderstand="1">https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.soap.marketingcloudapis.com/Service.asmx</a:To>
+\n        <fueloauth xmlns="http://exacttarget.com">{{oauthtoken}}</fueloauth>
+\n    </s:Header>
+\n    <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+\n        <CreateRequest xmlns="http://exacttarget.com/wsdl/partnerAPI">
+\n            <Objects xsi:type="DataExtension">
+\n                <Client>
+\n                    <ID></ID>
+\n                </Client>
+\n                <CustomerKey>postman_demographics</CustomerKey>
+\n                <Name>{{customeruniqueid}}</Name>
+\n                <IsSendable>true</IsSendable>
+\n                <SendableDataExtensionField>
+\n                    <CustomerKey>SubscriberKey</CustomerKey>
+\n                    <Name>SubscriberKey</Name>
+\n                    <FieldType>Text</FieldType>
+\n                </SendableDataExtensionField>
+\n                <SendableSubscriberField>
+\n                    <Name>Subscriber Key</Name>
+\n                    <Value></Value>
+\n                </SendableSubscriberField>
+\n                <Fields>
+\n                    <Field>
+\n                        <CustomerKey>SubscriberKey</CustomerKey>
+\n                        <Name>SubscriberKey</Name>
+\n                        <FieldType>Text</FieldType>
+\n                        <MaxLength>50</MaxLength>
+\n                        <IsRequired>true</IsRequired>
+\n                        <IsPrimaryKey>true</IsPrimaryKey>
+\n                    </Field>
+\n                    <Field>
+\n                        <CustomerKey>First_Name</CustomerKey>
+\n                        <Name>First_Name</Name>
+\n                        <FieldType>Text</FieldType>
+\n                        <MaxLength>50</MaxLength>
+\n                        <IsRequired>false</IsRequired>
+\n                        <IsPrimaryKey>false</IsPrimaryKey>
+\n                    </Field>
+\n                    <Field>
+\n                        <CustomerKey>Last_Name</CustomerKey>
+\n                        <Name>Last_Name</Name>
+\n                        <FieldType>Text</FieldType>
+\n                        <MaxLength>50</MaxLength>
+\n                        <IsRequired>false</IsRequired>
+\n                        <IsPrimaryKey>false</IsPrimaryKey>
+\n                    </Field>
+\n                    <Field>
+\n                        <CustomerKey>Email</CustomerKey>
+\n                        <Name>Email</Name>
+\n                        <FieldType>EmailAddress</FieldType>
+\n                        <IsRequired>false</IsRequired>
+\n                        <IsPrimaryKey>false</IsPrimaryKey>
+\n                    </Field>
+\n                    <Field>
+\n                        <CustomerKey>Gender</CustomerKey>
+\n                        <Name>Gender</Name>
+\n                        <FieldType>Text</FieldType>
+\n                        <MaxLength>6</MaxLength>
+\n                        <IsRequired>false</IsRequired>
+\n                        <IsPrimaryKey>false</IsPrimaryKey>
+\n                    </Field>
+\n                    <Field>
+\n                        <CustomerKey>City</CustomerKey>
+\n                        <Name>City</Name>
+\n                        <FieldType>Text</FieldType>
+\n                        <MaxLength>50</MaxLength>
+\n                        <IsRequired>false</IsRequired>
+\n                        <IsPrimaryKey>false</IsPrimaryKey>
+\n                    </Field>
+\n                    <Field>
+\n                        <CustomerKey>State</CustomerKey>
+\n                        <Name>State</Name>
+\n                        <FieldType>Text</FieldType>
+\n                        <MaxLength>50</MaxLength>
+\n                        <IsRequired>false</IsRequired>
+\n                        <IsPrimaryKey>false</IsPrimaryKey>
+\n                    </Field>
+\n                    <Field>
+\n                        <CustomerKey>Postal</CustomerKey>
+\n                        <Name>Postal</Name>
+\n                        <FieldType>Text</FieldType>
+\n                        <MaxLength>5</MaxLength>
+\n                        <IsRequired>false</IsRequired>
+\n                        <IsPrimaryKey>false</IsPrimaryKey>
+\n                    </Field>
+\n                    <Field>
+\n                        <CustomerKey>TMZ</CustomerKey>
+\n                        <Name>TMZ</Name>
+\n                        <FieldType>Text</FieldType>
+\n                        <MaxLength>50</MaxLength>
+\n                        <IsRequired>false</IsRequired>
+\n                        <IsPrimaryKey>false</IsPrimaryKey>
+\n                    </Field>
+\n                    <Field>
+\n                        <CustomerKey>Language</CustomerKey>
+\n                        <Name>Language</Name>
+\n                        <FieldType>Text</FieldType>
+\n                        <MaxLength>50</MaxLength>
+\n                        <IsRequired>false</IsRequired>
+\n                        <IsPrimaryKey>false</IsPrimaryKey>
+\n                    </Field>
+\n                    <Field>
+\n                        <CustomerKey>Username</CustomerKey>
+\n                        <Name>Username</Name>
+\n                        <FieldType>Text</FieldType>
+\n                        <MaxLength>50</MaxLength>
+\n                        <IsRequired>false</IsRequired>
+\n                        <IsPrimaryKey>false</IsPrimaryKey>
+\n                    </Field>
+\n                    <Field>
+\n                        <CustomerKey>Opt_in_date</CustomerKey>
+\n                        <Name>Opt_in_date</Name>
+\n                        <FieldType>Date</FieldType>
+\n                        <IsRequired>false</IsRequired>
+\n                        <IsPrimaryKey>false</IsPrimaryKey>
+\n                    </Field>
+\n                    <Field>
+\n                        <CustomerKey>Channel_Preference</CustomerKey>
+\n                        <Name>Channel_Preference</Name>
+\n                        <FieldType>Text</FieldType>
+\n                        <MaxLength>50</MaxLength>
+\n                        <IsRequired>false</IsRequired>
+\n                        <IsPrimaryKey>false</IsPrimaryKey>
+\n                    </Field>
+\n                    <Field>
+\n                        <CustomerKey>AccountID</CustomerKey>
+\n                        <Name>AccountID</Name>
+\n                        <FieldType>Text</FieldType>
+\n                        <MaxLength>50</MaxLength>
+\n                        <IsRequired>false</IsRequired>
+\n                        <IsPrimaryKey>false</IsPrimaryKey>
+\n                    </Field>
+\n                    <Field>
+\n                        <CustomerKey>DMA</CustomerKey>
+\n                        <Name>DMA</Name>
+\n                        <FieldType>Text</FieldType>
+\n                        <MaxLength>50</MaxLength>
+\n                        <IsRequired>false</IsRequired>
+\n                        <IsPrimaryKey>false</IsPrimaryKey>
+\n                    </Field>
+\n                    <Field>
+\n                        <CustomerKey>Birthday</CustomerKey>
+\n                        <Name>Birthday</Name>
+\n                        <FieldType>Date</FieldType>
+\n                        <IsRequired>false</IsRequired>
+\n                        <IsPrimaryKey>false</IsPrimaryKey>
+\n                    </Field>
+\n                    <Field>
+\n                        <CustomerKey>Rewards_Member</CustomerKey>
+\n                        <Name>Rewards_Member</Name>
+\n                        <FieldType>Text</FieldType>
+\n                        <MaxLength>50</MaxLength>
+\n                        <IsRequired>false</IsRequired>
+\n                        <IsPrimaryKey>false</IsPrimaryKey>
+\n                    </Field>
+\n                    <Field>
+\n                        <CustomerKey>Membership_Holder</CustomerKey>
+\n                        <Name>Membership_Holder</Name>
+\n                        <FieldType>Boolean</FieldType>
+\n                        <IsRequired>false</IsRequired>
+\n                        <IsPrimaryKey>false</IsPrimaryKey>
+\n                    </Field>
+\n                    <Field>
+\n                        <CustomerKey>Rewards_Points</CustomerKey>
+\n                        <Name>Rewards_Points</Name>
+\n                        <FieldType>Number</FieldType>
+\n                        <IsRequired>false</IsRequired>
+\n                        <IsPrimaryKey>false</IsPrimaryKey>
+\n                    </Field>
+\n                    <Field>
+\n                        <CustomerKey>App_Installed</CustomerKey>
+\n                        <Name>App_Installed</Name>
+\n                        <FieldType>Boolean</FieldType>
+\n                        <IsRequired>false</IsRequired>
+\n                        <IsPrimaryKey>false</IsPrimaryKey>
+\n                    </Field>
+\n                </Fields>
+\n            </Objects>
+\n        </CreateRequest>
+\n    </s:Body>
+\n</s:Envelope>';
+
+var config = {
+  method: 'post',
+  url: 'https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.soap.marketingcloudapis.com/Service.asmx',
+  headers: { 
+    'Content-Type': 'text/xml'
+  },
+  data : data
+};
+axios(config)
+.then(function (response) {
+  console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+  console.log(error);
+});
+	}
 
      class HearsayPage1 extends React.Component {
         constructor(props) {
@@ -581,9 +785,7 @@
 		  
         }
 
-        componentDidMount() {
-
-        }
+        
 
         handleNewFieldClick(event){
           const counter=this.state.FieldCounter+1;
@@ -694,7 +896,7 @@
 		
 					loaddata(jsonObject);
 					console.log("Before createDE function ");
-					createDE(authtoken);
+					createDE(authtoken,this.state.customeruniqueid);
 					console.log("authentication token obtained and row has been created");
 		  
                   });
