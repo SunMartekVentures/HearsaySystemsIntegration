@@ -262,7 +262,7 @@ export default class SfmcApiHelper
         
         public createDataExtension(req: express.Request, res: express.Response)
     {
-        Utils.logInfo("request body = " + JSON.stringify(req.body));
+        Utils.logInfo("request body = " + req.body);
         let self = this;
         let sessionId = req.session.id;
         Utils.logInfo("loadData entered. SessionId = " + sessionId);
@@ -270,7 +270,7 @@ export default class SfmcApiHelper
         if (req.session.oauthAccessToken)
         {
             Utils.logInfo("Using OAuth token: " + req.session.oauthAccessToken);
-            self.createDataExtensionHelper(req.session.oauthAccessToken, JSON.stringify(req.body))
+            self.createDataExtensionHelper(req.session.oauthAccessToken, req.body)
             .then((result) => {
                 res.status(result.status).send(result.statusText);
             })
@@ -308,7 +308,7 @@ export default class SfmcApiHelper
 			
             axios.post('https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.soap.marketingcloudapis.com', jsonData, {"headers" : headers})
 			.then(function (response) {
-				console.log(JSON.stringify(response.data));
+				console.log(response.data);
 			})
 			.catch(function (error) {
 				console.log(error);
