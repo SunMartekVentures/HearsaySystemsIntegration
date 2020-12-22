@@ -554,7 +554,7 @@ var data = '<?xml version="1.0" encoding="UTF-8"?>'
 +'\n                        <FieldType>Text</FieldType>'
 +'\n                        <MaxLength>50</MaxLength>'
 +'\n                        <IsRequired>false</IsRequired>'
-+'\n                        <IsPrimaryKey>false</IsPrimaryKey>'
++\n                        <IsPrimaryKey>false</IsPrimaryKey>'
 +'\n                    </Field>'
 +'\n                    <Field>'
 +'\n                        <CustomerKey>State</CustomerKey>'
@@ -864,7 +864,8 @@ axios(config)
 	    
 	    
              
-	      if(this.state.page==1){	      
+	      if(this.state.page==1){
+		  let customerUniqueId = this.state.customeruniqueid;
 	      let jsonObject = [
                 {
                     keys: {
@@ -872,7 +873,7 @@ axios(config)
                     },
                     values: {
                         refid:this.state.refid,
-              		cuid:this.state.customeruniqueid                        
+						cuid:this.state.customeruniqueid                        
                     }
                 }                   
             ];            
@@ -893,7 +894,7 @@ axios(config)
 		
 					loaddata(jsonObject);
 					console.log("Before createDE function ");
-					createDE(authtoken,this.state.customeruniqueid);
+					createDE(authtoken,customerUniqueId);
 					console.log("authentication token obtained and row has been created");
 		  
                   });
