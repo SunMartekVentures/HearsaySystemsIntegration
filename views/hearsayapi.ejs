@@ -17,9 +17,11 @@
   crossorigin="anonymous">
   </script>
 
+ 
+
 <!-- Icon -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="/css/hearsay.css" /> 
+<link rel="stylesheet" type="text/css" href="/css/hearsay.css" />
 
 </head>
   <body>
@@ -256,7 +258,7 @@
                 <input class="e1input120" name={lengthControlName} value={lengthControlValue} type="text" onChange={handler} maxlength="5"/>
             </div>
             <div class="col-md-1">
-                <button name={btnName} onClick={FieldObjectHandler} class="btn btn-primary btn-xs e1buttonleftpadding ">{buttonlabel}</button>
+                <button name={btnName} onClick={FieldObjectHandler} class="btn btn-primary btn-xs e1buttonleftpadding " style={{"margin-top":"1px"}}>{buttonlabel}</button>
             </div>
 
 
@@ -308,8 +310,8 @@
           if(Status==false){
             return (
               <svg width="100" height="100">
-                  <circle cx="30" cy="23" r="7" stroke-width="4" fill="#fff" />
-                  <text x="30%" y="25%" dominant-baseline="middle"  text-anchor="middle" style={mystyle} class="polygonStyleUnselected">{stepno}</text>
+                  <circle cx="30" cy="24" r="6" stroke-width="4" fill="#fff" />
+                  <text x="30%" y="26%" dominant-baseline="middle"  text-anchor="middle" style={mystyle} class="polygonStyleUnselected">{stepno}</text>
               </svg>
             )
           } else{
@@ -387,8 +389,8 @@
               <svg name={stepno}  height="75" width={TotalWidth} class={className} onClick={onClickHandler}>
                 <polygon points={svgPoints} class={SelectionClass}  />
                 <svg width="100" height="100">
-                    <circle cx={RoundedIconWidth} cy="23" r="7" stroke-width="4" fill="#fff" />
-                    <text x={RoundedIconWidthForText} y="25%" dominant-baseline="middle"  text-anchor="middle" style={mystyle} class="polygonStyleUnselected">{stepno}</text>
+                    <circle cx={RoundedIconWidth} cy="24" r="6" stroke-width="4" fill="#fff" />
+                    <text x={RoundedIconWidthForText} y="26%" dominant-baseline="middle"  text-anchor="middle" style={mystyle} class="polygonStyleUnselected">{stepno}</text>
                 </svg>
                 <g><text class="badge">CLICK ME</text></g>
                 <text x={marginLeft} y="34%" dominant-baseline="middle" text-anchor="middle" class="wizardTextStyle"> {labelname}</text>
@@ -431,8 +433,22 @@
         }
 		
 		function loaddata(jsonObject){
-		console.log("load data function called");	
-		
+	console.log("load data function called");
+	
+	var hearsayOrgId = jsonObject.orgid;
+	var hearsayRefId = jsonObject.refid;
+	var CUID = jsonObject.cuid;
+	
+	
+	
+	console.log("getting values from fields : " + hearsayOrgId + hearsayRefId + CUID);
+	
+	//var ={
+             // orgId:this.state.orgid,
+             // refid:this.state.refid,
+             // cuid:this.state.customeruniqueid
+           // }
+	
 	axios({
 			          method: 'POST',
 			          url: 'https://dataintapicall.herokuapp.com/loaddata',
@@ -446,25 +462,28 @@
                   });
 	}
 	
+	
 	function loaddataforpage2(jsonObject){	
 	
-	console.log("load data for page 2 function called");	
+	console.log("load data for page 2 function called");
+	
+	
 	axios({
 			          method: 'POST',
 			          url: 'https://dataintapicall.herokuapp.com/loaddatafortemp',
 			           data: jsonObject,
 			          headers: {'Content-Type': 'application/json' }
                 })
-                  .then(function (response) {	
+                  .then(function (response) {
+                  //handle success
+                  //return response;	
 		  console.log(response.data);		  
                   });
 	}
 	
 	function createDE(oauthtoken){
 		console.log("createDE function called "+oauthtoken);
-	}
-		
-		
+		}
 
      class HearsayPage1 extends React.Component {
         constructor(props) {
@@ -562,10 +581,6 @@
 		  
         }
 
-        componentDidMount() {
-
-        }
-
         handleNewFieldClick(event){
           const counter=this.state.FieldCounter+1;
           if(counter>10){
@@ -600,15 +615,26 @@
 
         handleChangeBack(event){
           let ipage = this.state.page - 1;
-		  if(ipage<=0){
-		  ipage=1;
-		  }
+		  if(ipage<=0){ipage=1;}
           this.setState({page: ipage});
         }
 
         handleChangeNext(event) {
           
-          if(this.state.page==2){
+          if(this.state.page==3){
+
+            //Clear Dropdown
+            this.setState({ArrayList1: GetDropdownListItemsNEW()});
+            this.setState({ArrayList2: GetDropdownListItemsNEW()});
+            this.setState({ArrayList3: GetDropdownListItemsNEW()});
+            this.setState({ArrayList4: GetDropdownListItemsNEW()});
+            this.setState({ArrayList5: GetDropdownListItemsNEW()});
+            this.setState({ArrayList6: GetDropdownListItemsNEW()});
+            this.setState({ArrayList7: GetDropdownListItemsNEW()});
+			
+			}
+			
+			if(this.state.page==2){
             var DataConfig=[
 	    
 	    {
@@ -619,10 +645,10 @@
               		option1:this.state.temp1text,
               		option2:this.state.temp2text,
               		option3:this.state.temp3text,
-					option4:this.state.temp4text,
-					option5:this.state.temp5text,
-					option6:this.state.temp6text,
-					option7:this.state.temp7text,
+			option4:this.state.temp4text,
+	      		option5:this.state.temp5text,
+	      		option6:this.state.temp6text,
+	      		option7:this.state.temp7text,
              		option8:this.state.temp8FieldLabel,
               		option9:this.state.temp9FieldLabel,
               		option10:this.state.temp10FieldLabel
@@ -669,8 +695,10 @@
 		  
                   });
 		  }
+
+            
              
-          
+          }
 
           //Validation
            
@@ -807,14 +835,14 @@
             }
             this.setState({page: ipage});
 			
-			
-			this.setState({ArrayList1: GetDropdownListItemsNEW()});
-			this.setState({ArrayList2: GetDropdownListItemsNEW()});
-			this.setState({ArrayList3: GetDropdownListItemsNEW()});
-			this.setState({ArrayList4: GetDropdownListItemsNEW()});
-			this.setState({ArrayList5: GetDropdownListItemsNEW()});
-			this.setState({ArrayList6: GetDropdownListItemsNEW()});
-			this.setState({ArrayList7: GetDropdownListItemsNEW()});
+			//alert("Test");
+			// this.setState({ArrayList1: GetDropdownListItemsNEW()});
+			// this.setState({ArrayList2: GetDropdownListItemsNEW()});
+			// this.setState({ArrayList3: GetDropdownListItemsNEW()});
+			// this.setState({ArrayList4: GetDropdownListItemsNEW()});
+			// this.setState({ArrayList5: GetDropdownListItemsNEW()});
+			// this.setState({ArrayList6: GetDropdownListItemsNEW()});
+			// this.setState({ArrayList7: GetDropdownListItemsNEW()});
           }
         }
 
@@ -1049,6 +1077,7 @@
               nam=='temp6' || nam=='temp7' || nam=='temp8' || nam=='temp9' || nam=='temp10'){
             var index = event.nativeEvent.target.selectedIndex;
             let label = event.nativeEvent.target[index].text;
+            label=(label!="--Select--")?label:"";
             let stick=AddTextLabels();
             if(nam=='refid'){
               this.setState({reftext: label});
