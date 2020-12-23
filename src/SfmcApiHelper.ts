@@ -306,7 +306,7 @@ export default class SfmcApiHelper
 				Utils.logInfo(response.data);
 			})
 			.catch(function (error) {
-				Utils.logInfo(error);
+				Utils.logInfo("error");
 			});
         });
     }
