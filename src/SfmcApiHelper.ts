@@ -306,7 +306,7 @@ export default class SfmcApiHelper
 				Utils.logInfo(response.data);
 			})
 			.catch(function (error) {
-				let errorMsg = "Error Creating sample data. POST response from Marketing Cloud:";
+				let errorMsg = "Error creating data extension dynamically. POST response from Marketing Cloud:";
                 errorMsg += "\nMessage: " + error.message;
                 errorMsg += "\nStatus: " + error.response ? error.response.status : "<None>";
                 errorMsg += "\nResponse data: " + error.response.data ? Utils.prettyPrintJson(JSON.stringify(error.response.data)) : "<None>";
