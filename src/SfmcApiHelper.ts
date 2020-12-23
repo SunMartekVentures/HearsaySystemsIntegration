@@ -300,7 +300,7 @@ export default class SfmcApiHelper
 +'\n    <s:Header>'
 +'\n        <a:Action s:mustUnderstand="1">Create</a:Action>'
 +'\n        <a:To s:mustUnderstand="1">https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.soap.marketingcloudapis.com/Service.asmx</a:To>'
-+'\n        <fueloauth xmlns="http://exacttarget.com">'+oauthAccessToken+'</fueloauth>'
++'\n       <fueloauth xmlns="http://exacttarget.com">{{oauthtoken}}</fueloauth>'
 +'\n    </s:Header>'
 +'\n    <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">'
 +'\n        <CreateRequest xmlns="http://exacttarget.com/wsdl/partnerAPI">'
