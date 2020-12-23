@@ -12,256 +12,30 @@
   crossorigin="anonymous"
 />
 
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="js/require.js"></script>
+		<script type="text/javascript">
+        (function () {
+            var config = {
+                baseUrl: 'js'
+            };
+
+            var dependencies = [
+                'customActivity'
+            ];
+
+            require(config, dependencies);
+        })();
+    </script>
+
 <!-- Icon -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-
-
-
-
-
+<link rel="stylesheet" href="css/hearsay.css">
 <style>
-
-body {
-    font-size: 13px;
-}
-.e1container{
-  margin-top:7px;
-  /* margin-bottom:10px; */
-  padding-top:7px;
-  padding-bottom:7px;
-  padding-left:15px;
-  padding-right:15px;
-  /* background-color:#eef2f7; */
-}
-.e1pageheader{
-  padding-left:10px;
-  padding-bottom:7px;
-  font-weight:bold ;
-  font-size:16px;
-  letter-spacing:1px;
-}
-.e1butonfontsize{
-  font-size:12px;
-  border-color :#0069d9 !important;
-  border-bottom-style:solid;
-}
-.e1labelheader{
-  font-size:13px;
-  letter-spacing:1px;
-  margin-top: 10px;
-}
-.e1labelheaderPage1 {
-  font-weight: 600;
-    font-size: 13px;
-    letter-spacing: 1px;
-    margin-top: 5px;
-    margin-bottom: 12px;
-}
-.e1input{
-  padding-bottom:0px;
-  padding-left: 4px;
-  padding-top: 4px;
-  width:30%;
-  border-radius: 6px;
-  margin-left: 20px;
-}
-.e1inputpg1{
-  padding-bottom: 0px;
-  padding-left: 4px;
-  width: 220px;
-  border-radius: 6px;
-  height: 26px;
-  /* margin-left: 50px; */
-}
-.e1inputpg2{
-  padding-bottom: 0px;
-  padding-left: 4px;
-  width: 220px;
-  border-radius: 6px;
-  margin-top: 12px;
-  height: 26px;
-}
-.e1input3{
-  padding-bottom:0px;
-  padding-left: 4px;
-  padding-top: 4px;
-  border-radius: 6px;
-  /* margin-left: 20px; */
-  width:160px;
-}
-.e1inputpg1:hover{
-  color: #495057;
-  background-color: #fff;
-  border-color: #80bdff;
-  outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
-}
-.e1inputpg2:hover{
-  color: #495057;
-  background-color: #fff;
-  border-color: #80bdff;
-  outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
-}
-.e1input3:hover{
-  color: #495057;
-  background-color: #fff;
-  border-color: #80bdff;
-  outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
-}
-
-.e1linecolor{
-  color: #788592;
-  background-color: #788592;
-  margin-bottom:3px;
-  margin-top: 25px;
-}
-.epaddingbottom10{
-  margin-bottom:7px;
-  padding-left: 30px;
-}
-.ehidediv{
-  display: none;
-}
-.btn-primary {
-  background-color: #fff;
-  border: 1px solid #0069d9;
-  color: #0069d9;
-}
-.btn-primary:hover {
-  background-color:#e6e6e6;
-  border: 1px solid #0056b3;
-  color: #0056b3;
-}
-.btn-primary:active {
-  background-color:#e6e6e6;
-  border: 1px solid #0056b3;
-  color: #0056b3;
-}
-.btn-primary:focus {
-  background-color:#e6e6e6;
-  border: 1px solid #0056b3;
-  color: #0056b3;
-}
-.btn-xs {
-    padding: 3px 10px;
-    font-size: 10px;
-    line-height: 1.5;
-    border-radius: 3px;
-}
-.elRowPg1{
-  display: grid;
-  margin-left: 30px;
-}
-.elRowPg2{
-  /* display: grid; */
-   margin-left: 15px; 
-}
-label {
-    margin-bottom: 0px;
-}
-.clsValidation{
-  font-size: 13px;
-  letter-spacing: 1px;
-  color: red;
-  margin-left: 10px;
-}
-.leadActivityBlock{
-  height: 66px;
-}
-.fa-check-circle{
-  font-size: 2em;
-  color: #4BCA81;
-}
-.badge {
-  border-radius: 50%;
-    width: 22px;
-    height: 22px;
-    padding: 5px;
-    background: #fff;
-    border: 2px solid #666;
-    color: #666;
-    text-align: center;
-    size: 18px;
-    /* display: inline-block;
-    min-width: 10px;
-    padding: 6px 9px;
-    font-size: 12px;
-    font-weight: 700;
-    line-height: 1;
-    color: #fff;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    background-color: #777;
-    border-radius: 10px; */
-}
-.checkmark {
-        display: inline-block;
-        width: 22px;
-        height: 22px;
-        -ms-transform: rotate(45deg); /* IE 9 */
-        -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
-        transform: rotate(45deg);
-        margin-top: 15px;
-    }
-
-    .checkmark_circle {
-        position: absolute;
-        width: 22px;
-        height: 22px;
-        background-color: #4BCA81;
-        border-radius: 11px;
-        left: 0;
-        top: 0;
-    }
-
-    .checkmark_stem {
-        position: absolute;
-        width: 3px;
-        height: 9px;
-        background-color: #fff;
-        left: 11px;
-        top: 6px;
-    }
-
-    .checkmark_kick {
-        position: absolute;
-        width: 3px;
-        height: 3px;
-        background-color: #fff;
-        left: 8px;
-        top: 12px;
-    }
-    .e1labelheaderPage2 {
-    font-weight: 600;
-    font-size: 13px;
-    letter-spacing: 1px;
-    margin-top: 12px;
-    margin-bottom: 12px;
-    }
-    .e1labelheaderPage2 {
-    font-weight: 600;
-    font-size: 13px;
-    letter-spacing: 1px;
-    margin-top: 12px;
-    margin-bottom: 12px;
-    }
-    .selectInput{
-      display: grid;
-    }
-    .e1cancelbuton {
-    font-size: 12px;
-    }
-    .e1buttonleftpadding {
-        margin-left: 4px;
-    }
-    .SecondPageLabel{
-      margin-bottom: -20px;
-    }
-    .Roundedbadge{
+  .e1container{
+    background-color: #ffffff;
+  }
+  .Roundedbadge{
       border-radius: 50%;
     width: 22px;
     height: 23px;
@@ -285,23 +59,20 @@ label {
     size: 18px;
     margin-top: 15px;
     }
-    .displayFlex{
-      display: flex;
-    }
 </style>
 </head>
   <body>
     <div  class='row'>
-      <div class='col-md-2'></div>
-      <div class='col-md-8' id="mydiv"></div>
-      <div class='col-md-2'></div>
+      <div class='col-md-1'></div>
+      <div class='col-md-10' id="mydiv"></div>
+      <div class='col-md-1'></div>
     </div>
 
     <script type="text/babel">
       function AddLogorow(abcd, second){
         return (
           <div>
-            <div><img src='./hearsay.png' width='50' height ='50' /><label class='e1pageheader'>Hearsay Systems</label></div>
+            <div><img src='https://github.com/Sivaskandharuban/authmcdataext/blob/master/views/hearsay.png?raw=true' width='50' height ='50' /><label class='e1pageheader'>Hearsay Systems</label></div>
           </div>
         );
       }
@@ -338,7 +109,7 @@ label {
 
       function AddTextLabels(){
         return (
-            <span class="checkmark">
+            <span class="checkmarkSecPage">
                 <div class="checkmark_circle"></div>
                 <div class="checkmark_stem"></div>
                 <div class="checkmark_kick"></div>
@@ -460,34 +231,43 @@ label {
 		}
 
 
-		function GetDropdownListItemsNEW(sel1,sel2,sel3,sel4,sel5,sel6,sel7){
+		function GetDropdownListItemsNEW(sel1,sel2,sel3,sel4,sel5,sel6,sel7,sel8,sel9,sel10){
 		    let arrtemp=[];
 			arrtemp.push(GetSelectItemName());
-		
-			let itemelement=CheckDropDownItemExist('Birth Date',sel1,sel2,sel3,sel4,sel5,sel6,sel7);
+    
+      let itemelement=CheckDropDownItemExist('Birth Date',sel1,sel2,sel3,sel4,sel5,sel6,sel7,sel8,sel9,sel10);
 			if(itemelement.length >0){arrtemp.push(itemelement);}
-			
-     		itemelement=CheckDropDownItemExist('Email',sel1,sel2,sel3,sel4,sel5,sel6,sel7);
-			if(itemelement.length >0){arrtemp.push(itemelement);}
-			
-     		itemelement=CheckDropDownItemExist('First Name',sel1,sel2,sel3,sel4,sel5,sel6,sel7);
-			if(itemelement.length >0){arrtemp.push(itemelement);}			
 
-     		itemelement=CheckDropDownItemExist('Last Name',sel1,sel2,sel3,sel4,sel5,sel6,sel7);
-			if(itemelement.length >0){arrtemp.push(itemelement);}			
+      itemelement=CheckDropDownItemExist('Customer Unique ID',sel1,sel2,sel3,sel4,sel5,sel6,sel7,sel8,sel9,sel10);
+      if(itemelement.length >0){arrtemp.push(itemelement);}	
+
+			itemelement=CheckDropDownItemExist('Email',sel1,sel2,sel3,sel4,sel5,sel6,sel7,sel8,sel9,sel10);
+			if(itemelement.length >0){arrtemp.push(itemelement);}
 			
-			itemelement=CheckDropDownItemExist('Name',sel1,sel2,sel3,sel4,sel5,sel6,sel7);
+      itemelement=CheckDropDownItemExist('First Name',sel1,sel2,sel3,sel4,sel5,sel6,sel7,sel8,sel9,sel10);
 			if(itemelement.length >0){arrtemp.push(itemelement);}	
 			
-			itemelement=CheckDropDownItemExist('Phone',sel1,sel2,sel3,sel4,sel5,sel6,sel7);
+      itemelement=CheckDropDownItemExist('Hearsay Org ID',sel1,sel2,sel3,sel4,sel5,sel6,sel7,sel8,sel9,sel10);
+      if(itemelement.length >0){arrtemp.push(itemelement);}		
+
+      itemelement=CheckDropDownItemExist('Hearsy User Reference ID',sel1,sel2,sel3,sel4,sel5,sel6,sel7,sel8,sel9,sel10);
+      if(itemelement.length >0){arrtemp.push(itemelement);}
+
+      itemelement=CheckDropDownItemExist('Last Name',sel1,sel2,sel3,sel4,sel5,sel6,sel7,sel8,sel9,sel10);
+			if(itemelement.length >0){arrtemp.push(itemelement);}	
+
+      itemelement=CheckDropDownItemExist('Name',sel1,sel2,sel3,sel4,sel5,sel6,sel7,sel8,sel9,sel10);
+			if(itemelement.length >0){arrtemp.push(itemelement);}
+     				
+			itemelement=CheckDropDownItemExist('Phone',sel1,sel2,sel3,sel4,sel5,sel6,sel7,sel8,sel9,sel10);
 			if(itemelement.length >0){arrtemp.push(itemelement);}				
 
-			itemelement=CheckDropDownItemExist('Preferred Name',sel1,sel2,sel3,sel4,sel5,sel6,sel7);
+			itemelement=CheckDropDownItemExist('Preferred Name',sel1,sel2,sel3,sel4,sel5,sel6,sel7,sel8,sel9,sel10);
       if(itemelement.length >0){arrtemp.push(itemelement);}						
       
-      itemelement=CheckDropDownItemExist('Title',sel1,sel2,sel3,sel4,sel5,sel6,sel7);
-      if(itemelement.length >0){arrtemp.push(itemelement);}		
-      
+      itemelement=CheckDropDownItemExist('Title',sel1,sel2,sel3,sel4,sel5,sel6,sel7,sel8,sel9,sel10);
+      if(itemelement.length >0){arrtemp.push(itemelement);}	
+				
 			return arrtemp;
 		}
 
@@ -571,24 +351,25 @@ label {
             erControl14:"",
             erControl15:"",
             erControl16:"",
+            erValidationText:"",
             
 
             ArrayList1:GetDropdownListItemsForFirstGroup('','','','','','','','','','',''),
             ArrayList2:GetDropdownListItemsForFirstGroup('','','','','','','','','','',''),
             ArrayList3:GetDropdownListItemsForFirstGroup('','','','','','','','','','',''),
             ArrayList4:GetDropdownListItemsForFirstGroup('','','','','','','','','','',''),
-            ArrayList5:GetDropdownListItemsNEW('','','','','','',''),
-            ArrayList6:GetDropdownListItemsNEW('','','','','','',''),
-            ArrayList7:GetDropdownListItemsNEW('','','','','','',''),
-            ArrayList8:GetDropdownListItemsNEW('','','','','','',''),
+            ArrayList5:GetDropdownListItemsNEW('','','','','','','','','',''),
+            ArrayList6:GetDropdownListItemsNEW('','','','','','','','','',''),
+            ArrayList7:GetDropdownListItemsNEW('','','','','','','','','',''),
+            ArrayList8:GetDropdownListItemsNEW('','','','','','','','','',''),
             ArrayList9:GetDropdownListItemsForFirstGroup('','','','','','','','','','',''),
             ArrayList10:GetDropdownListItemsForFirstGroup('','','','','','','','','','',''),
             ArrayList11:GetDropdownListItemsForFirstGroup('','','','','','','','','','',''),
             ArrayList12:GetDropdownListItemsForFirstGroup('','','','','','','','','','',''),
-            ArrayList13:GetDropdownListItemsNEW('','','','','','',''),
-            ArrayList14:GetDropdownListItemsNEW('','','','','','',''),
-            ArrayList15:GetDropdownListItemsNEW('','','','','','',''),
-            ArrayList16:GetDropdownListItemsNEW('','','','','','',''),
+            ArrayList13:GetDropdownListItemsNEW('','','','','','','','','',''),
+            ArrayList14:GetDropdownListItemsNEW('','','','','','','','','',''),
+            ArrayList15:GetDropdownListItemsNEW('','','','','','','','','',''),
+            ArrayList16:GetDropdownListItemsNEW('','','','','','','','','',''),
             
             
             
@@ -600,10 +381,14 @@ label {
         }
 
         handleChangeBack(event) {
-           
-          var ipage=this.state.page - 1;
-          if(ipage<=0){ipage=1;}
-          this.setState({page: ipage});
+           if(this.state.page==3){
+            this.setState({page: 1});
+           } else{
+            var ipage=this.state.page - 1;
+            if(ipage<=0){ipage=1;}
+            this.setState({page: ipage});
+           }
+          
         }
 
         handleCancelBtnClick() {
@@ -620,7 +405,7 @@ label {
 
         handleChangeNext(event) {
           //validation
-           
+           debugger;
 
           if(this.state.page==1){
             var isValidated=true;
@@ -636,17 +421,24 @@ label {
                 this.setState({erleadsActivity:"Leads Activity Label is mandatory"});
                 isValidated=false;
               } else{
+                
                 this.setState({erleadsActivity:""});
               }
             }
 
             //Save Data
             if(isValidated){
-              //alert('Done button clicked');
-              if(this.state.page==1){
-                this.setState({page:2});
+              var DropdownSelection=this.state.integrationType;
+              debugger;
+              if(DropdownSelection=="companyTemplate"){
+                if(this.state.page==1){
+                  this.setState({page:3});
+                }
+              } else {
+                if(this.state.page==1){
+                  this.setState({page:2});
+                }
               }
-              
             } else{
               return false;
             }
@@ -655,97 +447,97 @@ label {
             var Page2IsValidated=true;
              
             if(this.state.control1=="--Select--"){
-              this.setState({erControl1:valMessage});
+              //this.setState({erControl1:valMessage});
               Page2IsValidated=false;
             } else{
               this.setState({erControl1:""});
             }
             if(this.state.control2=="--Select--"){
-              this.setState({erControl2:valMessage});
+              //this.setState({erControl2:valMessage});
               Page2IsValidated=false;
             } else{
               this.setState({erControl2:""});
             }
             if(this.state.control3=="--Select--"){
-              this.setState({erControl3:valMessage});
+              //this.setState({erControl3:valMessage});
               Page2IsValidated=false;
             } else{
               this.setState({erControl3:""});
             }
             if(this.state.control4=="--Select--"){
-              this.setState({erControl4:valMessage});
+              //this.setState({erControl4:valMessage});
               Page2IsValidated=false;
             } else{
               this.setState({erControl4:""});
             }
             if(this.state.control5=="--Select--"){
-              this.setState({erControl5:valMessage});
+              //this.setState({erControl5:valMessage});
               Page2IsValidated=false;
             } else{
               this.setState({erControl5:""});
             }
             if(this.state.control6=="--Select--"){
-              this.setState({erControl6:valMessage});
+              //this.setState({erControl6:valMessage});
               Page2IsValidated=false;
             } else{
               this.setState({erControl6:""});
             }
             if(this.state.control7=="--Select--"){
-              this.setState({erControl7:valMessage});
+              //this.setState({erControl7:valMessage});
               Page2IsValidated=false;
             } else{
               this.setState({erControl7:""});
             }
             if(this.state.control8=="--Select--"){
-              this.setState({erControl8:valMessage});
+              //this.setState({erControl8:valMessage});
               Page2IsValidated=false;
             } else{
               this.setState({erControl8:""});
             }
             if(this.state.control9=="--Select--"){
-              this.setState({erControl9:valMessage});
+              //this.setState({erControl9:valMessage});
               Page2IsValidated=false;
             } else{
               this.setState({erControl9:""});
             }
             if(this.state.control10=="--Select--"){
-              this.setState({erControl10:valMessage});
+              //this.setState({erControl10:valMessage});
               Page2IsValidated=false;
             } else{
               this.setState({erControl10:""});
             }
             if(this.state.control11=="--Select--"){
-              this.setState({erControl11:valMessage});
+              //this.setState({erControl11:valMessage});
               Page2IsValidated=false;
             } else{
               this.setState({erControl11:""});
             }
             if(this.state.control12=="--Select--"){
-              this.setState({erControl12:valMessage});
+              //this.setState({erControl12:valMessage});
               Page2IsValidated=false;
             } else{
               this.setState({erControl12:""});
             }
             if(this.state.control13=="--Select--"){
-              this.setState({erControl13:valMessage});
+              //this.setState({erControl13:valMessage});
               Page2IsValidated=false;
             } else{
               this.setState({erControl13:""});
             }
             if(this.state.control14=="--Select--"){
-              this.setState({erControl14:valMessage});
+              //this.setState({erControl14:valMessage});
               Page2IsValidated=false;
             } else{
               this.setState({erControl14:""});
             }
             if(this.state.control15=="--Select--"){
-              this.setState({erControl15:valMessage});
+              //this.setState({erControl15:valMessage});
               Page2IsValidated=false;
             } else{
               this.setState({erControl15:""});
             }
             if(this.state.control16=="--Select--"){
-              this.setState({erControl16:valMessage});
+              //this.setState({erControl16:valMessage});
               Page2IsValidated=false;
             } else{
               this.setState({erControl16:""});
@@ -822,8 +614,13 @@ label {
 
               this.setState({fieldCss:"row epaddingbottom10 ehidediv"});
               alert("Saved Successdully");
+            } else{
+              this.setState({erValidationText:"The above fields are mandatory. Please select atleast one of the above options"});
             }
-          }
+          }else if(this.state.page==3){
+              alert("Saved Successdully");
+              this.setState({page:1});
+            }
         }
 
 
@@ -1181,8 +978,8 @@ label {
         myChangeHandler = (event) => {
           let nam = event.target.name;
           let val = event.target.value;
-          var validationMessage="The field is mandatory.";
-           
+          var validationMessage="The above fields are mandatory. Please select atleast one of the above options";  //The field is mandatory.
+          //var ValidationMessageForCommon="";
           if(nam=="integrationType"){
 
             if(val=="0"){
@@ -1210,201 +1007,253 @@ label {
 
           //validationMessage
           const icon=AddTextLabels();
+          var ValStatus=false;
           if(nam=="control1"){
             if(val=="--Select--"){
-              this.setState({erControl1: validationMessage});
+              this.setState({erValidationText: validationMessage});
               this.setState({control1: "--Select--"});
               this.setState({iconText1:AddDigitInCircle("1")});
-            } else{
-              this.setState({erControl1: ""});
-              this.setState({control1: val});
               
+            } else{
+              this.setState({erValidationText: ""});
+              this.setState({control1: val});
               this.setState({iconText1:icon});
+              ValStatus=true;
             }
 			      this.RefreshOtherDropDownListsForFirstGroup(1,val);
           }
           if(nam=="control2"){
             if(val=="--Select--"){
-              this.setState({erControl2: validationMessage});
+              this.setState({erValidationText: validationMessage});
               this.setState({control2: "--Select--"});
               this.setState({iconText2:AddDigitInCircle("2")});
+              
             } else{
-              this.setState({erControl2: ""});
+              this.setState({erValidationText: ""});
               this.setState({control2: val});
               this.setState({iconText2:icon});
+              ValStatus=true;
             }
             this.RefreshOtherDropDownListsForFirstGroup(2,val);
           }
           if(nam=="control3"){
             if(val=="--Select--"){
-              this.setState({erControl3: validationMessage});
+              this.setState({erValidationText: validationMessage});
               this.setState({control3: "--Select--"});
               this.setState({iconText3:AddDigitInCircle("3")});
+              
             } else{
-              this.setState({erControl3: ""});
+              this.setState({erValidationText: ""});
               this.setState({control3: val});
               this.setState({iconText3:icon});
+              ValStatus=true;
             }
             this.RefreshOtherDropDownListsForFirstGroup(3,val);
           }
           if(nam=="control4"){
             if(val=="--Select--"){
-              this.setState({erControl4: validationMessage});
+              this.setState({erValidationText: validationMessage});
               this.setState({control4: "--Select--"});
               this.setState({iconText4:AddDigitInCircle("4")});
+              
             } else{
-              this.setState({erControl4: ""});
+              this.setState({erValidationText: ""});
               this.setState({control4: val});
               this.setState({iconText4:icon});
+              ValStatus=true;
             }
             this.RefreshOtherDropDownListsForFirstGroup(4,val);
           }
           if(nam=="control5"){
             if(val=="--Select--"){
-              this.setState({erControl5: validationMessage});
+              this.setState({erValidationText: validationMessage});
               this.setState({control5: "--Select--"});
               this.setState({iconText5:AddDigitInCircle("5")});
+              
             } else{
-              this.setState({erControl5: ""});
+              this.setState({erValidationText: ""});
               this.setState({control5: val});
               this.setState({iconText5:icon});
+              ValStatus=true;
             }
             this.RefreshOtherDropDownLists(5,val);
           }
           if(nam=="control6"){
             if(val=="--Select--"){
-              this.setState({erControl6: validationMessage});
+              this.setState({erValidationText: validationMessage});
               this.setState({control6: "--Select--"});
               this.setState({iconText6:AddDigitInCircle("6")});
+              
             } else{
-              this.setState({erControl6: ""});
+              this.setState({erValidationText: ""});
               this.setState({control6: val});
               this.setState({iconText6:icon});
+              ValStatus=true;
             }
             this.RefreshOtherDropDownLists(6,val);
           }
           if(nam=="control7"){
             if(val=="--Select--"){
-              this.setState({erControl7: validationMessage});
+              this.setState({erValidationText: validationMessage});
               this.setState({control7: "--Select--"});
               this.setState({iconText7:AddDigitInCircle("7")});
+              
             } else{
-              this.setState({erControl7: ""});
+              this.setState({erValidationText: ""});
               this.setState({control7: val});
               this.setState({iconText7:icon});
+              ValStatus=true;
             }
             this.RefreshOtherDropDownLists(7,val);
           }
           if(nam=="control8"){
             if(val=="--Select--"){
-              this.setState({erControl8: validationMessage});
+              this.setState({erValidationText: validationMessage});
               this.setState({control8: "--Select--"});
               this.setState({iconText8:AddDigitInCircle("8")});
+              
             } else{
-              this.setState({erControl8: ""});
+              this.setState({erValidationText: ""});
               this.setState({control8: val});
               this.setState({iconText8:icon});
+              ValStatus=true;
             }
             this.RefreshOtherDropDownLists(8,val);
           }
           if(nam=="control9"){
             if(val=="--Select--"){
-              this.setState({erControl9: validationMessage});
+              this.setState({erValidationText: validationMessage});
               this.setState({control9: "--Select--"});
               this.setState({iconText9:AddDigitInCircle("9")});
+              
             } else{
-              this.setState({erControl9: ""});
+              this.setState({erValidationText: ""});
               this.setState({control9: val});
               this.setState({iconText9:icon});
+              ValStatus=true;
             }
             this.RefreshOtherDropDownListsForFirstGroup(9,val);
           }
           if(nam=="control10"){
             if(val=="--Select--"){
-              this.setState({erControl10: validationMessage});
+              this.setState({erValidationText: validationMessage});
               this.setState({control10: "--Select--"});
               this.setState({iconText10:AddDigitInCircle("10")});
+              
             } else{
-              this.setState({erControl10: ""});
+              this.setState({erValidationText: ""});
               this.setState({control10: val});
               this.setState({iconText10:icon});
+              ValStatus=true;
             }
             this.RefreshOtherDropDownListsForFirstGroup(10,val);
           }
           if(nam=="control11"){
             if(val=="--Select--"){
-              this.setState({erControl11: validationMessage});
+              this.setState({erValidationText: validationMessage});
               this.setState({control11: "--Select--"});
               this.setState({iconText11:AddDigitInCircle("11")});
+              
             } else{
-              this.setState({erControl11: ""});
+              this.setState({erValidationText: ""});
               this.setState({control11: val});
               this.setState({iconText11:icon});
+              ValStatus=true;
             }
             this.RefreshOtherDropDownListsForFirstGroup(11,val);
           }
           if(nam=="control12"){
             if(val=="--Select--"){
-              this.setState({erControl12: validationMessage});
+              this.setState({erValidationText: validationMessage});
               this.setState({control12: "--Select--"});
               this.setState({iconText12:AddDigitInCircle("12")});
+              
             } else{
-              this.setState({erControl12: ""});
+              this.setState({erValidationText: ""});
               this.setState({control12: val});
               this.setState({iconText12:icon});
+              ValStatus=true;
             }
             this.RefreshOtherDropDownListsForFirstGroup(12,val);
           }
 
           if(nam=="control13"){
             if(val=="--Select--"){
-              this.setState({erControl13: validationMessage});
+              this.setState({erValidationText: validationMessage});
               this.setState({control13: "--Select--"});
               this.setState({iconText13:AddDigitInCircle("13")});
+              
             } else{
-              this.setState({erControl13: ""});
+              this.setState({erValidationText: ""});
               this.setState({control13: val});
               this.setState({iconText13:icon});
+              ValStatus=true;
             }
             this.RefreshOtherDropDownLists(13,val);
           }
           if(nam=="control14"){
             if(val=="--Select--"){
-              this.setState({erControl14: validationMessage});
+              this.setState({erValidationText: validationMessage});
               this.setState({control14: "--Select--"});
               this.setState({iconText14:AddDigitInCircle("14")});
+              
             } else{
-              this.setState({erControl14: ""});
+              this.setState({erValidationText: ""});
               this.setState({control14: val});
               this.setState({iconText14:icon});
+              ValStatus=true;
             }
             this.RefreshOtherDropDownLists(14,val);
           }
           if(nam=="control15"){
             if(val=="--Select--"){
-              this.setState({erControl15: validationMessage});
+              this.setState({erValidationText: validationMessage});
               this.setState({control15: "--Select--"});
               this.setState({iconText15:AddDigitInCircle("15")});
+             
             } else{
-              this.setState({erControl15: ""});
+              this.setState({erValidationText: ""});
               this.setState({control15: val});
               this.setState({iconText15:icon});
+              ValStatus=true;
             }
             this.RefreshOtherDropDownLists(15,val);
           }
           if(nam=="control16"){
             if(val=="--Select--"){
-              this.setState({erControl16: validationMessage});
+              this.setState({erValidationText: validationMessage});
               this.setState({control16: "--Select--"});
               this.setState({iconText16:AddDigitInCircle("16")});
+             
             } else{
-              this.setState({erControl16: ""});
+              this.setState({erValidationText: ""});
               this.setState({control16: val});
               this.setState({iconText16:icon});
+              ValStatus=true;
             }
             this.RefreshOtherDropDownLists(16,val);
           }
 
+
+          if(ValStatus==true){
+            this.setState({erValidationText: ""});
+          }
+
+          
+          
+          
+
+          if(this.state.control1!="--Select--" && this.state.control2!="--Select--" && this.state.control3!="--Select--" && this.state.control4!="--Select--" && this.state.control5!="--Select--" && this.state.control6!="--Select--" && this.state.control7!="--Select--" && this.state.control8!="--Select--" && this.state.control9!="--Select--" && this.state.control10!="--Select--" && this.state.control11!="--Select--" && this.state.control12!="--Select--" && this.state.control13!="--Select--" && this.state.control14!="--Select--" && this.state.control15!="--Select--" && this.state.control16!="--Select--" && val!="--Select--"){
+            this.setState({erValidationText: "The above fields are mandatory. Please select atleast one of the above options"});
+          } else{
+            this.setState({erValidationText: ""});
+            }
+
+          // if(ValStatus==false){
+            
+          // }
+
+          
         }
         
 
@@ -1438,7 +1287,7 @@ label {
             return (
               <div class='e1container'>
                 {AddLogorow()}
-                <div class="row epaddingbottom10 e1marginleft">
+                <div class="row epaddingbottom10  ">
                   <div class="col-md-1 ">
                   </div>
                   <div class="col-md-4 SecondPageLabel">
@@ -1450,7 +1299,7 @@ label {
                     <label class="e1labelheaderPage1">Hearsay</label>
                   </div>
                 </div>
-                <div class="row epaddingbottom10 e1marginleft">
+                <div class="row epaddingbottom10  ">
                   <div class="col-md-1 displayFlex">
                   {this.state.iconText1}
                   </div>
@@ -1460,7 +1309,7 @@ label {
                   </div>
                     {DropdownValues("control5", this.state.control5, this.myChangeHandler, "e1inputpg2", this.state.erControl5, this.state.ArrayList5)}
                 </div>
-                <div class="row epaddingbottom10 e1marginleft">
+                <div class="row epaddingbottom10  ">
                   <div class="col-md-1  displayFlex">
                   {this.state.iconText2}
                   </div>
@@ -1470,7 +1319,7 @@ label {
                   </div>
                     {DropdownValues("control6", this.state.control6, this.myChangeHandler, "e1inputpg2", this.state.erControl6, this.state.ArrayList6)}
                 </div>
-                <div class="row epaddingbottom10 e1marginleft">
+                <div class="row epaddingbottom10  ">
                   <div class="col-md-1  displayFlex">
                   {this.state.iconText3}
                   </div>
@@ -1480,7 +1329,7 @@ label {
                   </div>
                     {DropdownValues("control7", this.state.control7, this.myChangeHandler, "e1inputpg2", this.state.erControl7, this.state.ArrayList7)}
                 </div>
-                <div class="row epaddingbottom10 e1marginleft">
+                <div class="row epaddingbottom10  ">
                   <div class="col-md-1  displayFlex">
                   {this.state.iconText4}
                   </div>
@@ -1490,7 +1339,7 @@ label {
                   </div>
                     {DropdownValues("control8", this.state.control8, this.myChangeHandler, "e1inputpg2", this.state.erControl8, this.state.ArrayList8)}
                 </div>
-                <div class="row epaddingbottom10 e1marginleft">
+                <div class="row epaddingbottom10  ">
                   <div class="col-md-1 displayFlex">
                   {this.state.iconText9}
                   </div>
@@ -1500,7 +1349,7 @@ label {
                   </div>
                     {DropdownValues("control13", this.state.control13, this.myChangeHandler, "e1inputpg2", this.state.erControl13, this.state.ArrayList13)}
                 </div>
-                <div class="row epaddingbottom10 e1marginleft">
+                <div class="row epaddingbottom10  ">
                   <div class="col-md-1 displayFlex">
                   {this.state.iconText10}
                   </div>
@@ -1510,7 +1359,7 @@ label {
                   </div>
                     {DropdownValues("control14", this.state.control14, this.myChangeHandler, "e1inputpg2", this.state.erControl14, this.state.ArrayList14)}
                 </div>
-                <div class="row epaddingbottom10 e1marginleft">
+                <div class="row epaddingbottom10  ">
                   <div class="col-md-1 displayFlex">
                   {this.state.iconText11}
                   </div>
@@ -1520,7 +1369,7 @@ label {
                   </div>
                     {DropdownValues("control15", this.state.control15, this.myChangeHandler, "e1inputpg2", this.state.erControl15, this.state.ArrayList15)}
                 </div>
-                <div class="row epaddingbottom10 e1marginleft">
+                <div class="row epaddingbottom10  ">
                   <div class="col-md-1 displayFlex">
                   {this.state.iconText12}
                   </div>
@@ -1530,6 +1379,38 @@ label {
                   </div>
                     {DropdownValues("control16", this.state.control16, this.myChangeHandler, "e1inputpg2", this.state.erControl16, this.state.ArrayList16)}
                 </div>
+                <div class="row epaddingbottom10  ">
+                  <div class="col-md-10 clsValidation marginTop12px" style={{"text-align":"center"}}>
+                  {this.state.erValidationText}
+                  </div>
+                  <div class="col-md-2">
+                  
+                  </div>
+                </div>
+                <hr class='e1linecolor'/>
+                  {AddButtonBlock(this.handleCancelBtnClick,this.handleChangeNext,'Done','btn btn-primary btn-xs e1buttonleftpadding float-right', this.handleChangeBack, this.state.page)}
+                </div>
+            
+                
+            ) 
+          } else if(this.state.page==3){
+            return (
+              <div class='e1container'>
+                {AddLogorow()}
+
+                <div class="row epaddingbottom10">
+                  <div class="col-md-11 elRowPg1">
+                    <div><label class="e1labelheaderPage1">DATA EXTENSION TEMPLATES (NEW)</label></div>
+                    <div>Birth Date </div>
+                    <div>First Name </div>
+                    <div>Email </div>
+                  </div>
+                  <div class="col-md-1">
+
+                  </div>
+                </div>
+
+                
                 <hr class='e1linecolor'/>
                   {AddButtonBlock(this.handleCancelBtnClick,this.handleChangeNext,'Done','btn btn-primary btn-xs e1buttonleftpadding float-right', this.handleChangeBack, this.state.page)}
                 </div>
