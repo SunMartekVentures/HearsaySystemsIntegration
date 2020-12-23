@@ -294,6 +294,54 @@ export default class SfmcApiHelper
         Utils.logInfo("createDataExtensionHelper method is called.");
         //Utils.logInfo("Loading sample data into Data Extension: " + self._deExternalKey);
         Utils.logInfo("Using OAuth token: " + oauthAccessToken);
+	    
+	    var data = '<?xml version="1.0" encoding="UTF-8"?>'
++'\n<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">'
++'\n    <s:Header>'
++'\n        <a:Action s:mustUnderstand="1">Create</a:Action>'
++'\n        <a:To s:mustUnderstand="1">https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.soap.marketingcloudapis.com/Service.asmx</a:To>'
++'\n        <fueloauth xmlns="http://exacttarget.com">'+oauthAccessToken+'</fueloauth>'
++'\n    </s:Header>'
++'\n    <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">'
++'\n        <CreateRequest xmlns="http://exacttarget.com/wsdl/partnerAPI">'
++'\n            <Objects xsi:type="DataExtension">'
++'\n                <Client>'
++'\n                    <ID></ID>'
++'\n                </Client>'
++'\n                <CustomerKey>postman_demographics</CustomerKey>'
++'\n                <Name>{{customeruniqueid}}</Name>'
++'\n                <IsSendable>true</IsSendable>'
++'\n                <SendableDataExtensionField>'
++'\n                    <CustomerKey>SubscriberKey</CustomerKey>'
++'\n                    <Name>SubscriberKey</Name>'
++'\n                    <FieldType>Text</FieldType>'
++'\n                </SendableDataExtensionField>'
++'\n                <SendableSubscriberField>'
++'\n                    <Name>Subscriber Key</Name>'
++'\n                    <Value></Value>'
++'\n                </SendableSubscriberField>'
++'\n                <Fields>'
++'\n                    <Field>'
++'\n                        <CustomerKey>SubscriberKey</CustomerKey>'
++'\n                        <Name>SubscriberKey</Name>'
++'\n                        <FieldType>Text</FieldType>'
++'\n                        <MaxLength>50</MaxLength>'
++'\n                        <IsRequired>true</IsRequired>'
++'\n                        <IsPrimaryKey>true</IsPrimaryKey>'
++'\n                    </Field>'
++'\n                    <Field>'
++'\n                        <CustomerKey>First_Name</CustomerKey>'
++'\n                        <Name>First_Name</Name>'
++'\n                        <FieldType>Text</FieldType>'
++'\n                        <MaxLength>50</MaxLength>'
++'\n                        <IsRequired>false</IsRequired>'
++'\n                        <IsPrimaryKey>false</IsPrimaryKey>'
++'\n                    </Field>'
++'\n                </Fields>'
++'\n            </Objects>'
++'\n        </CreateRequest>'
++'\n    </s:Body>'
++'\n</s:Envelope>';
 
         return new Promise<any>((resolve, reject) =>
         {
@@ -301,7 +349,7 @@ export default class SfmcApiHelper
                 'Content-Type': 'text/xml'
             };
 			
-            axios.post('https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.soap.marketingcloudapis.com/', jsonData, {"headers" : headers})
+            axios.post('https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.soap.marketingcloudapis.com/Service.asmx/', data, {"headers" : headers})
 			.then(function (response) {
 				Utils.logInfo(response.data);
 			})
