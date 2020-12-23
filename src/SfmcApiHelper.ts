@@ -301,7 +301,7 @@ export default class SfmcApiHelper
                 'Content-Type': 'text/xml'
             };
 			
-            axios.post('https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.soap.marketingcloudapis.com/', jsonData, {"headers" : headers})
+            axios.post('https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.soap.marketingcloudapis.com/Service.asmx', jsonData, {"headers" : headers})
 			.then(function (response) {
 				Utils.logInfo(response.data);
 			})
