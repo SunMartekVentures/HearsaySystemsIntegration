@@ -1,14 +1,20 @@
+
 <!DOCTYPE html>
 <html>
-
 <head>
-    <title></title>
-    <meta charset="utf-8" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="css/styles.css">
-    <script type="text/javascript" src="js/require.js"></script>
-    <script type="text/javascript">
+  <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  <link
+  rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+  integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+  crossorigin="anonymous"
+/>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="js/require.js"></script>
+		<script type="text/javascript">
         (function () {
             var config = {
                 baseUrl: 'js'
@@ -21,21 +27,1404 @@
             require(config, dependencies);
         })();
     </script>
+
+<!-- Icon -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/hearsay.css">
+<style>
+  .e1container{
+    background-color: #ffffff;
+  }
+  .Roundedbadge{
+      border-radius: 50%;
+    width: 22px;
+    height: 23px;
+    /* padding: 5px; */
+    background: #fff;
+    border: 2px solid #666;
+    color: #666;
+    text-align: center;
+    size: 18px;
+    margin-top: 15px;
+    }
+    .RoundedbadgeBlack{
+      border-radius: 50%;
+    width: 22px;
+    height: 23px;
+    /* padding: 5px; */
+    background: #666;
+    border: 2px solid #666;
+    color: #666;
+    text-align: center;
+    size: 18px;
+    margin-top: 15px;
+    }
+</style>
 </head>
+  <body>
+    <div  class='row'>
+      <div class='col-md-1'></div>
+      <div class='col-md-10' id="mydiv"></div>
+      <div class='col-md-1'></div>
+    </div>
 
-<body>
-    <div id="step1" class="step">
-        <div class="slds-grid">
+    <script type="text/babel">
+      function AddLogorow(abcd, second){
+        return (
+          <div>
+            <div><img src='https://github.com/Sivaskandharuban/authmcdataext/blob/master/views/hearsay.png?raw=true' width='50' height ='50' /><label class='e1pageheader'>Hearsay Systems</label></div>
+          </div>
+        );
+      }
 
-            <main class="slds-col">
-               
-                <h1>welcome to your activity!</h1>
-            </main>
+      function AddBackButton(page, btnclick, btnclass){
+          if(page>1){
+            return (
+                <button onClick={btnclick} class={btnclass}>Back</button>
+            );
+          } else{
+            return (
+                ""
+            );
+          }
+        }
+
+
+
+      function AddButtonBlock(cancelclick, nextclick, nextbtntext,btnclass, backclick, pageno){
+        return (
+          <div class='e1container'>
+                  <div  class='row'>
+                    <div class='col-md-2 pull-left'><button onClick={cancelclick} class='btn btn-link e1cancelbuton float-left'>Cancel</button></div>
+                    <div class='col-md-7' id="mydiv"></div>
+                    <div class='col-md-3'>
+                      <button onClick={nextclick} class={btnclass}>{nextbtntext}</button>
+                      {AddBackButton(pageno, backclick, btnclass)}
+                      </div>
+                  </div>
+              </div>
+        );
+      }
+
+
+      function AddTextLabels(){
+        return (
+            <span class="checkmarkSecPage">
+                <div class="checkmark_circle"></div>
+                <div class="checkmark_stem"></div>
+                <div class="checkmark_kick"></div>
+            </span>
+        );
+      }
+
+      function getRenamedDigit(number){
+        if(number=="9"){
+          return "5";
+        } else if(number=="10"){
+          return "6";
+        } else if(number=="11"){
+          return "7";
+        } else if(number=="12"){
+          return "8";
+        } else {
+          return number;
+        }
+      }
+
+
+      function AddDigitInCircle(number){
+        if(number=="1" || number=="2" || number=="3" || number=="4" ||number=="9" ||number=="10" ||number=="11" ||number=="12"){
+          number=getRenamedDigit(number);
+          return (
+          <span class="Roundedbadge" aria-hidden="true">{number}</span>
+          );
+        } else{
+          return (
+          <span class="RoundedbadgeBlack" aria-hidden="true"> </span>
+          );
+        }
+      }
+
+      function ShowLeadsActivity(labelname, fieldcontrolname,  fieldvalue, handler, divcssclass, errorhandler){
+        return (
+          <div class={divcssclass}>
+            <div class="col-md-11 elRowPg1">
+              <label class='e1labelheaderPage1'>{labelname}</label>
+              <input name={fieldcontrolname} value={fieldvalue} class='e1inputpg1' maxlength='40' onChange={handler} />
+              <span class="clsValidation">{errorhandler}</span>
+            </div>
+            <div class="col-md-1"></div>
+          </div>
+        )
+      }
+
+      function CheckDropDownItemExistForFirstGroup(itemname,sel1,sel2,sel3,sel4,sel5,sel6,sel7,sel8,sel9,sel10, sel11){
+        if(sel1 != itemname && sel2 != itemname && sel3 != itemname && sel4 != itemname &&
+        sel5 != itemname && sel6 != itemname && sel7 != itemname && sel8 != itemname && sel9 != itemname && sel10 != itemname && sel11!=itemname){
+          //OK Good to go
+        }
+        else{
+          itemname='';
+        }
+			  return itemname;
+      }
+
+      function CheckDropDownItemExist(itemname,sel1,sel2,sel3,sel4,sel5,sel6,sel7){
+        if(sel1 != itemname && sel2 != itemname && sel3 != itemname && sel4 != itemname &&
+        sel5 != itemname && sel6 != itemname && sel7 != itemname){
+          //OK Good to go
+        }
+        else{
+          itemname='';
+        }
+			  return itemname;
+      }
+
+      function GetSelectItemName(){
+        return '--Select--';
+      }
+    
+    function MakeItem(X) {
+			return <option value={X}>{X}</option>;
+		};
+
+    function GetDropdownListItemsForFirstGroup(sel1,sel2,sel3,sel4,sel5,sel6,sel7, sel8, sel9, sel10, sel11){
+       
+		    let arrtemp=[];
+			arrtemp.push(GetSelectItemName());
+		
+			let itemelement=CheckDropDownItemExistForFirstGroup('Address',sel1,sel2,sel3,sel4,sel5,sel6,sel7, sel8, sel9, sel10, sel11);
+			if(itemelement.length >0){arrtemp.push(itemelement);}
+			
+     		itemelement=CheckDropDownItemExistForFirstGroup('City',sel1,sel2,sel3,sel4,sel5,sel6,sel7, sel8, sel9, sel10, sel11);
+			if(itemelement.length >0){arrtemp.push(itemelement);}
+			
+     		itemelement=CheckDropDownItemExistForFirstGroup('Customer Id',sel1,sel2,sel3,sel4,sel5,sel6,sel7, sel8, sel9, sel10, sel11);
+			if(itemelement.length >0){arrtemp.push(itemelement);}			
+
+     		itemelement=CheckDropDownItemExistForFirstGroup('Customer Name',sel1,sel2,sel3,sel4,sel5,sel6,sel7, sel8, sel9, sel10, sel11);
+			if(itemelement.length >0){arrtemp.push(itemelement);}			
+			
+			itemelement=CheckDropDownItemExistForFirstGroup('Email Address',sel1,sel2,sel3,sel4,sel5,sel6,sel7, sel8, sel9, sel10, sel11);
+			if(itemelement.length >0){arrtemp.push(itemelement);}	
+			
+			itemelement=CheckDropDownItemExistForFirstGroup('First Name',sel1,sel2,sel3,sel4,sel5,sel6,sel7, sel8, sel9, sel10, sel11);
+			if(itemelement.length >0){arrtemp.push(itemelement);}				
+
+			itemelement=CheckDropDownItemExistForFirstGroup('Last Name',sel1,sel2,sel3,sel4,sel5,sel6,sel7, sel8, sel9, sel10, sel11);
+      if(itemelement.length >0){arrtemp.push(itemelement);}						
+      
+      itemelement=CheckDropDownItemExistForFirstGroup('Last Purchase Date',sel1,sel2,sel3,sel4,sel5,sel6,sel7, sel8, sel9, sel10, sel11);
+      if(itemelement.length >0){arrtemp.push(itemelement);}	
+      
+      itemelement=CheckDropDownItemExistForFirstGroup('Mobile Phone',sel1,sel2,sel3,sel4,sel5,sel6,sel7, sel8, sel9, sel10, sel11);
+      if(itemelement.length >0){arrtemp.push(itemelement);}	
+      
+      itemelement=CheckDropDownItemExistForFirstGroup('State',sel1,sel2,sel3,sel4,sel5,sel6,sel7, sel8, sel9, sel10, sel11);
+      if(itemelement.length >0){arrtemp.push(itemelement);}	
+      
+      itemelement=CheckDropDownItemExistForFirstGroup('Zip',sel1,sel2,sel3,sel4,sel5,sel6,sel7, sel8, sel9, sel10, sel11);
+      if(itemelement.length >0){arrtemp.push(itemelement);}	
+      
+      
+			return arrtemp;
+		}
+
+
+		function GetDropdownListItemsNEW(sel1,sel2,sel3,sel4,sel5,sel6,sel7,sel8,sel9,sel10){
+		    let arrtemp=[];
+			arrtemp.push(GetSelectItemName());
+    
+      let itemelement=CheckDropDownItemExist('Birth Date',sel1,sel2,sel3,sel4,sel5,sel6,sel7,sel8,sel9,sel10);
+			if(itemelement.length >0){arrtemp.push(itemelement);}
+
+      itemelement=CheckDropDownItemExist('Customer Unique ID',sel1,sel2,sel3,sel4,sel5,sel6,sel7,sel8,sel9,sel10);
+      if(itemelement.length >0){arrtemp.push(itemelement);}	
+
+			itemelement=CheckDropDownItemExist('Email',sel1,sel2,sel3,sel4,sel5,sel6,sel7,sel8,sel9,sel10);
+			if(itemelement.length >0){arrtemp.push(itemelement);}
+			
+      itemelement=CheckDropDownItemExist('First Name',sel1,sel2,sel3,sel4,sel5,sel6,sel7,sel8,sel9,sel10);
+			if(itemelement.length >0){arrtemp.push(itemelement);}	
+			
+      itemelement=CheckDropDownItemExist('Hearsay Org ID',sel1,sel2,sel3,sel4,sel5,sel6,sel7,sel8,sel9,sel10);
+      if(itemelement.length >0){arrtemp.push(itemelement);}		
+
+      itemelement=CheckDropDownItemExist('Hearsy User Reference ID',sel1,sel2,sel3,sel4,sel5,sel6,sel7,sel8,sel9,sel10);
+      if(itemelement.length >0){arrtemp.push(itemelement);}
+
+      itemelement=CheckDropDownItemExist('Last Name',sel1,sel2,sel3,sel4,sel5,sel6,sel7,sel8,sel9,sel10);
+			if(itemelement.length >0){arrtemp.push(itemelement);}	
+
+      itemelement=CheckDropDownItemExist('Name',sel1,sel2,sel3,sel4,sel5,sel6,sel7,sel8,sel9,sel10);
+			if(itemelement.length >0){arrtemp.push(itemelement);}
+     				
+			itemelement=CheckDropDownItemExist('Phone',sel1,sel2,sel3,sel4,sel5,sel6,sel7,sel8,sel9,sel10);
+			if(itemelement.length >0){arrtemp.push(itemelement);}				
+
+			itemelement=CheckDropDownItemExist('Preferred Name',sel1,sel2,sel3,sel4,sel5,sel6,sel7,sel8,sel9,sel10);
+      if(itemelement.length >0){arrtemp.push(itemelement);}						
+      
+      itemelement=CheckDropDownItemExist('Title',sel1,sel2,sel3,sel4,sel5,sel6,sel7,sel8,sel9,sel10);
+      if(itemelement.length >0){arrtemp.push(itemelement);}	
+				
+			return arrtemp;
+		}
+
+      
+
+      function DropdownValues(controlname, controlvalue, handler, classcss, erhandler, arraylist){
+        return(
+          <div class="col-md-4 selectInput" >
+              <select name={controlname} value={controlvalue} onChange={handler} class={classcss}>
+                {arraylist.map(MakeItem)}          
+              </select>
+              <span class="clsValidation">{erhandler}</span>
+            </div>
+        )
+      }
+
+      class HearsayPage1 extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            integrationType:"0",
+            leadsActivity:"",
+            erIntegrationType:"",
+            erleadsActivity:"",
+            page:1,
+            /* iControl1:"badge",
+            iControl2:"badge",
+            iControl3:"badge",
+            iControl4:"badge",
+            iControl5:"badge",
+            iControl6:"badge",
+            iControl7:"badge",
+            iControl8:"badge", */
+            iconText1:AddDigitInCircle("1"),
+            iconText2:AddDigitInCircle("2"),
+            iconText3:AddDigitInCircle("3"),
+            iconText4:AddDigitInCircle("4"),
+            iconText5:AddDigitInCircle("5"),
+            iconText6:AddDigitInCircle("6"),
+            iconText7:AddDigitInCircle("7"),
+            iconText8:AddDigitInCircle("8"),
+            iconText9:AddDigitInCircle("9"),
+            iconText10:AddDigitInCircle("10"),
+            iconText11:AddDigitInCircle("11"),
+            iconText12:AddDigitInCircle("12"),
+            iconText13:AddDigitInCircle("13"),
+            iconText14:AddDigitInCircle("14"),
+            iconText15:AddDigitInCircle("15"),
+            iconText16:AddDigitInCircle("16"),
+            
+            control1:GetSelectItemName(),
+            control2:GetSelectItemName(),
+            control3:GetSelectItemName(),
+            control4:GetSelectItemName(),
+            control5:GetSelectItemName(),
+            control6:GetSelectItemName(),
+            control7:GetSelectItemName(),
+            control8:GetSelectItemName(),
+            control9:GetSelectItemName(),
+            control10:GetSelectItemName(),
+            control11:GetSelectItemName(),
+            control12:GetSelectItemName(),
+            control13:GetSelectItemName(),
+            control14:GetSelectItemName(),
+            control15:GetSelectItemName(),
+            control16:GetSelectItemName(),
+            
+            erControl1:"",
+            erControl2:"",
+            erControl3:"",
+            erControl4:"",
+            erControl5:"",
+            erControl6:"",
+            erControl7:"",
+            erControl8:"",
+            erControl9:"",
+            erControl10:"",
+            erControl11:"",
+            erControl12:"",
+            erControl13:"",
+            erControl14:"",
+            erControl15:"",
+            erControl16:"",
+            erValidationText:"",
             
 
-        </div>
+            ArrayList1:GetDropdownListItemsForFirstGroup('','','','','','','','','','',''),
+            ArrayList2:GetDropdownListItemsForFirstGroup('','','','','','','','','','',''),
+            ArrayList3:GetDropdownListItemsForFirstGroup('','','','','','','','','','',''),
+            ArrayList4:GetDropdownListItemsForFirstGroup('','','','','','','','','','',''),
+            ArrayList5:GetDropdownListItemsNEW('','','','','','','','','',''),
+            ArrayList6:GetDropdownListItemsNEW('','','','','','','','','',''),
+            ArrayList7:GetDropdownListItemsNEW('','','','','','','','','',''),
+            ArrayList8:GetDropdownListItemsNEW('','','','','','','','','',''),
+            ArrayList9:GetDropdownListItemsForFirstGroup('','','','','','','','','','',''),
+            ArrayList10:GetDropdownListItemsForFirstGroup('','','','','','','','','','',''),
+            ArrayList11:GetDropdownListItemsForFirstGroup('','','','','','','','','','',''),
+            ArrayList12:GetDropdownListItemsForFirstGroup('','','','','','','','','','',''),
+            ArrayList13:GetDropdownListItemsNEW('','','','','','','','','',''),
+            ArrayList14:GetDropdownListItemsNEW('','','','','','','','','',''),
+            ArrayList15:GetDropdownListItemsNEW('','','','','','','','','',''),
+            ArrayList16:GetDropdownListItemsNEW('','','','','','','','','',''),
+            
+            
+            
+            fieldCss:"row epaddingbottom10 ehidediv"
+            };
+          this.handleChangeNext = this.handleChangeNext.bind(this);
+          this.handleChangeBack = this.handleChangeBack.bind(this);
+          this.RefreshOtherDropDownLists = this.RefreshOtherDropDownLists.bind(this);
+        }
 
-    </div>
-</body>
+        handleChangeBack(event) {
+           if(this.state.page==3){
+            this.setState({page: 1});
+           } else{
+            var ipage=this.state.page - 1;
+            if(ipage<=0){ipage=1;}
+            this.setState({page: ipage});
+           }
+          
+        }
 
+        handleCancelBtnClick() {
+          alert("Cancel button clicked");
+        }
+
+        // handleChangeBack(event){
+        //   alert("Back button pressed");
+        //    
+        //   let ipage = this.state.page - 1;
+		    //   if(ipage<=0){ipage=1;}
+        //   this.setState({page: ipage});
+        // }
+
+        handleChangeNext(event) {
+          //validation
+           debugger;
+
+          if(this.state.page==1){
+            var isValidated=true;
+            if(this.state.integrationType=="0"){
+              this.setState({erIntegrationType:"Integration Type is mandatory"});
+              isValidated=false;
+            } else{
+              this.setState({erIntegrationType:""});
+            }
+
+            if(this.state.integrationType=="currentJourney"){
+              if(this.state.leadsActivity=="" ||this.state.leadsActivity==" " ||this.state.leadsActivity==null){
+                this.setState({erleadsActivity:"Leads Activity Label is mandatory"});
+                isValidated=false;
+              } else{
+                
+                this.setState({erleadsActivity:""});
+              }
+            }
+
+            //Save Data
+            if(isValidated){
+              var DropdownSelection=this.state.integrationType;
+              debugger;
+              if(DropdownSelection=="companyTemplate"){
+                if(this.state.page==1){
+                  this.setState({page:3});
+                }
+              } else {
+                if(this.state.page==1){
+                  this.setState({page:2});
+                }
+              }
+            } else{
+              return false;
+            }
+          } else if(this.state.page==2){
+            var valMessage="The field is mandatory.";
+            var Page2IsValidated=true;
+             
+            if(this.state.control1=="--Select--"){
+              //this.setState({erControl1:valMessage});
+              Page2IsValidated=false;
+            } else{
+              this.setState({erControl1:""});
+            }
+            if(this.state.control2=="--Select--"){
+              //this.setState({erControl2:valMessage});
+              Page2IsValidated=false;
+            } else{
+              this.setState({erControl2:""});
+            }
+            if(this.state.control3=="--Select--"){
+              //this.setState({erControl3:valMessage});
+              Page2IsValidated=false;
+            } else{
+              this.setState({erControl3:""});
+            }
+            if(this.state.control4=="--Select--"){
+              //this.setState({erControl4:valMessage});
+              Page2IsValidated=false;
+            } else{
+              this.setState({erControl4:""});
+            }
+            if(this.state.control5=="--Select--"){
+              //this.setState({erControl5:valMessage});
+              Page2IsValidated=false;
+            } else{
+              this.setState({erControl5:""});
+            }
+            if(this.state.control6=="--Select--"){
+              //this.setState({erControl6:valMessage});
+              Page2IsValidated=false;
+            } else{
+              this.setState({erControl6:""});
+            }
+            if(this.state.control7=="--Select--"){
+              //this.setState({erControl7:valMessage});
+              Page2IsValidated=false;
+            } else{
+              this.setState({erControl7:""});
+            }
+            if(this.state.control8=="--Select--"){
+              //this.setState({erControl8:valMessage});
+              Page2IsValidated=false;
+            } else{
+              this.setState({erControl8:""});
+            }
+            if(this.state.control9=="--Select--"){
+              //this.setState({erControl9:valMessage});
+              Page2IsValidated=false;
+            } else{
+              this.setState({erControl9:""});
+            }
+            if(this.state.control10=="--Select--"){
+              //this.setState({erControl10:valMessage});
+              Page2IsValidated=false;
+            } else{
+              this.setState({erControl10:""});
+            }
+            if(this.state.control11=="--Select--"){
+              //this.setState({erControl11:valMessage});
+              Page2IsValidated=false;
+            } else{
+              this.setState({erControl11:""});
+            }
+            if(this.state.control12=="--Select--"){
+              //this.setState({erControl12:valMessage});
+              Page2IsValidated=false;
+            } else{
+              this.setState({erControl12:""});
+            }
+            if(this.state.control13=="--Select--"){
+              //this.setState({erControl13:valMessage});
+              Page2IsValidated=false;
+            } else{
+              this.setState({erControl13:""});
+            }
+            if(this.state.control14=="--Select--"){
+              //this.setState({erControl14:valMessage});
+              Page2IsValidated=false;
+            } else{
+              this.setState({erControl14:""});
+            }
+            if(this.state.control15=="--Select--"){
+              //this.setState({erControl15:valMessage});
+              Page2IsValidated=false;
+            } else{
+              this.setState({erControl15:""});
+            }
+            if(this.state.control16=="--Select--"){
+              //this.setState({erControl16:valMessage});
+              Page2IsValidated=false;
+            } else{
+              this.setState({erControl16:""});
+            }
+
+            if(this.state.control1!="--Select--" || this.state.control2!="--Select--" || this.state.control3!="--Select--" || this.state.control4!="--Select--" || this.state.control5!="--Select--" || this.state.control6!="--Select--" || this.state.control7!="--Select--" || this.state.control8!="--Select--"|| this.state.control9!="--Select--"|| this.state.control10!="--Select--"|| this.state.control11!="--Select--"|| this.state.control12!="--Select--"|| this.state.control13!="--Select--"|| this.state.control14!="--Select--"|| this.state.control15!="--Select--"|| this.state.control16!="--Select--"){
+              
+              this.setState({integrationType:"0"});
+              this.setState({leadsActivity:""});
+              this.setState({erIntegrationType:""});
+              this.setState({erleadsActivity:""});
+              this.setState({page:1});
+              /* this.setState({iControl1:"badge"});
+              this.setState({iControl2:"badge"});
+              this.setState({iControl3:"badge"});
+              this.setState({iControl4:"badge"});
+              this.setState({iControl5:"badge"});
+              this.setState({iControl6:"badge"});
+              this.setState({iControl7:"badge"});
+              this.setState({iControl8:"badge"}); */
+              this.setState({iconText1:AddDigitInCircle("1")});
+              this.setState({iconText2:AddDigitInCircle("2")});
+              this.setState({iconText3:AddDigitInCircle("3")});
+              this.setState({iconText4:AddDigitInCircle("4")});
+              this.setState({iconText5:AddDigitInCircle("5")});
+              this.setState({iconText6:AddDigitInCircle("6")});
+              this.setState({iconText7:AddDigitInCircle("7")});
+              this.setState({iconText8:AddDigitInCircle("8")});
+              this.setState({iconText9:AddDigitInCircle("9")});
+              this.setState({iconText10:AddDigitInCircle("10")});
+              this.setState({iconText11:AddDigitInCircle("11")});
+              this.setState({iconText12:AddDigitInCircle("12")});
+              this.setState({iconText13:AddDigitInCircle("13")});
+              this.setState({iconText14:AddDigitInCircle("14")});
+              this.setState({iconText15:AddDigitInCircle("15")});
+              this.setState({iconText16:AddDigitInCircle("16")});
+              this.setState({control1:"--Select--"});
+              this.setState({control2:"--Select--"});
+              this.setState({control3:"--Select--"});
+              this.setState({control4:"--Select--"});
+              this.setState({control5:"--Select--"});
+              this.setState({control6:"--Select--"});
+              this.setState({control7:"--Select--"});
+              this.setState({control8:"--Select--"});
+
+              this.setState({control9:"--Select--"});
+              this.setState({control10:"--Select--"});
+              this.setState({control11:"--Select--"});
+              this.setState({control12:"--Select--"});
+
+              this.setState({control13:"--Select--"});
+              this.setState({control14:"--Select--"});
+              this.setState({control15:"--Select--"});
+              this.setState({control16:"--Select--"});
+
+              this.setState({erControl1:""});
+              this.setState({erControl2:""});
+              this.setState({erControl3:""});
+              this.setState({erControl4:""});
+              this.setState({erControl5:""});
+              this.setState({erControl6:""});
+              this.setState({erControl7:""});
+              this.setState({erControl8:""});
+
+              this.setState({erControl9:""});
+              this.setState({erControl10:""});
+              this.setState({erControl11:""});
+              this.setState({erControl12:""});
+
+              this.setState({erControl13:""});
+              this.setState({erControl14:""});
+              this.setState({erControl15:""});
+              this.setState({erControl16:""});
+
+              this.setState({fieldCss:"row epaddingbottom10 ehidediv"});
+              alert("Saved Successdully");
+            } else{
+              this.setState({erValidationText:"The above fields are mandatory. Please select atleast one of the above options"});
+            }
+          }else if(this.state.page==3){
+              alert("Saved Successdully");
+              this.setState({page:1});
+            }
+        }
+
+
+        RefreshOtherDropDownListsForFirstGroup(pos,value) {
+           
+          let ddl1 = this.state.control1;
+          let ddl2 = this.state.control2;
+          let ddl3 = this.state.control3;
+          let ddl4 = this.state.control4;
+          let ddl5 = this.state.control9;
+          let ddl6 = this.state.control10;
+          let ddl7 = this.state.control11;
+          let ddl8 = this.state.control12;
+          let ddl9 = this.state.control12;
+          let ddl10 = this.state.control12;
+          let ddl11 = this.state.control12;
+          let ddl12 = this.state.control12;
+          
+          
+          
+          
+    //		  alert(ddl1 + ' - ' + ddl2 + ' -- ' + ddl3 + ' -- ' + ddl4 + ' -- ' + ddl5 + ' -- ' + ddl6);
+          
+          let ddlselitem =GetSelectItemName();
+
+          if(pos==1){
+          //first dropdown selected, refresh the other dropdowns
+          ddl1=value;ddl2=ddlselitem;ddl3=ddlselitem;ddl4=ddlselitem;
+          ddl9=ddlselitem;
+          ddl10=ddlselitem;ddl11=ddlselitem;ddl12=ddlselitem;
+          
+            //clear temp state values too
+                  this.setState({control2: ddlselitem});
+                  this.setState({control3: ddlselitem});
+                  this.setState({control4: ddlselitem});
+                  this.setState({control9: ddlselitem});
+                  this.setState({control10: ddlselitem});
+                  this.setState({control11: ddlselitem});
+                  this.setState({control12: ddlselitem});
+            
+            //clear label fields too  
+                  this.setState({iconText2: AddDigitInCircle('2')});
+                  this.setState({iconText3: AddDigitInCircle('3')});
+                  this.setState({iconText4: AddDigitInCircle('4')});
+                  this.setState({iconText9: AddDigitInCircle('9')});
+                  this.setState({iconText10: AddDigitInCircle('10')});
+                  this.setState({iconText11: AddDigitInCircle('11')});
+                  this.setState({iconText12: AddDigitInCircle('12')});
+            
+            //clear array list
+          // this.setState({ArrayList2: GetDropdownListItemsForFirstGroup(value,  )});
+          // this.setState({ArrayList3: GetDropdownListItemsForFirstGroup()});
+          // this.setState({ArrayList4: GetDropdownListItemsForFirstGroup()});
+          // this.setState({ArrayList5: GetDropdownListItemsNEW()});
+          // this.setState({ArrayList6: GetDropdownListItemsNEW()});
+          // this.setState({ArrayList7: GetDropdownListItemsNEW()});
+          
+          
+          
+          this.setState({ArrayList2: GetDropdownListItemsForFirstGroup(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7,ddl8,ddl9,ddl10,ddl11)});
+          this.setState({ArrayList3: GetDropdownListItemsForFirstGroup(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7,ddl8,ddl9,ddl10,ddl11)});
+          this.setState({ArrayList4: GetDropdownListItemsForFirstGroup(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7,ddl8,ddl9,ddl10,ddl11)});
+          this.setState({ArrayList9: GetDropdownListItemsForFirstGroup(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7,ddl8,ddl9,ddl10,ddl11)});
+          this.setState({ArrayList10: GetDropdownListItemsForFirstGroup(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7,ddl8,ddl9,ddl10,ddl11)});
+          this.setState({ArrayList11: GetDropdownListItemsForFirstGroup(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7,ddl8,ddl9,ddl10,ddl11)});
+          this.setState({ArrayList12: GetDropdownListItemsForFirstGroup(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7,ddl8,ddl9,ddl10,ddl11)});
+          
+          
+
+          
+            
+          }
+          else if(pos==2){
+          ddl2=value;ddl3=ddlselitem;ddl4=ddlselitem;
+          ddl9=ddlselitem;
+          ddl10=ddlselitem;ddl11=ddlselitem;ddl12=ddlselitem;
+          // ddl5=ddlselitem;
+          // ddl6=ddlselitem;ddl7=ddlselitem;
+          //update the unselected dropdowns
+          
+          this.setState({ArrayList3: GetDropdownListItemsForFirstGroup(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7,ddl8,ddl9,ddl10,ddl11)});
+          this.setState({ArrayList4: GetDropdownListItemsForFirstGroup(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7,ddl8,ddl9,ddl10,ddl11)});
+          this.setState({ArrayList9: GetDropdownListItemsForFirstGroup(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7,ddl8,ddl9,ddl10,ddl11)});
+          this.setState({ArrayList10: GetDropdownListItemsForFirstGroup(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7,ddl8,ddl9,ddl10,ddl11)});
+          this.setState({ArrayList11: GetDropdownListItemsForFirstGroup(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7,ddl8,ddl9,ddl10,ddl11)});
+          this.setState({ArrayList12: GetDropdownListItemsForFirstGroup(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7,ddl8,ddl9,ddl10,ddl11)});
+            //clear label too
+            this.setState({iconText3: AddDigitInCircle('3')});
+            this.setState({iconText4: AddDigitInCircle('4')});
+            this.setState({iconText9: AddDigitInCircle('9')});
+            this.setState({iconText10: AddDigitInCircle('10')});
+            this.setState({iconText11: AddDigitInCircle('11')});
+            this.setState({iconText12: AddDigitInCircle('12')});
+            //clear temp state values too
+            this.setState({control3: ddlselitem});
+            this.setState({control4: ddlselitem});
+            this.setState({control9: ddlselitem});
+            this.setState({control10: ddlselitem});
+            this.setState({control11: ddlselitem});
+            this.setState({control12: ddlselitem});
+          }
+          else if(pos==3){
+          ddl3=value;;ddl4=ddlselitem;
+          ddl9=ddlselitem;
+          ddl10=ddlselitem;ddl11=ddlselitem;ddl12=ddlselitem;
+          // ddl5=ddlselitem;
+          // ddl6=ddlselitem;ddl7=ddlselitem;ddl8=ddlselitem;
+          
+          this.setState({ArrayList4: GetDropdownListItemsForFirstGroup(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7,ddl8,ddl9,ddl10,ddl11)});
+          this.setState({ArrayList9: GetDropdownListItemsForFirstGroup(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7,ddl8,ddl9,ddl10,ddl11)});
+          this.setState({ArrayList10: GetDropdownListItemsForFirstGroup(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7,ddl8,ddl9,ddl10,ddl11)});
+          this.setState({ArrayList11: GetDropdownListItemsForFirstGroup(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7,ddl8,ddl9,ddl10,ddl11)});
+          this.setState({ArrayList12: GetDropdownListItemsForFirstGroup(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7,ddl8,ddl9,ddl10,ddl11)});
+            //clear label too
+                  this.setState({iconText4: AddDigitInCircle('4')});
+                  this.setState({iconText9: AddDigitInCircle('9')});
+                  this.setState({iconText10: AddDigitInCircle('10')});
+                  this.setState({iconText11: AddDigitInCircle('11')});
+                  this.setState({iconText12: AddDigitInCircle('12')});
+            //clear temp state values too
+                  this.setState({control4: ddlselitem});
+                  this.setState({control9: ddlselitem});
+                  this.setState({control10: ddlselitem});
+                  this.setState({control11: ddlselitem});
+                  this.setState({control12: ddlselitem});
+            
+          }		  
+          else if(pos==4){
+          ddl4=value;
+          ddl9=ddlselitem;
+          ddl10=ddlselitem;ddl11=ddlselitem;ddl12=ddlselitem;
+          
+          
+          this.setState({ArrayList9: GetDropdownListItemsForFirstGroup(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7,ddl8,ddl9,ddl10,ddl11)});
+          this.setState({ArrayList10: GetDropdownListItemsForFirstGroup(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7,ddl8,ddl9,ddl10,ddl11)});
+          this.setState({ArrayList11: GetDropdownListItemsForFirstGroup(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7,ddl8,ddl9,ddl10,ddl11)});
+          this.setState({ArrayList12: GetDropdownListItemsForFirstGroup(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7,ddl8,ddl9,ddl10,ddl11)});
+            //clear label too
+                  this.setState({iconText9: AddDigitInCircle('9')});
+                  this.setState({iconText10: AddDigitInCircle('10')});
+                  this.setState({iconText11: AddDigitInCircle('11')});
+                  this.setState({iconText12: AddDigitInCircle('12')});
+            
+            //clear temp state values too
+                  this.setState({control9: ddlselitem});
+                  this.setState({control10: ddlselitem});
+                  this.setState({control11: ddlselitem});
+                  this.setState({control12: ddlselitem});
+            
+          }		  		  
+           else if(pos==9){
+          ddl9=value;ddl10=ddlselitem;ddl11=ddlselitem;ddl12=ddlselitem;
+          this.setState({ArrayList10: GetDropdownListItemsForFirstGroup(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7,ddl8,ddl9,ddl10,ddl11)});
+          this.setState({ArrayList11: GetDropdownListItemsForFirstGroup(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7,ddl8,ddl9,ddl10,ddl11)});
+          this.setState({ArrayList12: GetDropdownListItemsForFirstGroup(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7,ddl8,ddl9,ddl10,ddl11)});
+          //   //clear label too
+            this.setState({iconText10: AddDigitInCircle('10')});
+            this.setState({iconText11: AddDigitInCircle('11')});
+            this.setState({iconText12: AddDigitInCircle('12')});
+          //   //clear temp state values too
+                  this.setState({control10: ddlselitem});
+                  this.setState({control11: ddlselitem});
+                  this.setState({control12: ddlselitem});
+                  
+            
+
+          }		  		  		  
+          else if(pos==10){
+          ddl10=value;ddl11=ddlselitem;ddl12=ddlselitem;
+          this.setState({ArrayList11: GetDropdownListItemsForFirstGroup(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7,ddl8,ddl9,ddl10,ddl11)});
+          this.setState({ArrayList12: GetDropdownListItemsForFirstGroup(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7,ddl8,ddl9,ddl10,ddl11)});
+            //clear label too
+            this.setState({iconText11: AddDigitInCircle('11')});
+            this.setState({iconText12: AddDigitInCircle('12')});
+            //clear temp state values too
+                  this.setState({control11: ddlselitem});		
+                  this.setState({control12: ddlselitem});		  
+          }	
+          else if(pos==11){
+            ddl11=value;ddl12=ddlselitem;
+            debugger;
+            this.setState({ArrayList12: GetDropdownListItemsForFirstGroup(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7,ddl8,ddl9,ddl10,ddl11)});
+            //clear label too
+            this.setState({iconText12: AddDigitInCircle('12')});
+
+            //clear temp state values too
+            this.setState({control12: ddlselitem});
+          } else if(pos==12){
+            ddl12=value;
+          }
+        }
+
+        RefreshOtherDropDownLists(pos,value) {
+          
+          let ddl5 = this.state.control5;
+          let ddl6 = this.state.control6;
+          let ddl7 = this.state.control7;
+          let ddl8 = this.state.control8;
+          let ddl13 = this.state.control13;
+          let ddl14 = this.state.control14;
+          let ddl15 = this.state.control15;
+          let ddl16 = this.state.control16;
+          
+          
+          
+    //		  alert(ddl1 + ' - ' + ddl2 + ' -- ' + ddl3 + ' -- ' + ddl4 + ' -- ' + ddl5 + ' -- ' + ddl6);
+          
+          let ddlselitem =GetSelectItemName();
+
+          if(pos==5){
+          ddl5=value;ddl6=ddlselitem;ddl7=ddlselitem;ddl8=ddlselitem;ddl13=ddlselitem;ddl14=ddlselitem;ddl15=ddlselitem;ddl16=ddlselitem;
+          this.setState({ArrayList6: GetDropdownListItemsNEW(ddl5,ddl6,ddl7,ddl8,ddl13,ddl14,ddl15,ddl16)});
+          this.setState({ArrayList7: GetDropdownListItemsNEW(ddl5,ddl6,ddl7,ddl8,ddl13,ddl14,ddl15,ddl16)});
+          this.setState({ArrayList8: GetDropdownListItemsNEW(ddl5,ddl6,ddl7,ddl8,ddl13,ddl14,ddl15,ddl16)});
+          this.setState({ArrayList13: GetDropdownListItemsNEW(ddl5,ddl6,ddl7,ddl8,ddl13,ddl14,ddl15,ddl16)});
+          this.setState({ArrayList14: GetDropdownListItemsNEW(ddl5,ddl6,ddl7,ddl8,ddl13,ddl14,ddl15,ddl16)});
+          this.setState({ArrayList15: GetDropdownListItemsNEW(ddl5,ddl6,ddl7,ddl8,ddl13,ddl14,ddl15,ddl16)});
+          this.setState({ArrayList16: GetDropdownListItemsNEW(ddl5,ddl6,ddl7,ddl8,ddl13,ddl14,ddl15,ddl16)});
+          
+            //clear label too
+            this.setState({iconText6: AddDigitInCircle('6')});
+            this.setState({iconText7: AddDigitInCircle('7')});
+            this.setState({iconText8: AddDigitInCircle('8')});
+            this.setState({iconText13: AddDigitInCircle('13')});
+            this.setState({iconText14: AddDigitInCircle('14')});
+            this.setState({iconText15: AddDigitInCircle('15')});
+            this.setState({iconText16: AddDigitInCircle('16')});
+            
+            //clear temp state values too
+                  this.setState({control6: ddlselitem});
+                  this.setState({control7: ddlselitem});
+                  this.setState({control8: ddlselitem});
+                  this.setState({control13: ddlselitem});
+                  this.setState({control14: ddlselitem});
+                  this.setState({control15: ddlselitem});
+                  this.setState({control16: ddlselitem});
+                  
+
+          }		  		  		  
+          else if(pos==6){
+          ddl6=value;ddl7=ddlselitem;ddl8=ddlselitem;ddl13=ddlselitem;ddl14=ddlselitem;ddl15=ddlselitem;ddl16=ddlselitem;
+          this.setState({ArrayList7: GetDropdownListItemsNEW(ddl5,ddl6,ddl7,ddl8,ddl13,ddl14,ddl15,ddl16)});
+          this.setState({ArrayList8: GetDropdownListItemsNEW(ddl5,ddl6,ddl7,ddl8,ddl13,ddl14,ddl15,ddl16)});
+          this.setState({ArrayList13: GetDropdownListItemsNEW(ddl5,ddl6,ddl7,ddl8,ddl13,ddl14,ddl15,ddl16)});
+          this.setState({ArrayList14: GetDropdownListItemsNEW(ddl5,ddl6,ddl7,ddl8,ddl13,ddl14,ddl15,ddl16)});
+          this.setState({ArrayList15: GetDropdownListItemsNEW(ddl5,ddl6,ddl7,ddl8,ddl13,ddl14,ddl15,ddl16)});
+          this.setState({ArrayList16: GetDropdownListItemsNEW(ddl5,ddl6,ddl7,ddl8,ddl13,ddl14,ddl15,ddl16)});
+          
+            //clear label too
+            this.setState({iconText7: AddDigitInCircle('7')});
+            this.setState({iconText8: AddDigitInCircle('8')});
+            this.setState({iconText13: AddDigitInCircle('13')});
+            this.setState({iconText14: AddDigitInCircle('14')});
+            this.setState({iconText15: AddDigitInCircle('15')});
+            this.setState({iconText16: AddDigitInCircle('16')});
+            //clear temp state values too
+                  this.setState({control7: ddlselitem});		
+                  this.setState({control8: ddlselitem});
+                  this.setState({control13: ddlselitem});
+                  this.setState({control14: ddlselitem});
+                  this.setState({control15: ddlselitem});
+                  this.setState({control16: ddlselitem});		  
+          }	
+          else if(pos==7){
+            ddl7=value;ddl8=value;ddl13=ddlselitem;ddl14=ddlselitem;ddl15=ddlselitem;ddl16=ddlselitem;
+            this.setState({ArrayList8: GetDropdownListItemsNEW(ddl5,ddl6,ddl7,ddl8,ddl13,ddl14,ddl15,ddl16)});
+            this.setState({ArrayList13: GetDropdownListItemsNEW(ddl5,ddl6,ddl7,ddl8,ddl13,ddl14,ddl15,ddl16)});
+            this.setState({ArrayList14: GetDropdownListItemsNEW(ddl5,ddl6,ddl7,ddl8,ddl13,ddl14,ddl15,ddl16)});
+            this.setState({ArrayList15: GetDropdownListItemsNEW(ddl5,ddl6,ddl7,ddl8,ddl13,ddl14,ddl15,ddl16)});
+            this.setState({ArrayList16: GetDropdownListItemsNEW(ddl5,ddl6,ddl7,ddl8,ddl13,ddl14,ddl15,ddl16)});
+            //clear label too
+            this.setState({iconText8: AddDigitInCircle('8')});
+            this.setState({iconText13: AddDigitInCircle('13')});
+            this.setState({iconText14: AddDigitInCircle('14')});
+            this.setState({iconText15: AddDigitInCircle('15')});
+            this.setState({iconText16: AddDigitInCircle('16')});
+
+            //clear temp state values too
+            this.setState({control8: ddlselitem});
+            this.setState({control13: ddlselitem});
+            this.setState({control14: ddlselitem});
+            this.setState({control15: ddlselitem});
+            this.setState({control16: ddlselitem});
+          } else if(pos==8){
+            ddl8=value;ddl13=ddlselitem;ddl14=ddlselitem;ddl15=ddlselitem;ddl16=ddlselitem;
+            
+            this.setState({ArrayList13: GetDropdownListItemsNEW(ddl5,ddl6,ddl7,ddl8,ddl13,ddl14,ddl15,ddl16)});
+            this.setState({ArrayList14: GetDropdownListItemsNEW(ddl5,ddl6,ddl7,ddl8,ddl13,ddl14,ddl15,ddl16)});
+            this.setState({ArrayList15: GetDropdownListItemsNEW(ddl5,ddl6,ddl7,ddl8,ddl13,ddl14,ddl15,ddl16)});
+            this.setState({ArrayList16: GetDropdownListItemsNEW(ddl5,ddl6,ddl7,ddl8,ddl13,ddl14,ddl15,ddl16)});
+            //clear label too
+            
+            this.setState({iconText13: AddDigitInCircle('13')});
+            this.setState({iconText14: AddDigitInCircle('14')});
+            this.setState({iconText15: AddDigitInCircle('15')});
+            this.setState({iconText16: AddDigitInCircle('16')});
+
+            //clear temp state values too
+            
+            this.setState({control13: ddlselitem});
+            this.setState({control14: ddlselitem});
+            this.setState({control15: ddlselitem});
+            this.setState({control16: ddlselitem});
+          } else if(pos==13){
+            ddl13=value;ddl14=ddlselitem;ddl15=ddlselitem;ddl16=ddlselitem;
+            
+            this.setState({ArrayList14: GetDropdownListItemsNEW(ddl5,ddl6,ddl7,ddl8,ddl13,ddl14,ddl15,ddl16)});
+            this.setState({ArrayList15: GetDropdownListItemsNEW(ddl5,ddl6,ddl7,ddl8,ddl13,ddl14,ddl15,ddl16)});
+            this.setState({ArrayList16: GetDropdownListItemsNEW(ddl5,ddl6,ddl7,ddl8,ddl13,ddl14,ddl15,ddl16)});
+            //clear label too
+            
+            this.setState({iconText14: AddDigitInCircle('14')});
+            this.setState({iconText15: AddDigitInCircle('15')});
+            this.setState({iconText16: AddDigitInCircle('16')});
+
+            //clear temp state values too
+            
+            this.setState({control14: ddlselitem});
+            this.setState({control15: ddlselitem});
+            this.setState({control16: ddlselitem});
+          } else if(pos==14){
+            ddl14=value;ddl15=ddlselitem;ddl16=ddlselitem;
+            
+            
+            this.setState({ArrayList15: GetDropdownListItemsNEW(ddl5,ddl6,ddl7,ddl8,ddl13,ddl14,ddl15,ddl16)});
+            this.setState({ArrayList16: GetDropdownListItemsNEW(ddl5,ddl6,ddl7,ddl8,ddl13,ddl14,ddl15,ddl16)});
+            //clear label too
+            
+            
+            this.setState({iconText15: AddDigitInCircle('15')});
+            this.setState({iconText16: AddDigitInCircle('16')});
+
+            //clear temp state values too
+            
+            
+            this.setState({control15: ddlselitem});
+            this.setState({control16: ddlselitem});
+            
+          } else if(pos==15){
+            ddl15=value;ddl16=ddlselitem;
+            
+            this.setState({ArrayList16: GetDropdownListItemsNEW(ddl5,ddl6,ddl7,ddl8,ddl13,ddl14,ddl15,ddl16)});
+            //clear label too
+            
+            this.setState({iconText16: AddDigitInCircle('16')});
+
+            //clear temp state values too
+            
+            this.setState({control16: ddlselitem});
+          } else if(pos==16){
+            ddl16=value;
+          }
+        }
+
+        myChangeHandler = (event) => {
+          let nam = event.target.name;
+          let val = event.target.value;
+          var validationMessage="The above fields are mandatory. Please select atleast one of the above options";  //The field is mandatory.
+          //var ValidationMessageForCommon="";
+          if(nam=="integrationType"){
+
+            if(val=="0"){
+              this.setState({erIntegrationType: "Integration Type is mandatory"});
+            } else{
+              this.setState({erIntegrationType: ""});
+            }
+
+            this.setState({integrationType: val});
+            if(val=="currentJourney"){
+              this.setState({fieldCss: "row epaddingbottom10"});
+            } else{
+              this.setState({fieldCss: "row epaddingbottom10 ehidediv"});
+            }
+          }
+
+          if(nam=="leadsActivity"){
+            if(val=="" ||val==" " || val==null ){
+              this.setState({erleadsActivity: "Leads Activity Label is mandatory"});
+            } else{
+              this.setState({erleadsActivity: ""});
+            }
+            this.setState({leadsActivity: val});
+          }
+
+          //validationMessage
+          const icon=AddTextLabels();
+          var ValStatus=false;
+          if(nam=="control1"){
+            if(val=="--Select--"){
+              this.setState({erValidationText: validationMessage});
+              this.setState({control1: "--Select--"});
+              this.setState({iconText1:AddDigitInCircle("1")});
+              
+            } else{
+              this.setState({erValidationText: ""});
+              this.setState({control1: val});
+              this.setState({iconText1:icon});
+              ValStatus=true;
+            }
+			      this.RefreshOtherDropDownListsForFirstGroup(1,val);
+          }
+          if(nam=="control2"){
+            if(val=="--Select--"){
+              this.setState({erValidationText: validationMessage});
+              this.setState({control2: "--Select--"});
+              this.setState({iconText2:AddDigitInCircle("2")});
+              
+            } else{
+              this.setState({erValidationText: ""});
+              this.setState({control2: val});
+              this.setState({iconText2:icon});
+              ValStatus=true;
+            }
+            this.RefreshOtherDropDownListsForFirstGroup(2,val);
+          }
+          if(nam=="control3"){
+            if(val=="--Select--"){
+              this.setState({erValidationText: validationMessage});
+              this.setState({control3: "--Select--"});
+              this.setState({iconText3:AddDigitInCircle("3")});
+              
+            } else{
+              this.setState({erValidationText: ""});
+              this.setState({control3: val});
+              this.setState({iconText3:icon});
+              ValStatus=true;
+            }
+            this.RefreshOtherDropDownListsForFirstGroup(3,val);
+          }
+          if(nam=="control4"){
+            if(val=="--Select--"){
+              this.setState({erValidationText: validationMessage});
+              this.setState({control4: "--Select--"});
+              this.setState({iconText4:AddDigitInCircle("4")});
+              
+            } else{
+              this.setState({erValidationText: ""});
+              this.setState({control4: val});
+              this.setState({iconText4:icon});
+              ValStatus=true;
+            }
+            this.RefreshOtherDropDownListsForFirstGroup(4,val);
+          }
+          if(nam=="control5"){
+            if(val=="--Select--"){
+              this.setState({erValidationText: validationMessage});
+              this.setState({control5: "--Select--"});
+              this.setState({iconText5:AddDigitInCircle("5")});
+              
+            } else{
+              this.setState({erValidationText: ""});
+              this.setState({control5: val});
+              this.setState({iconText5:icon});
+              ValStatus=true;
+            }
+            this.RefreshOtherDropDownLists(5,val);
+          }
+          if(nam=="control6"){
+            if(val=="--Select--"){
+              this.setState({erValidationText: validationMessage});
+              this.setState({control6: "--Select--"});
+              this.setState({iconText6:AddDigitInCircle("6")});
+              
+            } else{
+              this.setState({erValidationText: ""});
+              this.setState({control6: val});
+              this.setState({iconText6:icon});
+              ValStatus=true;
+            }
+            this.RefreshOtherDropDownLists(6,val);
+          }
+          if(nam=="control7"){
+            if(val=="--Select--"){
+              this.setState({erValidationText: validationMessage});
+              this.setState({control7: "--Select--"});
+              this.setState({iconText7:AddDigitInCircle("7")});
+              
+            } else{
+              this.setState({erValidationText: ""});
+              this.setState({control7: val});
+              this.setState({iconText7:icon});
+              ValStatus=true;
+            }
+            this.RefreshOtherDropDownLists(7,val);
+          }
+          if(nam=="control8"){
+            if(val=="--Select--"){
+              this.setState({erValidationText: validationMessage});
+              this.setState({control8: "--Select--"});
+              this.setState({iconText8:AddDigitInCircle("8")});
+              
+            } else{
+              this.setState({erValidationText: ""});
+              this.setState({control8: val});
+              this.setState({iconText8:icon});
+              ValStatus=true;
+            }
+            this.RefreshOtherDropDownLists(8,val);
+          }
+          if(nam=="control9"){
+            if(val=="--Select--"){
+              this.setState({erValidationText: validationMessage});
+              this.setState({control9: "--Select--"});
+              this.setState({iconText9:AddDigitInCircle("9")});
+              
+            } else{
+              this.setState({erValidationText: ""});
+              this.setState({control9: val});
+              this.setState({iconText9:icon});
+              ValStatus=true;
+            }
+            this.RefreshOtherDropDownListsForFirstGroup(9,val);
+          }
+          if(nam=="control10"){
+            if(val=="--Select--"){
+              this.setState({erValidationText: validationMessage});
+              this.setState({control10: "--Select--"});
+              this.setState({iconText10:AddDigitInCircle("10")});
+              
+            } else{
+              this.setState({erValidationText: ""});
+              this.setState({control10: val});
+              this.setState({iconText10:icon});
+              ValStatus=true;
+            }
+            this.RefreshOtherDropDownListsForFirstGroup(10,val);
+          }
+          if(nam=="control11"){
+            if(val=="--Select--"){
+              this.setState({erValidationText: validationMessage});
+              this.setState({control11: "--Select--"});
+              this.setState({iconText11:AddDigitInCircle("11")});
+              
+            } else{
+              this.setState({erValidationText: ""});
+              this.setState({control11: val});
+              this.setState({iconText11:icon});
+              ValStatus=true;
+            }
+            this.RefreshOtherDropDownListsForFirstGroup(11,val);
+          }
+          if(nam=="control12"){
+            if(val=="--Select--"){
+              this.setState({erValidationText: validationMessage});
+              this.setState({control12: "--Select--"});
+              this.setState({iconText12:AddDigitInCircle("12")});
+              
+            } else{
+              this.setState({erValidationText: ""});
+              this.setState({control12: val});
+              this.setState({iconText12:icon});
+              ValStatus=true;
+            }
+            this.RefreshOtherDropDownListsForFirstGroup(12,val);
+          }
+
+          if(nam=="control13"){
+            if(val=="--Select--"){
+              this.setState({erValidationText: validationMessage});
+              this.setState({control13: "--Select--"});
+              this.setState({iconText13:AddDigitInCircle("13")});
+              
+            } else{
+              this.setState({erValidationText: ""});
+              this.setState({control13: val});
+              this.setState({iconText13:icon});
+              ValStatus=true;
+            }
+            this.RefreshOtherDropDownLists(13,val);
+          }
+          if(nam=="control14"){
+            if(val=="--Select--"){
+              this.setState({erValidationText: validationMessage});
+              this.setState({control14: "--Select--"});
+              this.setState({iconText14:AddDigitInCircle("14")});
+              
+            } else{
+              this.setState({erValidationText: ""});
+              this.setState({control14: val});
+              this.setState({iconText14:icon});
+              ValStatus=true;
+            }
+            this.RefreshOtherDropDownLists(14,val);
+          }
+          if(nam=="control15"){
+            if(val=="--Select--"){
+              this.setState({erValidationText: validationMessage});
+              this.setState({control15: "--Select--"});
+              this.setState({iconText15:AddDigitInCircle("15")});
+             
+            } else{
+              this.setState({erValidationText: ""});
+              this.setState({control15: val});
+              this.setState({iconText15:icon});
+              ValStatus=true;
+            }
+            this.RefreshOtherDropDownLists(15,val);
+          }
+          if(nam=="control16"){
+            if(val=="--Select--"){
+              this.setState({erValidationText: validationMessage});
+              this.setState({control16: "--Select--"});
+              this.setState({iconText16:AddDigitInCircle("16")});
+             
+            } else{
+              this.setState({erValidationText: ""});
+              this.setState({control16: val});
+              this.setState({iconText16:icon});
+              ValStatus=true;
+            }
+            this.RefreshOtherDropDownLists(16,val);
+          }
+
+
+          if(ValStatus==true){
+            this.setState({erValidationText: ""});
+          }
+
+          
+          
+          
+
+          if(this.state.control1!="--Select--" && this.state.control2!="--Select--" && this.state.control3!="--Select--" && this.state.control4!="--Select--" && this.state.control5!="--Select--" && this.state.control6!="--Select--" && this.state.control7!="--Select--" && this.state.control8!="--Select--" && this.state.control9!="--Select--" && this.state.control10!="--Select--" && this.state.control11!="--Select--" && this.state.control12!="--Select--" && this.state.control13!="--Select--" && this.state.control14!="--Select--" && this.state.control15!="--Select--" && this.state.control16!="--Select--" && val!="--Select--"){
+            this.setState({erValidationText: "The above fields are mandatory. Please select atleast one of the above options"});
+          } else{
+            this.setState({erValidationText: ""});
+            }
+
+          // if(ValStatus==false){
+            
+          // }
+
+          
+        }
+        
+
+        render() {
+          if(this.state.page==1){
+            return (
+              <div class='e1container'>
+                  {AddLogorow()}
+                  <div class="row epaddingbottom10">
+                    <div class="col-md-11 elRowPg1" >
+                      <label class='e1labelheaderPage1'>Integration Type</label>
+                      <select name='integrationType' value={this.state.integrationType} onChange={this.myChangeHandler} class='e1inputpg1'>
+                          <option value="0">--Select--</option>
+                          <option value="companyTemplate">Company Template</option>
+                          <option value="currentJourney">Current Journey</option>
+                      </select>
+                      <span class="clsValidation">{this.state.erIntegrationType}</span>
+                    </div>
+                    <div class="col-md-1"></div>
+                  </div>
+                  <div class="leadActivityBlock">{ShowLeadsActivity("Leads Activity Label", "leadsActivity", this.state.leadsActivity, this.myChangeHandler, this.state.fieldCss, this.state.erleadsActivity)}</div>
+                  
+                              
+                  <hr class='e1linecolor'/>
+                  {AddButtonBlock(this.handleCancelBtnClick,this.handleChangeNext,'Next','btn btn-primary btn-xs e1buttonleftpadding float-right', this.handleChangeBack, this.state.page)}
+                </div>
+            
+                
+            ) 
+          } else if(this.state.page==2){
+            return (
+              <div class='e1container'>
+                {AddLogorow()}
+                <div class="row epaddingbottom10  ">
+                  <div class="col-md-1 ">
+                  </div>
+                  <div class="col-md-4 SecondPageLabel">
+                    <label class="e1labelheaderPage1">Journey Source</label>
+                  </div>
+                  <div class="col-md-1 ">
+                  </div>
+                  <div class="col-md-4 SecondPageLabel">
+                    <label class="e1labelheaderPage1">Hearsay</label>
+                  </div>
+                </div>
+                <div class="row epaddingbottom10  ">
+                  <div class="col-md-1 displayFlex">
+                  {this.state.iconText1}
+                  </div>
+                    {DropdownValues("control1", this.state.control1, this.myChangeHandler, "e1inputpg2", this.state.erControl1, this.state.ArrayList1)}
+                  <div class="col-md-1  displayFlex">
+                    {this.state.iconText5}
+                  </div>
+                    {DropdownValues("control5", this.state.control5, this.myChangeHandler, "e1inputpg2", this.state.erControl5, this.state.ArrayList5)}
+                </div>
+                <div class="row epaddingbottom10  ">
+                  <div class="col-md-1  displayFlex">
+                  {this.state.iconText2}
+                  </div>
+                    {DropdownValues("control2", this.state.control2, this.myChangeHandler, "e1inputpg2", this.state.erControl2, this.state.ArrayList2)}
+                  <div class="col-md-1  displayFlex">
+                    {this.state.iconText6}
+                  </div>
+                    {DropdownValues("control6", this.state.control6, this.myChangeHandler, "e1inputpg2", this.state.erControl6, this.state.ArrayList6)}
+                </div>
+                <div class="row epaddingbottom10  ">
+                  <div class="col-md-1  displayFlex">
+                  {this.state.iconText3}
+                  </div>
+                    {DropdownValues("control3", this.state.control3, this.myChangeHandler, "e1inputpg2", this.state.erControl3, this.state.ArrayList3)}
+                  <div class="col-md-1  displayFlex">
+                    {this.state.iconText7}
+                  </div>
+                    {DropdownValues("control7", this.state.control7, this.myChangeHandler, "e1inputpg2", this.state.erControl7, this.state.ArrayList7)}
+                </div>
+                <div class="row epaddingbottom10  ">
+                  <div class="col-md-1  displayFlex">
+                  {this.state.iconText4}
+                  </div>
+                    {DropdownValues("control4", this.state.control4, this.myChangeHandler, "e1inputpg2", this.state.erControl4, this.state.ArrayList4)}
+                  <div class="col-md-1  displayFlex">
+                    {this.state.iconText8}
+                  </div>
+                    {DropdownValues("control8", this.state.control8, this.myChangeHandler, "e1inputpg2", this.state.erControl8, this.state.ArrayList8)}
+                </div>
+                <div class="row epaddingbottom10  ">
+                  <div class="col-md-1 displayFlex">
+                  {this.state.iconText9}
+                  </div>
+                    {DropdownValues("control9", this.state.control9, this.myChangeHandler, "e1inputpg2", this.state.erControl9, this.state.ArrayList9)}
+                    <div class="col-md-1 displayFlex">
+                  {this.state.iconText13}
+                  </div>
+                    {DropdownValues("control13", this.state.control13, this.myChangeHandler, "e1inputpg2", this.state.erControl13, this.state.ArrayList13)}
+                </div>
+                <div class="row epaddingbottom10  ">
+                  <div class="col-md-1 displayFlex">
+                  {this.state.iconText10}
+                  </div>
+                    {DropdownValues("control10", this.state.control10, this.myChangeHandler, "e1inputpg2", this.state.erControl10, this.state.ArrayList10)}
+                    <div class="col-md-1 displayFlex">
+                  {this.state.iconText14}
+                  </div>
+                    {DropdownValues("control14", this.state.control14, this.myChangeHandler, "e1inputpg2", this.state.erControl14, this.state.ArrayList14)}
+                </div>
+                <div class="row epaddingbottom10  ">
+                  <div class="col-md-1 displayFlex">
+                  {this.state.iconText11}
+                  </div>
+                    {DropdownValues("control11", this.state.control11, this.myChangeHandler, "e1inputpg2", this.state.erControl11, this.state.ArrayList11)}
+                    <div class="col-md-1 displayFlex">
+                  {this.state.iconText15}
+                  </div>
+                    {DropdownValues("control15", this.state.control15, this.myChangeHandler, "e1inputpg2", this.state.erControl15, this.state.ArrayList15)}
+                </div>
+                <div class="row epaddingbottom10  ">
+                  <div class="col-md-1 displayFlex">
+                  {this.state.iconText12}
+                  </div>
+                    {DropdownValues("control12", this.state.control12, this.myChangeHandler, "e1inputpg2", this.state.erControl12, this.state.ArrayList12)}
+                    <div class="col-md-1 displayFlex">
+                  {this.state.iconText16}
+                  </div>
+                    {DropdownValues("control16", this.state.control16, this.myChangeHandler, "e1inputpg2", this.state.erControl16, this.state.ArrayList16)}
+                </div>
+                <div class="row epaddingbottom10  ">
+                  <div class="col-md-10 clsValidation marginTop12px" style={{"text-align":"center"}}>
+                  {this.state.erValidationText}
+                  </div>
+                  <div class="col-md-2">
+                  
+                  </div>
+                </div>
+                <hr class='e1linecolor'/>
+                  {AddButtonBlock(this.handleCancelBtnClick,this.handleChangeNext,'Done','btn btn-primary btn-xs e1buttonleftpadding float-right', this.handleChangeBack, this.state.page)}
+                </div>
+            
+                
+            ) 
+          } else if(this.state.page==3){
+            return (
+              <div class='e1container'>
+                {AddLogorow()}
+
+                <div class="row epaddingbottom10">
+                  <div class="col-md-11 elRowPg1">
+                    <div><label class="e1labelheaderPage1">DATA EXTENSION TEMPLATES (NEW)</label></div>
+                    <div>Birth Date </div>
+                    <div>First Name </div>
+                    <div>Email </div>
+                  </div>
+                  <div class="col-md-1">
+
+                  </div>
+                </div>
+
+                
+                <hr class='e1linecolor'/>
+                  {AddButtonBlock(this.handleCancelBtnClick,this.handleChangeNext,'Done','btn btn-primary btn-xs e1buttonleftpadding float-right', this.handleChangeBack, this.state.page)}
+                </div>
+            
+                
+            ) 
+          }
+                 
+        }
+      }
+
+      
+
+      ReactDOM.render(<HearsayPage1 />, document.getElementById('mydiv'))
+    </script>
+  </body>
 </html>
