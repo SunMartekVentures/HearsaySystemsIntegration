@@ -534,7 +534,7 @@ var data = '<?xml version="1.0" encoding="UTF-8"?>'
 axios({
 			          method: 'POST',
 			          url: 'https://dataintapicall.herokuapp.com/createde', 
-			          data: data
+			          data: data,
 			          headers: {'Content-Type': 'text/xml' }
                 })
                   .then(function (response) {		  
