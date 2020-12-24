@@ -307,14 +307,11 @@ export default class SfmcApiHelper
     <s:Header>
         <a:Action s:mustUnderstand="1">Create</a:Action>
         <a:To s:mustUnderstand="1">"https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.soap.marketingcloudapis.com/Service.asmx"</a:To>
-        <fueloauth xmlns="http://exacttarget.com">{{oauthtoken}}</fueloauth>
+        <fueloauth xmlns="http://exacttarget.com">{{oauthAccessToken}}</fueloauth>
     </s:Header>
     <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
         <CreateRequest xmlns="http://exacttarget.com/wsdl/partnerAPI">
             <Objects xsi:type="DataExtension">
-                <Client>
-                    <ID></ID>
-                </Client>
                 <CustomerKey>postman_demographics</CustomerKey>
                 <Name>{{customeruniqueid}}</Name>
                 <IsSendable>true</IsSendable>
