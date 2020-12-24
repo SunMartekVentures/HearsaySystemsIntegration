@@ -295,93 +295,60 @@ export default class SfmcApiHelper
         //Utils.logInfo("Loading sample data into Data Extension: " + self._deExternalKey);
         Utils.logInfo("Using OAuth token: " + oauthAccessToken);
 	    
-	    var data = '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">'
- +'\n  <soap:Header>'
-+'\n      <wsa:Action>Create</wsa:Action>'
-+'\n      <wsa:MessageID>urn:uuid:168bbf3d-394e-4656-ae57-2e96b4b568ae</wsa:MessageID>'
-+'\n     <wsa:ReplyTo>'
-+'\n         <wsa:Address>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:Address>'
-+'\n      </wsa:ReplyTo>'
-+'\n      <wsa:To>https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.soap.marketingcloudapis.com/Service.asmx</wsa:To>'
-+'\n      <wsse:Security soap:mustUnderstand="1">'
-+'\n         <wsse:UsernameToken wsu:Id="SecurityToken-d19fb7b0-ec6d-49a8-8fd3-796819ec7306">'
-+'\n            <wsse:Username>sivaorkestra</wsse:Username>'
-+'\n            <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">pashtekjuly2120#!</wsse:Password>'
-+'\n         </wsse:UsernameToken>'
-+'\n      </wsse:Security>'
-+'\n   </soap:Header>'
-+'\n   <soap:Body>'
-+'\n      <CreateRequest xmlns="http://exacttarget.com/wsdl/partnerAPI">'
-+'\n         <Options>'
-+'\n            <SaveOptions/>'
-+'\n         </Options>'
-+'\n         <Objects xsi:type="DataExtension">'
-+'\n            <PartnerKey xsi:nil="true"/>'
-+'\n            <ObjectID xsi:nil="true"/>'
-+'\n            <CustomerKey>02_2010-02-26-08_42_30_762_851628611</CustomerKey>'
-+'\n            <Name>02_2010-02-26-08_42_30_762_851628611</Name>'
-+'\n            <Description>02_2010-02-26-08_42_30_762_851628611</Description>'
-+'\n            <IsSendable>true</IsSendable>'
-+'\n            <IsTestable>false</IsTestable>'
-+'\n            <DataRetentionPeriodLength>48</DataRetentionPeriodLength>'
-+'\n            <DataRetentionPeriodUnitOfMeasure>0</DataRetentionPeriodUnitOfMeasure>'
-+'\n            <RowBasedRetention>false</RowBasedRetention>'
-+'\n            <ResetRetentionPeriodOnImport>true</ResetRetentionPeriodOnImport>'
-+'\n            <DeleteAtEndOfRetentionPeriod>false</DeleteAtEndOfRetentionPeriod>'
- +'\n           <Fields>'
-+'\n               <Field>'
-+'\n                  <PartnerKey xsi:nil="true"/>'
-+'\n                  <ObjectID xsi:nil="true"/>'
-+'\n                  <Name>D_Body</Name>'
-+'\n                  <Description>D_Body</Description>'
-+'\n                  <IsRequired>true</IsRequired>'
- +'\n                 <IsPrimaryKey>false</IsPrimaryKey>'
-+'\n                  <FieldType>Text</FieldType>'
-+'\n                  <DefaultValue></DefaultValue>'
-+'\n               </Field>'
-+'\n               <Field>'
-+'\n                  <PartnerKey xsi:nil="true"/>'
-+'\n                  <ObjectID xsi:nil="true"/>'
-+'\n                  <Name>D_F1</Name>'
-+'\n                  <Description>D_F1</Description>'
-+'\n                  <MaxLength>100</MaxLength>'
- +'\n                 <IsRequired>true</IsRequired>'
-+'\n                  <IsPrimaryKey>false</IsPrimaryKey>'
-+'\n                  <FieldType>Text</FieldType>'
-+'\n                  <DefaultValue></DefaultValue>'
- +'\n              </Field>'
-+'\n               <Field>'
- +'\n                 <PartnerKey xsi:nil="true"/>'
-+'\n                  <ObjectID xsi:nil="true"/>'
-+'\n                  <Name>D_F2</Name>'
-+'\n                  <Description>D_F2</Description>'
-+'\n                  <MaxLength>100</MaxLength>'
-+'\n                  <IsRequired>true</IsRequired>'
-+'\n                  <IsPrimaryKey>false</IsPrimaryKey>'
-+'\n                  <FieldType>Text</FieldType>'
-+'\n                  <DefaultValue></DefaultValue>'
-+'\n               </Field>'               
-+'\n            </Fields>'
-+'\n            <SendableDataExtensionField>'
-+'\n               <PartnerKey xsi:nil="true"/>'
-+'\n               <ObjectID xsi:nil="true"/>'
-+'\n               <Name>Email Address</Name>'
-+'\n            </SendableDataExtensionField>'
-+'\n            <SendableSubscriberField>'
-+'\n               <Name>Email Address</Name>'
-+'\n            </SendableSubscriberField>'
-+'\n         </Objects>'
-+'\n      </CreateRequest>'
-+'\n   </soap:Body>'
-+'\n </soap:Envelope>';
-
+	    
         return new Promise<any>((resolve, reject) =>
         {
 			let headers = {
                 'Content-Type': 'text/xml'
             };
 			
-            axios.post('https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.soap.marketingcloudapis.com/Service.asmx', data, {"headers" : headers})
+            axios.post('https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.soap.marketingcloudapis.com/Service.asmx', <?xml version="1.0" encoding="UTF-8"?>
+<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+    <s:Header>
+        <a:Action s:mustUnderstand="1">Create</a:Action>
+        <a:To s:mustUnderstand="1">"https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.soap.marketingcloudapis.com/Service.asmx"</a:To>
+        <fueloauth xmlns="http://exacttarget.com">{{oauthtoken}}</fueloauth>
+    </s:Header>
+    <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <CreateRequest xmlns="http://exacttarget.com/wsdl/partnerAPI">
+            <Objects xsi:type="DataExtension">
+                <Client>
+                    <ID></ID>
+                </Client>
+                <CustomerKey>postman_demographics</CustomerKey>
+                <Name>{{customeruniqueid}}</Name>
+                <IsSendable>true</IsSendable>
+                <SendableDataExtensionField>
+                    <CustomerKey>SubscriberKey</CustomerKey>
+                    <Name>SubscriberKey</Name>
+                    <FieldType>Text</FieldType>
+                </SendableDataExtensionField>
+                <SendableSubscriberField>
+                    <Name>Subscriber Key</Name>
+                    <Value></Value>
+                </SendableSubscriberField>
+                <Fields>
+                    <Field>
+                        <CustomerKey>SubscriberKey</CustomerKey>
+                        <Name>SubscriberKey</Name>
+                        <FieldType>Text</FieldType>
+                        <MaxLength>50</MaxLength>
+                        <IsRequired>true</IsRequired>
+                        <IsPrimaryKey>true</IsPrimaryKey>
+                    </Field>
+                   <Field>
+                        <CustomerKey>First_Name</CustomerKey>
+                        <Name>First_Name</Name>
+                        <FieldType>Text</FieldType>
+                        <MaxLength>50</MaxLength>
+                       <IsRequired>false</IsRequired>
+                        <IsPrimaryKey>false</IsPrimaryKey>
+                    </Field>
+              </Fields>
+           </Objects>
+        </CreateRequest>
+  </s:Body>
+</s:Envelope>, {"headers" : headers})
 			.then(function (response) {
 				Utils.logInfo(response.data);
 			})
