@@ -298,54 +298,12 @@ export default class SfmcApiHelper
 	    
         return new Promise<any>((resolve, reject) =>
         {
-			let headers = {
+		let soapData = '<?xml version="1.0" encoding="UTF-8"?><s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"><s:Header><a:Action s:mustUnderstand="1">Create</a:Action><a:To s:mustUnderstand="1">"https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.soap.marketingcloudapis.com/Service.asmx"</a:To><fueloauth xmlns="http://exacttarget.com">{{oauthAccessToken}}</fueloauth></s:Header><s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><CreateRequest xmlns="http://exacttarget.com/wsdl/partnerAPI"><Objects xsi:type="DataExtension"><CustomerKey>postman_demographics</CustomerKey><Name>{{customeruniqueid}}</Name><IsSendable>true</IsSendable><SendableDataExtensionField><CustomerKey>SubscriberKey</CustomerKey><Name>SubscriberKey</Name><FieldType>Text</FieldType></SendableDataExtensionField><SendableSubscriberField><Name>Subscriber Key</Name><Value></Value></SendableSubscriberField><Fields><Field><CustomerKey>SubscriberKey</CustomerKey><Name>SubscriberKey</Name><FieldType>Text</FieldType><MaxLength>50</MaxLength><IsRequired>true</IsRequired><IsPrimaryKey>true</IsPrimaryKey></Field><Field><CustomerKey>First_Name</CustomerKey><Name>First_Name</Name><FieldType>Text</FieldType><MaxLength>50</MaxLength><IsRequired>false</IsRequired><IsPrimaryKey>false</IsPrimaryKey></Field></Fields></Objects></CreateRequest></s:Body></s:Envelope>'
+		let headers = {
                 'Content-Type': 'text/xml'
             };
 			
-            axios.post('https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.soap.marketingcloudapis.com/Service.asmx', <?xml version="1.0" encoding="UTF-8"?>
-<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
-    <s:Header>
-        <a:Action s:mustUnderstand="1">Create</a:Action>
-        <a:To s:mustUnderstand="1">"https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.soap.marketingcloudapis.com/Service.asmx"</a:To>
-        <fueloauth xmlns="http://exacttarget.com">{{oauthAccessToken}}</fueloauth>
-    </s:Header>
-    <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-        <CreateRequest xmlns="http://exacttarget.com/wsdl/partnerAPI">
-            <Objects xsi:type="DataExtension">
-                <CustomerKey>postman_demographics</CustomerKey>
-                <Name>{{customeruniqueid}}</Name>
-                <IsSendable>true</IsSendable>
-                <SendableDataExtensionField>
-                    <CustomerKey>SubscriberKey</CustomerKey>
-                    <Name>SubscriberKey</Name>
-                    <FieldType>Text</FieldType>
-                </SendableDataExtensionField>
-                <SendableSubscriberField>
-                    <Name>Subscriber Key</Name>
-                    <Value></Value>
-                </SendableSubscriberField>
-                <Fields>
-                    <Field>
-                        <CustomerKey>SubscriberKey</CustomerKey>
-                        <Name>SubscriberKey</Name>
-                        <FieldType>Text</FieldType>
-                        <MaxLength>50</MaxLength>
-                        <IsRequired>true</IsRequired>
-                        <IsPrimaryKey>true</IsPrimaryKey>
-                    </Field>
-                   <Field>
-                        <CustomerKey>First_Name</CustomerKey>
-                        <Name>First_Name</Name>
-                        <FieldType>Text</FieldType>
-                        <MaxLength>50</MaxLength>
-                       <IsRequired>false</IsRequired>
-                        <IsPrimaryKey>false</IsPrimaryKey>
-                    </Field>
-              </Fields>
-           </Objects>
-        </CreateRequest>
-  </s:Body>
-</s:Envelope>, {"headers" : headers})
+            axios.post('https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.soap.marketingcloudapis.com/Service.asmx', soapData, {"headers" : headers})
 			.then(function (response) {
 				Utils.logInfo(response.data);
 			})
