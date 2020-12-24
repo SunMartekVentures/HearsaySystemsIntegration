@@ -298,7 +298,47 @@ export default class SfmcApiHelper
 	    
         return new Promise<any>((resolve, reject) =>
         {
-		let soapData = '<?xml version="1.0" encoding="UTF-8"?><s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"><s:Header><a:Action s:mustUnderstand="1">Create</a:Action><a:To s:mustUnderstand="1">"webservice.s11.exacttarget.com/Service.asmx"</a:To><fueloauth xmlns="http://exacttarget.com">{{oauthAccessToken}}</fueloauth></s:Header><s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><CreateRequest xmlns="http://exacttarget.com/wsdl/partnerAPI"><Objects xsi:type="DataExtension"><CustomerKey>postman_demographics</CustomerKey><Name>postman_demographics</Name><IsSendable>true</IsSendable><SendableDataExtensionField><CustomerKey>SubscriberKey</CustomerKey><Name>SubscriberKey</Name><FieldType>Text</FieldType></SendableDataExtensionField><SendableSubscriberField><Name>Subscriber Key</Name><Value></Value></SendableSubscriberField><Fields><Field><CustomerKey>SubscriberKey</CustomerKey><Name>SubscriberKey</Name><FieldType>Text</FieldType><MaxLength>50</MaxLength><IsRequired>true</IsRequired><IsPrimaryKey>true</IsPrimaryKey></Field><Field><CustomerKey>First_Name</CustomerKey><Name>First_Name</Name><FieldType>Text</FieldType><MaxLength>50</MaxLength><IsRequired>false</IsRequired><IsPrimaryKey>false</IsPrimaryKey></Field></Fields></Objects></CreateRequest></s:Body></s:Envelope>'
+		let soapData = '<soapenv:Body>
+    <CreateRequest xmlns="http://exacttarget.com/wsdl/partnerAPI">
+        <Options></Options>
+        <Objects xmlns:ns1="http://exacttarget.com/wsdl/partnerAPI" xsi:type="ns1:DataExtension">
+            <CustomerKey>DataExtensionFromAPI</CustomerKey>
+            <Name>DataExtensionFromAPI</Name>
+            <IsSendable>true</IsSendable>
+            <SendableDataExtensionField>
+                <CustomerKey>EmailAddress_Key</CustomerKey>
+                <Name>EmailAddress</Name>
+                <FieldType>EmailAddress</FieldType>
+            </SendableDataExtensionField>
+            <SendableSubscriberField>
+                <Name>Email Address</Name>
+                <Value></Value>
+            </SendableSubscriberField>
+            <Fields>
+                <Field>
+                    <CustomerKey>EmailAddress_Key</CustomerKey>
+                    <Name>EmailAddress</Name>
+                    <FieldType>EmailAddress</FieldType>
+                </Field>
+                <Field>
+                    <CustomerKey>ChannelUser_Key</CustomerKey>
+                    <Name>ChannelUser</Name>
+                    <FieldType>Text</FieldType>
+                </Field>
+                <Field>
+                    <CustomerKey>ChannelUser_EmailAddress_Key</CustomerKey>
+                    <Name>ChannelUser_EmailAddress</Name>
+                    <FieldType>EmailAddress</FieldType>
+                </Field>
+                <Field>
+                    <CustomerKey>Demographic_Address_Key</CustomerKey>
+                    <Name>Demographic_Address</Name>
+                    <FieldType>Text</FieldType>
+                </Field>
+            </Fields>
+        </Objects>
+    </CreateRequest>
+</soapenv:Body>'
 		let headers = {
                 'Content-Type': 'text/xml'
             };
