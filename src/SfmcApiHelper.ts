@@ -313,7 +313,7 @@ export default class SfmcApiHelper
                 errorMsg += "\nStatus: " + error.response ? error.response.status : "<None>";
                 errorMsg += "\nResponse data: " + error.response.data ? Utils.prettyPrintJson(JSON.stringify(error.response.data)) : "<None>";
                 Utils.logError(errorMsg);
-		    Utils.prettyPrintJson(JSON.stringify(error));
+		    Utils.logError(error.response.data);
 
                 reject(errorMsg);
 			});
