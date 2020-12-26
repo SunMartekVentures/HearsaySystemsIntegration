@@ -292,6 +292,7 @@ export default class SfmcApiHelper
     {
         let self = this;
         Utils.logInfo("createDataExtensionHelper method is called.");
+	    Utils.logInfo("request body for data extension creation = " + req.body);
         //Utils.logInfo("Loading sample data into Data Extension: " + self._deExternalKey);
         Utils.logInfo("Using OAuth token: " + oauthAccessToken);
 	    
