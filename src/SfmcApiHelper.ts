@@ -262,7 +262,7 @@ export default class SfmcApiHelper
         
         public createDataExtension(req: express.Request, res: express.Response)
     {
-        Utils.logInfo("request body = " + req.body);
+        Utils.logInfo("request body for data extension creation = " + req.body);
         let self = this;
         let sessionId = req.session.id;
         Utils.logInfo("loadData entered. SessionId = " + sessionId);
@@ -288,11 +288,10 @@ export default class SfmcApiHelper
     }
 
     
-    private createDataExtensionHelper(oauthAccessToken: string, jsonData: string) : Promise<any>    
+    private createDataExtensionHelper(oauthAccessToken: string, customerUniqueID: string) : Promise<any>    
     {
         let self = this;
         Utils.logInfo("createDataExtensionHelper method is called.");
-	    Utils.logInfo("request body for data extension creation = " + req.body);
         //Utils.logInfo("Loading sample data into Data Extension: " + self._deExternalKey);
         Utils.logInfo("Using OAuth token: " + oauthAccessToken);
 	    
@@ -316,8 +315,8 @@ export default class SfmcApiHelper
 +'            <Objects xsi:type="DataExtension">'
 +'                <PartnerKey xsi:nil="true"/>'
 +'                <ObjectID xsi:nil="true"/>'
-+'                <CustomerKey>SivaDataExtension</CustomerKey>'
-+'                <Name>SivaDataExtension</Name>'
++'                <CustomerKey>'+customerUniqueID+'</CustomerKey>'
++'                <Name>'+customerUniqueID+'</Name>'
 +'                <IsSendable>false</IsSendable>'
 +'                <Fields>'
 +'                    <Field>'
