@@ -662,7 +662,9 @@ axios({
 	    
              
 	      if(this.state.page==1){
-		  let customerUniqueId = this.state.customeruniqueid;
+		  let customerUniqueId = {
+		  CustomerUniqueID : this.state.customeruniqueid
+		  };
 	      let jsonObject = [
                 {
                     keys: {
