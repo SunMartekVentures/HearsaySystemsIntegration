@@ -476,7 +476,7 @@ axios({
 					  data : customeruniqueid
                 })
                   .then(function (response) {		  
-					console.log("Data extension created dynamically");
+					console.log("Data extension created dynamically " + response.data);
                   })
 				  .catch(function (error) {
 					console.log(error);
