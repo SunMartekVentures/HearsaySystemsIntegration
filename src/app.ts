@@ -31,7 +31,7 @@ app.use(helmet());
 // Allow X-Frame from Marketing Cloud. Sets "X-Frame-Options: ALLOW-FROM http://exacttarget.com".
 app.use(helmet.frameguard({
     action: 'allow-from',
-    domain: 'https://mc.s11.exacttarget.com'
+    domain: 'https://exacttarget.com'
   }))
 
 app.use(session({
