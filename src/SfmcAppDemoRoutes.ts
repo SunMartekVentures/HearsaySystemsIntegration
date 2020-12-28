@@ -5,7 +5,7 @@ import express = require("express");
 import SfmcApiHelper from './SfmcApiHelper';
 import Utils from './Utils';
 
-export default class SfmcApiDemoRoutes
+export default class SfmcAppDemoRoutes
 {
     // Instance variables
     private _apiHelper = new SfmcApiHelper();
