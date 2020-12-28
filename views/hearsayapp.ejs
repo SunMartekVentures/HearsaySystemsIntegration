@@ -486,16 +486,7 @@ axios({
         constructor(props) {
           super(props);
 		  
-		  axios({
-			          method: 'POST',
-			          url: 'https://dataintapicall.herokuapp.com/login',
-                })
-                  .then(function (response) {		  
-					console.log("Login Done Successfully");
-                  })
-				  .catch(function (error) {
-					console.log(error);
-					});
+		  
 		  
           this.state = {
             orgid: '',
