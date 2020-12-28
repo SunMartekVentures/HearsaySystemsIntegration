@@ -54,9 +54,9 @@ export default class SfmcAppDemoRoutes
             req.session.refreshTokenFromJWT = req.session.decodedJWT.request.rest.refreshToken;
             Utils.logInfo("refreshToken from JWT = \n" + req.session.refreshTokenFromJWT);
 
-            let redirectUrl = req.session.decodedJWT.request.application.redirectUrl;
-            Utils.logInfo("Redirecting to: \n" + JSON.stringify(redirectUrl));
-            res.redirect(redirectUrl); // redirect to MC app landing page
+            //let redirectUrl = req.session.decodedJWT.request.application.redirectUrl;
+            //Utils.logInfo("Redirecting to: \n" + JSON.stringify(redirectUrl));
+            //res.redirect(redirectUrl); // redirect to MC app landing page
         }
         catch(error)
         {
@@ -96,6 +96,7 @@ export default class SfmcAppDemoRoutes
     public getOAuthAccessToken(req: express.Request, res: express.Response)
     {
         let self = this;
+        self.login(req, res);
         let sessionId = req.session.id;
         let clientId = process.env.DF18DEMO_CLIENTID;
         let clientSecret = process.env.DF18DEMO_CLIENTSECRET;
