@@ -120,8 +120,8 @@ export default class SfmcApiHelper
     {
         Utils.logInfo("request body = " + JSON.stringify(req.body));
         let self = this;
-        let sessionId = req.session.id;
-        Utils.logInfo("loadData entered. SessionId = " + sessionId);
+        //let sessionId = req.session.id;
+        //Utils.logInfo("loadData entered. SessionId = " + sessionId);
 
         if (req.session.oauthAccessToken)
         {
