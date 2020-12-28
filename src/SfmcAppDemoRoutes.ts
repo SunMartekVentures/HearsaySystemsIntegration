@@ -37,7 +37,7 @@ export default class SfmcAppDemoRoutes
         req.session.oauthAccessToken = "";
         req.session.oauthAccessTokenExpiry = "";
 
-        // Decode JWT with the secret from environment variable.
+        // Decode JWT with the secret from environment variable.ggg
         try
         {
             // Decode JWT
