@@ -73,13 +73,24 @@ app.post('/loaddata', function(req, res) {
 
 app.post('/loaddatafortemp', function(req, res) {
   apiDemoRoutes.loadDataForPage2(req, res); });
+
+app.post('/createde', function(req, res) {
+  apiDemoRoutes.createDataExtension(req, res); });
     
 // Routes: called when this demo app runs as a Marketing Cloud app in an IFRAME in the Marketing Cloud web UI
 app.post('/appdemoauthtoken', function(req, res) {
   appDemoRoutes.getOAuthAccessToken(req, res); });
 
-app.post('/createde', function(req, res) {
-  apiDemoRoutes.createDataExtension(req, res); });
+app.post('/loaddataforapp', function(req, res) {
+  appDemoRoutes.loadDataForApp(req, res); });
+
+app.post('/loaddatafortempapp', function(req, res) {
+  appDemoRoutes.loadDataForPage2App(req, res); });
+
+app.post('/createdeforapp', function(req, res) {
+  appDemoRoutes.createDataExtensionForApp(req, res); });
+
+
 
 // Marketing Cloud POSTs the JWT to the '/login' endpoint when a user logs in
 app.post('/login', function(req, res) {
