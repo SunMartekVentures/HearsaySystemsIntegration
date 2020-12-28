@@ -96,10 +96,14 @@ export default class SfmcAppDemoRoutes
     public getOAuthAccessToken(req: express.Request, res: express.Response)
     {
         let self = this;
-        self.login(req, res);
         let sessionId = req.session.id;
         let clientId = process.env.DF18DEMO_CLIENTID;
         let clientSecret = process.env.DF18DEMO_CLIENTSECRET;
+        
+        //console.log('here we are cid' + clientId);
+        //console.log('here we are cs' + clientSecret);
+        
+        
 
         req.session.oauthAccessToken = "";
         req.session.oauthAccessTokenExpiry = "";
@@ -108,27 +112,23 @@ export default class SfmcAppDemoRoutes
 
         if (clientId && clientSecret)
         {
-            if (req.session.refreshTokenFromJWT)
-            {
-                Utils.logInfo("Getting OAuth Access Token with ClientID and ClientSecret from in environment variables and refreshToken: " + req.session.refreshTokenFromJWT);
-    
-                self._apiHelper.getOAuthAccessTokenFromRefreshToken(clientId, clientSecret, req.session.refreshTokenFromJWT)
-                .then((result) => {
-                    req.session.oauthAccessToken = result.oauthAccessToken;
-                    req.session.oauthAccessTokenExpiry = result.oauthAccessTokenExpiry;
-                    res.status(result.status).send(result.statusText);
-                })
-                .catch((err) => {
-                    res.status(500).send(err);
-                });
-            }
-            else
-            {
-                // error
-                let errorMsg = "refreshToken *not* found in session.\nCheck the '/login' URL specified in your\nMarketing Cloud App configuration."; 
-                Utils.logError(errorMsg);
-                res.status(500).send(errorMsg);
-            }
+            Utils.logInfo("Getting OAuth Access Token with ClientID and ClientSecret from in environment variables.");
+			Utils.logInfo("This was called from axios reactjs");
+            
+            // set the desired timeout in options
+            
+
+            
+             self._apiHelper.getOAuthAccessToken(clientId, clientSecret)           
+            .then((result) => {
+                req.session.oauthAccessToken = result.oauthAccessToken;
+                req.session.oauthAccessTokenExpiry = result.oauthAccessTokenExpiry;
+                res.status(result.status).send(result.statusText);
+                req.setTimeout(0, ()=>{});
+		})
+            .catch((err) => {
+                res.status(500).send(err);
+            });
         }
         else
         {
@@ -137,5 +137,8 @@ export default class SfmcAppDemoRoutes
             Utils.logError(errorMsg);
             res.status(500).send(errorMsg);
         }
-    }
+		
+		//Utils.logInfo("called for data extension creation");
+		//self.loadData(req, res);
+	}
 }
