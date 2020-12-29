@@ -267,16 +267,16 @@ export default class SfmcApiHelper
         public createDataExtension(req: express.Request, res: express.Response)
     {
 	
-        Utils.logInfo("request body for data extension creation = " + req.body.customeruniqueid);
+        Utils.logInfo("request body for data extension creation = " + JSON.stringify(req.body.templateName));
         let self = this;
         let sessionId = req.session.id;
         Utils.logInfo("loadData entered. SessionId = " + sessionId);
-	    let customerUniqueID = req.body.customeruniqueid;
+	    let templateName = JSON.stringify(req.body.templateName);
 
         if (this._oauthToken!= "")
         {
-            Utils.logInfo("Create Data extension method called and Condition satisfied: " + customerUniqueID);
-            self.createDataExtensionHelper(this._oauthToken, customerUniqueID)
+            Utils.logInfo("Create Data extension method called and Condition satisfied: " + );
+            self.createDataExtensionHelper(this._oauthToken, templateName)
             .then((result) => {
                 res.status(result.status).send(result.statusText);
             })
@@ -294,7 +294,7 @@ export default class SfmcApiHelper
     }
 
     
-    private createDataExtensionHelper(oauthAccessToken: string, customerUniqueID: string) : Promise<any>    
+    private createDataExtensionHelper(oauthAccessToken: string, templateName: string) : Promise<any>    
     {
         let self = this;
         Utils.logInfo("createDataExtensionHelper method is called.");
@@ -321,8 +321,8 @@ export default class SfmcApiHelper
 +'            <Objects xsi:type="DataExtension">'
 +'                <PartnerKey xsi:nil="true"/>'
 +'                <ObjectID xsi:nil="true"/>'
-+'                <CustomerKey>'+customerUniqueID+'</CustomerKey>'
-+'                <Name>'+customerUniqueID+'</Name>'
++'                <CustomerKey>'+templateName+'</CustomerKey>'
++'                <Name>'+templateName+'</Name>'
 +'                <IsSendable>false</IsSendable>'
 +'                <Fields>'
 +'                    <Field>'
