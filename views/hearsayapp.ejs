@@ -473,6 +473,7 @@
 axios({
 			          method: 'POST',
 			          url: 'https://dataintapicall.herokuapp.com/createdeforapp',
+					  data: customeruniqueid
                 })
                   .then(function (response) {		  
 					console.log("Data extension created dynamically");
