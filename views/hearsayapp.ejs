@@ -444,8 +444,7 @@
                   .then(function (response) {
                   //handle success
                   //return response;	
-					console.log(response.data);
-							  
+					console.log(response.data);							  
                   });
 	}
 	
@@ -622,6 +621,7 @@ axios({
         }
 
         handleChangeNext(event) {
+		var authtoken;
           
           if(this.state.page==3){
 
@@ -639,6 +639,7 @@ axios({
 			if(this.state.page==2){
 			
 			var templateName = this.state.templatename;
+			console.log("Template Name :" + templateName);
 			
             var DataConfig=[
 	    
@@ -661,13 +662,12 @@ axios({
 	    	}
 	    ];
 		
-		loaddataforpage2(DataConfig, templateName);
+		loaddataforpage2(DataConfig, authtoken, templateName);
 	    }
 	    
 	    
              
 	      if(this.state.page==1){
-		  let customerUniqueId = this.state.customeruniqueid;
 	      let jsonObject = [
                 {
                     keys: {
@@ -691,12 +691,10 @@ axios({
 					var responseData = response.data;
 					var authtoken = JSON.parse(responseData.replace('OK','')).access_token;
 		  
-					console.log(JSON.parse(responseData.replace('OK','')).access_token);
-					console.log(jsonObject.values.cuid);
-					console.log("customer Unique ID :" + customerUniqueId);
-					loaddata(jsonObject, authtoken);
-					console.log("Before createDE function ");
-					
+					//console.log(JSON.parse(responseData.replace('OK','')).access_token);
+					//console.log(jsonObject.values.cuid);
+					loaddata(jsonObject);
+					//console.log("Before createDE function ");					
 					console.log("authentication token obtained and row has been created");
 		  
                   })
