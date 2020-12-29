@@ -11,6 +11,7 @@ export default class SfmcAppDemoRoutes
 {
     // Instance variables
     private _apiHelper = new SfmcApiHelper();
+	
 
     /**
      * login: called by Marketing Cloud when hosted app is launched. Decodes JWT in BODY passed by Marketing Cloud.
@@ -124,7 +125,7 @@ export default class SfmcAppDemoRoutes
                 req.session.oauthAccessToken = result.oauthAccessToken;
                 req.session.oauthAccessTokenExpiry = result.oauthAccessTokenExpiry;
                 res.status(result.status).send(result.statusText);
-                req.setTimeout(0, ()=>{});
+                //req.setTimeout(0, ()=>{});
 		})
             .catch((err) => {
                 res.status(500).send(err);
