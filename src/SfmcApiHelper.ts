@@ -275,7 +275,7 @@ export default class SfmcApiHelper
 
         if (this._oauthToken!= "")
         {
-            Utils.logInfo("Create Data extension method called and Condition satisfied: " + );
+            Utils.logInfo("Create Data extension method called and Condition satisfied: " + templateName );
             self.createDataExtensionHelper(this._oauthToken, templateName)
             .then((result) => {
                 res.status(result.status).send(result.statusText);
