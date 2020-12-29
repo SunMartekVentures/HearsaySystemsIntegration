@@ -127,10 +127,10 @@ export default class SfmcApiHelper
 	    //Utils.logInfo("Using OAuth token: " + req.session.oauthAccessToken);
 		Utils.logInfo("Getting the accesstoken in a object's variable "+ this._oauthToken);
 
-        if (req.session.oauthAccessToken)
+        if (this._oauthToken)
         {
-            Utils.logInfo("Using OAuth token: " + req.session.oauthAccessToken);
-            self.loadDataHelper(req.session.oauthAccessToken, JSON.stringify(req.body))
+            //Utils.logInfo("Using OAuth token: " + req.session.oauthAccessToken);
+            self.loadDataHelper(this._oauthToken, JSON.stringify(req.body))
             .then((result) => {
                 res.status(result.status).send(result.statusText);
             })
