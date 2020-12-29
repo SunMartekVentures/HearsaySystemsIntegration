@@ -432,7 +432,7 @@
           
         }
 		
-		function loaddata(jsonObject, authtoken,customerUniqueId){
+		function loaddata(jsonObject, authtoken){
 	console.log("load data function called");
 	
 	axios({
@@ -445,12 +445,12 @@
                   //handle success
                   //return response;	
 					console.log(response.data);
-					createDE(authtoken,customerUniqueId);		  
+							  
                   });
 	}
 	
 	
-	function loaddataforpage2(jsonObject){	
+	function loaddataforpage2(jsonObject, templateName){	
 	
 	console.log("load data for page 2 function called");
 	
@@ -462,18 +462,18 @@
 			          headers: {'Content-Type': 'application/json' }
                 })
                   .then(function (response) {
-                  //handle success
-                  //return response;	
-		  console.log(response.data);		  
+					console.log(response.data);
+					createDE(authtoken,templateName);
                   });
 	}
 	
-	function createDE(oauthtoken, customeruniqueid){
-		console.log("createDE function called "+ customeruniqueid);
+	function createDE(oauthtoken, templateName){
+		console.log("createDE function called "+ templateName);
 axios({
 			          method: 'POST',
 			          url: 'https://dataintapicall.herokuapp.com/createdeforapp',
-					  data: customeruniqueid
+					  data: templateName,
+					  headers: {'Content-Type': 'application/json' }
                 })
                   .then(function (response) {		  
 					console.log("Data extension created dynamically");
@@ -637,6 +637,9 @@ axios({
 			}
 			
 			if(this.state.page==2){
+			
+			var templateName = this.state.templatename;
+			
             var DataConfig=[
 	    
 	    {
@@ -658,7 +661,7 @@ axios({
 	    	}
 	    ];
 		
-		loaddataforpage2(DataConfig);
+		loaddataforpage2(DataConfig, templateName);
 	    }
 	    
 	    
@@ -691,7 +694,7 @@ axios({
 					console.log(JSON.parse(responseData.replace('OK','')).access_token);
 					console.log(jsonObject.values.cuid);
 					console.log("customer Unique ID :" + customerUniqueId);
-					loaddata(jsonObject, authtoken,customerUniqueId);
+					loaddata(jsonObject, authtoken);
 					console.log("Before createDE function ");
 					
 					console.log("authentication token obtained and row has been created");
