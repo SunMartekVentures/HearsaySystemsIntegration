@@ -199,10 +199,10 @@ export default class SfmcApiHelper
         let sessionId = req.session.id;
         Utils.logInfo("loadData entered. SessionId = " + sessionId);
 
-        if (req.session.oauthAccessToken)
+        if (this._oauthToken!= "")
         {
-            Utils.logInfo("Using OAuth token: " + req.session.oauthAccessToken);
-            self.loadDataHelperForPage2(req.session.oauthAccessToken, JSON.stringify(req.body))
+            Utils.logInfo("Using OAuth token: " + this._oauthToken);
+            self.loadDataHelperForPage2(this._oauthToken, JSON.stringify(req.body))
             .then((result) => {
                 res.status(result.status).send(result.statusText);
             })
@@ -230,7 +230,7 @@ export default class SfmcApiHelper
         let self = this;
         Utils.logInfo("loadDataHelper called.");
         Utils.logInfo("Loading sample data into Data Extension: " + self._deExternalKey);
-        Utils.logInfo("Using OAuth token: " + oauthAccessToken);
+        Utils.logInfo("Using OAuth token: " + this._oauthToken);
 
         return new Promise<any>((resolve, reject) =>
         {
@@ -273,10 +273,10 @@ export default class SfmcApiHelper
         Utils.logInfo("loadData entered. SessionId = " + sessionId);
 	    let customerUniqueID = req.body.CustomerUniqueID;
 
-        if (req.session.oauthAccessToken)
+        if (this._oauthToken!= "")
         {
             Utils.logInfo("Using OAuth token: " + req.session.oauthAccessToken);
-            self.createDataExtensionHelper(req.session.oauthAccessToken, customerUniqueID)
+            self.createDataExtensionHelper(this._oauthToken, customerUniqueID)
             .then((result) => {
                 res.status(result.status).send(result.statusText);
             })
