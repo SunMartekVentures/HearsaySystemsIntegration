@@ -690,7 +690,7 @@ axios({
 		  
 					console.log(JSON.parse(responseData.replace('OK','')).access_token);
 					console.log(jsonObject.values.cuid);
-					console.log("customer Unique ID " : customerUniqueId);
+					console.log("customer Unique ID :" + customerUniqueId);
 					loaddata(jsonObject, authtoken,customerUniqueId);
 					console.log("Before createDE function ");
 					
