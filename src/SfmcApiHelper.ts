@@ -9,7 +9,7 @@ export default class SfmcApiHelper
     // Instance variables 
     private _deExternalKey = "OrgSetup";
     private _sfmcDataExtensionApiUrl = "https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.rest.marketingcloudapis.com/hub/v1/dataevents/key:" + this._deExternalKey + "/rowset";
-    private _oauthToken = null;
+    private _oauthToken;
     
     
     
@@ -158,13 +158,13 @@ export default class SfmcApiHelper
         let self = this;
         Utils.logInfo("loadDataHelper called.");
         Utils.logInfo("Loading sample data into Data Extension: " + self._deExternalKey);
-        Utils.logInfo("Using OAuth token: " + oauthAccessToken);
+        Utils.logInfo("Using OAuth token: " + this._oauthToken);
 
         return new Promise<any>((resolve, reject) =>
         {
             let headers = {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + oauthAccessToken
+                'Authorization': 'Bearer ' + this._oauthToken
             };
 
             // POST to Marketing Cloud Data Extension endpoint to load sample data in the POST body
