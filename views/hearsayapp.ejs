@@ -468,8 +468,7 @@
 	
 	function createDE(oauthtoken, templateName){
 		console.log("createDE function called "+ templateName);
-		parsedTemplateName = JSON.parse(templateName);
-		console.log("Parsed Template Name "+ templateName);
+		
 axios({
 			          method: 'POST',
 			          url: 'https://dataintapicall.herokuapp.com/createdeforapp',
@@ -640,7 +639,10 @@ axios({
 			
 			if(this.state.page==2){
 			
-			var templateName = this.state.templatename;
+			var templateName = 
+			{
+				templateName : this.state.templatename;
+			}
 			console.log("Template Name :" + templateName);
 			
             var DataConfig=[
