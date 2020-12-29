@@ -9,7 +9,7 @@ export default class SfmcApiHelper
     // Instance variables 
     private _deExternalKey = "OrgSetup";
     private _sfmcDataExtensionApiUrl = "https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.rest.marketingcloudapis.com/hub/v1/dataevents/key:" + this._deExternalKey + "/rowset";
-    private _oauthToken = "";
+    private _oauthToken = null;
     
     
     
@@ -127,7 +127,7 @@ export default class SfmcApiHelper
 	    //Utils.logInfo("Using OAuth token: " + req.session.oauthAccessToken);
 		Utils.logInfo("Getting the accesstoken in a object's variable "+ this._oauthToken);
 
-        if (this._oauthToken)
+        if (this._oauthToken!= null)
         {
             //Utils.logInfo("Using OAuth token: " + req.session.oauthAccessToken);
             self.loadDataHelper(this._oauthToken, JSON.stringify(req.body))
