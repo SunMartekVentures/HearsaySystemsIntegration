@@ -19,6 +19,7 @@ const PORT = process.env.PORT || 5000
 
 // Create & configure Express server
 const app = express();
+var MemoryStore = require('memorystore')(session)
 
 // Express configuration
 app.set("port", PORT);
@@ -35,12 +36,13 @@ app.use(helmet.frameguard({
   }))
 
 app.use(session({
-    name: 'server-session-cookie-id',
-    secret: 'sanagama-df18',
+    cookie: { maxAge: 86400000 },
+    store: new MemoryStore({
+      checkPeriod: 86400000 // prune expired entries every 24h
+    }),
     resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false }
-}));
+    secret: 'keyboard cat'
+}))
 
 app.use(compression());
 app.use(logger("dev"));
