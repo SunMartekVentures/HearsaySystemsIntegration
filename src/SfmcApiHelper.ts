@@ -89,7 +89,7 @@ export default class SfmcApiHelper
                 Utils.logInfo("tokenExpiry..." + tokenExpiry);
                 
 				this._oauthToken = response.data.access_token;
-				Utils.logInfo("Storing the accesstoken in a object's variable "+ this_oauthToken);
+				Utils.logInfo("Storing the accesstoken in a object's variable "+ this._oauthToken);
                 //tokenExpiry.setSeconds(tokenExpiry.getSeconds() + response.data.expires_in);
                 Utils.logInfo("Got OAuth token: " + accessToken + ", expires = " +  tokenExpiry);
 
