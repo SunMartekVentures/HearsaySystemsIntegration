@@ -300,7 +300,7 @@ export default class SfmcApiHelper
         Utils.logInfo("createDataExtensionHelper method is called.");
         Utils.logInfo("Using OAuth token: " + oauthAccessToken);
 		//let dynamicTemplate = JSON.stringify(template);
-		Utils.logInfo("Request body as a parameter: " + template);
+		Utils.logInfo("Request body as a parameter: " + JSON.stringify(template));
 	    
 	    
         return new Promise<any>((resolve, reject) =>
