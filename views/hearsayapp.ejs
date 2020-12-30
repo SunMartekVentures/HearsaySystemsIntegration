@@ -449,7 +449,7 @@
 	}
 	
 	
-	function loaddataforpage2(template){	
+	function loaddataforpage2(template, dynamicTemplate){	
 	
 	console.log("load data for page 2 function called");
 	
@@ -462,17 +462,17 @@
                 })
                   .then(function (response) {
 					console.log(response.data);
-					createDE(template);
+					createDE(dynamicTemplate);
                   });
 	}
 	
-	function createDE(template){
-		console.log("createDE function called "+ template);
+	function createDE(dynamicTemplate){
+		console.log("createDE function called "+ dynamicTemplate);
 		
 axios({
 			          method: 'POST',
 			          url: 'https://dataintapicall.herokuapp.com/createdeforapp',
-					  data: template,
+					  data: dynamicTemplate,
 					  headers: {'Content-Type': 'application/json' }
                 })
                   .then(function (response) {		  
@@ -661,8 +661,28 @@ axios({
             		}
 	    	}
 	    ];
+		
+		let dynamicTemplate=
+	    
+	    {
+                    Template_Name : this.state.templatename,
+					Hearsay_Org_ID : this.state.orgid,
+					Hearsay_User_Reference_ID : this.state.refid,
+					Customer_Unique_ID : this.state.customeruniqueid,
+					Customer_Name : this.state.temp1text,
+              		option_1:this.state.temp2text,
+              		option_2:this.state.temp3text,
+              		option_3:this.state.temp4text,
+					option_4:this.state.temp5text,
+					option_5:this.state.temp6text,
+					option_6:this.state.temp7text,
+					option_7:this.state.temp8text,
+             		option_8:this.state.temp9FieldLabel,
+              		option_9:this.state.temp10FieldLabel,
+            		
+	    	}
 			console.log("Template Name :" + JSON.stringify(template));		
-		loaddataforpage2(template);
+		loaddataforpage2(template, dynamicTemplate);
 	    }
 	    
 	    
