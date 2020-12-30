@@ -267,16 +267,16 @@ export default class SfmcApiHelper
         public createDataExtension(req: express.Request, res: express.Response)
     {
 	
-        Utils.logInfo("request body for data extension creation = " + req.body);
+        Utils.logInfo("request body for data extension creation = " + JSON.stringify(req.body));
         let self = this;
         let sessionId = req.session.id;
         Utils.logInfo("loadData entered. SessionId = " + sessionId);
-	    let template = req.body;
+	    let template = JSON.stringify(req.body);
 
         if (this._oauthToken!= "")
         {
             Utils.logInfo("Create Data extension method called and Condition satisfied: " + template );
-            self.createDataExtensionHelper(this._oauthToken, req.body)
+            self.createDataExtensionHelper(this._oauthToken, template)
             .then((result) => {
                 res.status(result.status).send(result.statusText);
             })
@@ -321,8 +321,8 @@ export default class SfmcApiHelper
 +'            <Objects xsi:type="DataExtension">'
 +'                <PartnerKey xsi:nil="true"/>'
 +'                <ObjectID xsi:nil="true"/>'
-+'                <CustomerKey>'+"Test"+'</CustomerKey>'
-+'                <Name>'+"Test"+'</Name>'
++'                <CustomerKey>'+"Test1"+'</CustomerKey>'
++'                <Name>'+"Test1"+'</Name>'
 +'                <IsSendable>false</IsSendable>'
 +'                <Fields>'
 +'                    <Field>'
