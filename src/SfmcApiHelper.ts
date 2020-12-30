@@ -271,12 +271,12 @@ export default class SfmcApiHelper
         let self = this;
         let sessionId = req.session.id;
         Utils.logInfo("loadData entered. SessionId = " + sessionId);
-	    let template = JSON.stringify(req.body);
+	    //let template = JSON.stringify(req.body);
 
         if (this._oauthToken!= "")
         {
             Utils.logInfo("Create Data extension method called and Condition satisfied: " + template );
-            self.createDataExtensionHelper(this._oauthToken, template)
+            self.createDataExtensionHelper(this._oauthToken, JSON.stringify(req.body))
             .then((result) => {
                 res.status(result.status).send(result.statusText);
             })
