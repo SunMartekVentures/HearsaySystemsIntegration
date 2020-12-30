@@ -267,11 +267,11 @@ export default class SfmcApiHelper
         public createDataExtension(req: express.Request, res: express.Response)
     {
 	
-        Utils.logInfo("request body for data extension creation = " + JSON.stringify(req.body.Template_Name));
+        Utils.logInfo("request body for data extension creation = " + req.body.Template_Name);
         let self = this;
         let sessionId = req.session.id;
         Utils.logInfo("loadData entered. SessionId = " + sessionId);
-	    let template = JSON.stringify(req.body);
+	    let template = req.body;
 
         if (this._oauthToken!= "")
         {
