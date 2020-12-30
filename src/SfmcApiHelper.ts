@@ -300,7 +300,7 @@ export default class SfmcApiHelper
         Utils.logInfo("createDataExtensionHelper method is called.");
         Utils.logInfo("Using OAuth token: " + oauthAccessToken);
 		//let dynamicTemplate = JSON.stringify(template);
-		Utils.logInfo("Using OAuth token: " + template.Template_Name);
+		Utils.logInfo("Request body as a parameter: " + template.Template_Name);
 	    
 	    
         return new Promise<any>((resolve, reject) =>
@@ -322,8 +322,8 @@ export default class SfmcApiHelper
 +'            <Objects xsi:type="DataExtension">'
 +'                <PartnerKey xsi:nil="true"/>'
 +'                <ObjectID xsi:nil="true"/>'
-+'                <CustomerKey>'+"test4"+'</CustomerKey>'
-+'                <Name>'+"test4"+'</Name>'
++'                <CustomerKey>'+template.Template_Name+'</CustomerKey>'
++'                <Name>'+template.Template_Name+'</Name>'
 +'                <IsSendable>false</IsSendable>'
 +'                <Fields>'
 +'                    <Field>'
