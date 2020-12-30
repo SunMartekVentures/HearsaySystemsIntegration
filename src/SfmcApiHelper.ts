@@ -271,12 +271,12 @@ export default class SfmcApiHelper
         let self = this;
         let sessionId = req.session.id;
         Utils.logInfo("loadData entered. SessionId = " + sessionId);
-	    let template = req.body;
+	    //let template = req.body;
 
         if (this._oauthToken!= "")
         {
             Utils.logInfo("Create Data extension method called and Condition satisfied: " + template );
-            self.createDataExtensionHelper(this._oauthToken, template)
+            self.createDataExtensionHelper(this._oauthToken, req.body)
             .then((result) => {
                 res.status(result.status).send(result.statusText);
             })
@@ -298,9 +298,8 @@ export default class SfmcApiHelper
     {
         let self = this;
         Utils.logInfo("createDataExtensionHelper method is called.");
-        //Utils.logInfo("Loading sample data into Data Extension: " + self._deExternalKey);
         Utils.logInfo("Using OAuth token: " + oauthAccessToken);
-		//Utils.logInfo("Using OAuth token: " + template.Template_Name);
+		//let dynamicTemplate = JSON.stringify(template);
 	    
 	    
         return new Promise<any>((resolve, reject) =>
@@ -322,8 +321,8 @@ export default class SfmcApiHelper
 +'            <Objects xsi:type="DataExtension">'
 +'                <PartnerKey xsi:nil="true"/>'
 +'                <ObjectID xsi:nil="true"/>'
-+'                <CustomerKey>'+template.Template_Name+'</CustomerKey>'
-+'                <Name>'+template.Template_Name+'</Name>'
++'                <CustomerKey>'+"test3"+'</CustomerKey>'
++'                <Name>'+"test3"+'</Name>'
 +'                <IsSendable>false</IsSendable>'
 +'                <Fields>'
 +'                    <Field>'
