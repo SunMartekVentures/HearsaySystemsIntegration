@@ -449,7 +449,7 @@
 	}
 	
 	
-	function loaddataforpage2(jsonObject2, authtoken, template){	
+	function loaddataforpage2(template){	
 	
 	console.log("load data for page 2 function called");
 	
@@ -457,16 +457,16 @@
 	axios({
 			          method: 'POST',
 			          url: 'https://dataintapicall.herokuapp.com/loaddatafortempapp',
-			           data: jsonObject2,
+			           data: template,
 			          headers: {'Content-Type': 'application/json' }
                 })
                   .then(function (response) {
 					console.log(response.data);
-					createDE(authtoken,template);
+					createDE(template);
                   });
 	}
 	
-	function createDE(oauthtoken, template){
+	function createDE(template){
 		console.log("createDE function called "+ template);
 		
 axios({
@@ -622,7 +622,6 @@ axios({
         }
 
         handleChangeNext(event) {
-		var authtoken;
           
           if(this.state.page==3){
 
@@ -639,50 +638,31 @@ axios({
 			
 			if(this.state.page==2){
 			
-			let template = 
-			{
-				Template_Name : this.state.templatename,
-				Hearsay_Org_ID : this.state.orgid,
-				Hearsay_User_Reference_ID : this.state.refid,
-				Customer_Unique_ID : this.state.customeruniqueid,
-				Customer_Name : this.state.temp1text,
-              			option_1:this.state.temp2text,
-              			option_2:this.state.temp3text,
-              			option_3:this.state.temp4text,
-				option_4:this.state.temp5text,
-				option_5:this.state.temp6text,
-				option_6:this.state.temp7text,
-				option_7:this.state.temp8text,
-             			option_8:this.state.temp9FieldLabel,
-              			option_9:this.state.temp10FieldLabel,
-			}
-			console.log("Template Name :" + JSON.stringify(template));
-			
-            let jsonObject2=[
+			let template=[
 	    
 	    {
-                    keys: {
-                        Template_Name : this.state.templatename,
-                    },
+            keys: {
+                    Template_Name : this.state.templatename,
+                },
 		    values: {
 					Hearsay_Org_ID : this.state.orgid,
 					Hearsay_User_Reference_ID : this.state.refid,
 					Customer_Unique_ID : this.state.customeruniqueid,
 					Customer_Name : this.state.temp1text,
-              				option_1:this.state.temp2text,
-              				option_2:this.state.temp3text,
-              				option_3:this.state.temp4text,
+              		option_1:this.state.temp2text,
+              		option_2:this.state.temp3text,
+              		option_3:this.state.temp4text,
 					option_4:this.state.temp5text,
 					option_5:this.state.temp6text,
 					option_6:this.state.temp7text,
 					option_7:this.state.temp8text,
-             				option_8:this.state.temp9FieldLabel,
-              				option_9:this.state.temp10FieldLabel,
+             		option_8:this.state.temp9FieldLabel,
+              		option_9:this.state.temp10FieldLabel,
             		}
 	    	}
 	    ];
-		
-		loaddataforpage2(jsonObject2, authtoken, template);
+			console.log("Template Name :" + JSON.stringify(template));		
+		loaddataforpage2(template);
 	    }
 	    
 	    
@@ -710,10 +690,6 @@ axios({
                 })
                   .then(function (response) {		  
 					var responseData = response.data;
-					var authtoken = JSON.parse(responseData.replace('OK','')).access_token;
-		  
-					//console.log(JSON.parse(responseData.replace('OK','')).access_token);
-					//console.log(jsonObject.values.cuid);
 					loaddata(jsonObject);
 					//console.log("Before createDE function ");					
 					console.log("authentication token obtained and row has been created");
