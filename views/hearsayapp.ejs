@@ -449,7 +449,7 @@
 	}
 	
 	
-	function loaddataforpage2(jsonObject, authtoken, templateName){	
+	function loaddataforpage2(jsonObject2, authtoken, template){	
 	
 	console.log("load data for page 2 function called");
 	
@@ -457,22 +457,22 @@
 	axios({
 			          method: 'POST',
 			          url: 'https://dataintapicall.herokuapp.com/loaddatafortempapp',
-			           data: jsonObject,
+			           data: jsonObject2,
 			          headers: {'Content-Type': 'application/json' }
                 })
                   .then(function (response) {
 					console.log(response.data);
-					createDE(authtoken,templateName);
+					createDE(authtoken,template);
                   });
 	}
 	
-	function createDE(oauthtoken, templateName){
-		console.log("createDE function called "+ templateName);
+	function createDE(oauthtoken, template){
+		console.log("createDE function called "+ template);
 		
 axios({
 			          method: 'POST',
 			          url: 'https://dataintapicall.herokuapp.com/createdeforapp',
-					  data: templateName,
+					  data: template,
 					  headers: {'Content-Type': 'application/json' }
                 })
                   .then(function (response) {		  
@@ -639,19 +639,9 @@ axios({
 			
 			if(this.state.page==2){
 			
-			var templateName = 
+			let template = 
 			{
-				templateName : this.state.templatename
-			}
-			console.log("Template Name :" + templateName);
-			
-            var DataConfig=[
-	    
-	    {
-                    keys: {
-                        Template_Name : this.state.templatename,
-                    },
-		    values: {
+				Template_Name : this.state.templatename
 				Hearsay_Org_ID : this.state.orgid,
 				Hearsay_User_Reference_ID : this.state.refid,
 				Customer_Unique_ID : this.state.customeruniqueid,
@@ -665,11 +655,34 @@ axios({
 				option_7:this.state.temp8text,
              			option_8:this.state.temp9FieldLabel,
               			option_9:this.state.temp10FieldLabel,
+			}
+			console.log("Template Name :" + JSON.stringify(template));
+			
+            let jsonObject2=[
+	    
+	    {
+                    keys: {
+                        Template_Name : this.state.templatename,
+                    },
+		    values: {
+					Hearsay_Org_ID : this.state.orgid,
+					Hearsay_User_Reference_ID : this.state.refid,
+					Customer_Unique_ID : this.state.customeruniqueid,
+					Customer_Name : this.state.temp1text,
+              				option_1:this.state.temp2text,
+              				option_2:this.state.temp3text,
+              				option_3:this.state.temp4text,
+					option_4:this.state.temp5text,
+					option_5:this.state.temp6text,
+					option_6:this.state.temp7text,
+					option_7:this.state.temp8text,
+             				option_8:this.state.temp9FieldLabel,
+              				option_9:this.state.temp10FieldLabel,
             		}
 	    	}
 	    ];
 		
-		loaddataforpage2(DataConfig, authtoken, templateName);
+		loaddataforpage2(jsonObject2, authtoken, template);
 	    }
 	    
 	    
@@ -682,7 +695,7 @@ axios({
                     },
                     values: {
                         Hearsay_User_Reference_ID : this.state.refid,
-			Customer_Unique_ID : this.state.customeruniqueid,
+						Customer_Unique_ID : this.state.customeruniqueid,
 						
                     }
                 }                   
