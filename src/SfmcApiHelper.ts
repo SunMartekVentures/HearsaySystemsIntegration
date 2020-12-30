@@ -294,7 +294,7 @@ export default class SfmcApiHelper
     }
 
     
-    private createDataExtensionHelper(oauthAccessToken: string, template: string) : Promise<any>    
+    private createDataExtensionHelper(oauthAccessToken: string, template: any) : Promise<any>    
     {
         let self = this;
         Utils.logInfo("createDataExtensionHelper method is called.");
@@ -322,8 +322,8 @@ export default class SfmcApiHelper
 +'            <Objects xsi:type="DataExtension">'
 +'                <PartnerKey xsi:nil="true"/>'
 +'                <ObjectID xsi:nil="true"/>'
-+'                <CustomerKey>'+"test3"+'</CustomerKey>'
-+'                <Name>'+"test3"+'</Name>'
++'                <CustomerKey>'+"test4"+'</CustomerKey>'
++'                <Name>'+"test4"+'</Name>'
 +'                <IsSendable>false</IsSendable>'
 +'                <Fields>'
 +'                    <Field>'
