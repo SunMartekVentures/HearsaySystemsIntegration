@@ -7,7 +7,7 @@ import Utils from './Utils';
 export default class SfmcApiHelper
 {
     // Instance variables 
-    private _deExternalKey = "OrgSetup";
+    private _deExternalKey = "Org_Setup";
     private _sfmcDataExtensionApiUrl = "https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.rest.marketingcloudapis.com/hub/v1/dataevents/key:" + this._deExternalKey + "/rowset";
     private _oauthToken = "";
     
@@ -267,11 +267,11 @@ export default class SfmcApiHelper
         public createDataExtension(req: express.Request, res: express.Response)
     {
 	
-        Utils.logInfo("request body for data extension creation = " + req.body.Template_Name);
+        Utils.logInfo("request body for data extension creation = " + req.body.templateName);
         let self = this;
         let sessionId = req.session.id;
         Utils.logInfo("loadData entered. SessionId = " + sessionId);
-	    let templateName = req.body.Template_Name;
+	    let templateName = req.body.templateName;
 
         if (this._oauthToken!= "")
         {
