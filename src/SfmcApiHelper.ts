@@ -332,6 +332,7 @@ export default class SfmcApiHelper
 +'                        <IsPrimaryKey>true</IsPrimaryKey>'
 +'                        <IsRequired>true</IsRequired>'
 +'                    </Field>'
+/*
 +'                    <Field>'
 +'                        <Name>'+template.Hearsay_Org_ID+'</Name>'
 +'                        <FieldType>'+template.Hearsay_Org_ID+'</FieldType>'
@@ -397,6 +398,7 @@ export default class SfmcApiHelper
 +'                        <FieldType>'+template.Option_9+'</FieldType>'
 +'                        <IsRequired>false</IsRequired>'
 +'                    </Field>'
+*/
 +'                </Fields>'
 +'            </Objects>'
 +'        </CreateRequest>'
