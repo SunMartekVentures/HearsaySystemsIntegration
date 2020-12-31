@@ -301,7 +301,7 @@ export default class SfmcApiHelper
         Utils.logInfo("Using OAuth token: " + oauthAccessToken);
 		//let dynamicTemplate = JSON.stringify(template);
 		Utils.logInfo("Request body as a parameter: " + JSON.stringify(template));
-		Object.values(obj).forEach(val => {
+		Object.values(template).forEach(val => {
 				Utils.logInfo(val);
 			});
 	    
