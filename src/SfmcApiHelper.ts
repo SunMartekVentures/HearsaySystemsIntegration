@@ -301,7 +301,7 @@ export default class SfmcApiHelper
         Utils.logInfo("Using OAuth token: " + oauthAccessToken);
 		//let dynamicTemplate = JSON.stringify(template);
 		Utils.logInfo("Request body as a parameter: " + JSON.stringify(template));
-		/*Object.values(template).forEach(val => {
+		Object.values(template).forEach(val => {
 				Utils.logInfo(val);
 				if(val==""){
 					Utils.logInfo("val=undefined condition satisfied");
@@ -309,14 +309,14 @@ export default class SfmcApiHelper
 				}
 				
 			});
-			Utils.logInfo("Request body after deletion: " + JSON.stringify(template));*/
+			Utils.logInfo("Request body after deletion: " + template);
 			
-			const dynamicTemplate = Object.values(template).reduce((object, value) => {
+			/*const dynamicTemplate = Object.values(template).reduce((object, value) => {
 				if (value !== "") 
-				object = template.value
+				object = Object.values(template);
 			return object
 			},{})
-		Utils.logInfo("Reduce body after deletion: " + JSON.stringify(dynamicTemplate));
+		Utils.logInfo("Reduce body after deletion: " + JSON.stringify(dynamicTemplate));*/
 			
 	    
 	    
