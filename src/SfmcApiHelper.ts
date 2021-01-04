@@ -340,6 +340,7 @@ export default class SfmcApiHelper
 +'                        <Name>'+template.Template_Name+'</Name>'
 +'                        <FieldType>Text</FieldType>'
 +'                        <IsPrimaryKey>true</IsPrimaryKey>'
++'						<MaxLength>50</MaxLength>'
 +'                        <IsRequired>true</IsRequired>'
 +'                    </Field>'
 +'                    <Field>'
