@@ -301,7 +301,7 @@ export default class SfmcApiHelper
         Utils.logInfo("Using OAuth token: " + oauthAccessToken);
 		//let dynamicTemplate = JSON.stringify(template);
 		Utils.logInfo("Request body as a parameter: " + JSON.stringify(template));
-		let filteredTemplate = Object.keys(template).forEach(key => {
+		Object.keys(template).forEach(key => {
 				Utils.logInfo(key);
 				if(template[key]===""){
 					Utils.logInfo("key=undefined condition satisfied");
@@ -309,7 +309,7 @@ export default class SfmcApiHelper
 				}
 				
 			});
-			Utils.logInfo("Request body after deletion: " + JSON.stringify(filteredTemplate));
+			Utils.logInfo("Request body after deletion: " + JSON.stringify(template));
 			
 	    
 	    
@@ -332,38 +332,38 @@ export default class SfmcApiHelper
 +'            <Objects xsi:type="DataExtension">'
 +'                <PartnerKey xsi:nil="true"/>'
 +'                <ObjectID xsi:nil="true"/>'
-+'                <CustomerKey>'+filteredTemplate.Template_Name+'</CustomerKey>'
-+'                <Name>'+filteredTemplate.Template_Name+'</Name>'
++'                <CustomerKey>'+template.Template_Name+'</CustomerKey>'
++'                <Name>'+template.Template_Name+'</Name>'
 +'                <IsSendable>false</IsSendable>'
 +'                <Fields>'
 +'                    <Field>'
-+'                        <Name>'+filteredTemplate.Template_Name+'</Name>'
++'                        <Name>'+template.Template_Name+'</Name>'
 +'                        <FieldType>Text</FieldType>'
 +'                        <IsPrimaryKey>true</IsPrimaryKey>'
 +'                        <IsRequired>true</IsRequired>'
 +'                    </Field>'
 +'                    <Field>'
-+'                        <Name>'+filteredTemplate.Hearsay_Org_ID+'</Name>'
++'                        <Name>'+template.Hearsay_Org_ID+'</Name>'
 +'                        <FieldType>Text</FieldType>'
 +'                        <IsRequired>true</IsRequired>'
 +'                    </Field>'
 +'                    <Field>'
-+'                        <Name>'+filteredTemplate.Hearsay_User_Reference_ID+'</Name>'
++'                        <Name>'+template.Hearsay_User_Reference_ID+'</Name>'
 +'                        <FieldType>Text</FieldType>'
 +'                        <IsRequired>true</IsRequired>'
 +'                    </Field>'
 +'                    <Field>'
-+'                        <Name>'+filteredTemplate.Customer_Unique_ID+'</Name>'
++'                        <Name>'+template.Customer_Unique_ID+'</Name>'
 +'                        <FieldType>Text</FieldType>'
 +'                        <IsRequired>true</IsRequired>'
 +'                    </Field>'
 +'                    <Field>'
-+'                        <Name>'+filteredTemplate.Customer_Name+'</Name>'
++'                        <Name>'+template.Customer_Name+'</Name>'
 +'                        <FieldType>Text</FieldType>'
 +'                        <IsRequired>true</IsRequired>'
 +'                    </Field>'
 +'                    <Field>'
-+'                        <Name>'+filteredTemplate.Option_1+'</Name>'
++'                        <Name>'+template.Option_1+'</Name>'
 +'                        <FieldType>Text</FieldType>'
 +'                        <IsRequired>false</IsRequired>'
 +'                    </Field>'
