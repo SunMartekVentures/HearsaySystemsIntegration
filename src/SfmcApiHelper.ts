@@ -155,7 +155,7 @@ export default class SfmcApiHelper
             };
 
             // POST to Marketing Cloud Data Extension endpoint to load sample data in the POST body
-            axios.get(https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.soap.marketingcloudapis.com/Service.asmx, soapMessage, {"headers" : headers})
+            axios.get('https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.soap.marketingcloudapis.com/Service.asmx', soapMessage, {"headers" : headers})
             .then((response: any) => {
                 // success
                 Utils.logInfo(response.data);
