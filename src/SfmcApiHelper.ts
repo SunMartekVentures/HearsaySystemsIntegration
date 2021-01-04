@@ -305,7 +305,7 @@ export default class SfmcApiHelper
 				Utils.logInfo(val);
 				if(val==""){
 					Utils.logInfo("val=undefined condition satisfied");
-				delete template.val;
+				delete val;
 				}
 				
 			});
