@@ -309,6 +309,8 @@ export default class SfmcApiHelper
 				}
 				
 			});
+			Utils.logInfo("Request body after deletion: " + JSON.stringify(template));
+			
 	    
 	    
         return new Promise<any>((resolve, reject) =>
