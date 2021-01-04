@@ -307,6 +307,9 @@ export default class SfmcApiHelper
 					Utils.logInfo("key=undefined condition satisfied");
 				delete template[key];
 				}
+				else{
+					Utils.logInfo("Test "+ template[key]);
+				}
 				
 			});
 			Utils.logInfo("Request body after deletion: " + JSON.stringify(template));
