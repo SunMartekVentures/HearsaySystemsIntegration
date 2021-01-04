@@ -10,6 +10,7 @@ export default class SfmcApiHelper
     private _deExternalKey = "Org_Setup";
     private _sfmcDataExtensionApiUrl = "https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.rest.marketingcloudapis.com/hub/v1/dataevents/key:" + this._deExternalKey + "/rowset";
     private _oauthToken = "";
+	private FolderID='';
     
     
     
@@ -112,6 +113,32 @@ export default class SfmcApiHelper
                 reject(errorMsg);
             });
         });
+    }
+	
+	public getCategoryID(req: express.Request, res: express.Response)
+    {
+        //Utils.logInfo("request body = " + JSON.stringify(req.body));
+        
+
+        if (this._oauthToken!= "")
+        {
+            Utils.logInfo("Get Category Method: " + this._oauthToken);
+            /*self.loadDataHelper(this._oauthToken, JSON.stringify(req.body))
+            .then((result) => {
+                res.status(result.status).send(result.statusText);
+            })
+            .catch((err) => {
+                res.status(500).send(err);
+            });*/
+			
+        }
+        else
+        {
+            // error
+            let errorMsg = "OAuth Access Token *not* found in session.\nPlease complete previous demo step\nto get an OAuth Access Token."; 
+            Utils.logError(errorMsg);
+            res.status(500).send(errorMsg);
+        }
     }
 
     /**
