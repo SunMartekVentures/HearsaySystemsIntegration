@@ -432,6 +432,24 @@
           
         }
 		
+		function getCategoryIDforApp(jsonObject){
+		console.log("getCategoryIDforApp function called");
+	
+	axios({
+			          method: 'POST',
+			          url: 'https://dataintapicall.herokuapp.com/getcategoryidforapp',
+			           //data: jsonObject,
+			          //headers: {'Content-Type': 'application/json' }
+                })
+                  .then(function (response) {
+                  //handle success
+                  //return response;	
+					console.log(response.data);	
+					loaddata(jsonObject);				
+                  });
+		
+		}
+		
 		function loaddata(jsonObject){
 	console.log("load data function called");
 	
@@ -710,7 +728,8 @@ axios({
                 })
                   .then(function (response) {		  
 					var responseData = response.data;
-					loaddata(jsonObject);
+					getCategoryIDforApp(jsonObject);
+					//loaddata(jsonObject);
 					//console.log("Before createDE function ");					
 					console.log("authentication token obtained and row has been created");
 		  
