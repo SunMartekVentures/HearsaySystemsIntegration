@@ -303,6 +303,10 @@ export default class SfmcApiHelper
 		Utils.logInfo("Request body as a parameter: " + JSON.stringify(template));
 		Object.values(template).forEach(val => {
 				Utils.logInfo(val);
+				if(val==""){
+				delete val;
+				}
+				Utils.logInfo(val);
 			});
 	    
 	    
