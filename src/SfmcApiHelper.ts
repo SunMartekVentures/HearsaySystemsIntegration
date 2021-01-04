@@ -304,7 +304,7 @@ export default class SfmcApiHelper
 		Object.values(template).forEach(val => {
 				Utils.logInfo(val);
 				if(val==undefined){
-				delete val;
+				delete template.val;
 				}
 				Utils.logInfo(val);
 			});
