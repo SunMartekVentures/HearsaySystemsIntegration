@@ -303,7 +303,7 @@ export default class SfmcApiHelper
 		Utils.logInfo("Request body as a parameter: " + JSON.stringify(template));
 		Object.values(template).forEach(val => {
 				Utils.logInfo(val);
-				if(val==undefined){
+				if(val==""){
 					Utils.logInfo("val=undefined condition satisfied");
 				delete template.val;
 				}
