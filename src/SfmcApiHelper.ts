@@ -316,7 +316,7 @@ export default class SfmcApiHelper
 				object[val] = template[val]
 			}
 			return object
-		}, {})
+		})
 		Utils.logInfo("Reduce body after deletion: " + JSON.stringify(dynamicTemplate));
 			
 	    
