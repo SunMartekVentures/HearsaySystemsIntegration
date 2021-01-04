@@ -318,13 +318,7 @@ export default class SfmcApiHelper
 +'                <Name>'+template.Template_Name+'</Name>'
 +'                <IsSendable>false</IsSendable>'
 +'                <Fields>'
-+'                    <Field>'
-+'                        <Name>'+template.Template_Name+'</Name>'
-+'                        <FieldType>Text</FieldType>'
-+'                        <IsPrimaryKey>true</IsPrimaryKey>'
-+'						<MaxLength>50</MaxLength>'
-+'                        <IsRequired>true</IsRequired>'
-+'                    </Field>';
+
 
         //Utils.logInfo("createDataExtensionHelper method is called.");
         //Utils.logInfo("Using OAuth token: " + oauthAccessToken);
@@ -332,16 +326,22 @@ export default class SfmcApiHelper
 		Utils.logInfo("Request body as a parameter: " + JSON.stringify(template));
 		Object.keys(template).forEach(key => {
 				Utils.logInfo(key);
-				if(template[key]===""){
-					Utils.logInfo("if condition satisfied " + template[key]);
-				delete template[key];
+				if(key === "Template_Name" ){
+					Utils.logInfo("if condition satisfied");
+					soapData +='<Field>'
++'                        <Name>'+template.Template_Name+'</Name>'
++'                        <FieldType>Text</FieldType>'
++'                        <IsPrimaryKey>true</IsPrimaryKey>'
++'						<MaxLength>50</MaxLength>'
++'                        <IsRequired>true</IsRequired>'
++'                    </Field>';				
 				}
-				else if(key === "Template_Name"){
-					Utils.logInfo("else if condition satisfied ");
-				//delete template[key];
+				else if(template[key]===""){
+					Utils.logInfo("else if condition satisfied ");				
+					delete template[key];
 				}
 				else{
-					Utils.logInfo("else condition "+ template[key]);
+					Utils.logInfo("field name "+ template[key] + " has been added to the soapData");
 					soapData += '<Field>'
 +'                        <Name>'+template[key]+'</Name>'
 +'                        <FieldType>Text</FieldType>'
