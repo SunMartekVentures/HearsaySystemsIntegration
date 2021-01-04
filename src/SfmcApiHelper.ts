@@ -311,9 +311,9 @@ export default class SfmcApiHelper
 			});
 			Utils.logInfo("Request body after deletion: " + JSON.stringify(template));*/
 			
-			const dynamicTemplate = Object.values(template).reduce((object, val) => {
-				if (val !== "") 
-				object.val = template.val
+			const dynamicTemplate = Object.values(template).reduce((object, value) => {
+				if (value !== "") 
+				object.value = template.value
 			return object
 			})
 		Utils.logInfo("Reduce body after deletion: " + JSON.stringify(dynamicTemplate));
