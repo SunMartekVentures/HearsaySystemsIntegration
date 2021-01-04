@@ -324,7 +324,7 @@ export default class SfmcApiHelper
 +'                </SendableDataExtensionField>'
 +'                <SendableSubscriberField>'
 +'                    <Name>'+template.Template_Name+'</Name>'
-+'                    <Value></Value>'
++'                    <Value>'+template.Template_Name+'</Value>'
 +'                </SendableSubscriberField>'
 +'                <Fields>'
 
