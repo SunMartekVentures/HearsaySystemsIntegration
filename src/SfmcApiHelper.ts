@@ -297,27 +297,6 @@ export default class SfmcApiHelper
     private createDataExtensionHelper(oauthAccessToken: string, template: any) : Promise<any>    
     {
         let self = this;
-        Utils.logInfo("createDataExtensionHelper method is called.");
-        Utils.logInfo("Using OAuth token: " + oauthAccessToken);
-		//let dynamicTemplate = JSON.stringify(template);
-		Utils.logInfo("Request body as a parameter: " + JSON.stringify(template));
-		Object.keys(template).forEach(key => {
-				Utils.logInfo(key);
-				if(template[key]===""){
-					Utils.logInfo("key=undefined condition satisfied");
-				delete template[key];
-				}
-				else{
-					Utils.logInfo("Test "+ template[key]);
-				}
-				
-			});
-			Utils.logInfo("Request body after deletion: " + JSON.stringify(template));
-			
-	    
-	    
-        return new Promise<any>((resolve, reject) =>
-        {
 		let soapData = '<?xml version="1.0" encoding="UTF-8"?>'
 +' <s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">'
 +'    <s:Header>'
@@ -365,18 +344,40 @@ export default class SfmcApiHelper
 +'                        <Name>'+template.Customer_Name+'</Name>'
 +'                        <FieldType>Text</FieldType>'
 +'                        <IsRequired>true</IsRequired>'
-+'                    </Field>'
-+'                    <Field>'
-+'                        <Name>'+template.Option_1+'</Name>'
++'                    </Field>';
+
+        //Utils.logInfo("createDataExtensionHelper method is called.");
+        //Utils.logInfo("Using OAuth token: " + oauthAccessToken);
+		//let dynamicTemplate = JSON.stringify(template);
+		Utils.logInfo("Request body as a parameter: " + JSON.stringify(template));
+		Object.keys(template).forEach(key => {
+				Utils.logInfo(key);
+				if(template[key]===""){
+					Utils.logInfo("if condition satisfied " + template[key]);
+				delete template[key];
+				}
+				else{
+					Utils.logInfo("else condition "+ template[key]);
+					soapData += '<Field>'
++'                        <Name>'+template[key]+'</Name>'
 +'                        <FieldType>Text</FieldType>'
 +'                        <IsRequired>false</IsRequired>'
 +'                    </Field>'
-+'                </Fields>'
+				}
+				
+			});
+			soapData += '</Fields>'
 +'            </Objects>'
 +'        </CreateRequest>'
 +'    </s:Body>'
 +'</s:Envelope>';
-		
+			
+			Utils.logInfo("Request body after deletion: " + JSON.stringify(template));
+			
+	    
+	    
+        return new Promise<any>((resolve, reject) =>
+        {		
 		let headers = {
                 'Content-Type': 'text/xml'
             };
