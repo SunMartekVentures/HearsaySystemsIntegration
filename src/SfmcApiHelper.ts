@@ -316,7 +316,16 @@ export default class SfmcApiHelper
 +'                <ObjectID xsi:nil="true"/>'
 +'                <CustomerKey>'+template.Template_Name+'</CustomerKey>'
 +'                <Name>'+template.Template_Name+'</Name>'
-+'                <IsSendable>false</IsSendable>'
++'                <IsSendable>true</IsSendable>'
++'                <SendableDataExtensionField>'
++'                    <CustomerKey>'+template.Template_Name+'</CustomerKey>'
++'                    <Name>'+template.Template_Name+'</Name>'
++'                    <FieldType>Text</FieldType>'
++'                </SendableDataExtensionField>'
++'                <SendableSubscriberField>'
++'                    <Name>'+template.Template_Name+'</Name>'
++'                    <Value></Value>'
++'                </SendableSubscriberField>'
 +'                <Fields>'
 
 
