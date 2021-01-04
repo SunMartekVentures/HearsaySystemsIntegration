@@ -324,26 +324,6 @@ export default class SfmcApiHelper
 +'                        <IsPrimaryKey>true</IsPrimaryKey>'
 +'						<MaxLength>50</MaxLength>'
 +'                        <IsRequired>true</IsRequired>'
-+'                    </Field>'
-+'                    <Field>'
-+'                        <Name>'+template.Hearsay_Org_ID+'</Name>'
-+'                        <FieldType>Text</FieldType>'
-+'                        <IsRequired>true</IsRequired>'
-+'                    </Field>'
-+'                    <Field>'
-+'                        <Name>'+template.Hearsay_User_Reference_ID+'</Name>'
-+'                        <FieldType>Text</FieldType>'
-+'                        <IsRequired>true</IsRequired>'
-+'                    </Field>'
-+'                    <Field>'
-+'                        <Name>'+template.Customer_Unique_ID+'</Name>'
-+'                        <FieldType>Text</FieldType>'
-+'                        <IsRequired>true</IsRequired>'
-+'                    </Field>'
-+'                    <Field>'
-+'                        <Name>'+template.Customer_Name+'</Name>'
-+'                        <FieldType>Text</FieldType>'
-+'                        <IsRequired>true</IsRequired>'
 +'                    </Field>';
 
         //Utils.logInfo("createDataExtensionHelper method is called.");
@@ -357,6 +337,7 @@ export default class SfmcApiHelper
 				delete template[key];
 				}
 				else{
+					Utils.logInfo("Inga varudha nu paaru "+ template.key);
 					Utils.logInfo("else condition "+ template[key]);
 					soapData += '<Field>'
 +'                        <Name>'+template[key]+'</Name>'
