@@ -313,7 +313,7 @@ export default class SfmcApiHelper
 			
 			const dynamicTemplate = Object.values(template).reduce((object, val) => {
 				if (val !== "") 
-				object[val] = template[val]
+				object.val = template.val
 			return object
 		})
 		Utils.logInfo("Reduce body after deletion: " + JSON.stringify(dynamicTemplate));
