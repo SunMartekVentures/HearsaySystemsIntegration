@@ -336,7 +336,7 @@ export default class SfmcApiHelper
 					Utils.logInfo("if condition satisfied " + template[key]);
 				delete template[key];
 				}
-				else if(key === Template_Name){
+				else if(key === "Template_Name"){
 					Utils.logInfo("else if condition satisfied ");
 				//delete template[key];
 				}
