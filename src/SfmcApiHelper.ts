@@ -336,8 +336,11 @@ export default class SfmcApiHelper
 					Utils.logInfo("if condition satisfied " + template[key]);
 				delete template[key];
 				}
+				else if(key === Template_Name){
+					Utils.logInfo("else if condition satisfied ");
+				//delete template[key];
+				}
 				else{
-					Utils.logInfo("Inga varudha nu paaru "+ template.key);
 					Utils.logInfo("else condition "+ template[key]);
 					soapData += '<Field>'
 +'                        <Name>'+template[key]+'</Name>'
