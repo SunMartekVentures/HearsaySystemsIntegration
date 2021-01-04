@@ -301,15 +301,15 @@ export default class SfmcApiHelper
         Utils.logInfo("Using OAuth token: " + oauthAccessToken);
 		//let dynamicTemplate = JSON.stringify(template);
 		Utils.logInfo("Request body as a parameter: " + JSON.stringify(template));
-		const dynamicTemplate = Object.values(template).forEach(val => {
-				Utils.logInfo(val);
-				if(val==""){
-					Utils.logInfo("val=undefined condition satisfied");
-				delete val;
+		Object.keys(template).forEach(key => {
+				Utils.logInfo(key);
+				if(template[key]===""){
+					Utils.logInfo("key=undefined condition satisfied");
+				delete template[key];
 				}
 				
 			});
-			Utils.logInfo("Request body after deletion: " + JSON.stringify(dynamicTemplate));
+			Utils.logInfo("Request body after deletion: " + JSON.stringify(template));
 			
 			/*const dynamicTemplate = Object.values(template).reduce((object, value) => {
 				if (value !== "") 
