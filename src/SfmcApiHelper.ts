@@ -301,7 +301,7 @@ export default class SfmcApiHelper
         Utils.logInfo("Using OAuth token: " + oauthAccessToken);
 		//let dynamicTemplate = JSON.stringify(template);
 		Utils.logInfo("Request body as a parameter: " + JSON.stringify(template));
-		Object.keys(template).forEach(key => {
+		let filteredTemplate = Object.keys(template).forEach(key => {
 				Utils.logInfo(key);
 				if(template[key]===""){
 					Utils.logInfo("key=undefined condition satisfied");
@@ -309,14 +309,7 @@ export default class SfmcApiHelper
 				}
 				
 			});
-			Utils.logInfo("Request body after deletion: " + JSON.stringify(template));
-			
-			/*const dynamicTemplate = Object.values(template).reduce((object, value) => {
-				if (value !== "") 
-				object = Object.values(template);
-			return object
-			},{})
-		Utils.logInfo("Reduce body after deletion: " + JSON.stringify(dynamicTemplate));*/
+			Utils.logInfo("Request body after deletion: " + JSON.stringify(filteredTemplate));
 			
 	    
 	    
@@ -339,78 +332,38 @@ export default class SfmcApiHelper
 +'            <Objects xsi:type="DataExtension">'
 +'                <PartnerKey xsi:nil="true"/>'
 +'                <ObjectID xsi:nil="true"/>'
-+'                <CustomerKey>'+template.Template_Name+'</CustomerKey>'
-+'                <Name>'+template.Template_Name+'</Name>'
++'                <CustomerKey>'+filteredTemplate.Template_Name+'</CustomerKey>'
++'                <Name>'+filteredTemplate.Template_Name+'</Name>'
 +'                <IsSendable>false</IsSendable>'
 +'                <Fields>'
 +'                    <Field>'
-+'                        <Name>'+template.Template_Name+'</Name>'
++'                        <Name>'+filteredTemplate.Template_Name+'</Name>'
 +'                        <FieldType>Text</FieldType>'
 +'                        <IsPrimaryKey>true</IsPrimaryKey>'
 +'                        <IsRequired>true</IsRequired>'
 +'                    </Field>'
 +'                    <Field>'
-+'                        <Name>'+template.Hearsay_Org_ID+'</Name>'
++'                        <Name>'+filteredTemplate.Hearsay_Org_ID+'</Name>'
 +'                        <FieldType>Text</FieldType>'
 +'                        <IsRequired>true</IsRequired>'
 +'                    </Field>'
 +'                    <Field>'
-+'                        <Name>'+template.Hearsay_User_Reference_ID+'</Name>'
++'                        <Name>'+filteredTemplate.Hearsay_User_Reference_ID+'</Name>'
 +'                        <FieldType>Text</FieldType>'
 +'                        <IsRequired>true</IsRequired>'
 +'                    </Field>'
 +'                    <Field>'
-+'                        <Name>'+template.Customer_Unique_ID+'</Name>'
++'                        <Name>'+filteredTemplate.Customer_Unique_ID+'</Name>'
 +'                        <FieldType>Text</FieldType>'
 +'                        <IsRequired>true</IsRequired>'
 +'                    </Field>'
 +'                    <Field>'
-+'                        <Name>'+template.Customer_Name+'</Name>'
++'                        <Name>'+filteredTemplate.Customer_Name+'</Name>'
 +'                        <FieldType>Text</FieldType>'
 +'                        <IsRequired>true</IsRequired>'
 +'                    </Field>'
 +'                    <Field>'
-+'                        <Name>'+template.Option_1+'</Name>'
-+'                        <FieldType>Text</FieldType>'
-+'                        <IsRequired>false</IsRequired>'
-+'                    </Field>'
-+'                    <Field>'
-+'                        <Name>'+template.Option_2+'</Name>'
-+'                        <FieldType>Text</FieldType>'
-+'                        <IsRequired>false</IsRequired>'
-+'                    </Field>'
-+'                    <Field>'
-+'                        <Name>'+template.Option_3+'</Name>'
-+'                        <FieldType>Text</FieldType>'
-+'                        <IsRequired>false</IsRequired>'
-+'                    </Field>'
-+'                    <Field>'
-+'                        <Name>'+template.Option_4+'</Name>'
-+'                        <FieldType>Text</FieldType>'
-+'                        <IsRequired>false</IsRequired>'
-+'                    </Field>'
-+'                    <Field>'
-+'                        <Name>'+template.Option_5+'</Name>'
-+'                        <FieldType>Text</FieldType>'
-+'                        <IsRequired>false</IsRequired>'
-+'                    </Field>'
-+'                    <Field>'
-+'                        <Name>'+template.Option_6+'</Name>'
-+'                        <FieldType>Text</FieldType>'
-+'                        <IsRequired>false</IsRequired>'
-+'                    </Field>'
-+'                    <Field>'
-+'                        <Name>'+template.Option_7+'</Name>'
-+'                        <FieldType>Text</FieldType>'
-+'                        <IsRequired>false</IsRequired>'
-+'                    </Field>'
-+'                    <Field>'
-+'                        <Name>'+template.Option_8+'</Name>'
-+'                        <FieldType>Text</FieldType>'
-+'                        <IsRequired>false</IsRequired>'
-+'                    </Field>'
-+'                    <Field>'
-+'                        <Name>'+template.Option_9+'</Name>'
++'                        <Name>'+filteredTemplate.Option_1+'</Name>'
 +'                        <FieldType>Text</FieldType>'
 +'                        <IsRequired>false</IsRequired>'
 +'                    </Field>'
