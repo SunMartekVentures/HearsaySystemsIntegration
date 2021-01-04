@@ -142,6 +142,14 @@ export default class SfmcAppDemoRoutes
 		//		self.loadData(req, res);
 	}
 	
+	public getCategoryIDforApp(req: express.Request, res: express.Response)
+    {
+        let self = this;
+        Utils.logInfo("Get Category ID route method called.");
+        self._apiHelper.getCategoryID(req, res);
+		//Utils.logInfo("Request Body." + req);
+    }
+	
 	public loadDataForApp(req: express.Request, res: express.Response)
     {
         let self = this;
