@@ -174,11 +174,12 @@ export default class SfmcApiHelper
 	return new Promise<any>((resolve, reject) =>
 		{
 			let headers = {
-                'Content-Type': 'text/xml'
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + this._oauthToken
             };
 
             // POST to Marketing Cloud Data Extension endpoint to load sample data in the POST body
-            axios.post('https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.soap.marketingcloudapis.com/Service.asmx', soapMessage, {"headers" : headers})
+            axios.post("https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.rest.marketingcloudapis.com/asset/v1/content/categories?$pagesize=20&$filter=name eq Hearsay Integrations",{"headers" : headers})
             .then((response: any) => {
 				Utils.logInfo(response.data);
 			})
