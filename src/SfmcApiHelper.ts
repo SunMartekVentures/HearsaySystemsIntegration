@@ -10,7 +10,7 @@ export default class SfmcApiHelper
     private _deExternalKey = "Org_Setup";
     private _sfmcDataExtensionApiUrl = "https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.rest.marketingcloudapis.com/hub/v1/dataevents/key:" + this._deExternalKey + "/rowset";
     private _oauthToken = "";
-	private FolderID='';
+	//private FolderID='';
     
     
     
@@ -108,126 +108,6 @@ export default class SfmcApiHelper
                 errorMsg += "\nMessage: " + error.message;
                 errorMsg += "\nStatus: " + error.response ? error.response.status : "<None>";
                 errorMsg += "\nResponse data: " + error.response ? Utils.prettyPrintJson(JSON.stringify(error.response.data)) : "<None>";
-                Utils.logError(errorMsg);
-
-                reject(errorMsg);
-            });
-        });
-    }
-	
-	public getCategoryID(req: express.Request, res: express.Response)
-    {
-        //Utils.logInfo("request body = " + JSON.stringify(req.body));
-        
-
-        if (this._oauthToken!= "")
-        {
-            Utils.logInfo("Get Category Method: " + this._oauthToken);
-			
-			let soapMessage='<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">';
-				soapMessage+='<soapenv:Header>';
-				soapMessage+='<a:Action s:mustUnderstand="1">Retrieve</a:Action>';
-				soapMessage+='<a:MessageID>urn:uuid:e3f7fdfe-d225-47fb-a764-ad4f465fb724</a:MessageID>';
-				soapMessage+='<a:ReplyTo>';
-				soapMessage+='<a:Address>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</a:Address>';
-				soapMessage+='</a:ReplyTo>';
-				soapMessage+='<a:To s:mustUnderstand="1">https://webservice.exacttarget.com/Service.asmx</a:To>';
-				soapMessage+='<fueloauth>'+this._oauthToken+'</fueloauth>'; 
-				soapMessage+='</soapenv:Header>';
-				soapMessage+='<soapenv:Body>';
-				soapMessage+='<RetrieveRequestMsg xmlns="http://exacttarget.com/wsdl/partnerAPI">';
-				soapMessage+='<RetrieveRequest>';
-				soapMessage+='<ObjectType>DataFolder</ObjectType>';
-				soapMessage+='<Properties>CustomerKey</Properties>';
-				soapMessage+='<Properties>ID</Properties>';              
-				soapMessage+='<Properties>Name</Properties>';
-				soapMessage+='<Properties>ParentFolder.ID</Properties>';            
-				soapMessage+='<Properties>ParentFolder.Name</Properties>';
-                soapMessage+='<Filter xsi:type="SimpleFilterPart">';
-                soapMessage+='<Property>Name</Property>';
-                soapMessage+='<SimpleOperator>equals</SimpleOperator>';
-                soapMessage+='<Value>Hearsay Integrations</Value>';
-				soapMessage+='</Filter>';
-				soapMessage+='</RetrieveRequest>';
-				soapMessage+='</RetrieveRequestMsg>';
-				soapMessage+='</soapenv:Body>';
-				soapMessage+='</soapenv:Envelope>';
-				
-            return new Promise<any>((resolve, reject) =>
-        {
-            let headers = {
-                'Content-Type': 'text/xml',
-                'SOAPAction': 'Retrieve'
-            };
-
-            // POST to Marketing Cloud Data Extension endpoint to load sample data in the POST body
-            axios.get('https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.soap.marketingcloudapis.com/Service.asmx', soapMessage, {"headers" : headers})
-            .then((response: any) => {
-                // success
-                Utils.logInfo(response.data);
-				Dom.Document doc = response.getBodyDocument();
-					for(Dom.XmlNode parentNode: doc.getRootElement().getChildElements()) {
-						for(Dom.XmlNode ChildNode: parentNode.getChildElements()) {														
-									if(ChildNode.getName() == 'ID'){
-									FolderID=ChildNode.getText();
-									Utils.logInfo('FolderID:'+FolderID);
-														}
-												}
-											}
-										})									
-										.catch((error: any) => {
-										// error
-										let errorMsg = "Error loading sample data. POST response from Marketing Cloud:";
-										errorMsg += "\nMessage: " + error.message;
-										errorMsg += "\nStatus: " + error.response ? error.response.status : "<None>";
-										errorMsg += "\nResponse data: " + error.response.data ? Utils.prettyPrintJson(JSON.stringify(error.response.data)) : "<None>";
-										Utils.logError(errorMsg);
-
-										reject(errorMsg);
-									});
-								});
-							}				
-        else
-        {
-            // error
-            let errorMsg = "OAuth Access Token *not* found in session.\nPlease complete previous demo step\nto get an OAuth Access Token."; 
-            Utils.logError(errorMsg);
-            res.status(500).send(errorMsg);
-        }
-    }
-	
-	private getCategoryIDHelper(oauthAccessToken: string, jsonData: string) : Promise<any>    
-    {
-        let self = this;
-        Utils.logInfo("loadDataHelper called.");
-        Utils.logInfo("Loading sample data into Data Extension: " + self._deExternalKey);
-        Utils.logInfo("Using OAuth token: " + this._oauthToken);
-
-        return new Promise<any>((resolve, reject) =>
-        {
-            let headers = {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + this._oauthToken
-            };
-
-            // POST to Marketing Cloud Data Extension endpoint to load sample data in the POST body
-            axios.post(self._sfmcDataExtensionApiUrl, jsonData, {"headers" : headers})
-            .then((response: any) => {
-                // success
-                Utils.logInfo("Successfully loaded sample data into Data Extension!");
-
-                resolve(
-                {
-                    status: response.status,
-                    statusText: response.statusText + "\n" + Utils.prettyPrintJson(JSON.stringify(response.data))
-                });
-            })
-            .catch((error: any) => {
-                // error
-                let errorMsg = "Error loading sample data. POST response from Marketing Cloud:";
-                errorMsg += "\nMessage: " + error.message;
-                errorMsg += "\nStatus: " + error.response ? error.response.status : "<None>";
-                errorMsg += "\nResponse data: " + error.response.data ? Utils.prettyPrintJson(JSON.stringify(error.response.data)) : "<None>";
                 Utils.logError(errorMsg);
 
                 reject(errorMsg);
