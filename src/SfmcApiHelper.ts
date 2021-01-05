@@ -126,6 +126,12 @@ export default class SfmcApiHelper
 			
 			let soapMessage='<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">';
 				soapMessage+='<soapenv:Header>';
+				soapMessage+='<a:Action s:mustUnderstand="1">Retrieve</a:Action>';
+				soapMessage+='<a:MessageID>urn:uuid:e3f7fdfe-d225-47fb-a764-ad4f465fb724</a:MessageID>';
+				soapMessage+='<a:ReplyTo>';
+				soapMessage+='<a:Address>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</a:Address>';
+				soapMessage+='</a:ReplyTo>';
+				soapMessage+='<a:To s:mustUnderstand="1">https://webservice.exacttarget.com/Service.asmx</a:To>';
 				soapMessage+='<fueloauth>'+this._oauthToken+'</fueloauth>'; 
 				soapMessage+='</soapenv:Header>';
 				soapMessage+='<soapenv:Body>';
