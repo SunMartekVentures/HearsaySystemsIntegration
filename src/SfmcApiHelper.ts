@@ -142,28 +142,44 @@ export default class SfmcApiHelper
 	}
 	public getCategoryIDHelper(oauthAccessToken: string) : Promise<any>
 	{
-		let soapMessage='<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">';
-			soapMessage+='<soapenv:Header>';
-			soapMessage+='<fueloauth>'+oauthAccessToken+'</fueloauth>'; 
-			soapMessage+='</soapenv:Header>';
-			soapMessage+='<soapenv:Body>';
-			soapMessage+='<RetrieveRequestMsg xmlns="http://exacttarget.com/wsdl/partnerAPI">';
-			soapMessage+='<RetrieveRequest>';
-			soapMessage+='<ObjectType>DataFolder</ObjectType>';
-			soapMessage+='<Properties>CustomerKey</Properties>';
-			soapMessage+='<Properties>ID</Properties>';              
-			soapMessage+='<Properties>Name</Properties>';
-			soapMessage+='<Properties>ParentFolder.ID</Properties>';            
-			soapMessage+='<Properties>ParentFolder.Name</Properties>';
-			soapMessage+='<Filter xsi:type="SimpleFilterPart">';
-			soapMessage+='<Property>Name</Property>';
-			soapMessage+='<SimpleOperator>equals</SimpleOperator>';
-			soapMessage+='<Value>Hearsay Integrations</Value>';
-			soapMessage+='</Filter>';
-			soapMessage+='</RetrieveRequest>';
-			soapMessage+='</RetrieveRequestMsg>';
-			soapMessage+='</soapenv:Body>';
-			soapMessage+='</soapenv:Envelope>';
+		let soapMessage = '<?xml version="1.0" encoding="UTF-8"?>'
++'<SOAP-ENV:Envelope'
++'    xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"'
++'    xmlns:xsd="http://www.w3.org/2001/XMLSchema"'
++'    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">'
++'    <SOAP-ENV:Header>'
++'        <wsse:Security'
++'            xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"'
++'            xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">'            
++'        </wsse:Security>'
++'			<fueloauth>'+oauthAccessToken+'</fueloauth>'
++'		</SOAP-ENV:Header>'
++'   <SOAP-ENV:Body>'
++'        <RetrieveRequestMsg'
++'            xmlns="http://exacttarget.com/wsdl/partnerAPI">'
++'            <RetrieveRequest>'
++'                <ObjectType>DataFolder</ObjectType>'
++'                <Properties>ID</Properties>'
++'                <Properties>Description</Properties>'
++'                <Properties>ParentFolder.Description</Properties>'
++'                <Properties>Client.ID</Properties>'
++'                <Properties>ParentFolder.CustomerKey</Properties>'
++'                <Properties>Name</Properties>'
++'                <Properties>ContentType</Properties>'
++'                <Properties>ParentFolder.Name</Properties>'
++'                <Properties>ObjectID</Properties>'
++'                <Properties>ParentFolder.ObjectID</Properties>'
++'                <ns1:Filter'
++'                     xmlns:ns1="http://exacttarget.com/wsdl/partnerAPI" xsi:type="ns1:SimpleFilterPart">'
++'                     <ns1:Property>Name</ns1:Property>'
++'                     <ns1:SimpleOperator>equals</ns1:SimpleOperator>'
++'                     <ns1:Value>Hearsay Integrations</ns1:Value>'
++'                </ns1:Filter>'
++'                <QueryAllAccounts>false</QueryAllAccounts>'
++'            </RetrieveRequest>'
++'        </RetrieveRequestMsg>'
++'   </SOAP-ENV:Body>'
++'</SOAP-ENV:Envelope>';
 				
 	return new Promise<any>((resolve, reject) =>
 		{
