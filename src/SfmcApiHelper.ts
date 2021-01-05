@@ -114,6 +114,11 @@ export default class SfmcApiHelper
             });
         });
     }
+	
+	public getCategoryID(req: express.Request, res: express.Response)
+    {
+		//Utils.logInfo("request body = " + JSON.stringify(req.body));
+	}
 
     /**
      * loadData: called by the GET handlers for /apidemoloaddata and /appdemoloaddata
