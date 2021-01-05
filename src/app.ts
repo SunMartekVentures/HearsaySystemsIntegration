@@ -91,7 +91,7 @@ app.post('/loaddatafortempapp', function(req, res) {
 app.post('/createdeforapp', function(req, res) {
   appDemoRoutes.createDataExtensionForApp(req, res); });
   
-  app.post('/getcategoryidforapp', function(req, res) {
+  app.get('/getcategoryidforapp', function(req, res) {
   appDemoRoutes.getCategoryIDforApp(req, res); });
 
 
