@@ -118,7 +118,7 @@ export default class SfmcApiHelper
 	public getCategoryID(req: express.Request, res: express.Response)
     {
 		Utils.logInfo("Get Category Method: " + this._oauthToken);
-			
+		let self = this;	
 			
 		//Utils.logInfo("request body = " + JSON.stringify(req.body));
 		if (this._oauthToken!= "")
