@@ -142,32 +142,31 @@ export default class SfmcApiHelper
 	}
 	public getCategoryIDHelper(oauthAccessToken: string) : Promise<any>
 	{
-		let soapMessage ='<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">'
-+'<SOAP-ENV:Header>'
-+'			<a:Action s:mustUnderstand="1">Retrieve</a:Action>'
-+'      <a:MessageID>urn:uuid:7e0cca04-57bd-4481-864c-6ea8039d2ea0</a:MessageID>'
-+'      <a:ReplyTo>'
-+'         <a:Address>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</a:Address>'
-+'      </a:ReplyTo>'
-+'      <a:To s:mustUnderstand="1">https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.soap.marketingcloudapis.com/Service.asmx</a:To>'
-+'			<fueloauth xmlns="http://exacttarget.com">'+this._oauthToken+'</fueloauth>'
-+'			</SOAP-ENV:Header>'
- +'<soapenv:Body>'
- +'<RetrieveRequestMsg xmlns="http://exacttarget.com/wsdl/partnerAPI">'
- +'<RetrieveRequest>'
- +'<ObjectType>DataFolder</ObjectType>'
- +'<Properties>CustomerKey</Properties>'
- +'<Properties>ID</Properties>'
- +'<Properties>Name</Properties>'
- +'<Filter xsi:type="SimpleFilterPart">'
- +'<Property>Name</Property>'
- +'<SimpleOperator>IN</SimpleOperator>'
- +'<Value>Hearsay Integrations</Value>'
- +'</Filter>'
- +'</RetrieveRequest>'
- +'</RetrieveRequestMsg>'
- +'</soapenv:Body>'
- +'</soapenv:Envelope>';
+		let soapMessage = '<?xml version="1.0" encoding="UTF-8"?>'
++'<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">'
++'    <s:Header>'
++'        <a:Action s:mustUnderstand="1">Retrieve</a:Action>'
++'        <a:To s:mustUnderstand="1">https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.soap.marketingcloudapis.com/Service.asmx</a:To>'
++'        <fueloauth xmlns="http://exacttarget.com">'+this._oauthToken+'</fueloauth>'
++'    </s:Header>'
++'    <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">'
++'        <RetrieveRequestMsg xmlns="http://exacttarget.com/wsdl/partnerAPI">'
++'            <RetrieveRequest>'
++'                <ObjectType>DataFolder</ObjectType>'
++'                <Properties>ID</Properties>'
++'                <Properties>CustomerKey</Properties>'
++'                <Properties>Name</Properties>'
++'                <Properties>ParentFolder.ID</Properties>'
++'                <Properties>ParentFolder.Name</Properties>'
++'                <Filter xsi:type="SimpleFilterPart">'
++'                    <Property>Name</Property>'
++'                    <SimpleOperator>equals</SimpleOperator>'
++'                    <Value>Hearsay Integrations</Value>'
++'                </Filter>'
++'            </RetrieveRequest>'
++'        </RetrieveRequestMsg>'
++'    </s:Body>'
++'</s:Envelope>';
 				
 	return new Promise<any>((resolve, reject) =>
 		{
@@ -178,11 +177,10 @@ export default class SfmcApiHelper
 
             // POST to Marketing Cloud Data Extension endpoint to load sample data in the POST body
             axios({
-				method: 'get',
+				method: 'post',
 				url: 'https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.soap.marketingcloudapis.com/Service.asmx',
-				params: {'soapMessage': soapMessage},
-				headers: {'Content-Type': 'text/xml',
-							'SOAPAction': 'Retrieve'}
+				data: {'soapMessage': soapMessage},
+				headers: {'Content-Type': 'text/xml'}							
 				})            
 				.then((response: any) => {
 				Utils.logInfo(response.data);
