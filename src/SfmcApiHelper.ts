@@ -143,7 +143,7 @@ export default class SfmcApiHelper
 	public getCategoryIDHelper(oauthAccessToken: string) : Promise<any>
 	{
 		let soapMessage ='<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">'
-+'<SOAP-ENV:Header>
++'<SOAP-ENV:Header>'
 +'			<a:Action s:mustUnderstand="1">Retrieve</a:Action>'
 +'      <a:MessageID>urn:uuid:7e0cca04-57bd-4481-864c-6ea8039d2ea0</a:MessageID>'
 +'      <a:ReplyTo>'
