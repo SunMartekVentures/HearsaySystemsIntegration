@@ -169,7 +169,7 @@ export default class SfmcApiHelper
  +'</RetrieveRequest>'
  +'</RetrieveRequestMsg>'
  +'</soapenv:Body>'
- +'</soapenv:Envelope>'
+ +'</soapenv:Envelope>';
 				
 	return new Promise<any>((resolve, reject) =>
 		{
