@@ -179,7 +179,7 @@ export default class SfmcApiHelper
             axios({
 				method: 'post',
 				url: 'https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.soap.marketingcloudapis.com/Service.asmx',
-				data: {'soapMessage': soapMessage},
+				data: soapMessage,
 				headers: {'Content-Type': 'text/xml'}							
 				})            
 				.then((response: any) => {
