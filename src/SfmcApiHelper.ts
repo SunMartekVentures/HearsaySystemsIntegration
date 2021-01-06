@@ -184,7 +184,10 @@ export default class SfmcApiHelper
 				})            
 				.then((response: any) => {
 				Utils.logInfo(response.data);
-				Dom.Document doc = response.data.getBodyDocument();
+				let parser = new DOMParser();
+				let xmlDoc = parser.parseFromString(response.data,"text/xml");
+				Utils.logInfo(xmlDoc);
+				/*Dom.Document doc = response.data.getBodyDocument();
 				for(Dom.XmlNode parentNode: doc.getRootElement().getChildElements()) {
 					Utils.logInfo(parentNode);
 				for(Dom.XmlNode ChildNode: parentNode.getChildElements()) {
@@ -200,7 +203,7 @@ export default class SfmcApiHelper
 	   }
 	   }
 	   }
-	   }
+	   }*/
 			})
 			.catch((error: any) => {
 										// error
