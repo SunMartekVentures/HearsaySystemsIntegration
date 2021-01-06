@@ -11,9 +11,8 @@ export default class SfmcApiHelper
     private _sfmcDataExtensionApiUrl = "https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.rest.marketingcloudapis.com/hub/v1/dataevents/key:" + this._deExternalKey + "/rowset";
     private _oauthToken = "";
 	private FolderID='';
-    
-    
-    
+	private parser = new DOMParser(); 
+	private xmlDoc;
     
     
     /**
@@ -184,8 +183,7 @@ export default class SfmcApiHelper
 				})            
 				.then((response: any) => {
 				Utils.logInfo(response.data);
-				let parser = new DOMParser();
-				let xmlDoc = parser.parseFromString(response.data,"text/xml");
+				xmlDoc = parser.parseFromString(response.data,"text/xml");
 				Utils.logInfo(xmlDoc);
 				/*Dom.Document doc = response.data.getBodyDocument();
 				for(Dom.XmlNode parentNode: doc.getRootElement().getChildElements()) {
@@ -206,12 +204,12 @@ export default class SfmcApiHelper
 	   }*/
 			})
 			.catch((error: any) => {
-										// error
-										let errorMsg = "Error loading sample data. POST response from Marketing Cloud:";
-										errorMsg += "\nMessage: " + error.message;
-										errorMsg += "\nStatus: " + error.response ? error.response.status : "<None>";
-										errorMsg += "\nResponse data: " + error.response.data ? Utils.prettyPrintJson(JSON.stringify(error.response.data)) : "<None>";
-										Utils.logError(errorMsg);
+						// error
+						let errorMsg = "Error loading sample data. POST response from Marketing Cloud:";
+						errorMsg += "\nMessage: " + error.message;
+						errorMsg += "\nStatus: " + error.response ? error.response.status : "<None>";
+						errorMsg += "\nResponse data: " + error.response.data ? Utils.prettyPrintJson(JSON.stringify(error.response.data)) : "<None>";
+						Utils.logError(errorMsg);
 
 										reject(errorMsg);
 									});
