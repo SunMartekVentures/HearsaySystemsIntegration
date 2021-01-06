@@ -10,7 +10,7 @@ export default class SfmcApiHelper
     private _deExternalKey = "Org_Setup";
     private _sfmcDataExtensionApiUrl = "https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.rest.marketingcloudapis.com/hub/v1/dataevents/key:" + this._deExternalKey + "/rowset";
     private _oauthToken = "";
-	//private FolderID='';
+	private FolderID='';
     
     
     
@@ -184,6 +184,23 @@ export default class SfmcApiHelper
 				})            
 				.then((response: any) => {
 				Utils.logInfo(response.data);
+				Dom.Document doc = res.getBodyDocument();
+				for(Dom.XmlNode parentNode: doc.getRootElement().getChildElements()) {
+					Utils.logInfo(parentNode);
+				for(Dom.XmlNode ChildNode: parentNode.getChildElements()) {
+					Utils.logInfo(ChildNode);
+				for(Dom.XmlNode pchildNode: ChildNode.getChildElements()) {
+					Utils.logInfo(pchildNode);
+				for(Dom.XmlNode ppchildNode: pchildNode.getChildElements()) {
+					Utils.logInfo(ppchildNode);
+       if(ppchildNode.getName() == 'ID'){
+       FolderID=ppchildNode.getText();
+      system.debug('FolderID:'+FolderID);
+       }
+	   }
+	   }
+	   }
+	   }
 			})
 			.catch((error: any) => {
 										// error
