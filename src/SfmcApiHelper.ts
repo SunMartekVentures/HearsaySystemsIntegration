@@ -3,7 +3,7 @@
 import axios from 'axios';
 import express = require("express");
 import Utils from './Utils';
-import DomParser = require('dom-parser');
+import xml2js = require("xml2js");
 
 export default class SfmcApiHelper
 {
@@ -183,9 +183,17 @@ export default class SfmcApiHelper
 				headers: {'Content-Type': 'text/xml'}							
 				})            
 				.then((response: any) => {
-				Utils.logInfo(response.data);
-				let xmlDoc = this.parser.parseFromString(response.data,"text/xml");
-				Utils.logInfo(xmlDoc);
+                Utils.logInfo(response.data);
+                var extractedData = "";
+var parser = new xml2js.Parser();
+parser.parseString(response.data, (err: any, result: { [x: string]: { [x: string]: { [x: string]: { [x: string]: any; }[]; }[]; }; }) => {
+        //Extract the value from the data element
+        //extractedData = result['soap:Envelope']['soap:Body'];
+        Utils.logInfo('response ' + JSON.stringify(result));
+        Utils.logInfo('response env ' + Utils.prettyPrintJson(JSON.stringify(result['soap:Envelope'])));
+        Utils.logInfo('response body' + Utils.prettyPrintJson(JSON.stringify(result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'])));
+    });
+//console.log("Note that you can't use value here if parseString is async; extractedData=", extractedData.RetrieveResponseMsg);
 				/*Dom.Document doc = response.data.getBodyDocument();
 				for(Dom.XmlNode parentNode: doc.getRootElement().getChildElements()) {
 					Utils.logInfo(parentNode);
