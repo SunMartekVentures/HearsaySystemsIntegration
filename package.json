@@ -50,7 +50,7 @@
     "helmet": "^3.13.0",
     "jquery": "^3.5.1",
     "jwt-simple": "^0.5.1",
-    "morgan": "^1.9.0",
+    "morgan": "^1.9.1",
     "serve-favicon": "^2.5.0",
     "shortid": "^2.2.13",
     "sizzle": "^2.3.5",
