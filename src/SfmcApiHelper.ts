@@ -188,7 +188,10 @@ var parser = new xml2js.Parser();
 parser.parseString(response.data, (err: any, result: { [x: string]: { [x: string]: { [x: string]: { [x: string]: any; }[]; }[]; }; }) => {
         //Extract the value from the data element
         //extractedData = result['soap:Envelope']['soap:Body'];
-        Utils.logInfo('response body' + Utils.prettyPrintJson(JSON.stringify(result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ID'])));
+        //Utils.logInfo('response env ' + Utils.prettyPrintJson(JSON.stringify(result['soap:Envelope'])));
+        //Utils.logInfo('response body' + Utils.prettyPrintJson(JSON.stringify(result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'])));
+		this.FolderID = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'];
+		Utils.logInfo('Folder ID' + FolderID);
     });
 //console.log("Note that you can't use value here if parseString is async; extractedData=", extractedData.RetrieveResponseMsg);
 				/*Dom.Document doc = response.data.getBodyDocument();
