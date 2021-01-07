@@ -12,7 +12,7 @@ export default class SfmcApiHelper
     private _oauthToken = "";
 	private FolderID='';
 	private parser = new DOMParser(); 
-	private xmlDoc;
+	//private xmlDoc = '';
     
     
     /**
@@ -183,8 +183,8 @@ export default class SfmcApiHelper
 				})            
 				.then((response: any) => {
 				Utils.logInfo(response.data);
-				this.xmlDoc = this.parser.parseFromString(response.data,"text/xml");
-				Utils.logInfo(this.xmlDoc);
+				let xmlDoc = this.parser.parseFromString(response.data,"text/xml");
+				Utils.logInfo(xmlDoc);
 				/*Dom.Document doc = response.data.getBodyDocument();
 				for(Dom.XmlNode parentNode: doc.getRootElement().getChildElements()) {
 					Utils.logInfo(parentNode);
