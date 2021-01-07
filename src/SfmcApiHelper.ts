@@ -426,6 +426,7 @@ parser.parseString(response.data, (err: any, result: { [x: string]: { [x: string
 +'            <Objects xsi:type="DataExtension">'
 +'                <PartnerKey xsi:nil="true"/>'
 +'                <ObjectID xsi:nil="true"/>'
++'                <CategoryID>'+this.FolderID+'</CategoryID>'
 +'                <CustomerKey>'+template.Template_Name+'</CustomerKey>'
 +'                <Name>'+template.Template_Name+'</Name>'
 +'                <IsSendable>true</IsSendable>'
