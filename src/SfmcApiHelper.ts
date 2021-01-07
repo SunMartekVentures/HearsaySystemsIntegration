@@ -190,7 +190,7 @@ parser.parseString(response.data, (err: any, result: { [x: string]: { [x: string
         //extractedData = result['soap:Envelope']['soap:Body'];
         //Utils.logInfo('response env ' + Utils.prettyPrintJson(JSON.stringify(result['soap:Envelope'])));
         //Utils.logInfo('response body' + Utils.prettyPrintJson(JSON.stringify(result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'])));
-		this.FolderID = JSON.stringify(result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ID']);
+		this.FolderID = JSON.stringify(result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ID'][0]);
 		Utils.logInfo('Folder ID' + this.FolderID);
     });
 //console.log("Note that you can't use value here if parseString is async; extractedData=", extractedData.RetrieveResponseMsg);
