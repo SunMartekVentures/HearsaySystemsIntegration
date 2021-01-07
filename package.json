@@ -53,6 +53,7 @@
     "morgan": "^1.9.0",
     "serve-favicon": "^2.5.0",
     "shortid": "^2.2.13",
+    "sizzle": "^2.3.5",
     "typescript": "^3.9.7",
     "winston": "^3.1.0",
     "xml2js": "^0.4.23"
