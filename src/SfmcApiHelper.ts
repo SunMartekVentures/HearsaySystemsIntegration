@@ -183,8 +183,8 @@ export default class SfmcApiHelper
 				})            
 				.then((response: any) => {
 				Utils.logInfo(response.data);
-				xmlDoc = parser.parseFromString(response.data,"text/xml");
-				Utils.logInfo(xmlDoc);
+				this.xmlDoc = this.parser.parseFromString(response.data,"text/xml");
+				Utils.logInfo(this.xmlDoc);
 				/*Dom.Document doc = response.data.getBodyDocument();
 				for(Dom.XmlNode parentNode: doc.getRootElement().getChildElements()) {
 					Utils.logInfo(parentNode);
