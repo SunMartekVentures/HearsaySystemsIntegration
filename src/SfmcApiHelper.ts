@@ -12,7 +12,6 @@ export default class SfmcApiHelper
     private _sfmcDataExtensionApiUrl = "https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.rest.marketingcloudapis.com/hub/v1/dataevents/key:" + this._deExternalKey + "/rowset";
     private _oauthToken = "";
 	private FolderID='';
-	private parser = new DOMParser(); 
 	//private xmlDoc = '';
     
     
