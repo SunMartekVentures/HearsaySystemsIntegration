@@ -3,6 +3,7 @@
 import axios from 'axios';
 import express = require("express");
 import Utils from './Utils';
+import DomParser = require('dom-parser');
 
 export default class SfmcApiHelper
 {
