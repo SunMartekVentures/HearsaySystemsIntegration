@@ -35,7 +35,7 @@
     "@types/jquery": "^3.3.6",
     "@types/jwt-simple": "^0.5.33",
     "@types/morgan": "^1.7.35",
-    "@types/node": "^10.9.4",
+    "@types/node": "^10.17.50",
     "@types/serve-favicon": "^2.2.30",
     "@types/shortid": "0.0.29",
     "@types/winston": "^2.4.4",
