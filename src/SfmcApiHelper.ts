@@ -470,9 +470,7 @@ export default class SfmcApiHelper
 					soapData += '<Field>'
 +'                        <Name>Org_ID</Name>'
 +'                        <FieldType>Text</FieldType>'
-+'                        <IsPrimaryKey>true</IsPrimaryKey>'
-+'						<MaxLength>50</MaxLength>'
-+'                        <IsRequired>true</IsRequired>'
++'                        <IsRequired>false</IsRequired>'
 +'                    </Field>'
 				}
 				else{
@@ -563,15 +561,10 @@ export default class SfmcApiHelper
 		
 		let RowData=
 	    {
-			keys:{
-                    Org_ID : this.Hearsay_Org_ID
-			},
-			values:{
-				
-			}
-			
-                                		
-	    	}
+			items: {
+			Org_ID : this.Hearsay_Org_ID
+			}                                		
+	    }
 			let Row = JSON.stringify(RowData);
 			Utils.logInfo("Row "+ Row);
 			
@@ -583,7 +576,7 @@ export default class SfmcApiHelper
 		return new Promise<any>((resolve, reject) =>
         {
 			Utils.logInfo("Ahpppaaaddaa, Method call aaiduchu");
-			 axios.post("https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.rest.marketingcloudapis.com/hub/v1/dataevents/key:" + DataExtensionName + "/rowset", Row, {"headers" : headers})
+			 axios.post("https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.rest.marketingcloudapis.com/data/v1/dataevents/key:" + DataExtensionName + "/rows", Row, {"headers" : headers})
             .then((response: any) => {
                 // success
                 Utils.logInfo("Hearsay_Org_ID Updated Successfully");
