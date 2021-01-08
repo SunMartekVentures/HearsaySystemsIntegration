@@ -447,7 +447,7 @@ export default class SfmcApiHelper
 		Utils.logInfo("Request body as a parameter: " + JSON.stringify(template));
 		Object.keys(template).forEach(key => {
 				Utils.logInfo(key);
-				if(key === "Template_Name" ){
+				/*if(key === "Template_Name" ){
 					Utils.logInfo("if condition satisfied");
 					soapData +='<Field>'
 +'                        <Name>'+template.Template_Name+'</Name>'
@@ -456,12 +456,12 @@ export default class SfmcApiHelper
 +'						<MaxLength>50</MaxLength>'
 +'                        <IsRequired>true</IsRequired>'
 +'                    </Field>';				
-				}
-				else if(template[key]===""){
+				}*/
+				if(template[key]===""){
 					Utils.logInfo("else if condition satisfied ");				
 					delete template[key];
 				}
-				else if(key==="Hearsay_Org_ID"){
+				/*else if(key==="Hearsay_Org_ID"){
 					Utils.logInfo("Hearsay_Org_ID is blended with key, It will be sent as field name and the value inserted will be sent as value for that field ");				
 					soapData += '<Field>'
 +'                        <Name>Hearsay_Org_ID</Name>'
@@ -469,7 +469,7 @@ export default class SfmcApiHelper
 +'                    		<DefaultValue>'+template.Hearsay_Org_ID+'</DefaultValue>'
 +'                        <IsRequired>false</IsRequired>'
 +'                    </Field>'
-				}
+				}*/
 				else{
 					Utils.logInfo("field name "+ template[key] + " has been added to the soapData");
 					soapData += '<Field>'
