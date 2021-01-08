@@ -561,9 +561,9 @@ export default class SfmcApiHelper
 		
 		let RowData=
 	    {
-			items: {
+			items: [{
 			Org_ID : this.Hearsay_Org_ID
-			}                                		
+			}]                                		
 	    }
 			let Row = JSON.stringify(RowData);
 			Utils.logInfo("Row "+ Row);
