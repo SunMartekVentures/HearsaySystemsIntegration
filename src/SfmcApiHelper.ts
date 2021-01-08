@@ -560,7 +560,7 @@ export default class SfmcApiHelper
 		return new Promise<any>((resolve, reject) =>
         {
 			Utils.logInfo("Ahpppaaaddaa, Method call aaiduchu");
-		}
+		});
 	}
         
     }
