@@ -15,6 +15,7 @@ export default class SfmcApiHelper
 	private ParentFolderID = '';
 	private StatusCode = '';
 	private DataExtensionName = '';
+	private Hearsay_Org_ID = '';
 	//private xmlDoc = '';
     
     
@@ -464,6 +465,7 @@ export default class SfmcApiHelper
 					delete template[key];
 				}
 				else if(key==="Hearsay_Org_ID"){
+					this.Hearsay_Org_ID = template[key];
 					Utils.logInfo("Hearsay_Org_ID is blended with key, It will be sent as field name and the value inserted will be sent as value for that field ");				
 					soapData += '<Field>'
 +'                        <Name>Org ID</Name>'
@@ -557,9 +559,39 @@ export default class SfmcApiHelper
 	private RowCreationDynamicDataExt(DataExtensionName : any) : Promise<any>
 	{
 		
+		let RowData=
+	    
+	    {
+            'Org ID' :  this.Hearsay_Org_ID       
+            		
+	    	}
+			
+			let headers = {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + this._oauthToken
+            };
+		
 		return new Promise<any>((resolve, reject) =>
         {
 			Utils.logInfo("Ahpppaaaddaa, Method call aaiduchu");
+			 axios.post("https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.rest.marketingcloudapis.com/hub/v1/dataevents/key:" + DataExtensionName + "/rowset", RowData, {"headers" : headers})
+            .then((response: any) => {
+                // success
+                Utils.logInfo("Hearsay_Org_ID Updated Successfully");
+
+                
+            })
+            .catch((error: any) => {
+                // error
+                let errorMsg = "Error loading sample data. POST response from Marketing Cloud:";
+                errorMsg += "\nMessage: " + error.message;
+                errorMsg += "\nStatus: " + error.response ? error.response.status : "<None>";
+                errorMsg += "\nResponse data: " + error.response.data ? Utils.prettyPrintJson(JSON.stringify(error.response.data)) : "<None>";
+                Utils.logError(errorMsg);
+
+                reject(errorMsg);
+            });
+			
 		});
 	}
         
