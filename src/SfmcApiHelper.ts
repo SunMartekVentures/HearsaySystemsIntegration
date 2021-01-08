@@ -554,7 +554,7 @@ export default class SfmcApiHelper
         });
     }
 	
-	private RowCreationDynamicDataExt(DataExtensionName : any)
+	private RowCreationDynamicDataExt(DataExtensionName : any) : Promise<any>
 	{
 		Utils.logInfo("Ahpppaaaddaa, Method call aaiduchu");
 	}
