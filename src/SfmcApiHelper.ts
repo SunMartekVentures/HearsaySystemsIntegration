@@ -470,7 +470,9 @@ export default class SfmcApiHelper
 					soapData += '<Field>'
 +'                        <Name>Org_ID</Name>'
 +'                        <FieldType>Text</FieldType>'
-+'                        <IsRequired>false</IsRequired>'
++'                        <IsPrimaryKey>true</IsPrimaryKey>'
++'						<MaxLength>50</MaxLength>'
++'                        <IsRequired>true</IsRequired>'
 +'                    </Field>'
 				}
 				else{
@@ -561,8 +563,13 @@ export default class SfmcApiHelper
 		
 		let RowData=
 	    {
-			
+			keys:{
                     Org_ID : this.Hearsay_Org_ID
+			},
+			values:{
+				
+			}
+			
                                 		
 	    	}
 			let Row = JSON.stringify(RowData);
