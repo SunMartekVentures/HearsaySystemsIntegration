@@ -514,11 +514,11 @@ export default class SfmcApiHelper
 					Utils.logInfo('Data Extension Name : ' + this.DataExtensionName);
 					
 					self.RowCreationDynamicDataExt(this.DataExtensionName)
-					.then((result) => {
-						res.status(result.status).send(result.statusText);
+					.then((result : any) => {
+						Utils.logInfo('Row Created Successfully in Dynamically created DE');
 						})
-					.catch((err) => {
-						res.status(500).send(err);
+					.catch((err : any) => {
+						Utils.logInfo('Error when creating row in Dynamically created DE');
 					});
 				}
 				else{
@@ -554,7 +554,7 @@ export default class SfmcApiHelper
         });
     }
 	
-	private RowCreationDynamicDataExt(DataExtensionName)
+	private RowCreationDynamicDataExt(DataExtensionName : any)
 	{
 		Utils.logInfo("Ahpppaaaddaa, Method call aaiduchu");
 	}
