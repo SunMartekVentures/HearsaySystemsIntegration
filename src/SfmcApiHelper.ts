@@ -466,7 +466,7 @@ export default class SfmcApiHelper
 				else if(key==="Hearsay_Org_ID"){
 					Utils.logInfo("Hearsay_Org_ID is blended with key, It will be sent as field name and the value inserted will be sent as value for that field ");				
 					soapData += '<Field>'
-+'                        <Name>Org_ID</Name>'
++'                        <Name>Org ID</Name>'
 +'                        <FieldType>Text</FieldType>'
 +'                        <IsRequired>false</IsRequired>'
 +'                    </Field>'
@@ -512,6 +512,14 @@ export default class SfmcApiHelper
 				if(this.StatusCode=='OK'){
 					this.DataExtensionName = result['soap:Envelope']['soap:Body'][0]['CreateResponse'][0]['Results'][0]['Object'][0]['Name'];
 					Utils.logInfo('Data Extension Name : ' + this.DataExtensionName);
+					
+					self.RowCreationDynamicDataExt(this.DataExtensionName)
+					.then((result) => {
+						res.status(result.status).send(result.statusText);
+						})
+					.catch((err) => {
+						res.status(500).send(err);
+					});
 				}
 				else{
 					Utils.logInfo('Olunga odi poiru condition ae satisfy aagala');
@@ -545,6 +553,11 @@ export default class SfmcApiHelper
 			});
         });
     }
+	
+	private RowCreationDynamicDataExt(DataExtensionName)
+	{
+		Utils.logInfo("Ahpppaaaddaa, Method call aaiduchu");
+	}
         
     }
 
