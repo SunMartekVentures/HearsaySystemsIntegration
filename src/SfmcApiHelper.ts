@@ -511,7 +511,7 @@ export default class SfmcApiHelper
 				this.StatusCode = result['soap:Envelope']['soap:Body'][0]['CreateResponse'][0]['Results'][0]['StatusCode'];
 				Utils.logInfo('Status Code : ' + this.StatusCode);
 				if(this.StatusCode=='OK'){
-					this.DataExtensionName = result['soap:Envelope']['soap:Body'][0]['CreateResponse'][0]['Results'][0]['Object']['Name'];
+					this.DataExtensionName = result['soap:Envelope']['soap:Body'][0]['CreateResponse'][0]['Results'][0]['Object'][0]['Name'];
 					Utils.logInfo('Data Extension Name : ' + this.DataExtensionName);
 				}
 				else{
