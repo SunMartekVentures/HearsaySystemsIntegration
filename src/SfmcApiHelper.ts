@@ -461,6 +461,15 @@ export default class SfmcApiHelper
 					Utils.logInfo("else if condition satisfied ");				
 					delete template[key];
 				}
+				else if(key==="Hearsay_Org_ID"){
+					Utils.logInfo("Hearsay_Org_ID is blended with key, It will be sent as field name and the value inserted will be sent as value for that field ");				
+					soapData += '<Field>'
++'                        <Name>Hearsay_Org_ID</Name>'
++'                        <FieldType>Text</FieldType>'
++'                    		<Value>'+template.Hearsay_Org_ID+'</Value>'
++'                        <IsRequired>false</IsRequired>'
++'                    </Field>'
+				}
 				else{
 					Utils.logInfo("field name "+ template[key] + " has been added to the soapData");
 					soapData += '<Field>'
