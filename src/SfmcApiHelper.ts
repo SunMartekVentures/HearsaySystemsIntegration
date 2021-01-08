@@ -466,7 +466,7 @@ export default class SfmcApiHelper
 					soapData += '<Field>'
 +'                        <Name>Hearsay_Org_ID</Name>'
 +'                        <FieldType>Text</FieldType>'
-+'                    		<Value>'+template.Hearsay_Org_ID+'</Value>'
++'                    		<DefaultValue>'+template.Hearsay_Org_ID+'</DefaultValue>'
 +'                        <IsRequired>false</IsRequired>'
 +'                    </Field>'
 				}
