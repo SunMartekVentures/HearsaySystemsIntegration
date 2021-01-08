@@ -468,10 +468,10 @@ export default class SfmcApiHelper
 					this.Hearsay_Org_ID = template[key];
 					Utils.logInfo("Hearsay_Org_ID is blended with key, It will be sent as field name and the value inserted will be sent as value for that field ");				
 					soapData += '<Field>'
-+'                        <Name>Org ID</Name>'
++'                        <Name>Org_ID</Name>'
 +'                        <FieldType>Text</FieldType>'
 +'                        <IsPrimaryKey>true</IsPrimaryKey>'
-+'			  <MaxLength>50</MaxLength>'
++'						<MaxLength>50</MaxLength>'
 +'                        <IsRequired>true</IsRequired>'
 +'                    </Field>'
 				}
@@ -563,9 +563,7 @@ export default class SfmcApiHelper
 		
 		let RowData=
 	    {
-        "keys": {
-                'Org ID' :  this.Hearsay_Org_ID
-                }           		
+                 Org_ID : this.Hearsay_Org_ID		
 	    	}
 			
 			let headers = {
