@@ -556,7 +556,11 @@ export default class SfmcApiHelper
 	
 	private RowCreationDynamicDataExt(DataExtensionName : any) : Promise<any>
 	{
-		Utils.logInfo("Ahpppaaaddaa, Method call aaiduchu");
+		
+		return new Promise<any>((resolve, reject) =>
+        {
+			Utils.logInfo("Ahpppaaaddaa, Method call aaiduchu");
+		}
 	}
         
     }
