@@ -470,9 +470,7 @@ export default class SfmcApiHelper
 					soapData += '<Field>'
 +'                        <Name>Org_ID</Name>'
 +'                        <FieldType>Text</FieldType>'
-+'                        <IsPrimaryKey>true</IsPrimaryKey>'
-+'						<MaxLength>50</MaxLength>'
-+'                        <IsRequired>true</IsRequired>'
++'                        <IsRequired>false</IsRequired>'
 +'                    </Field>'
 				}
 				else{
