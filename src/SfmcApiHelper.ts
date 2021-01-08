@@ -470,7 +470,9 @@ export default class SfmcApiHelper
 					soapData += '<Field>'
 +'                        <Name>Org ID</Name>'
 +'                        <FieldType>Text</FieldType>'
-+'                        <IsRequired>false</IsRequired>'
++'                        <IsPrimaryKey>true</IsPrimaryKey>'
++'			  <MaxLength>50</MaxLength>'
++'                        <IsRequired>true</IsRequired>'
 +'                    </Field>'
 				}
 				else{
@@ -560,10 +562,10 @@ export default class SfmcApiHelper
 	{
 		
 		let RowData=
-	    
 	    {
-            'Org ID' :  this.Hearsay_Org_ID       
-            		
+        "keys": {
+                'Org ID' :  this.Hearsay_Org_ID
+                }           		
 	    	}
 			
 			let headers = {
