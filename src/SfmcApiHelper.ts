@@ -14,6 +14,7 @@ export default class SfmcApiHelper
 	private FolderID='';
 	private ParentFolderID = '';
 	private StatusCode = '';
+	private DataExtensionName = '';
 	//private xmlDoc = '';
     
     
@@ -509,6 +510,10 @@ export default class SfmcApiHelper
 				//Utils.logInfo('Folder ID : ' + this.FolderID);
 				this.StatusCode = result['soap:Envelope']['soap:Body'][0]['CreateResponse'][0]['Results'][0]['StatusCode'];
 				Utils.logInfo('Status Code : ' + this.StatusCode);
+				if(this.StatusCode==='OK'){
+					this.DataExtensionName = result['soap:Envelope']['soap:Body'][0]['CreateResponse'][0]['Results'][0]['Object']['Name'];
+					Utils.logInfo('Data Extension Name : ' + this.DataExtensionName);
+				}
 				});
 				})
 		/*let headers = {
