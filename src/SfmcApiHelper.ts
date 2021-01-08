@@ -492,8 +492,26 @@ export default class SfmcApiHelper
 	    
 	    
         return new Promise<any>((resolve, reject) =>
-        {		
-		let headers = {
+        {
+				
+				axios({
+				method: 'post',
+				url: 'https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.soap.marketingcloudapis.com/Service.asmx',
+				data: soapData,
+				headers: {'Content-Type': 'text/xml'}							
+				})            
+				.then((response: any) => {
+                Utils.logInfo(response.data);
+                var extractedData = "";
+				var parser = new xml2js.Parser();
+				parser.parseString(response.data, (err: any, result: { [x: string]: { [x: string]: { [x: string]: { [x: string]: any; }[]; }[]; }; }) => {
+				//this.FolderID = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ID'][0];
+				//Utils.logInfo('Folder ID : ' + this.FolderID);
+				this.StatusCode = result['soap:Envelope']['soap:Body'][0]['CreateResponse'][0]['Results'][0]['StatusCode'];
+				Utils.logInfo('Status Code : ' + this.StatusCode);
+				});
+				})
+		/*let headers = {
                 'Content-Type': 'text/xml'
             };
 			
@@ -507,7 +525,7 @@ export default class SfmcApiHelper
 				this.StatusCode = result['soap:Envelope']['soap:Body'][0]['CreateResponse'][0]['Results'][0]['StatusCode'];
 				Utils.logInfo('Status Code : ' + this.StatusCode);
 				});
-			})
+			})*/
 			.catch(function (error) {
 				let errorMsg = "Error creating data extension dynamically. POST response from Marketing Cloud:";
                 errorMsg += "\nMessage: " + error.message;
