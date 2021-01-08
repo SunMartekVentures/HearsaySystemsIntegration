@@ -563,7 +563,9 @@ export default class SfmcApiHelper
 		
 		let RowData=
 	    {
-                 Org_ID : this.Hearsay_Org_ID		
+			
+                    Org_ID : this.Hearsay_Org_ID
+                                		
 	    	}
 			
 			let headers = {
@@ -574,7 +576,7 @@ export default class SfmcApiHelper
 		return new Promise<any>((resolve, reject) =>
         {
 			Utils.logInfo("Ahpppaaaddaa, Method call aaiduchu");
-			 axios.post("https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.rest.marketingcloudapis.com/hub/v1/dataevents/key:" + DataExtensionName + "/rowset", RowData, {"headers" : headers})
+			 axios.post("https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.rest.marketingcloudapis.com/hub/v1/dataevents/key:" + DataExtensionName + "/rowset", JSON.stringify(RowData), {"headers" : headers})
             .then((response: any) => {
                 // success
                 Utils.logInfo("Hearsay_Org_ID Updated Successfully");
