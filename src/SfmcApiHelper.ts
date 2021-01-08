@@ -576,7 +576,7 @@ export default class SfmcApiHelper
 		return new Promise<any>((resolve, reject) =>
         {
 			Utils.logInfo("Ahpppaaaddaa, Method call aaiduchu");
-			 axios.post("https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.rest.marketingcloudapis.com/data/v1/dataextensions/key:" + DataExtensionName + "/rows", Row, {"headers" : headers})
+			 axios.post("https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.rest.marketingcloudapis.com/data/v1/async/dataextensions/key:" + DataExtensionName + "/rows", Row, {"headers" : headers})
             .then((response: any) => {
                 // success
                 Utils.logInfo("Hearsay_Org_ID Updated Successfully");
