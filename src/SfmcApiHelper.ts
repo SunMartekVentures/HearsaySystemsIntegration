@@ -468,9 +468,9 @@ export default class SfmcApiHelper
 					this.Hearsay_Org_ID = template[key];
 					Utils.logInfo("Hearsay_Org_ID is blended with key, It will be sent as field name and the value inserted will be sent as value for that field ");				
 					soapData += '<Field>'
-+'                        <Name>Org_ID</Name>'
-+'                        <FieldType>Text</FieldType>'
-+'                        <IsRequired>false</IsRequired>'
++'                        <Name>Org ID</Name>'
++'                        <DefaultValue>'+template[key]+'</DefaultValue>'
++'                        <IsRequired>true</IsRequired>'
 +'                    </Field>'
 				}
 				else{
@@ -505,7 +505,7 @@ export default class SfmcApiHelper
 				.then((response: any) => {
                 Utils.logInfo(response.data);
                 var extractedData = "";
-				var parser = new xml2js.Parser();
+				/*var parser = new xml2js.Parser();
 				parser.parseString(response.data, (err: any, result: { [x: string]: { [x: string]: { [x: string]: { [x: string]: any; }[]; }[]; }; }) => {
 				//this.FolderID = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ID'][0];
 				//Utils.logInfo('Folder ID : ' + this.FolderID);
@@ -526,7 +526,7 @@ export default class SfmcApiHelper
 				else{
 					Utils.logInfo('Olunga odi poiru condition ae satisfy aagala');
 				}
-				});
+				});*/
 				})
 		/*let headers = {
                 'Content-Type': 'text/xml'
@@ -549,14 +549,14 @@ export default class SfmcApiHelper
                 errorMsg += "\nStatus: " + error.response ? error.response.status : "<None>";
                 errorMsg += "\nResponse data: " + error.response.data ? Utils.prettyPrintJson(JSON.stringify(error.response.data)) : "<None>";
                 Utils.logError(errorMsg);
-		    Utils.logError(error.response.data);
+				Utils.logError(error.response.data);
 
                 reject(errorMsg);
 			});
         });
     }
 	
-	private RowCreationDynamicDataExt(DataExtensionName : any) : Promise<any>
+	/*private RowCreationDynamicDataExt(DataExtensionName : any) : Promise<any>
 	{
 		
 		let RowData=
@@ -595,7 +595,7 @@ export default class SfmcApiHelper
             });
 			
 		});
-	}
+	}*/
         
     }
 
