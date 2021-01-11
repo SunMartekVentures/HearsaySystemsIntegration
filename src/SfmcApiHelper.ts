@@ -434,15 +434,8 @@ export default class SfmcApiHelper
 		Utils.logInfo("Request body as a parameter: " + JSON.stringify(template));
 		Object.keys(template).forEach(key => {
 				Utils.logInfo(key);
-				if(key === "Template Name" ){
-					Utils.logInfo("if condition satisfied");
-					soapData +=	'<Objects xsi:type="DataExtension">'
-+'                <PartnerKey xsi:nil="true"/>'
-+'                <ObjectID xsi:nil="true"/>'
-+'                <CategoryID>'+this.FolderID+'</CategoryID>'
-+'                <CustomerKey>'+template[key]+'</CustomerKey>'
-+'                <Name>'+template[key]+'</Name>'
-+'                <IsSendable>true</IsSendable>'
+				if(key === "Hearsay User Reference ID"){
+					soapData += '<IsSendable>true</IsSendable>'
 +'                <SendableDataExtensionField>'
 +'                    <CustomerKey>'+template[key]+'</CustomerKey>'
 +'                    <Name>'+template[key]+'</Name>'
@@ -452,9 +445,22 @@ export default class SfmcApiHelper
 +'                    <Name>Subscriber Key</Name>'
 +'                    <Value>'+template[key]+'</Value>'
 +'                </SendableSubscriberField>'
+				}
+				else{
+					Utils.logInfo("Thambi, Hearsay User Reference ID innum varala");
+				}
+				if(key === "Template Name" ){
+					Utils.logInfo("if condition satisfied");
+					soapData +=	'<Objects xsi:type="DataExtension">'
++'                <PartnerKey xsi:nil="true"/>'
++'                <ObjectID xsi:nil="true"/>'
++'                <CategoryID>'+this.FolderID+'</CategoryID>'
++'                <CustomerKey>'+template[key]+'</CustomerKey>'
++'                <Name>'+template[key]+'</Name>'
+
 +'                <Fields>'		
 				}
-				if(template[key]===""){
+				else if(template[key]===""){
 					Utils.logInfo("else if condition satisfied ");				
 					delete template[key];
 				}
