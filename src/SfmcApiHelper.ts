@@ -482,6 +482,11 @@ export default class SfmcApiHelper
 +'                    <Value>'+template[key]+'</Value>'
 +'                </SendableSubscriberField>'
 +'                <Fields>'
++'					<Field>'
++'                        <Name>'+template[key]+'</Name>'
++'                        <FieldType>Text</FieldType>'
++'                        <IsRequired>false</IsRequired>'
++'                    </Field>'
 
 				}
 				else{
