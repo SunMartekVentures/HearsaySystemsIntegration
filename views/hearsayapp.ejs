@@ -437,7 +437,7 @@
 	
 	axios({
 			          method: 'GET',
-			          url: 'https://dataintapicall.herokuapp.com/getcategoryidforapp',
+			          url: 'https://hearsaydataextension.herokuapp.com/getcategoryidforapp',
 			           //data: jsonObject,
 			          //headers: {'Content-Type': 'application/json' }
                 })
@@ -455,7 +455,7 @@
 	
 	axios({
 			          method: 'POST',
-			          url: 'https://dataintapicall.herokuapp.com/loaddataforapp',
+			          url: 'https://hearsaydataextension.herokuapp.com/loaddataforapp',
 			           data: jsonObject,
 			          headers: {'Content-Type': 'application/json' }
                 })
@@ -474,7 +474,7 @@
 	
 	axios({
 			          method: 'POST',
-			          url: 'https://dataintapicall.herokuapp.com/loaddatafortempapp',
+			          url: 'https://hearsaydataextension.herokuapp.com/loaddatafortempapp',
 			           data: template,
 			          headers: {'Content-Type': 'application/json' }
                 })
@@ -489,7 +489,7 @@
 		
 axios({
 			          method: 'POST',
-			          url: 'https://dataintapicall.herokuapp.com/createdeforapp',
+			          url: 'https://hearsaydataextension.herokuapp.com/createdeforapp',
 					  data: dynamicTemplate,
 					  headers: {'Content-Type': 'application/json' }
                 })
@@ -722,7 +722,8 @@ axios({
 	    console.log("Before axios");	    
 	    axios({
 			          method: 'POST',
-			          url: 'https://dataintapicall.herokuapp.com/appdemoauthtoken', 
+			          url: 'https://hearsaydataextension.herokuapp.com/
+				  appdemoauthtoken', 
 			          
 			          //headers: {'Content-Type': 'application/json' }
                 })
