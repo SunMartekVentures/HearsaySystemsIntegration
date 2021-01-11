@@ -411,7 +411,13 @@ export default class SfmcApiHelper
     private createDataExtensionHelper(oauthAccessToken: string, template: any) : Promise<any>    
     {
         let self = this;
-		let soapData = '<?xml version="1.0" encoding="UTF-8"?>'
+		let bodySoapData = '';
+		let sendableSoapData = '';
+		let fieldSoapData = '';
+		let endSoapData = '';
+		let orgIDSoapData = '';
+		let soapData = '';
+		let headerSoapData = '<?xml version="1.0" encoding="UTF-8"?>'
 +' <s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">'
 +'    <s:Header>'
 +'        <a:Action s:mustUnderstand="1">Create</a:Action>'
@@ -428,36 +434,29 @@ export default class SfmcApiHelper
 
 
 
+
+
         //Utils.logInfo("createDataExtensionHelper method is called.");
         //Utils.logInfo("Using OAuth token: " + oauthAccessToken);
 		//let dynamicTemplate = JSON.stringify(template);
 		Utils.logInfo("Request body as a parameter: " + JSON.stringify(template));
 		Object.keys(template).forEach(key => {
 				Utils.logInfo(key);
-				if(key === "Hearsay User Reference ID"){
-					soapData += '<IsSendable>true</IsSendable>'
-+'                <SendableDataExtensionField>'
-+'                    <CustomerKey>'+template[key]+'</CustomerKey>'
-+'                    <Name>'+template[key]+'</Name>'
-+'                    <FieldType>EmailAddress</FieldType>'
-+'                </SendableDataExtensionField>'
-+'                <SendableSubscriberField>'
-+'                    <Name>Subscriber Key</Name>'
-+'                    <Value>'+template[key]+'</Value>'
-+'                </SendableSubscriberField>'
-				}
-				else{
+				
+				/*else{
 					Utils.logInfo("Thambi, Hearsay User Reference ID innum varala");
-				}
+				}*/
 				if(key === "Template Name" ){
 					Utils.logInfo("if condition satisfied");
-					soapData +=	'<Objects xsi:type="DataExtension">'
+					bodySoapData +=	'<Objects xsi:type="DataExtension">'
 +'                <PartnerKey xsi:nil="true"/>'
 +'                <ObjectID xsi:nil="true"/>'
 +'                <CategoryID>'+this.FolderID+'</CategoryID>'
 +'                <CustomerKey>'+template[key]+'</CustomerKey>'
 +'                <Name>'+template[key]+'</Name>'
-+'                <Fields>'		
++'                <IsSendable>true</IsSendable>'
+
+		
 				}
 				else if(template[key]===""){
 					Utils.logInfo("else if condition satisfied ");				
@@ -466,23 +465,36 @@ export default class SfmcApiHelper
 				else if(key==="Hearsay Org ID"){
 					//this.Hearsay_Org_ID = template[key];
 					Utils.logInfo("Hearsay_Org_ID is blended with key, It will be sent as field name and the value inserted will be sent as value for that field ");				
-					soapData += '<Field>'
+					orgIDSoapData += '<Field>'
 +'                        <Name>Org ID</Name>'
 +'                        <DefaultValue>'+template[key]+'</DefaultValue>'
 +'                        <IsRequired>true</IsRequired>'
 +'                    </Field>'
 				}
+				else if(key === "Hearsay User Reference ID"){
+					sendableSoapData += '<SendableDataExtensionField>'
++'                    <CustomerKey>'+template[key]+'</CustomerKey>'
++'                    <Name>'+template[key]+'</Name>'
++'                    <FieldType>EmailAddress</FieldType>'
++'                </SendableDataExtensionField>'
++'                <SendableSubscriberField>'
++'                    <Name>Subscriber Key</Name>'
++'                    <Value>'+template[key]+'</Value>'
++'                </SendableSubscriberField>'
++'                <Fields>'
+
+				}
 				else{
 					Utils.logInfo("field name "+ template[key] + " has been added to the soapData");
-					soapData += '<Field>'
+					fieldSoapData += '<Field>'
 +'                        <Name>'+template[key]+'</Name>'
-+'                        <FieldType>EmailAddress</FieldType>'
++'                        <FieldType>Text</FieldType>'
 +'                        <IsRequired>false</IsRequired>'
 +'                    </Field>'
 				}
 				
 			});
-			soapData += '</Fields>'
+			endSoapData += '</Fields>'
 +'            </Objects>'
 +'        </CreateRequest>'
 +'    </s:Body>'
@@ -490,7 +502,7 @@ export default class SfmcApiHelper
 			
 			Utils.logInfo("Request body after deletion: " + JSON.stringify(template));
 			
-	    
+ soapData = headerSoapData + bodySoapData + sendableSoapData + orgIDSoapData + endSoapData;	    
 	    
         return new Promise<any>((resolve, reject) =>
         {
