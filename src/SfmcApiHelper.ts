@@ -423,7 +423,7 @@ export default class SfmcApiHelper
 +'        <a:ReplyTo>'
 +'            <a:Address>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</a:Address>'
 +'        </a:ReplyTo>'
-+'        <a:To s:mustUnderstand="1">https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.soap.marketingcloudapis.com/Service.asmx</a:To>'
++'        <a:To s:mustUnderstand="1">https://mc4f63jqqhfc51yw6d1h0n1ns1-m.soap.marketingcloudapis.com/Service.asmx</a:To>'
 +'        <fueloauth xmlns="http://exacttarget.com">'+oauthAccessToken+'</fueloauth>'
 +'    </s:Header>'
 +'    <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">'
