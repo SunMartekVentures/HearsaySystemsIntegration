@@ -507,7 +507,7 @@ export default class SfmcApiHelper
 			
 			Utils.logInfo("Request body after deletion: " + JSON.stringify(template));
 			
- soapData = headerSoapData + bodySoapData + sendableSoapData + orgIDSoapData + endSoapData;	    
+ soapData = headerSoapData + bodySoapData + sendableSoapData + orgIDSoapData + fieldSoapData + endSoapData;	    
 	    
         return new Promise<any>((resolve, reject) =>
         {
