@@ -439,7 +439,7 @@ export default class SfmcApiHelper
 +'                <SendableDataExtensionField>'
 +'                    <CustomerKey>'+template[key]+'</CustomerKey>'
 +'                    <Name>'+template[key]+'</Name>'
-+'                    <FieldType>Text</FieldType>'
++'                    <FieldType>EmailAddress</FieldType>'
 +'                </SendableDataExtensionField>'
 +'                <SendableSubscriberField>'
 +'                    <Name>Subscriber Key</Name>'
@@ -457,7 +457,6 @@ export default class SfmcApiHelper
 +'                <CategoryID>'+this.FolderID+'</CategoryID>'
 +'                <CustomerKey>'+template[key]+'</CustomerKey>'
 +'                <Name>'+template[key]+'</Name>'
-
 +'                <Fields>'		
 				}
 				else if(template[key]===""){
@@ -477,7 +476,7 @@ export default class SfmcApiHelper
 					Utils.logInfo("field name "+ template[key] + " has been added to the soapData");
 					soapData += '<Field>'
 +'                        <Name>'+template[key]+'</Name>'
-+'                        <FieldType>Text</FieldType>'
++'                        <FieldType>EmailAddress</FieldType>'
 +'                        <IsRequired>false</IsRequired>'
 +'                    </Field>'
 				}
