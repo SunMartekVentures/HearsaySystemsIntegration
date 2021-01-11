@@ -425,23 +425,7 @@ export default class SfmcApiHelper
 +'    <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">'
 +'        <CreateRequest xmlns="http://exacttarget.com/wsdl/partnerAPI">'
 +'            <Options/>'
-+'            <Objects xsi:type="DataExtension">'
-+'                <PartnerKey xsi:nil="true"/>'
-+'                <ObjectID xsi:nil="true"/>'
-+'                <CategoryID>'+this.FolderID+'</CategoryID>'
-+'                <CustomerKey>'+template.Template_Name+'</CustomerKey>'
-+'                <Name>'+template.Template_Name+'</Name>'
-+'                <IsSendable>true</IsSendable>'
-+'                <SendableDataExtensionField>'
-+'                    <CustomerKey>'+template.Template_Name+'</CustomerKey>'
-+'                    <Name>'+template.Template_Name+'</Name>'
-+'                    <FieldType>Text</FieldType>'
-+'                </SendableDataExtensionField>'
-+'                <SendableSubscriberField>'
-+'                    <Name>Subscriber Key</Name>'
-+'                    <Value>'+template.Template_Name+'</Value>'
-+'                </SendableSubscriberField>'
-+'                <Fields>'
+
 
 
         //Utils.logInfo("createDataExtensionHelper method is called.");
@@ -450,22 +434,32 @@ export default class SfmcApiHelper
 		Utils.logInfo("Request body as a parameter: " + JSON.stringify(template));
 		Object.keys(template).forEach(key => {
 				Utils.logInfo(key);
-				/*if(key === "Template_Name" ){
+				if(key === "Template Name" ){
 					Utils.logInfo("if condition satisfied");
-					soapData +='<Field>'
-+'                        <Name>'+template.Template_Name+'</Name>'
-+'                        <FieldType>Text</FieldType>'
-+'                        <IsPrimaryKey>true</IsPrimaryKey>'
-+'						<MaxLength>50</MaxLength>'
-+'                        <IsRequired>true</IsRequired>'
-+'                    </Field>';				
-				}*/
+					soapData +=	'<Objects xsi:type="DataExtension">'
++'                <PartnerKey xsi:nil="true"/>'
++'                <ObjectID xsi:nil="true"/>'
++'                <CategoryID>'+this.FolderID+'</CategoryID>'
++'                <CustomerKey>'+template[key]+'</CustomerKey>'
++'                <Name>'+template[key]+'</Name>'
++'                <IsSendable>true</IsSendable>'
++'                <SendableDataExtensionField>'
++'                    <CustomerKey>'+template[key]+'</CustomerKey>'
++'                    <Name>'+template[key]+'</Name>'
++'                    <FieldType>Text</FieldType>'
++'                </SendableDataExtensionField>'
++'                <SendableSubscriberField>'
++'                    <Name>Subscriber Key</Name>'
++'                    <Value>'+template[key]+'</Value>'
++'                </SendableSubscriberField>'
++'                <Fields>'		
+				}
 				if(template[key]===""){
 					Utils.logInfo("else if condition satisfied ");				
 					delete template[key];
 				}
-				else if(key==="Hearsay_Org_ID"){
-					this.Hearsay_Org_ID = template[key];
+				else if(key==="Hearsay Org ID"){
+					//this.Hearsay_Org_ID = template[key];
 					Utils.logInfo("Hearsay_Org_ID is blended with key, It will be sent as field name and the value inserted will be sent as value for that field ");				
 					soapData += '<Field>'
 +'                        <Name>Org ID</Name>'
