@@ -780,29 +780,13 @@ axios({
 
 			
           } else if(this.state.page==2){
-           if(this.state.temp1text=="" && this.state.temp2text=="" && 
-			    this.state.temp3text=="" && this.state.temp4text=="" && 
-				this.state.temp5text=="" && this.state.temp6text=="" && this.state.temp7text==""){
-              ValidationStatus=false;
-              ReactDOM.render(<p style={{color: "red"}}>Email,Name fields are mandatory.</p>, document.getElementById('valMsgPageTwo'));
-				
-				} 
-           else if((this.state.temp2text =="Email" || this.state.temp2text =="Name") || (this.state.temp3text =="Email" || this.state.temp3text =="Name")){
+           
+            if(this.state.temp2text =="Email" && this.state.temp3text =="Email" && this.state.temp4text =="Email" && this.state.temp5text =="Email" && this.state.temp6text =="Email" && this.state.temp7text =="Email"){
 	     console.log('inside a first condition');
 	      ValidationStatus=false;
-              ReactDOM.render(<p style={{color: "red"}}>Email,Name Field are mandatory.</p>, document.getElementById('valMsgPageTwo'));
+              ReactDOM.render(<p style={{color: "red"}}>Email Field is mandatory.</p>, document.getElementById('valMsgPageTwo'));
 	    }
-	    else if((this.state.temp4text =="Email" || this.state.temp4text =="Name") || (this.state.temp5text =="Email" || this.state.temp5text =="Name")){
-	     console.log('inside a sec condition');
-	      ValidationStatus=false;
-              ReactDOM.render(<p style={{color: "red"}}>Email,Name Field are mandatory.</p>, document.getElementById('valMsgPageTwo'));
-           }
-	   else if((this.state.temp6text =="Email" || this.state.temp6text =="Name") || (this.state.temp7text =="Email" || this.state.temp7text =="Name")){
-	    console.log('inside a third condition');
-	      ValidationStatus=false;
-              ReactDOM.render(<p style={{color: "red"}}>Email,Name Field are mandatory.</p>, document.getElementById('valMsgPageTwo'));
-	   } 
-
+	   		
 			if(this.state.templatename==""){
               ValidationStatus=false;
               ReactDOM.render(<p style={{color: "red"}}>Template name is mandatory.</p>, document.getElementById('valMsgPageTwo'));
