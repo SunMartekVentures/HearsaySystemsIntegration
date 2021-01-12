@@ -3,19 +3,17 @@
 import axios from 'axios';
 import express = require("express");
 import Utils from './Utils';
-import xml2js = require("xml2js");
+
 export default class SfmcApiHelper
 {
     // Instance variables 
     private _deExternalKey = "Org_Setup";
     private _sfmcDataExtensionApiUrl = "https://mc4f63jqqhfc51yw6d1h0n1ns1-m.rest.marketingcloudapis.com/hub/v1/dataevents/key:" + this._deExternalKey + "/rowset";
     private _oauthToken = "";
-	private FolderID='';
-	private ParentFolderID = '';
-	private StatusCode = '';
-	private DataExtensionName = '';
-	private Hearsay_Org_ID = '';
-	//private xmlDoc = '';
+	//private FolderID='';
+    
+    
+    
     
     
     /**
@@ -78,7 +76,7 @@ export default class SfmcApiHelper
         {
             Utils.logInfo("Entered to the method...");
             // POST to Marketing Cloud REST Auth service and get back an OAuth access token.
-	    let sfmcAuthServiceApiUrl = "https://mc4f63jqqhfc51yw6d1h0n1ns1-m.auth.marketingcloudapis.com/v2/token";
+            let sfmcAuthServiceApiUrl = "https://mc4f63jqqhfc51yw6d1h0n1ns1-m.auth.marketingcloudapis.com/v2/token";
             Utils.logInfo("oauth token is called, waiting for status...");
             axios.post(sfmcAuthServiceApiUrl, postBody, {"headers" : headers})            
             .then((response : any) => {
@@ -116,116 +114,6 @@ export default class SfmcApiHelper
             });
         });
     }
-	
-	public getCategoryID(req: express.Request, res: express.Response)
-    {
-		Utils.logInfo("Get Category Method: " + this._oauthToken);
-		let self = this;	
-			
-		//Utils.logInfo("request body = " + JSON.stringify(req.body));
-		if (this._oauthToken!= "")
-        {
-            //Utils.logInfo("Using OAuth token: " + req.session.oauthAccessToken);
-            self.getCategoryIDHelper(this._oauthToken)
-            .then((result) => {
-                res.status(result.status).send(result.statusText);
-            })
-            .catch((err) => {
-                res.status(500).send(err);
-            });
-        }
-        else
-        {
-            // error
-            let errorMsg = "OAuth Access Token *not* found in session.\nPlease complete previous demo step\nto get an OAuth Access Token."; 
-            Utils.logError(errorMsg);
-            res.status(500).send(errorMsg);
-        }
-	}
-	public getCategoryIDHelper(oauthAccessToken: string) : Promise<any>
-	{
-		let soapMessage = '<?xml version="1.0" encoding="UTF-8"?>'
-+'<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">'
-+'    <s:Header>'
-+'        <a:Action s:mustUnderstand="1">Retrieve</a:Action>'
-+'        <a:To s:mustUnderstand="1">https://mc4f63jqqhfc51yw6d1h0n1ns1-m.soap.marketingcloudapis.com/Service.asmx</a:To>'
-+'        <fueloauth xmlns="http://exacttarget.com">'+this._oauthToken+'</fueloauth>'
-+'    </s:Header>'
-+'    <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">'
-+'        <RetrieveRequestMsg xmlns="http://exacttarget.com/wsdl/partnerAPI">'
-+'            <RetrieveRequest>'
-+'                <ObjectType>DataFolder</ObjectType>'
-+'                <Properties>ID</Properties>'
-+'                <Properties>CustomerKey</Properties>'
-+'                <Properties>Name</Properties>'
-+'                <Properties>ParentFolder.ID</Properties>'
-+'                <Properties>ParentFolder.Name</Properties>'
-+'                <Filter xsi:type="SimpleFilterPart">'
-+'                    <Property>Name</Property>'
-+'                    <SimpleOperator>equals</SimpleOperator>'
-+'                    <Value>Hearsay Integrations</Value>'
-+'                </Filter>'
-+'            </RetrieveRequest>'
-+'        </RetrieveRequestMsg>'
-+'    </s:Body>'
-+'</s:Envelope>';
-				
-	return new Promise<any>((resolve, reject) =>
-		{
-			let headers = {
-                'Content-Type': 'text/xml',
-                'SOAPAction': 'Retrieve'
-            };
-
-            // POST to Marketing Cloud Data Extension endpoint to load sample data in the POST body
-            axios({
-		   		method: 'post',
-				url: 'https://mc4f63jqqhfc51yw6d1h0n1ns1-m.soap.marketingcloudapis.com/Service.asmx',
-				data: soapMessage,
-				headers: {'Content-Type': 'text/xml'}							
-				})            
-				.then((response: any) => {
-                Utils.logInfo(response.data);
-                var extractedData = "";
-				var parser = new xml2js.Parser();
-				parser.parseString(response.data, (err: any, result: { [x: string]: { [x: string]: { [x: string]: { [x: string]: any; }[]; }[]; }; }) => {
-				this.FolderID = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ID'][0];
-				Utils.logInfo('Folder ID : ' + this.FolderID);
-				this.ParentFolderID = JSON.stringify(result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ParentFolder'][0]);
-				Utils.logInfo('Parent Folder ID : ' + this.ParentFolderID);
-				});
-//console.log("Note that you can't use value here if parseString is async; extractedData=", extractedData.RetrieveResponseMsg);
-				/*Dom.Document doc = response.data.getBodyDocument();
-				for(Dom.XmlNode parentNode: doc.getRootElement().getChildElements()) {
-					Utils.logInfo(parentNode);
-				for(Dom.XmlNode ChildNode: parentNode.getChildElements()) {
-					Utils.logInfo(ChildNode);
-				for(Dom.XmlNode pchildNode: ChildNode.getChildElements()) {
-					Utils.logInfo(pchildNode);
-				for(Dom.XmlNode ppchildNode: pchildNode.getChildElements()) {
-					Utils.logInfo(ppchildNode);
-       if(ppchildNode.getName() == 'ID'){
-       FolderID=ppchildNode.getText();
-      system.debug('FolderID:'+FolderID);
-       }
-	   }
-	   }
-	   }
-	   }*/
-			})
-			.catch((error: any) => {
-						// error
-						let errorMsg = "Error loading sample data. POST response from Marketing Cloud:";
-						errorMsg += "\nMessage: " + error.message;
-						errorMsg += "\nStatus: " + error.response ? error.response.status : "<None>";
-						errorMsg += "\nResponse data: " + error.response.data ? Utils.prettyPrintJson(JSON.stringify(error.response.data)) : "<None>";
-						Utils.logError(errorMsg);
-
-										reject(errorMsg);
-									});
-			
-        });
-	}
 
     /**
      * loadData: called by the GET handlers for /apidemoloaddata and /appdemoloaddata
@@ -351,6 +239,7 @@ export default class SfmcApiHelper
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + oauthAccessToken
             };
+
             // POST to Marketing Cloud Data Extension endpoint to load sample data in the POST body
             axios.post("https://mc4f63jqqhfc51yw6d1h0n1ns1-m.rest.marketingcloudapis.com/hub/v1/dataevents/key:" + "Data_Extension_Template" + "/rowset", jsonData, {"headers" : headers})
             .then((response: any) => {
@@ -409,13 +298,7 @@ export default class SfmcApiHelper
     private createDataExtensionHelper(oauthAccessToken: string, template: any) : Promise<any>    
     {
         let self = this;
-		let bodySoapData = '';
-		let sendableSoapData = '';
-		let fieldSoapData = '';
-		let endSoapData = '';
-		let orgIDSoapData = '';
-		let soapData = '';
-		let headerSoapData = '<?xml version="1.0" encoding="UTF-8"?>'
+		let soapData = '<?xml version="1.0" encoding="UTF-8"?>'
 +' <s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">'
 +'    <s:Header>'
 +'        <a:Action s:mustUnderstand="1">Create</a:Action>'
@@ -429,9 +312,22 @@ export default class SfmcApiHelper
 +'    <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">'
 +'        <CreateRequest xmlns="http://exacttarget.com/wsdl/partnerAPI">'
 +'            <Options/>'
-
-
-
++'            <Objects xsi:type="DataExtension">'
++'                <PartnerKey xsi:nil="true"/>'
++'                <ObjectID xsi:nil="true"/>'
++'                <CustomerKey>'+template.Template_Name+'</CustomerKey>'
++'                <Name>'+template.Template_Name+'</Name>'
++'                <IsSendable>true</IsSendable>'
++'                <SendableDataExtensionField>'
++'                    <CustomerKey>'+template.Template_Name+'</CustomerKey>'
++'                    <Name>'+template.Template_Name+'</Name>'
++'                    <FieldType>Text</FieldType>'
++'                </SendableDataExtensionField>'
++'                <SendableSubscriberField>'
++'                    <Name>Subscriber Key</Name>'
++'                    <Value>'+template.Template_Name+'</Value>'
++'                </SendableSubscriberField>'
++'                <Fields>'
 
 
         //Utils.logInfo("createDataExtensionHelper method is called.");
@@ -440,56 +336,23 @@ export default class SfmcApiHelper
 		Utils.logInfo("Request body as a parameter: " + JSON.stringify(template));
 		Object.keys(template).forEach(key => {
 				Utils.logInfo(key);
-				
-				/*else{
-					Utils.logInfo("Thambi, Hearsay User Reference ID innum varala");
-				}*/
-				if(key === "Template Name" ){
+				if(key === "Template_Name" ){
 					Utils.logInfo("if condition satisfied");
-					bodySoapData +=	'<Objects xsi:type="DataExtension">'
-+'                <PartnerKey xsi:nil="true"/>'
-+'                <ObjectID xsi:nil="true"/>'
-+'                <CategoryID>'+this.FolderID+'</CategoryID>'
-+'                <CustomerKey>'+template[key]+'</CustomerKey>'
-+'                <Name>'+template[key]+'</Name>'
-+'                <IsSendable>true</IsSendable>'
-
-		
+					soapData +='<Field>'
++'                        <Name>'+template.Template_Name+'</Name>'
++'                        <FieldType>Text</FieldType>'
++'                        <IsPrimaryKey>true</IsPrimaryKey>'
++'						<MaxLength>50</MaxLength>'
++'                        <IsRequired>true</IsRequired>'
++'                    </Field>';				
 				}
 				else if(template[key]===""){
 					Utils.logInfo("else if condition satisfied ");				
 					delete template[key];
 				}
-				else if(key==="Hearsay Org ID"){
-					//this.Hearsay_Org_ID = template[key];
-					Utils.logInfo("Hearsay_Org_ID is blended with key, It will be sent as field name and the value inserted will be sent as value for that field ");				
-					orgIDSoapData += '<Field>'
-+'                        <Name>Org ID</Name>'
-+'                        <DefaultValue>'+template[key]+'</DefaultValue>'
-+'                        <IsRequired>true</IsRequired>'
-+'                    </Field>'
-				}
-				else if(key === "Hearsay User Reference ID"){
-					sendableSoapData += '<SendableDataExtensionField>'
-+'                    <CustomerKey>'+template[key]+'</CustomerKey>'
-+'                    <Name>'+template[key]+'</Name>'
-+'                    <FieldType>Text</FieldType>'
-+'                </SendableDataExtensionField>'
-+'                <SendableSubscriberField>'
-+'                    <Name>Subscriber Key</Name>'
-+'                    <Value>'+template[key]+'</Value>'
-+'                </SendableSubscriberField>'
-+'                <Fields>'
-+'					<Field>'
-+'                        <Name>'+template[key]+'</Name>'
-+'                        <FieldType>Text</FieldType>'
-+'                        <IsRequired>false</IsRequired>'
-+'                    </Field>'
-
-				}
 				else{
 					Utils.logInfo("field name "+ template[key] + " has been added to the soapData");
-					fieldSoapData += '<Field>'
+					soapData += '<Field>'
 +'                        <Name>'+template[key]+'</Name>'
 +'                        <FieldType>Text</FieldType>'
 +'                        <IsRequired>false</IsRequired>'
@@ -497,7 +360,7 @@ export default class SfmcApiHelper
 				}
 				
 			});
-			endSoapData += '</Fields>'
+			soapData += '</Fields>'
 +'            </Objects>'
 +'        </CreateRequest>'
 +'    </s:Body>'
@@ -505,111 +368,29 @@ export default class SfmcApiHelper
 			
 			Utils.logInfo("Request body after deletion: " + JSON.stringify(template));
 			
- soapData = headerSoapData + bodySoapData + sendableSoapData + orgIDSoapData + fieldSoapData + endSoapData;	    
+	    
 	    
         return new Promise<any>((resolve, reject) =>
-        {
-				
-				axios({
-				method: 'post',
-				url: 'https://mc4f63jqqhfc51yw6d1h0n1ns1-m.soap.marketingcloudapis.com/Service.asmx',
-				data: soapData,
-				headers: {'Content-Type': 'text/xml'}							
-				})            
-				.then((response: any) => {
-                Utils.logInfo(response.data);
-                var extractedData = "";
-				/*var parser = new xml2js.Parser();
-				parser.parseString(response.data, (err: any, result: { [x: string]: { [x: string]: { [x: string]: { [x: string]: any; }[]; }[]; }; }) => {
-				//this.FolderID = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ID'][0];
-				//Utils.logInfo('Folder ID : ' + this.FolderID);
-				this.StatusCode = result['soap:Envelope']['soap:Body'][0]['CreateResponse'][0]['Results'][0]['StatusCode'];
-				Utils.logInfo('Status Code : ' + this.StatusCode);
-				if(this.StatusCode=='OK'){
-					this.DataExtensionName = result['soap:Envelope']['soap:Body'][0]['CreateResponse'][0]['Results'][0]['Object'][0]['Name'];
-					Utils.logInfo('Data Extension Name : ' + this.DataExtensionName);
-					
-					self.RowCreationDynamicDataExt(this.DataExtensionName)
-					.then((result : any) => {
-						Utils.logInfo('Row Created Successfully in Dynamically created DE');
-						})
-					.catch((err : any) => {
-						Utils.logInfo('Error when creating row in Dynamically created DE');
-					});
-				}
-				else{
-					Utils.logInfo('Olunga odi poiru condition ae satisfy aagala');
-				}
-				});*/
-				})
-		/*let headers = {
+        {		
+		let headers = {
                 'Content-Type': 'text/xml'
             };
 			
-            axios.post('https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.soap.marketingcloudapis.com/Service.asmx', soapData, {"headers" : headers})
+            axios.post('https://mc4f63jqqhfc51yw6d1h0n1ns1-m.soap.marketingcloudapis.com/Service.asmx', soapData, {"headers" : headers})
 			.then(function (response) {
 				Utils.logInfo(response.data);
-				var parser = new xml2js.Parser();
-				parser.parseString(response.data, (err: any, result: { [x: string]: { [x: string]: { [x: string]: { [x: string]: any; }[]; }[]; }; }) => {
-				//this.FolderID = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ID'][0];
-				//Utils.logInfo('Folder ID : ' + this.FolderID);
-				this.StatusCode = result['soap:Envelope']['soap:Body'][0]['CreateResponse'][0]['Results'][0]['StatusCode'];
-				Utils.logInfo('Status Code : ' + this.StatusCode);
-				});
-			})*/
+			})
 			.catch(function (error) {
 				let errorMsg = "Error creating data extension dynamically. POST response from Marketing Cloud:";
                 errorMsg += "\nMessage: " + error.message;
                 errorMsg += "\nStatus: " + error.response ? error.response.status : "<None>";
                 errorMsg += "\nResponse data: " + error.response.data ? Utils.prettyPrintJson(JSON.stringify(error.response.data)) : "<None>";
                 Utils.logError(errorMsg);
-				Utils.logError(error.response.data);
+		    Utils.logError(error.response.data);
 
                 reject(errorMsg);
 			});
         });
     }
-	
-	/*private RowCreationDynamicDataExt(DataExtensionName : any) : Promise<any>
-	{
-		
-		let RowData=
-	    {
-			items: [{
-			Org_ID : this.Hearsay_Org_ID
-			}]                                		
-	    }
-			let Row = JSON.stringify(RowData);
-			Utils.logInfo("Row "+ Row);
-			
-			let headers = {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + this._oauthToken
-            };
-		
-		return new Promise<any>((resolve, reject) =>
-        {
-			Utils.logInfo("Ahpppaaaddaa, Method call aaiduchu");
-			 axios.post("https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.rest.marketingcloudapis.com/data/v1/async/dataextensions/key:" + DataExtensionName + "/rows", Row, {"headers" : headers})
-            .then((response: any) => {
-                // success
-                Utils.logInfo("Hearsay_Org_ID Updated Successfully");
-
-                
-            })
-            .catch((error: any) => {
-                // error
-                let errorMsg = "Error loading sample data. POST response from Marketing Cloud:";
-                errorMsg += "\nMessage: " + error.message;
-                errorMsg += "\nStatus: " + error.response ? error.response.status : "<None>";
-                errorMsg += "\nResponse data: " + error.response.data ? Utils.prettyPrintJson(JSON.stringify(error.response.data)) : "<None>";
-                Utils.logError(errorMsg);
-
-                reject(errorMsg);
-            });
-			
-		});
-	}*/
         
     }
-
