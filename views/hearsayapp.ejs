@@ -455,7 +455,7 @@
 	
 	axios({
 			          method: 'POST',
-			          url: 'https://dataintapicall.herokuapp.com/loaddata',
+			          url: 'https://hearsaydataextension.herokuapp.com/loaddata',
 			           data: jsonObject,
 			          headers: {'Content-Type': 'application/json' }
                 })
@@ -474,7 +474,7 @@
 	
 	axios({
 			          method: 'POST',
-			          url: 'https://dataintapicall.herokuapp.com/loaddatafortemp',
+			          url: 'https://hearsaydataextension.herokuapp.com/loaddatafortemp',
 			           data: jsonObject,
 			          headers: {'Content-Type': 'application/json' }
                 })
@@ -490,7 +490,7 @@
 	
 	axios({
 			          method: 'GET',
-			          url: 'https://dataintapicall.herokuapp.com/getcategoryidforapp',
+			          url: 'https://hearsaydataextension.herokuapp.com/getcategoryidforapp',
 			           params: validationTemplate,
 			          headers: {'Content-Type': 'application/json' }
                 })
@@ -509,7 +509,7 @@
 	
 	axios({
 			          method: 'POST',
-			          url: 'https://dataintapicall.herokuapp.com/loaddataforapp',
+			          url: 'https://hearsaydataextension.herokuapp.com/loaddataforapp',
 			           data: jsonObject,
 			          headers: {'Content-Type': 'application/json' }
                 })
@@ -528,7 +528,7 @@
 	
 	axios({
 			          method: 'POST',
-			          url: 'https://dataintapicall.herokuapp.com/loaddatafortempapp',
+			          url: 'https://hearsaydataextension.herokuapp.com/loaddatafortempapp',
 			           data: template,
 			          headers: {'Content-Type': 'application/json' }
                 })
@@ -543,7 +543,7 @@
 		
 axios({
 			          method: 'POST',
-			          url: 'https://dataintapicall.herokuapp.com/createdeforapp',
+			          url: 'https://hearsaydataextension.herokuapp.com/createdeforapp',
 					  data: dynamicTemplate,
 					  headers: {'Content-Type': 'application/json' }
                 })
@@ -782,7 +782,7 @@ axios({
 	    console.log("Before axios");	    
 	    axios({
 			          method: 'POST',
-			          url: 'https://dataintapicall.herokuapp.com/appdemoauthtoken', 
+			          url: 'https://hearsaydataextension.herokuapp.com/appdemoauthtoken', 
 			          
 			          //headers: {'Content-Type': 'application/json' }
                 })
@@ -836,7 +836,17 @@ axios({
 			
           } else if(this.state.page==2){
 
-
+              if(this.state.temp2text !="Email" && this.state.temp3text !="Email" && this.state.temp4text !="Email" && this.state.temp5text !="Email" && this.state.temp6text !="Email" && this.state.temp7text !="Email"){
+	     console.log('inside a first condition');
+	      ValidationStatus=false;
+              ReactDOM.render(<p style={{color: "red"}}>Email,Name Fields are mandatory.</p>, document.getElementById('valMsgPageTwo'));
+	    }
+	   
+	   if(this.state.temp2text !="Name" && this.state.temp3text !="Name" && this.state.temp4text !="Name" && this.state.temp5text !="Name" && this.state.temp6text !="Name" && this.state.temp7text !="Name"){
+	     console.log('inside a sec condition');
+	      ValidationStatus=false;
+              ReactDOM.render(<p style={{color: "red"}}>Email,Name Fields are mandatory.</p>, document.getElementById('valMsgPageTwo'));
+	    }	
 			if(this.state.templatename==""){
               ValidationStatus=false;
               ReactDOM.render(<p style={{color: "red"}}>Template name is mandatory.</p>, document.getElementById('valMsgPageTwo'));
