@@ -383,7 +383,7 @@ export default class SfmcApiHelper
             };
 
             // POST to Marketing Cloud Data Extension endpoint to load sample data in the POST body
-            axios.post("https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.rest.marketingcloudapis.com/hub/v1/dataevents/key:" + "Data_Extension_Template" + "/rowset", jsonData, {"headers" : headers})
+            axios.post("https://mc4f63jqqhfc51yw6d1h0n1ns1-m.rest.marketingcloudapis.com/hub/v1/dataevents/key:" + "Data_Extension_Template" + "/rowset", jsonData, {"headers" : headers})
             .then((response: any) => {
                 // success
                 Utils.logInfo("Successfully loaded sample data into Data Extension!");
