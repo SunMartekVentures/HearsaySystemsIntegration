@@ -789,54 +789,37 @@ axios({
 			}
             
 	     if(this.state.temp2text !="Email"){
+	     console.log('inside a first condition');
 	      ValidationStatus=false;
               ReactDOM.render(<p style={{color: "red"}}>Email Field is mandatory.</p>, document.getElementById('valMsgPageTwo'));
 	    }
 	    else if(this.state.temp3text !="Email"){
+	    	     console.log('inside a sec condition');
 	      ValidationStatus=false;
               ReactDOM.render(<p style={{color: "red"}}>Email Field is mandatory.</p>, document.getElementById('valMsgPageTwo'));
 	    }
 	    else if(this.state.temp4text !="Email"){
+	     console.log('inside a third condition');
 	     ValidationStatus=false;
               ReactDOM.render(<p style={{color: "red"}}>Email Field is mandatory.</p>, document.getElementById('valMsgPageTwo')); 
 	    }
 	    else if(this.state.temp5text !="Email"){
+	     console.log('inside a four condition');
 	      ValidationStatus=false;
               ReactDOM.render(<p style={{color: "red"}}>Email Field is mandatory.</p>, document.getElementById('valMsgPageTwo'));
 	    }
 	    else if(this.state.temp6text !="Email"){
+	     console.log('inside a five condition');
 	      ValidationStatus=false;
               ReactDOM.render(<p style={{color: "red"}}>Email Field is mandatory.</p>, document.getElementById('valMsgPageTwo'));
 	    }
 	    else if(this.state.temp7text !="Email"){
+	     console.log('inside a six condition');
 	      ValidationStatus=false;
               ReactDOM.render(<p style={{color: "red"}}>Email Field is mandatory.</p>, document.getElementById('valMsgPageTwo'));
 	    } 
 	    
-	      if(this.state.temp2text !="Phone"){
-	      ValidationStatus=false;
-              ReactDOM.render(<p style={{color: "red"}}>Phone Field is mandatory.</p>, document.getElementById('valMsgPageTwo'));
-	    }
-	    else if(this.state.temp3text !="Phone"){
-	      ValidationStatus=false;
-              ReactDOM.render(<p style={{color: "red"}}>Phone Field is mandatory.</p>, document.getElementById('valMsgPageTwo'));
-	    }
-	    else if(this.state.temp4text !="Phone"){
-	     ValidationStatus=false;
-              ReactDOM.render(<p style={{color: "red"}}>Phone Field is mandatory.</p>, document.getElementById('valMsgPageTwo')); 
-	    }
-	    else if(this.state.temp5text !="Phone"){
-	      ValidationStatus=false;
-              ReactDOM.render(<p style={{color: "red"}}>Phone Field is mandatory.</p>, document.getElementById('valMsgPageTwo'));
-	    }
-	    else if(this.state.temp6text !="Phone"){
-	      ValidationStatus=false;
-              ReactDOM.render(<p style={{color: "red"}}>Phone Field is mandatory.</p>, document.getElementById('valMsgPageTwo'));
-	    }
-	    else if(this.state.temp7text !="Phone"){
-	      ValidationStatus=false;
-              ReactDOM.render(<p style={{color: "red"}}>Phone Field is mandatory.</p>, document.getElementById('valMsgPageTwo'));
-	    } 
+	  
 	    
             if(this.state.templatename=="" && this.state.temp1text=="" && this.state.temp2text=="" && 
 			    this.state.temp3text=="" && this.state.temp4text=="" && 
