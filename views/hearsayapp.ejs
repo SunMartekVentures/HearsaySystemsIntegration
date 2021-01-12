@@ -432,30 +432,12 @@
           
         }
 		
-		function getCategoryIDforApp(){
-		console.log("getCategoryIDforApp function called");
-	
-	axios({
-			          method: 'GET',
-			          url: 'https://hearsaydataextension.herokuapp.com/getcategoryidforapp',
-			           //data: jsonObject,
-			          //headers: {'Content-Type': 'application/json' }
-                })
-                  .then(function (response) {
-                  //handle success
-                  //return response;	
-					console.log(response.data);	
-					//loaddata(jsonObject);				
-                  });
-		
-		}
-		
 		function loaddata(jsonObject){
 	console.log("load data function called");
 	
 	axios({
 			          method: 'POST',
-			          url: 'https://hearsaydataextension.herokuapp.com/loaddataforapp',
+			          url: 'https://dataintapicall.herokuapp.com/loaddataforapp',
 			           data: jsonObject,
 			          headers: {'Content-Type': 'application/json' }
                 })
@@ -467,30 +449,30 @@
 	}
 	
 	
-	function loaddataforpage2(template, dynamicTemplate){	
+	function loaddataforpage2(jsonObject, authtoken, templateName){	
 	
 	console.log("load data for page 2 function called");
 	
 	
 	axios({
 			          method: 'POST',
-			          url: 'https://hearsaydataextension.herokuapp.com/loaddatafortempapp',
-			           data: template,
+			          url: 'https://dataintapicall.herokuapp.com/loaddatafortempapp',
+			           data: jsonObject,
 			          headers: {'Content-Type': 'application/json' }
                 })
                   .then(function (response) {
 					console.log(response.data);
-					createDE(dynamicTemplate);
+					createDE(authtoken,templateName);
                   });
 	}
 	
-	function createDE(dynamicTemplate){
-		console.log("createDE function called "+ dynamicTemplate);
+	function createDE(oauthtoken, templateName){
+		console.log("createDE function called "+ templateName);
 		
 axios({
 			          method: 'POST',
-			          url: 'https://hearsaydataextension.herokuapp.com/createdeforapp',
-					  data: dynamicTemplate,
+			          url: 'https://dataintapicall.herokuapp.com/createdeforapp',
+					  data: templateName,
 					  headers: {'Content-Type': 'application/json' }
                 })
                   .then(function (response) {		  
@@ -640,6 +622,7 @@ axios({
         }
 
         handleChangeNext(event) {
+		var authtoken;
           
           if(this.state.page==3){
 
@@ -654,53 +637,36 @@ axios({
 			
 			}
 			
-			if(this.state.page==3){
+			if(this.state.page==2){
 			
-			let template=[
+			var templateName = 
+			{
+				templateName : this.state.templatename
+			}
+			console.log("Template Name :" + templateName);
+			
+            var DataConfig=[
 	    
 	    {
-            keys: {
-                    "Template Name" : this.state.templatename,
-                },
+                    keys: {
+                        Name : this.state.templatename,
+                    },
 		    values: {
-					"Hearsay Org ID" : this.state.orgid,
-					"Hearsay User Reference ID" : this.state.refid,
-					"Customer Unique ID" : this.state.customeruniqueid,
-					"Customer Name" : "Customer Name",
-              		"option 1":this.state.temp2text,
-              		"option 2":this.state.temp3text,
-              		"option 3":this.state.temp4text,
-					"option 4":this.state.temp5text,
-					"option 5":this.state.temp6text,
-					"option 6":this.state.temp7text,
-					"option 7":this.state.temp8FieldLabel,
-             		"option 8":this.state.temp9FieldLabel,
-              		"option 9":this.state.temp10FieldLabel,
+              		option1:this.state.temp1text,
+              		option2:this.state.temp2text,
+              		option3:this.state.temp3text,
+			option4:this.state.temp4text,
+	      		option5:this.state.temp5text,
+	      		option6:this.state.temp6text,
+	      		option7:this.state.temp7text,
+             		option8:this.state.temp8FieldLabel,
+              		option9:this.state.temp9FieldLabel,
+              		option10:this.state.temp10FieldLabel
             		}
 	    	}
 	    ];
 		
-		let dynamicTemplate=
-	    
-	    {
-                    "Template Name" : this.state.templatename,
-					"Hearsay Org ID" : this.state.orgid,
-					"Hearsay User Reference ID" : this.state.refid,
-					"Customer Unique ID" : this.state.customeruniqueid,
-					"Customer Name" : "Customer Name",
-              		"option 1":this.state.temp2text,
-              		"option 2":this.state.temp3text,
-              		"option 3":this.state.temp4text,
-					"option 4":this.state.temp5text,
-					"option 5":this.state.temp6text,
-					"option 6":this.state.temp7text,
-					"option 7":this.state.temp8FieldLabel,
-             		"option 8":this.state.temp9FieldLabel,
-              		"option 9":this.state.temp10FieldLabel,
-            		
-	    	}
-			console.log("Template Name :" + JSON.stringify(template));		
-		loaddataforpage2(template, dynamicTemplate);
+		loaddataforpage2(DataConfig, authtoken, templateName);
 	    }
 	    
 	    
@@ -709,12 +675,11 @@ axios({
 	      let jsonObject = [
                 {
                     keys: {
-                        "Hearsay Org ID" : this.state.orgid,
+                        orgid:this.state.orgid,
                     },
                     values: {
-                        "Hearsay User Reference ID" : this.state.refid,
-						"Customer Unique ID" : this.state.customeruniqueid,
-						
+                        refid:this.state.refid,
+						cuid:this.state.customeruniqueid                        
                     }
                 }                   
             ];            
@@ -722,13 +687,16 @@ axios({
 	    console.log("Before axios");	    
 	    axios({
 			          method: 'POST',
-			          url: 'https://hearsaydataextension.herokuapp.com/appdemoauthtoken', 
+			          url: 'https://dataintapicall.herokuapp.com/appdemoauthtoken', 
 			          
 			          //headers: {'Content-Type': 'application/json' }
                 })
                   .then(function (response) {		  
 					var responseData = response.data;
-					//getCategoryIDforApp(jsonObject);
+					var authtoken = JSON.parse(responseData.replace('OK','')).access_token;
+		  
+					//console.log(JSON.parse(responseData.replace('OK','')).access_token);
+					//console.log(jsonObject.values.cuid);
 					loaddata(jsonObject);
 					//console.log("Before createDE function ");					
 					console.log("authentication token obtained and row has been created");
@@ -737,9 +705,6 @@ axios({
 				  .catch(function (error) {
 					console.log(error);
 					});
-		  }
-		  if(this.state.page==2){
-		  getCategoryIDforApp();
 		  }
 
             
@@ -1278,8 +1243,8 @@ axios({
                             <label class='e1labelheaderPage1'>Hearsay User Reference ID</label>
                             <select name='refid' value={this.state.refid} onChange={this.myChangeHandler} class='e1inputpg1'>
                                 <option value="0">--Select--</option>
-                                <option value="Agent ID">Agent ID</option>
-                                <option value="Email ID">Email ID</option>
+                                <option value="agentid">Agent ID</option>
+                                <option value="emailid">Email ID</option>
                             </select>
                             <span id="valMsgRefId"></span>
                         </div>
