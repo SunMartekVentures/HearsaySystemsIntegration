@@ -784,13 +784,13 @@ axios({
             if(this.state.temp2text !="Email" && this.state.temp3text !="Email" && this.state.temp4text !="Email" && this.state.temp5text !="Email" && this.state.temp6text !="Email" && this.state.temp7text !="Email"){
 	     console.log('inside a first condition');
 	      ValidationStatus=false;
-              ReactDOM.render(<p style={{color: "red"}}>Email Field is mandatory.</p>, document.getElementById('valMsgPageTwo'));
+              ReactDOM.render(<p style={{color: "red"}}>Email,Name Field is mandatory.</p>, document.getElementById('valMsgPageTwo'));
 	    }
 	   
 	   if(this.state.temp2text !="Name" && this.state.temp3text !="Name" && this.state.temp4text !="Name" && this.state.temp5text !="Name" && this.state.temp6text !="Name" && this.state.temp7text !="Name"){
 	     console.log('inside a sec condition');
 	      ValidationStatus=false;
-              ReactDOM.render(<p style={{color: "red"}}>Name Field is mandatory.</p>, document.getElementById('valMsgPageTwo'));
+              ReactDOM.render(<p style={{color: "red"}}>Email,Name Field is mandatory.</p>, document.getElementById('valMsgPageTwo'));
 	    }		
 			if(this.state.templatename==""){
               ValidationStatus=false;
