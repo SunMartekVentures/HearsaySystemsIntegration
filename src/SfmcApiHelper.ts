@@ -483,7 +483,13 @@ export default class SfmcApiHelper
 +'                <CategoryID>'+this.FolderID+'</CategoryID>'
 +'                <CustomerKey>'+template[key]+'</CustomerKey>'
 +'                <Name>'+template[key]+'</Name>'
-+'                <IsSendable>true</IsSendable>'
++'                <IsSendable>true</IsSendable>';
+
+				templateNameData += '<Field>'
++'                        <Name>'+template[key]+'</Name>'
++'                        <MaxLength>50</MaxLength>'
++'                        <IsRequired>true</IsRequired>'
++'                    </Field>';
 
 		
 				}
@@ -497,11 +503,31 @@ export default class SfmcApiHelper
 					orgIDSoapData += '<Field>'
 +'                        <Name>Org ID</Name>'
 +'                        <DefaultValue>'+template[key]+'</DefaultValue>'
++'                        <MaxLength>50</MaxLength>'
 +'                        <IsRequired>true</IsRequired>'
 +'                    </Field>'
 				}
 				else if(key === "Hearsay User Reference ID"){
 					if(template[key]==="Email ID"){
+					fieldSoapData +='<Field>'
++'                        <Name>'+template[key]+'</Name>'
++'                        <FieldType>EmailAddress</FieldType>'
++'                        <MaxLength>254</MaxLength>'
++'                        <IsRequired>true</IsRequired>'
++'                    </Field>'
+					}
+					else{
+						fieldSoapData +='<Field>'
++'                        <Name>'+template[key]+'</Name>'
++'                        <FieldType>Text</FieldType>'
++'                        <MaxLength>100</MaxLength>'
++'                        <IsRequired>true</IsRequired>'
++'                    </Field>'
+					}
+
+				}
+				else if(template[key] ==="Email"){
+					Utils.logInfo("field name "+ template[key] + " has been added to the soapData");
 					sendableSoapData += '<SendableDataExtensionField>'
 +'                    <CustomerKey>'+template[key]+'</CustomerKey>'
 +'                    <Name>'+template[key]+'</Name>'
@@ -515,29 +541,11 @@ export default class SfmcApiHelper
 +'					<Field>'
 +'                        <Name>'+template[key]+'</Name>'
 +'                        <FieldType>EmailAddress</FieldType>'
-+'                        <IsRequired>false</IsRequired>'
-+'                    </Field>'
-					}
-					else{
-						sendableSoapData += '<SendableDataExtensionField>'
-+'                    <CustomerKey>'+template[key]+'</CustomerKey>'
-+'                    <Name>'+template[key]+'</Name>'
-+'                    <FieldType>Text</FieldType>'
-+'                </SendableDataExtensionField>'
-+'                <SendableSubscriberField>'
-+'                    <Name>Subscriber Key</Name>'
-+'                    <Value>'+template[key]+'</Value>'
-+'                </SendableSubscriberField>'
-+'                <Fields>'
-+'					<Field>'
-+'                        <Name>'+template[key]+'</Name>'
-+'                        <FieldType>Text</FieldType>'
++'                        <MaxLength>254</MaxLength>'
 +'                        <IsRequired>true</IsRequired>'
 +'                    </Field>'
-					}
 				}
-
-				else if (key==="option 3" || key==="option 4" ||key==="option 5" ||key==="option 6" ||key==="option 7" ||key==="option 8" ||key==="option 9" ){
+				else if (key==="option 2" || key==="option 3" || key==="option 4" ||key==="option 5" ||key==="option 6" ||key==="option 7" ||key==="option 8" ||key==="option 9" ){
 				if(template[key] ==="Birth Date"){
 					Utils.logInfo("field name "+ template[key] + " has been added to the soapData");
 					fieldSoapData +='<Field>'
