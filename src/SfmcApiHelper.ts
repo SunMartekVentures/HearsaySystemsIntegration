@@ -446,6 +446,7 @@ export default class SfmcApiHelper
 		let endSoapData = '';
 		let orgIDSoapData = '';
 		let soapData = '';
+		let templateNameData = '';
 		let headerSoapData = '<?xml version="1.0" encoding="UTF-8"?>'
 +' <s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">'
 +'    <s:Header>'
