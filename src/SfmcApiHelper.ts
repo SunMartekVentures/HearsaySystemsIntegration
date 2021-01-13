@@ -261,7 +261,7 @@ export default class SfmcApiHelper
 			Utils.logInfo("Ahpppaaaddaa, Method call aaiduchu");
 			 axios({
 				method: 'post',
-				url: 'https://mc4f63jqqhfc51yw6d1h0n1ns1.soap.marketingcloudapis.com/Service.asmx',
+				url: 'https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.soap.marketingcloudapis.com/Service.asmx',
 				data: ValidationBody,
 				headers: {'Content-Type': 'text/xml'}							
 				}) 
@@ -282,12 +282,6 @@ export default class SfmcApiHelper
 						this.isValidated = 'false';
 					}
                 
-            })
-			.catch((err: any) => {
-                // error
-                Utils.logInfo('Data extension does not exist : ' + err);
-
-                reject(err);
             });
 			})
             .catch((error: any) => {
