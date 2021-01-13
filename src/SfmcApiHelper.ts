@@ -16,6 +16,9 @@ export default class SfmcApiHelper
 	private StatusCode = '';
 	private DataExtensionName = '';
 	private Hearsay_Org_ID = '';
+	private validateStatus = '';
+	private validateDEName = '';
+	private isValidated = '';
 	//private xmlDoc = '';
     
     
@@ -130,7 +133,7 @@ export default class SfmcApiHelper
             //Utils.logInfo("Using OAuth token: " + req.session.oauthAccessToken);
             self.getCategoryIDHelper(this._oauthToken, TemplateName)
             .then((result) => {
-                res.status(result.status).send(result.statusText);
+                res.status(result.status).send(this.validateDEName);
             })
             .catch((err) => {
                 res.status(500).send(err);
@@ -223,6 +226,8 @@ export default class SfmcApiHelper
 				Utils.logInfo('Folder ID : ' + this.FolderID);
 				this.ParentFolderID = JSON.stringify(result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ParentFolder'][0]);
 				Utils.logInfo('Parent Folder ID : ' + this.ParentFolderID);
+				this.ValidationForDataExtName(validateName);
+				
 				});
 //console.log("Note that you can't use value here if parseString is async; extractedData=", extractedData.RetrieveResponseMsg);
 				/*Dom.Document doc = response.data.getBodyDocument();
@@ -255,6 +260,59 @@ export default class SfmcApiHelper
 									});
 			
         });
+	}
+	
+	private ValidationForDataExtName(ValidationBody : any) : Promise<any>
+	{
+		
+			Utils.logInfo("Validation Body : "+ ValidationBody);
+			
+			//let headers = {
+                //'Content-Type': 'application/json',
+                //'Authorization': 'Bearer ' + this._oauthToken
+            //};
+		
+		return new Promise<any>((resolve, reject) =>
+        {
+			Utils.logInfo("Ahpppaaaddaa, Method call aaiduchu");
+			 axios({
+				method: 'post',
+				url: 'https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.soap.marketingcloudapis.com/Service.asmx',
+				data: ValidationBody,
+				headers: {'Content-Type': 'text/xml'}							
+				}) 
+            .then((response: any) => {
+                // success
+                Utils.logInfo("Validation Successful \n\n" + response.data);
+				
+				var parser = new xml2js.Parser();
+				parser.parseString(response.data, (err: any, result: { [x: string]: { [x: string]: { [x: string]: { [x: string]: any; }[]; }[]; }; }) => {
+				this.validateStatus = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['OverallStatus'][0];
+				Utils.logInfo('Validation Status : ' + this.validateStatus);
+				this.validateDEName = JSON.stringify(result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['Name'][0]);
+				Utils.logInfo('Validated Data Extension Name : ' + this.validateDEName);
+					if(this.validateStatus =='OK' && this.validateDEName!=""){
+						this.isValidated = 'true';
+					}
+					else{
+						this.isValidated = 'false';
+					}
+                
+            });
+			
+			})
+            .catch((error: any) => {
+                // error
+                let errorMsg = "Error loading sample data. POST response from Marketing Cloud:";
+                errorMsg += "\nMessage: " + error.message;
+                errorMsg += "\nStatus: " + error.response ? error.response.status : "<None>";
+                errorMsg += "\nResponse data: " + error.response.data ? Utils.prettyPrintJson(JSON.stringify(error.response.data)) : "<None>";
+                Utils.logError(errorMsg);
+
+                reject(errorMsg);
+            });
+			
+	})
 	}
 
     /**
@@ -612,7 +670,7 @@ export default class SfmcApiHelper
 				})            
 				.then((response: any) => {
                 Utils.logInfo(response.data);
-                var extractedData = "";
+                //var extractedData = "";
 				/*var parser = new xml2js.Parser();
 				parser.parseString(response.data, (err: any, result: { [x: string]: { [x: string]: { [x: string]: { [x: string]: any; }[]; }[]; }; }) => {
 				//this.FolderID = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ID'][0];
