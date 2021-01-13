@@ -282,12 +282,6 @@ export default class SfmcApiHelper
 						this.isValidated = 'false';
 					}
                 
-            })
-			.catch((err: any) => {
-                // error
-                Utils.logInfo('Data extension does not exist : ' + err);
-
-                reject(err);
             });
 			})
             .catch((error: any) => {
