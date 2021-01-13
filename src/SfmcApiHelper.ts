@@ -9,7 +9,7 @@ export default class SfmcApiHelper
 {
     // Instance variables 
     private _deExternalKey = "Org_Setup";
-    private _sfmcDataExtensionApiUrl = "https://mc4f63jqqhfc51yw6d1h0n1ns1.rest.marketingcloudapis.com/hub/v1/dataevents/key:" + this._deExternalKey + "/rowset";
+    private _sfmcDataExtensionApiUrl = "https://mc4f63jqqhfc51yw6d1h0n1ns1-m.rest.marketingcloudapis.com/hub/v1/dataevents/key:" + this._deExternalKey + "/rowset";
     private _oauthToken = "";
 	private FolderID='';
 	private ParentFolderID = '';
@@ -82,7 +82,7 @@ export default class SfmcApiHelper
         {
             Utils.logInfo("Entered to the method...");
             // POST to Marketing Cloud REST Auth service and get back an OAuth access token.
-            let sfmcAuthServiceApiUrl = "https://mc4f63jqqhfc51yw6d1h0n1ns1.auth.marketingcloudapis.com/v2/token";
+            let sfmcAuthServiceApiUrl = "https://mc4f63jqqhfc51yw6d1h0n1ns1-m.auth.marketingcloudapis.com/v2/token";
             Utils.logInfo("oauth token is called, waiting for status...");
             axios.post(sfmcAuthServiceApiUrl, postBody, {"headers" : headers})            
             .then((response : any) => {
@@ -156,7 +156,7 @@ export default class SfmcApiHelper
 +'<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">'
 +'    <s:Header>'
 +'        <a:Action s:mustUnderstand="1">Retrieve</a:Action>'
-+'        <a:To s:mustUnderstand="1">https://mc4f63jqqhfc51yw6d1h0n1ns1.soap.marketingcloudapis.com/Service.asmx</a:To>'
++'        <a:To s:mustUnderstand="1">https://mc4f63jqqhfc51yw6d1h0n1ns1-m.soap.marketingcloudapis.com/Service.asmx</a:To>'
 +'        <fueloauth xmlns="http://exacttarget.com">'+this._oauthToken+'</fueloauth>'
 +'    </s:Header>'
 +'    <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">'
@@ -183,7 +183,7 @@ export default class SfmcApiHelper
 +'<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">'
 +'    <s:Header>'
 +'        <a:Action s:mustUnderstand="1">Retrieve</a:Action>'
-+'        <a:To s:mustUnderstand="1">https://mc4f63jqqhfc51yw6d1h0n1ns1.soap.marketingcloudapis.com/Service.asmx</a:To>'
++'        <a:To s:mustUnderstand="1">https://mc4f63jqqhfc51yw6d1h0n1ns1-m.soap.marketingcloudapis.com/Service.asmx</a:To>'
 +'        <fueloauth xmlns="http://exacttarget.com">'+this._oauthToken+'</fueloauth>'
 +'    </s:Header>'
 +'    <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">'
@@ -215,7 +215,7 @@ export default class SfmcApiHelper
             // POST to Marketing Cloud Data Extension endpoint to load sample data in the POST body
             axios({
 				method: 'post',
-				url: 'https://mc4f63jqqhfc51yw6d1h0n1ns1.soap.marketingcloudapis.com/Service.asmx',
+				url: 'https://mc4f63jqqhfc51yw6d1h0n1ns1-m.soap.marketingcloudapis.com/Service.asmx',
 				data: soapMessage,
 				headers: {'Content-Type': 'text/xml'}							
 				})            
@@ -261,7 +261,7 @@ export default class SfmcApiHelper
 			Utils.logInfo("Ahpppaaaddaa, Method call aaiduchu");
 			 axios({
 				method: 'post',
-				url: 'https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.soap.marketingcloudapis.com/Service.asmx',
+				url: 'https://mc4f63jqqhfc51yw6d1h0n1ns1-m.soap.marketingcloudapis.com/Service.asmx',
 				data: ValidationBody,
 				headers: {'Content-Type': 'text/xml'}							
 				}) 
@@ -282,6 +282,12 @@ export default class SfmcApiHelper
 						this.isValidated = 'false';
 					}
                 
+            })
+			.catch((err: any) => {
+                // error
+                Utils.logInfo('Data extension does not exist : ' + err);
+
+                reject(err);
             });
 			})
             .catch((error: any) => {
@@ -425,7 +431,7 @@ export default class SfmcApiHelper
             };
 
             // POST to Marketing Cloud Data Extension endpoint to load sample data in the POST body
-            axios.post("https://mc4f63jqqhfc51yw6d1h0n1ns1.rest.marketingcloudapis.com/hub/v1/dataevents/key:" + "Data_Extension_Template" + "/rowset", jsonData, {"headers" : headers})
+            axios.post("https://mc4f63jqqhfc51yw6d1h0n1ns1-m.rest.marketingcloudapis.com/hub/v1/dataevents/key:" + "Data_Extension_Template" + "/rowset", jsonData, {"headers" : headers})
             .then((response: any) => {
                 // success
                 Utils.logInfo("Successfully loaded sample data into Data Extension!");
@@ -497,7 +503,7 @@ export default class SfmcApiHelper
 +'        <a:ReplyTo>'
 +'            <a:Address>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</a:Address>'
 +'        </a:ReplyTo>'
-+'        <a:To s:mustUnderstand="1">https://mc4f63jqqhfc51yw6d1h0n1ns1.soap.marketingcloudapis.com/Service.asmx</a:To>'
++'        <a:To s:mustUnderstand="1">https://mc4f63jqqhfc51yw6d1h0n1ns1-m.soap.marketingcloudapis.com/Service.asmx</a:To>'
 +'        <fueloauth xmlns="http://exacttarget.com">'+oauthAccessToken+'</fueloauth>'
 +'    </s:Header>'
 +'    <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">'
@@ -630,7 +636,7 @@ export default class SfmcApiHelper
 				
 				axios({
 				method: 'post',
-				url: 'https://mc4f63jqqhfc51yw6d1h0n1ns1.soap.marketingcloudapis.com/Service.asmx',
+				url: 'https://mc4f63jqqhfc51yw6d1h0n1ns1-m.soap.marketingcloudapis.com/Service.asmx',
 				data: soapData,
 				headers: {'Content-Type': 'text/xml'}							
 				})            
@@ -664,7 +670,7 @@ export default class SfmcApiHelper
                 'Content-Type': 'text/xml'
             };
 			
-            axios.post('https://mc4f63jqqhfc51yw6d1h0n1ns1.soap.marketingcloudapis.com/Service.asmx', soapData, {"headers" : headers})
+            axios.post('https://mc4f63jqqhfc51yw6d1h0n1ns1-m.soap.marketingcloudapis.com/Service.asmx', soapData, {"headers" : headers})
 			.then(function (response) {
 				Utils.logInfo(response.data);
 				var parser = new xml2js.Parser();
@@ -708,7 +714,7 @@ export default class SfmcApiHelper
 		return new Promise<any>((resolve, reject) =>
         {
 			Utils.logInfo("Ahpppaaaddaa, Method call aaiduchu");
-			 axios.post("https://mc4f63jqqhfc51yw6d1h0n1ns1.rest.marketingcloudapis.com/data/v1/async/dataextensions/key:" + DataExtensionName + "/rows", Row, {"headers" : headers})
+			 axios.post("https://mc4f63jqqhfc51yw6d1h0n1ns1-m.rest.marketingcloudapis.com/data/v1/async/dataextensions/key:" + DataExtensionName + "/rows", Row, {"headers" : headers})
             .then((response: any) => {
                 // success
                 Utils.logInfo("Hearsay_Org_ID Updated Successfully");
