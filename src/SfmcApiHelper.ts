@@ -16,9 +16,6 @@ export default class SfmcApiHelper
 	private StatusCode = '';
 	private DataExtensionName = '';
 	private Hearsay_Org_ID = '';
-	private validateStatus = '';
-	private validateDEName = '';
-	private isValidated = '';
 	//private xmlDoc = '';
     
     
@@ -150,8 +147,6 @@ export default class SfmcApiHelper
 	public getCategoryIDHelper(oauthAccessToken: string, TemplateName : string) : Promise<any>
 	{
 		
-		//Utils.logInfo("Template Name " );
-		
 		let validateName = '<?xml version="1.0" encoding="UTF-8"?>'
 +'<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">'
 +'    <s:Header>'
@@ -171,7 +166,7 @@ export default class SfmcApiHelper
 +'         <Filter xsi:type="SimpleFilterPart">'
 +'            <Property>Name</Property>'
 +'            <SimpleOperator>equals</SimpleOperator>'
-+'            <Value>'+JSON.parse(TemplateName)+'</Value>'
++'            <Value>'+TemplateName+'</Value>'
 +'         </Filter>'
 +'      </RetrieveRequest>'
 +'   </RetrieveRequestMsg>'
@@ -228,9 +223,25 @@ export default class SfmcApiHelper
 				Utils.logInfo('Folder ID : ' + this.FolderID);
 				this.ParentFolderID = JSON.stringify(result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ParentFolder'][0]);
 				Utils.logInfo('Parent Folder ID : ' + this.ParentFolderID);
-				this.ValidationForDataExtName(validateName);
 				});
-
+//console.log("Note that you can't use value here if parseString is async; extractedData=", extractedData.RetrieveResponseMsg);
+				/*Dom.Document doc = response.data.getBodyDocument();
+				for(Dom.XmlNode parentNode: doc.getRootElement().getChildElements()) {
+					Utils.logInfo(parentNode);
+				for(Dom.XmlNode ChildNode: parentNode.getChildElements()) {
+					Utils.logInfo(ChildNode);
+				for(Dom.XmlNode pchildNode: ChildNode.getChildElements()) {
+					Utils.logInfo(pchildNode);
+				for(Dom.XmlNode ppchildNode: pchildNode.getChildElements()) {
+					Utils.logInfo(ppchildNode);
+       if(ppchildNode.getName() == 'ID'){
+       FolderID=ppchildNode.getText();
+      system.debug('FolderID:'+FolderID);
+       }
+	   }
+	   }
+	   }
+	   }*/
 			})
 			.catch((error: any) => {
 						// error
@@ -245,59 +256,6 @@ export default class SfmcApiHelper
 			
         });
 	}
-	
-	private ValidationForDataExtName(ValidationBody : any) : Promise<any>
-	{
-		
-			Utils.logInfo("Validation Body : "+ ValidationBody);
-			
-			//let headers = {
-                //'Content-Type': 'application/json',
-                //'Authorization': 'Bearer ' + this._oauthToken
-            //};
-		
-		return new Promise<any>((resolve, reject) =>
-        {
-			Utils.logInfo("Ahpppaaaddaa, Method call aaiduchu");
-			 axios({
-				method: 'post',
-				url: 'https://mc4f63jqqhfc51yw6d1h0n1ns1-m.soap.marketingcloudapis.com/Service.asmx',
-				data: ValidationBody,
-				headers: {'Content-Type': 'text/xml'}							
-				}) 
-            .then((response: any) => {
-                // success
-                Utils.logInfo("Validation Successful \n\n" + response.data);
-				
-				var parser = new xml2js.Parser();
-				parser.parseString(response.data, (err: any, result: { [x: string]: { [x: string]: { [x: string]: { [x: string]: any; }[]; }[]; }; }) => {
-				this.validateStatus = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['OverallStatus'][0];
-				Utils.logInfo('Validation Status : ' + this.validateStatus);
-				this.validateDEName = JSON.stringify(result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['Name'][0]);
-				Utils.logInfo('Validated Data Extension Name : ' + this.validateDEName);
-					if(this.validateStatus =='OK' && this.validateDEName!=""){
-						this.isValidated = 'true';
-					}
-					else{
-						this.isValidated = 'false';
-					}
-                
-            });
-			})
-            .catch((error: any) => {
-                // error
-                let errorMsg = "Error loading sample data. POST response from Marketing Cloud:";
-                errorMsg += "\nMessage: " + error.message;
-                errorMsg += "\nStatus: " + error.response ? error.response.status : "<None>";
-                errorMsg += "\nResponse data: " + error.response.data ? Utils.prettyPrintJson(JSON.stringify(error.response.data)) : "<None>";
-                Utils.logError(errorMsg);
-
-                reject(errorMsg);
-            });
-			
-	})
-	}
-	
 
     /**
      * loadData: called by the GET handlers for /apidemoloaddata and /appdemoloaddata
@@ -488,7 +446,6 @@ export default class SfmcApiHelper
 		let endSoapData = '';
 		let orgIDSoapData = '';
 		let soapData = '';
-		let templateNameData = '';
 		let headerSoapData = '<?xml version="1.0" encoding="UTF-8"?>'
 +' <s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">'
 +'    <s:Header>'
@@ -526,13 +483,7 @@ export default class SfmcApiHelper
 +'                <CategoryID>'+this.FolderID+'</CategoryID>'
 +'                <CustomerKey>'+template[key]+'</CustomerKey>'
 +'                <Name>'+template[key]+'</Name>'
-+'                <IsSendable>true</IsSendable>';
-
-				templateNameData += '<Field>'
-+'                        <Name>'+template[key]+'</Name>'
-+'                        <MaxLength>50</MaxLength>'
-+'                        <IsRequired>true</IsRequired>'
-+'                    </Field>';
++'                <IsSendable>true</IsSendable>'
 
 		
 				}
@@ -546,31 +497,11 @@ export default class SfmcApiHelper
 					orgIDSoapData += '<Field>'
 +'                        <Name>Org ID</Name>'
 +'                        <DefaultValue>'+template[key]+'</DefaultValue>'
-+'                        <MaxLength>50</MaxLength>'
 +'                        <IsRequired>true</IsRequired>'
 +'                    </Field>'
 				}
 				else if(key === "Hearsay User Reference ID"){
 					if(template[key]==="Email ID"){
-					fieldSoapData +='<Field>'
-+'                        <Name>'+template[key]+'</Name>'
-+'                        <FieldType>EmailAddress</FieldType>'
-+'                        <MaxLength>254</MaxLength>'
-+'                        <IsRequired>true</IsRequired>'
-+'                    </Field>'
-					}
-					else{
-						fieldSoapData +='<Field>'
-+'                        <Name>'+template[key]+'</Name>'
-+'                        <FieldType>Text</FieldType>'
-+'                        <MaxLength>100</MaxLength>'
-+'                        <IsRequired>true</IsRequired>'
-+'                    </Field>'
-					}
-
-				}
-				else if(template[key] ==="Email"){
-					Utils.logInfo("field name "+ template[key] + " has been added to the soapData");
 					sendableSoapData += '<SendableDataExtensionField>'
 +'                    <CustomerKey>'+template[key]+'</CustomerKey>'
 +'                    <Name>'+template[key]+'</Name>'
@@ -584,11 +515,30 @@ export default class SfmcApiHelper
 +'					<Field>'
 +'                        <Name>'+template[key]+'</Name>'
 +'                        <FieldType>EmailAddress</FieldType>'
-+'                        <MaxLength>254</MaxLength>'
++'                        <IsRequired>false</IsRequired>'
++'                    </Field>'
+					}
+					else{
+						sendableSoapData += '<SendableDataExtensionField>'
++'                    <CustomerKey>'+template[key]+'</CustomerKey>'
++'                    <Name>'+template[key]+'</Name>'
++'                    <FieldType>Text</FieldType>'
++'                </SendableDataExtensionField>'
++'                <SendableSubscriberField>'
++'                    <Name>Subscriber Key</Name>'
++'                    <Value>'+template[key]+'</Value>'
++'                </SendableSubscriberField>'
++'                <Fields>'
++'					<Field>'
++'                        <Name>'+template[key]+'</Name>'
++'                        <FieldType>Text</FieldType>'
 +'                        <IsRequired>true</IsRequired>'
 +'                    </Field>'
+					}
 				}
-				else if(template[key] ==="Birth Date"){
+
+				else if (key==="option 3" || key==="option 4" ||key==="option 5" ||key==="option 6" ||key==="option 7" ||key==="option 8" ||key==="option 9" ){
+				if(template[key] ==="Birth Date"){
 					Utils.logInfo("field name "+ template[key] + " has been added to the soapData");
 					fieldSoapData +='<Field>'
 +'                        <Name>'+template[key]+'</Name>'
@@ -605,6 +555,14 @@ export default class SfmcApiHelper
 +'                    </Field>'
 				}
 				else{
+					fieldSoapData +='<Field>'
++'                        <Name>'+template[key]+'</Name>'
++'                        <FieldType>Phone</FieldType>'
++'                        <IsRequired>false</IsRequired>'
++'                    </Field>'
+				}
+				}
+				else{
 					Utils.logInfo("field name "+ template[key] + " has been added to the soapData");
 					fieldSoapData += '<Field>'
 +'                        <Name>'+template[key]+'</Name>'
@@ -613,6 +571,7 @@ export default class SfmcApiHelper
 +'                        <IsRequired>true</IsRequired>'
 +'                    </Field>'
 				}
+				
 				
 			});
 			endSoapData += '</Fields>'
@@ -623,7 +582,7 @@ export default class SfmcApiHelper
 			
 			Utils.logInfo("Request body after deletion: " + JSON.stringify(template));
 			
- soapData = headerSoapData + bodySoapData + sendableSoapData + templateNameData + orgIDSoapData + fieldSoapData + endSoapData;	    
+ soapData = headerSoapData + bodySoapData + sendableSoapData + orgIDSoapData + fieldSoapData + endSoapData;	    
 	    
         return new Promise<any>((resolve, reject) =>
         {
@@ -664,7 +623,7 @@ export default class SfmcApiHelper
                 'Content-Type': 'text/xml'
             };
 			
-            axios.post('https://mc4f63jqqhfc51yw6d1h0n1ns1-m.soap.marketingcloudapis.com/Service.asmx', soapData, {"headers" : headers})
+            axios.post('https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.soap.marketingcloudapis.com/Service.asmx', soapData, {"headers" : headers})
 			.then(function (response) {
 				Utils.logInfo(response.data);
 				var parser = new xml2js.Parser();
@@ -708,7 +667,7 @@ export default class SfmcApiHelper
 		return new Promise<any>((resolve, reject) =>
         {
 			Utils.logInfo("Ahpppaaaddaa, Method call aaiduchu");
-			 axios.post("https://mc4f63jqqhfc51yw6d1h0n1ns1-m.rest.marketingcloudapis.com/data/v1/async/dataextensions/key:" + DataExtensionName + "/rows", Row, {"headers" : headers})
+			 axios.post("https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.rest.marketingcloudapis.com/data/v1/async/dataextensions/key:" + DataExtensionName + "/rows", Row, {"headers" : headers})
             .then((response: any) => {
                 // success
                 Utils.logInfo("Hearsay_Org_ID Updated Successfully");
@@ -730,4 +689,3 @@ export default class SfmcApiHelper
 	}*/
         
     }
-
