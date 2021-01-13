@@ -610,7 +610,7 @@ export default class SfmcApiHelper
 					fieldSoapData +='<Field>'
 +'                        <Name>'+template[key]+'</Name>'
 +'                        <FieldType>Date</FieldType>'
-+'                        <IsRequired>true</IsRequired>'
++'                        <IsRequired>false</IsRequired>'
 +'                    </Field>'
 				}
 				else if(template[key] ==="Phone"){
@@ -618,7 +618,7 @@ export default class SfmcApiHelper
 					fieldSoapData +='<Field>'
 +'                        <Name>'+template[key]+'</Name>'
 +'                        <FieldType>Phone</FieldType>'
-+'                        <IsRequired>true</IsRequired>'
++'                        <IsRequired>false</IsRequired>'
 +'                    </Field>'
 				}
 				else if(template[key] ==="Name"){
