@@ -282,6 +282,12 @@ export default class SfmcApiHelper
 						this.isValidated = 'false';
 					}
                 
+            })
+			.catch((err: any) => {
+                // error
+                Utils.logInfo('Data extension does not exist : ' + err);
+
+                reject(err);
             });
 			})
             .catch((error: any) => {
@@ -588,8 +594,7 @@ export default class SfmcApiHelper
 +'                        <IsRequired>true</IsRequired>'
 +'                    </Field>'
 				}
-				else if (key==="option 2" || key==="option 3" || key==="option 4" ||key==="option 5" ||key==="option 6" ||key==="option 7" ||key==="option 8" ||key==="option 9" ){
-				if(template[key] ==="Birth Date"){
+				else if(template[key] ==="Birth Date"){
 					Utils.logInfo("field name "+ template[key] + " has been added to the soapData");
 					fieldSoapData +='<Field>'
 +'                        <Name>'+template[key]+'</Name>'
@@ -604,14 +609,6 @@ export default class SfmcApiHelper
 +'                        <FieldType>Phone</FieldType>'
 +'                        <IsRequired>true</IsRequired>'
 +'                    </Field>'
-				}
-				else{
-					fieldSoapData +='<Field>'
-+'                        <Name>'+template[key]+'</Name>'
-+'                        <FieldType>Phone</FieldType>'
-+'                        <IsRequired>false</IsRequired>'
-+'                    </Field>'
-				}
 				}
 				else{
 					Utils.logInfo("field name "+ template[key] + " has been added to the soapData");
