@@ -606,7 +606,7 @@ export default class SfmcApiHelper
 				}
 				else if (key==="option 2" || key==="option 3" || key==="option 4" ||key==="option 5" ||key==="option 6" ||key==="option 7" ||key==="option 8" ||key==="option 9" ){
 				if(template[key] ==="Birth Date"){
-					Utils.logInfo("field name "+ template[key] + " has been added to the soapData");
+					Utils.logInfo("field name Birth Date of "+key+"has been added to the soapData");
 					fieldSoapData +='<Field>'
 +'                        <Name>'+template[key]+'</Name>'
 +'                        <FieldType>Date</FieldType>'
