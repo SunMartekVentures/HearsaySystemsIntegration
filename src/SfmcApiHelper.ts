@@ -295,7 +295,7 @@ export default class SfmcApiHelper
 			})
             .catch((error: any) => {
                 // error
-                let errorMsg = "Error loading sample data. POST response from Marketing Cloud:";
+                let errorMsg = "Error retrieving the data extension name :";
                 errorMsg += "\nMessage: " + error.message;
                 errorMsg += "\nStatus: " + error.response ? error.response.status : "<None>";
                 errorMsg += "\nResponse data: " + error.response.data ? Utils.prettyPrintJson(JSON.stringify(error.response.data)) : "<None>";
