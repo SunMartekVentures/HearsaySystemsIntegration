@@ -504,7 +504,7 @@
 					var parser = new DOMParser();
 					var xmlDoc = parser.parseFromString(responseXML,"text/xml");
 					//var xml = new XMLParser().parseFromString(response.data);
-					console.log("Parsed response.data " + xmlDoc.getElementsByTagName("OverallStatus")[0]);
+					console.log("Parsed response.data " + JSON.stringify(xmlDoc.getElementsByTagName("OverallStatus")[0]));
 					//loaddata(jsonObject);				
                   });
 		
