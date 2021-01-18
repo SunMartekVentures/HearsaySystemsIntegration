@@ -152,7 +152,7 @@ export default class SfmcApiHelper
 	private ValidationForDataExtName(TemplateName : string) : Promise<any>
 	{
 		
-			Utils.logInfo("Validation Body : "+ ValidationBody);
+			//Utils.logInfo("Validation Body : "+ ValidationBody);
 			
 			//let headers = {
                 //'Content-Type': 'application/json',
