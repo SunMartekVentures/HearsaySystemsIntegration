@@ -132,7 +132,7 @@ export default class SfmcApiHelper
 		if (this._oauthToken!= "")
         {
             //Utils.logInfo("Using OAuth token: " + req.session.oauthAccessToken);
-            self.getCategoryIDHelper(this._oauthToken, TemplateName)
+            self.ValidationForDataExtName(TemplateName)
             .then((result) => {
                 res.status(result.status).send(result.statusText);
             })
@@ -148,10 +148,21 @@ export default class SfmcApiHelper
             res.status(500).send(errorMsg);
         }
 	}
-	public getCategoryIDHelper(oauthAccessToken: string, TemplateName : string) : Promise<any>
+	
+	private ValidationForDataExtName(TemplateName : string) : Promise<any>
 	{
 		
-		let validateName = '<?xml version="1.0" encoding="UTF-8"?>'
+			Utils.logInfo("Validation Body : "+ ValidationBody);
+			
+			//let headers = {
+                //'Content-Type': 'application/json',
+                //'Authorization': 'Bearer ' + this._oauthToken
+            //};
+		
+		return new Promise<any>((resolve, reject) =>
+        {
+			
+			let validateName = '<?xml version="1.0" encoding="UTF-8"?>'
 +'<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">'
 +'    <s:Header>'
 +'        <a:Action s:mustUnderstand="1">Retrieve</a:Action>'
@@ -176,8 +187,58 @@ export default class SfmcApiHelper
 +'   </RetrieveRequestMsg>'
 +'    </s:Body>'
 +'</s:Envelope>';
+			Utils.logInfo("Ahpppaaaddaa, Method call aaiduchu");
+			 axios({
+				method: 'post',
+				url: 'https://mc4f63jqqhfc51yw6d1h0n1ns1-m.soap.marketingcloudapis.com/Service.asmx',
+				data: validateName,
+				headers: {'Content-Type': 'text/xml'}							
+				}) 
+            .then((response: any) => {
+                // success
+                Utils.logInfo("Validation Successful \n\n" + response.data);
+				this.ValidateResponse = response.data;
+				
+				var parser = new xml2js.Parser();
+				parser.parseString(response.data, (err: any, result: { [x: string]: { [x: string]: { [x: string]: { [x: string]: any; }[]; }[]; }; }) => {
+				this.validateStatus = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['OverallStatus'][0];
+				Utils.logInfo('Validation Status : ' + this.validateStatus);
+				this.validateDEName = JSON.stringify(result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['Name'][0]);
+				Utils.logInfo('Validated Data Extension Name : ' + this.validateDEName);
+					if(this.validateStatus =='OK' && this.validateDEName!=""){
+						this.isValidated = 'true';
+					}
+					else{
+						this.isValidated = 'false';
+					}
+                
+            });
+			this.getCategoryIDHelper();
+			resolve(
+                {
+                    status: response.status,
+                    statusText: response.statusText + "\n" + Utils.prettyPrintJson(JSON.stringify(response.data))
+                });
+			
+			})
+            .catch((error: any) => {
+                // error
+                let errorMsg = "Error retrieving the data extension name :";
+                errorMsg += "\nMessage: " + error.message;
+                errorMsg += "\nStatus: " + error.response ? error.response.status : "<None>";
+                errorMsg += "\nResponse data: " + error.response.data ? Utils.prettyPrintJson(JSON.stringify(error.response.data)) : "<None>";
+                Utils.logError(errorMsg);
 
-
+                reject(errorMsg);
+            });
+			
+	})
+	}
+	
+	
+	public getCategoryIDHelper() : Promise<any>
+	{
+		Utils.logInfo('getCategoryIDHelper Method has been called, Finally it Worked. We are going to complete');
 		let soapMessage = '<?xml version="1.0" encoding="UTF-8"?>'
 +'<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">'
 +'    <s:Header>'
@@ -227,13 +288,13 @@ export default class SfmcApiHelper
 				Utils.logInfo('Folder ID : ' + this.FolderID);
 				this.ParentFolderID = JSON.stringify(result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ParentFolder'][0]);
 				Utils.logInfo('Parent Folder ID : ' + this.ParentFolderID);
-				this.ValidationForDataExtName(validateName);				
+								
 				
 				});
 			resolve(
 					{
                     status: response.status,
-                    statusText: this.ValidateResponse
+                    statusText: response.statusText + "\n" + Utils.prettyPrintJson(JSON.stringify(response.data))
 					});
 			})
 			.catch((error: any) => {
@@ -250,64 +311,7 @@ export default class SfmcApiHelper
         });
 	}
 	
-	private ValidationForDataExtName(ValidationBody : any) : Promise<any>
-	{
-		
-			Utils.logInfo("Validation Body : "+ ValidationBody);
-			
-			//let headers = {
-                //'Content-Type': 'application/json',
-                //'Authorization': 'Bearer ' + this._oauthToken
-            //};
-		
-		return new Promise<any>((resolve, reject) =>
-        {
-			Utils.logInfo("Ahpppaaaddaa, Method call aaiduchu");
-			 axios({
-				method: 'post',
-				url: 'https://mc4f63jqqhfc51yw6d1h0n1ns1-m.soap.marketingcloudapis.com/Service.asmx',
-				data: ValidationBody,
-				headers: {'Content-Type': 'text/xml'}							
-				}) 
-            .then((response: any) => {
-                // success
-                Utils.logInfo("Validation Successful \n\n" + response.data);
-				this.ValidateResponse = response.data;
-				
-				var parser = new xml2js.Parser();
-				parser.parseString(response.data, (err: any, result: { [x: string]: { [x: string]: { [x: string]: { [x: string]: any; }[]; }[]; }; }) => {
-				this.validateStatus = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['OverallStatus'][0];
-				Utils.logInfo('Validation Status : ' + this.validateStatus);
-				this.validateDEName = JSON.stringify(result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['Name'][0]);
-				Utils.logInfo('Validated Data Extension Name : ' + this.validateDEName);
-					if(this.validateStatus =='OK' && this.validateDEName!=""){
-						this.isValidated = 'true';
-					}
-					else{
-						this.isValidated = 'false';
-					}
-                
-            });
-			resolve(
-                {
-                    status: response.status,
-                    statusText: response.statusText + "\n" + Utils.prettyPrintJson(JSON.stringify(response.data))
-                });
-			
-			})
-            .catch((error: any) => {
-                // error
-                let errorMsg = "Error retrieving the data extension name :";
-                errorMsg += "\nMessage: " + error.message;
-                errorMsg += "\nStatus: " + error.response ? error.response.status : "<None>";
-                errorMsg += "\nResponse data: " + error.response.data ? Utils.prettyPrintJson(JSON.stringify(error.response.data)) : "<None>";
-                Utils.logError(errorMsg);
-
-                reject(errorMsg);
-            });
-			
-	})
-	}
+	
 
     /**
      * loadData: called by the GET handlers for /apidemoloaddata and /appdemoloaddata
