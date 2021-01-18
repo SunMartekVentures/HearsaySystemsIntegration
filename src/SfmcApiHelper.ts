@@ -505,6 +505,7 @@ export default class SfmcApiHelper
 		let orgIDSoapData = '';
 		let soapData = '';
 		let templateNameData = '';
+		let OptionFieldSoapData = '';
 		let headerSoapData = '<?xml version="1.0" encoding="UTF-8"?>'
 +' <s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">'
 +'    <s:Header>'
@@ -628,6 +629,43 @@ export default class SfmcApiHelper
 +'                        <IsRequired>true</IsRequired>'
 +'                    </Field>'
 				}
+				else if(key ==="Customer Unique ID"){
+					Utils.logInfo("field name "+ template[key] + " has been added to the soapData");
+					fieldSoapData +='<Field>'
++'                        <Name>'+template[key]+'</Name>'
++'                        <FieldType>Text</FieldType>'
++'                        <IsRequired>true</IsRequired>'
++'                    </Field>'
+				}
+				
+				else if(key ==="Customer Unique ID"){
+					Utils.logInfo("field name "+ template[key] + " has been added to the soapData");
+					fieldSoapData +='<Field>'
++'                        <Name>'+template[key]+'</Name>'
++'                        <FieldType>Text</FieldType>'
++'                        <IsRequired>true</IsRequired>'
++'                    </Field>'
+				}
+				
+				else if(key ==="option 7" || key ==="option 8" || key ==="option 9"){
+					Utils.logInfo("field name "+ template[key] + " has been added to the OptionFieldSoapData");
+					OptionFieldSoapData +='<Field>'
++'                        <Name>'+template[key]+'</Name>'
+
+				}
+				else if(key ==="FieldType 1" || key ==="FieldType 2" || key ==="FieldType 3"){
+					Utils.logInfo("field type "+ template[key] + " has been added to the OptionFieldSoapData");
+					OptionFieldSoapData +='<FieldType>'+template[key]+'</FieldType>'
+				}
+				
+				else if(key ==="FieldLength 1" || key ==="FieldLength 2" || key ==="FieldLength 3"){
+					Utils.logInfo("field length "+ template[key] + " has been added to the OptionFieldSoapData");
+					OptionFieldSoapData += '<MaxLength>'+ template[key] +'</MaxLength>'
++'                        <IsRequired>false</IsRequired>'					
++'                    </Field>'
+				}
+				
+				
 				else{
 					fieldSoapData +='<Field>'
 +'                        <Name>'+template[key]+'</Name>'
