@@ -127,7 +127,7 @@ export default class SfmcApiHelper
 		let self = this;	
 			
 		Utils.logInfo("request body = " + JSON.stringify(req.query.TemplateName));
-		let TemplateName = JSON.stringify(req.query.TemplateName);
+		let TemplateName = req.query.TemplateName;
 		if (this._oauthToken!= "")
         {
             //Utils.logInfo("Using OAuth token: " + req.session.oauthAccessToken);
