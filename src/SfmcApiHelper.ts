@@ -20,6 +20,7 @@ export default class SfmcApiHelper
 	private validateDEName = '';
 	private isValidated = '';
 	//private xmlDoc = '';
+	private ValidateResponse = '';
     
     
     /**
@@ -232,7 +233,7 @@ export default class SfmcApiHelper
 			resolve(
 					{
                     status: response.status,
-                    statusText: response.data
+                    statusText: this.validateResponse
 					});
 			})
 			.catch((error: any) => {
@@ -271,6 +272,7 @@ export default class SfmcApiHelper
             .then((response: any) => {
                 // success
                 Utils.logInfo("Validation Successful \n\n" + response.data);
+				this.ValidateResponse = response.data;
 				
 				var parser = new xml2js.Parser();
 				parser.parseString(response.data, (err: any, result: { [x: string]: { [x: string]: { [x: string]: { [x: string]: any; }[]; }[]; }; }) => {
