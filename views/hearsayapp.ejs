@@ -505,7 +505,11 @@
 					var xmlDoc = parser.parseFromString(responseXML,"text/xml");
 					//var xml = new XMLParser().parseFromString(response.data);
 					console.log("Parsed response.data " + xmlDoc.getElementsByTagName("Name")[0].childNodes[0].nodeValue);
-					//loaddata(jsonObject);				
+					var ExistingTemplateName = xmlDoc.getElementsByTagName("Name")[0].childNodes[0].nodeValue;
+
+					if(ExistingTemplateName != undefined || ExistingTemplateName != ""){
+						console.log("The Template Name already exists");
+					}
                   });
 		
 		}
