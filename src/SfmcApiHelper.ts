@@ -710,12 +710,13 @@ export default class SfmcApiHelper
 					Utils.logInfo('Olunga odi poiru condition ae satisfy aagala');
 				}
 				});*/
-				})
+				
 				resolve(
                 {
                     status: response.status,
                     statusText: response.statusText + "\n" + Utils.prettyPrintJson(JSON.stringify(response.data))
                 });
+				})
 		/*let headers = {
                 'Content-Type': 'text/xml'
             };
