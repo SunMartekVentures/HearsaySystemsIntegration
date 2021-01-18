@@ -133,7 +133,7 @@ export default class SfmcApiHelper
             //Utils.logInfo("Using OAuth token: " + req.session.oauthAccessToken);
             self.getCategoryIDHelper(this._oauthToken, TemplateName)
             .then((result) => {
-                res.send(this.validateDEName);
+                res.status(result.status).send(result.statusText);
             })
             .catch((err) => {
                 res.status(500).send(err);
