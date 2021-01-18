@@ -264,7 +264,7 @@ export default class SfmcApiHelper
 			Utils.logInfo("Ahpppaaaddaa, Method call aaiduchu");
 			 axios({
 				method: 'post',
-				url: 'https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.soap.marketingcloudapis.com/Service.asmx',
+				url: 'https://mc4f63jqqhfc51yw6d1h0n1ns1-m.soap.marketingcloudapis.com/Service.asmx',
 				data: ValidationBody,
 				headers: {'Content-Type': 'text/xml'}							
 				}) 
