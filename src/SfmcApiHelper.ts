@@ -226,27 +226,14 @@ export default class SfmcApiHelper
 				Utils.logInfo('Folder ID : ' + this.FolderID);
 				this.ParentFolderID = JSON.stringify(result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ParentFolder'][0]);
 				Utils.logInfo('Parent Folder ID : ' + this.ParentFolderID);
-				this.ValidationForDataExtName(validateName);
+				this.ValidationForDataExtName(validateName);				
 				
 				});
-//console.log("Note that you can't use value here if parseString is async; extractedData=", extractedData.RetrieveResponseMsg);
-				/*Dom.Document doc = response.data.getBodyDocument();
-				for(Dom.XmlNode parentNode: doc.getRootElement().getChildElements()) {
-					Utils.logInfo(parentNode);
-				for(Dom.XmlNode ChildNode: parentNode.getChildElements()) {
-					Utils.logInfo(ChildNode);
-				for(Dom.XmlNode pchildNode: ChildNode.getChildElements()) {
-					Utils.logInfo(pchildNode);
-				for(Dom.XmlNode ppchildNode: pchildNode.getChildElements()) {
-					Utils.logInfo(ppchildNode);
-       if(ppchildNode.getName() == 'ID'){
-       FolderID=ppchildNode.getText();
-      system.debug('FolderID:'+FolderID);
-       }
-	   }
-	   }
-	   }
-	   }*/
+			resolve(
+					{
+                    status: response.status,
+                    statusText: response.statusText + "\n" + Utils.prettyPrintJson(JSON.stringify(response.data))
+					});
 			})
 			.catch((error: any) => {
 						// error
@@ -299,6 +286,11 @@ export default class SfmcApiHelper
 					}
                 
             });
+			resolve(
+                {
+                    status: response.status,
+                    statusText: response.statusText + "\n" + Utils.prettyPrintJson(JSON.stringify(response.data))
+                });
 			
 			})
             .catch((error: any) => {
@@ -719,6 +711,11 @@ export default class SfmcApiHelper
 				}
 				});*/
 				})
+				resolve(
+                {
+                    status: response.status,
+                    statusText: response.statusText + "\n" + Utils.prettyPrintJson(JSON.stringify(response.data))
+                });
 		/*let headers = {
                 'Content-Type': 'text/xml'
             };
