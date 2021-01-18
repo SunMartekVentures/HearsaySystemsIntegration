@@ -731,16 +731,16 @@ export default class SfmcApiHelper
 				Utils.logInfo('Status Code : ' + this.StatusCode);
 				});
 			})*/
-			.catch(function (error) {
-				let errorMsg = "Error creating data extension dynamically. POST response from Marketing Cloud:";
+			.catch((error: any) => {
+                // error
+                let errorMsg = "Error loading sample data. POST response from Marketing Cloud:";
                 errorMsg += "\nMessage: " + error.message;
                 errorMsg += "\nStatus: " + error.response ? error.response.status : "<None>";
                 errorMsg += "\nResponse data: " + error.response.data ? Utils.prettyPrintJson(JSON.stringify(error.response.data)) : "<None>";
                 Utils.logError(errorMsg);
-				Utils.logError(error.response.data);
 
                 reject(errorMsg);
-			});
+            });
         });
     }
 	
