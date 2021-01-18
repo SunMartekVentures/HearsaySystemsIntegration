@@ -509,6 +509,7 @@
 
 					if(ExistingTemplateName != undefined || ExistingTemplateName != ""){
 						console.log("The Template Name already exists");
+						ReactDOM.render(<p style={{color: "red" }}>Hearsay Org ID is mandatory.</p>, document.getElementById('valMsgOrgId'));
 					}
                   });
 		
