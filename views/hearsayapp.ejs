@@ -549,6 +549,7 @@ axios({
                 })
                   .then(function (response) {		  
 					console.log("Data extension created dynamically");
+					 //window.location.href = "https://mc.s11.exacttarget.com/";
                   })
 				  .catch(function (error) {
 					console.log(error);
@@ -651,7 +652,7 @@ axios({
           this.handleChangeNext = this.handleChangeNext.bind(this);
           this.handleChangeCancel = this.handleChangeCancel.bind(this);
           this.handleNewFieldClick = this.handleNewFieldClick.bind(this);
-	  this.handleChangeDone = this.handleChangeDone.bind(this);
+	  //this.handleChangeDone = this.handleChangeDone.bind(this);
 
 
 		  
@@ -691,9 +692,7 @@ axios({
         }
 
 
-      handleChangeDone(event) {
-          window.location.href = "https://mc.s11.exacttarget.com/";          
-        }
+     
         
 
 
@@ -758,6 +757,8 @@ axios({
 					"option 5":this.state.temp6text,
 					"option 6":this.state.temp7text,
 					"option 7":this.state.temp8FieldLabel,
+					"FieldType 1":this.state.temp8DataType,
+					"FieldLength 1":this.state.temp8Length,
              		"option 8":this.state.temp9FieldLabel,
               		"option 9":this.state.temp10FieldLabel,
             		
