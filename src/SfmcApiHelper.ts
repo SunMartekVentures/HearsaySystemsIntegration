@@ -232,7 +232,7 @@ export default class SfmcApiHelper
 			resolve(
 					{
                     status: response.status,
-                    statusText: response.data
+                    statusText: response.statusText + "\n" + response.data
 					});
 			})
 			.catch((error: any) => {
