@@ -176,8 +176,6 @@ export default class SfmcApiHelper
 +'         <Properties>ObjectID</Properties>'
 +'         <Properties>CustomerKey</Properties>'
 +'         <Properties>Name</Properties>'
-+'         <Properties>IsSendable</Properties>'
-+'         <Properties>SendableSubscriberField.Name</Properties>'
 +'         <Filter xsi:type="SimpleFilterPart">'
 +'            <Property>Name</Property>'
 +'            <SimpleOperator>equals</SimpleOperator>'
