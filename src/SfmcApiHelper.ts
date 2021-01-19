@@ -210,7 +210,9 @@ export default class SfmcApiHelper
 						this.isValidated = 'false';
 					}
                 
-            });
+            }).catch((err : any)=>{
+				reject(err);
+			});
 			this.getCategoryIDHelper();
 			resolve(
                 {
