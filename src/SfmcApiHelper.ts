@@ -198,7 +198,7 @@ export default class SfmcApiHelper
 				this.ValidateResponse = response.data;
 				
 				var parser = new xml2js.Parser();
-				parser.parseString(response.data, (err: any, result: { [x: string]: { [x: string]: { [x: string]: { [x: string]: any; }[]; }[]; }; }) => {
+				parser.parseString(response.data, (err, result: { [x: string]: { [x: string]: { [x: string]: { [x: string]: any; }[]; }[]; }; }) => {
 				this.validateStatus = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['OverallStatus'][0];
 				Utils.logInfo('Validation Status : ' + this.validateStatus);
 				this.validateDEName = JSON.stringify(result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['Name'][0]);
@@ -210,7 +210,7 @@ export default class SfmcApiHelper
 						this.isValidated = 'false';
 					}
                 
-            }).catch((err : any)=>{
+            }).catch((err)=>{
 				Utils.logInfo("Extension Template not available, You can proceed further");
 			});
 			this.getCategoryIDHelper();
