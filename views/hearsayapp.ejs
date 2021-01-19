@@ -826,7 +826,7 @@ axios({
 			  let validationTemplate = {
                     "TemplateName" : this.state.templatename
 			  }
-				ExistingTemplateName = getCategoryIDforApp(validationTemplate);
+				ExistingTemplateName = await getCategoryIDforApp(validationTemplate);
 				console.log("Method has returned the ExistingTemplateName :" + ExistingTemplateName);
 		  }
 
