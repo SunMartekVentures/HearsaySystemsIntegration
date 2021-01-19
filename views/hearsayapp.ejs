@@ -816,7 +816,7 @@ axios({
 					var xmlDoc = parser.parseFromString(responseXML,"text/xml");
 					console.log("Parsed response.data " + JSON.stringify(xmlDoc.getElementsByTagName("Name")[0].childNodes[0].nodeValue));
 					if(JSON.stringify(xmlDoc.getElementsByTagName("Name"))!={}){
-						console.log("Condition Satisfied, Parsed response.data " + xmlDoc.getElementsByTagName("Name")[0].childNodes[0].nodeValue);
+						console.log("Condition Satisfied, Parsed response.data " + JSON.stringify(xmlDoc.getElementsByTagName("Name")[0].childNodes[0].nodeValue));
 					}
 					else{
 						console.log("Condition not satisfied");
