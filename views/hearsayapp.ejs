@@ -814,8 +814,8 @@ axios({
 					var responseXML = response.data;
 					var parser = new DOMParser();
 					var xmlDoc = parser.parseFromString(responseXML,"text/xml");
-					console.log("Parsed response.data " + xmlDoc.getElementsByTagName("Name")[0].childNodes[0].nodeValue);
-					ExistingTemplateName = xmlDoc.getElementsByTagName("Name")[0].childNodes[0].nodeValue;
+					console.log("Parsed response.data " + JSON.stringify(xmlDoc.getElementsByTagName("Name")[0].childNodes[0].nodeValue));
+					ExistingTemplateName = JSON.stringify(xmlDoc.getElementsByTagName("Name")[0].childNodes[0].nodeValue);
 					console.log("ExistingTemplateName "+ ExistingTemplateName);
 					
 					//return ExistingTemplateName
