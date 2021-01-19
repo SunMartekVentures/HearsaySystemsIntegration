@@ -203,16 +203,11 @@ export default class SfmcApiHelper
 				Utils.logInfo('Validation Status : ' + this.validateStatus);
 				this.validateDEName = JSON.stringify(result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['Name'][0]);
 				Utils.logInfo('Validated Data Extension Name : ' + this.validateDEName);
-					if(this.validateStatus =='OK' && this.validateDEName!=""){
-						this.isValidated = 'true';
-					}
-					else{
-						this.isValidated = 'false';
+					if(err){
+						reject(err);
 					}
                 
-            }).catch((err : any)=>{
-				reject(err);
-			});
+            });
 			this.getCategoryIDHelper();
 			resolve(
                 {
