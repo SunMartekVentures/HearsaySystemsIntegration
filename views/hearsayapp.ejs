@@ -885,8 +885,13 @@ axios({
 			    this.state.temp3text=="" && this.state.temp4text=="" && 
 				this.state.temp5text=="" && this.state.temp6text=="" && this.state.temp7text==""){
               ValidationStatus=false;
-              ReactDOM.render(<p style={{color: "red"}}>Data template fields are mandatory.</p>, document.getElementById('valMsgPageTwo'));
+              
 				
+				}
+				
+				if(ExistingTemplateName!=undefined || ExistingTemplateName !=""){
+					ValidationStatus = false;
+					ReactDOM.render(<p style={{color: "red"}}>Template Name already exists.</p>, document.getElementById('valMsgPageTwo'));
 				}
             }
 
