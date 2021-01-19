@@ -814,8 +814,14 @@ axios({
 					var responseXML = response.data;
 					var parser = new DOMParser();
 					var xmlDoc = parser.parseFromString(responseXML,"text/xml");
-					console.log("Parsed response.data " + xmlDoc.getElementsByTagName("Name"));
-					ExistingTemplateName = (xmlDoc.getElementsByTagName("Name")!=undefined)?(xmlDoc.getElementsByTagName("Name")[0].childNodes[0].nodeValue):undefined;
+					//console.log("Parsed response.data " + xmlDoc.getElementsByTagName("Name"));
+					if(xmlDoc.getElementsByTagName("Name")!=undefined){
+						console.log("Condition Satisfied, Parsed response.data " + xmlDoc.getElementsByTagName("Name")[0].childNodes[0].nodeValue);
+					}
+					else{
+						console.log("Condition not satisfied");
+					}
+					//ExistingTemplateName = (xmlDoc.getElementsByTagName("Name")!=undefined)?(xmlDoc.getElementsByTagName("Name")[0].childNodes[0].nodeValue):undefined;
 					console.log("ExistingTemplateName "+ ExistingTemplateName);
 					
 					//return ExistingTemplateName
@@ -889,10 +895,10 @@ axios({
 				
 				}
 				
-				if(ExistingTemplateName!=""){
+				/*if(ExistingTemplateName!=""){
 					ValidationStatus = false;
 					ReactDOM.render(<p style={{color: "red"}}>Template Name already exists.</p>, document.getElementById('valMsgPageTwo'));
-				}
+				}*/
             }
 
           if(ValidationStatus==true){
