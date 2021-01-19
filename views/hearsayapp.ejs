@@ -132,6 +132,25 @@
                 </select>
               );
             }
+			else if(controlname=="temp2")
+            {
+              
+              return (
+                <select disabled name={controlname} value={controlvalue} onChange={handler} class='e1inputdd col-md-11'>
+                  <option value="Email">Email</option>
+                </select>
+              );
+            }
+			else if(controlname=="temp3")
+            {
+              
+              return (
+                <select disabled name={controlname} value={controlvalue} onChange={handler} class='e1inputdd col-md-11'>
+                  <option value="Name">Name</option>
+                </select>
+              );
+            }
+			
             else
             {
               return (
