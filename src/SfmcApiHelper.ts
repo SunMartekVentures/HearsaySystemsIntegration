@@ -203,11 +203,16 @@ export default class SfmcApiHelper
 				Utils.logInfo('Validation Status : ' + this.validateStatus);
 				this.validateDEName = JSON.stringify(result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['Name'][0]);
 				Utils.logInfo('Validated Data Extension Name : ' + this.validateDEName);
-					if(err){
-						reject(err);
+					if(this.validateStatus =='OK' && this.validateDEName!=""){
+						this.isValidated = 'true';
+					}
+					else{
+						this.isValidated = 'false';
 					}
                 
-            });
+            }).catch((err : any)=>{
+				Utils.logInfo("Extension Template not available, You can proceed further");
+			});
 			this.getCategoryIDHelper();
 			resolve(
                 {
