@@ -548,7 +548,7 @@ axios({
                 })
                   .then(function (response) {		  
 					console.log("Data extension created dynamically");
-					 //window.location.href = "https://mc.s11.exacttarget.com/";
+					 window.location.href = "https://mc.s11.exacttarget.com/";
                   })
 				  .catch(function (error) {
 					console.log(error);
@@ -829,7 +829,7 @@ axios({
 					 if(responseXML!=undefined){
 					ValidationStatus = false;
 					console.log("ValidationStatus = false" + responseXML);
-					ReactDOM.render(<p style={{color: "red"}}>Template Name already exists.</p>, document.getElementsByClassName("ValidationPage2"));
+					ReactDOM.render(<p style={{color: "red"}}>Template Name already exists.</p>,  document.getElementById('valMsgPageTwo'));
 				}
 				else{
 					console.log("ValidationStatus = true");
