@@ -560,6 +560,7 @@ axios({
           super(props);
 		  
           this.state = {
+			DuplicateError:"",
             orgid: '',
             refid: 0,
             customeruniqueid:'',
@@ -644,8 +645,7 @@ axios({
 			ArrayList6:GetDropdownListItemsNEW('','','','','','',''),
 			ArrayList7:GetDropdownListItemsNEW('','','','','','',''),
 		
-			ExistingTemplateName : "",
-			ErDuplicate:""
+			ExistingTemplateName : ""
             };
 
             
@@ -830,12 +830,13 @@ axios({
 					 if(responseXML!=undefined){
 					ValidationStatus = false;
 					console.log("ValidationStatus = false" + responseXML);
-					//this.setState({ErDuplicate: 'Duplicate'});
-					ReactDOM.render(<p style={{color: "red"}}>Template Name already exists.</p>,  document.getElementById('valMsgPageTwo'));
+					this.setState({DuplicateError: 'Test Error'});
+					//ReactDOM.render(<p style={{color: "red"}}>Template Name already exists.</p>,  document.getElementById('valMsgPageTwo'));
 				}
 				else{
 					console.log("ValidationStatus = true");
-					//this.setState({ErDuplicate: ''});
+					this.setState({DuplicateError: ''});
+					
 					ValidationStatus = true;
 				}
 					
@@ -1515,7 +1516,7 @@ axios({
                       <div class='col-md-1'></div>
                       <div class='col-md-10'>
                         <span  id="valMsgPageTwo" class = 'ValidationPage2'></span>
-						<span style={{"color":"red"}}>{this.state.ErDuplicate}</span>
+						<span style={{"color":"red"}} id="idDuplicateError">{this.state.DuplicateError}</span>
                       </div>
                       <div class='col-md-1'></div>
                   </div>
