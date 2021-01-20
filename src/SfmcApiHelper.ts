@@ -205,14 +205,14 @@ export default class SfmcApiHelper
 				resolve(
                 {
                     status: 200,
-                    statusText: response.data
+                    statusText: validateDEName
                 });
 			}
 			else{
 				resolve(
                 {
                     status: 302,
-                    statusText: response.data
+                    statusText: validateDEName
                 });
 			}
             });
