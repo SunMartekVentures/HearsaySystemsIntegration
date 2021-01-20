@@ -645,6 +645,7 @@ axios({
 			ArrayList7:GetDropdownListItemsNEW('','','','','','',''),
 		
 			ExistingTemplateName : "",
+			ErDuplicate:""
             };
 
             
@@ -829,10 +830,12 @@ axios({
 					 if(responseXML!=undefined){
 					ValidationStatus = false;
 					console.log("ValidationStatus = false" + responseXML);
-					ReactDOM.render(<p style={{color: "red"}}>Template Name already exists.</p>,  document.getElementById('valMsgPageTwo'));
+					this.setState({ErDuplicate: 'Duplicate'});
+					//ReactDOM.render(<p style={{color: "red"}}>Template Name already exists.</p>,  document.getElementById('valMsgPageTwo'));
 				}
 				else{
 					console.log("ValidationStatus = true");
+					this.setState({ErDuplicate: ''});
 					ValidationStatus = true;
 				}
 					
@@ -1511,7 +1514,8 @@ axios({
                   <div class='row epaddingbottom10'>
                       <div class='col-md-1'></div>
                       <div class='col-md-10'>
-                        <span id="valMsgPageTwo" class = 'ValidationPage2'></span>
+                        <span  id="valMsgPageTwo" class = 'ValidationPage2'></span>
+						<span style={{"color":"red"}}>{this.state.ErDuplicate}</span>
                       </div>
                       <div class='col-md-1'></div>
                   </div>
