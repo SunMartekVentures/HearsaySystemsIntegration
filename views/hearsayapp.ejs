@@ -548,15 +548,25 @@ axios({
                 })
                   .then(function (response) {		  
 					console.log("Data extension created dynamically");
-					window.location.replace("https://mc.s11.exacttarget.com/");
-					 //window.location.href = "https://mc.s11.exacttarget.com/";
+					logOut();
+					
                   })
 				  .catch(function (error) {
 					console.log(error);
 					});
 	}
-	function renderError(){
-		console.log("Function Render Error called");
+	function logOut(){
+		console.log("Function Log Out called");
+		axios({
+			          method: 'POST',
+			          url: 'https://hearsaydataextension.herokuapp.com/logout',
+                })
+                  .then(function (response) {		  
+					console.log("Logged Out Successfully");				
+                  })
+				  .catch(function (error) {
+					console.log(error);
+					});
 		
 	}
 
