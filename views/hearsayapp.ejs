@@ -670,9 +670,9 @@ axios({
 
         }
 		
-		handleValidation(event){
+		/*handleValidation(event){
 			ReactDOM.render(<p style={{color: "red"}}>Template Name already exists.</p>,  document.getElementById('valMsgPageTwo'));
-		}
+		}*/
 
         handleNewFieldClick(event){
           const counter=this.state.FieldCounter+1;
@@ -839,7 +839,7 @@ axios({
 					ValidationStatus = false;
 					console.log("ValidationStatus = false" + responseXML);
 					//this.setState({DuplicateError: 'Test Error'});
-					this.handleValidation();
+					alert('Template Name already exists');
 					//ReactDOM.render(<p style={{color: "red"}}>Template Name already exists.</p>,  document.getElementById('valMsgPageTwo'));
 				}
 				else{
