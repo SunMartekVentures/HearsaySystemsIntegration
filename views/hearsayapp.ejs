@@ -829,7 +829,7 @@ axios({
 					 if(responseXML!=undefined){
 					ValidationStatus = false;
 					console.log("ValidationStatus = false" + responseXML);
-					ReactDOM.render(<p style={{color: "red"}}>Template Name already exists.</p>, document.getElementById('valMsgPageTwo'));
+					ReactDOM.render(<p style={{color: "red"}}>Template Name already exists.</p>, document.getElementById("valMsgPageTwo"));
 				}
 				else{
 					console.log("ValidationStatus = true");
@@ -1511,7 +1511,7 @@ axios({
                   <div class='row epaddingbottom10'>
                       <div class='col-md-1'></div>
                       <div class='col-md-10'>
-                        <span id="valMsgPageTwo"></span>
+                        <span id="valMsgPageTwo" class = 'ValidationPage2'></span>
                       </div>
                       <div class='col-md-1'></div>
                   </div>
