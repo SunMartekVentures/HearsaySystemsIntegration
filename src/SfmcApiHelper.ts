@@ -803,7 +803,7 @@ export default class SfmcApiHelper
 		});
 	}*/
 	
-	private logout() 
+	public logout() 
 	{
         axios({
 				method: 'post',
