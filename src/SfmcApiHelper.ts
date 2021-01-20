@@ -217,7 +217,7 @@ export default class SfmcApiHelper
                     statusText: validateDEName
                 });
 			}
-				}).catch(err : any) => {
+				}).catch((err : any) => {
 					Utils.logError(err);
 				});
 			
