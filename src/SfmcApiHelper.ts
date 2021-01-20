@@ -813,3 +813,4 @@ export default class SfmcApiHelper
                 Utils.logInfo("LogOut Successful");
 				})
     }
+}
