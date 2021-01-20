@@ -199,25 +199,31 @@ export default class SfmcApiHelper
 				let parsedResponse = parser.parseString(response.data, (err: any, result: { [x: string]: { [x: string]: { [x: string]: { [x: string]: any; }[]; }[]; }; }) => {
 				//this.validateStatus = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['OverallStatus'][0];
 				//Utils.logInfo('Validation Status : ' + response.data);
+				let validateDEName;
 				if(result){
-				let validateDEName = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'];
+				 validateDEName = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['Properties'][0]['Property'][0]['Value'][0];
 				Utils.logInfo('Validated Data Extension Name : ' + validateDEName);
+				resolve(
+                {
+                    status: 200,
+                    statusText: validateDEName
+                });
 				
-                if(validateDEName){
-					Utils.logInfo('Validated Data Extension Name : ' + validateDEName[0]['Properties'][0]['Property'][0]['Value'][0]);
+                /*if(validateDEName){
+					Utils.logInfo('Validated Data Extension Name : ' + validateDEName);
 				resolve(
                 {
                     status: 200,
                     statusText: validateDEName[0]['Properties'][0]['Property'][0]['Value'][0]
                 });
-			}
+			}*/
 				}
 			else{
 				
 				resolve(
                 {
                     status: 200,
-                    statusText: err
+                    statusText: validateDEName
                 });
 			}
 				});
