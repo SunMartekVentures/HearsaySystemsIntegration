@@ -211,7 +211,7 @@ export default class SfmcApiHelper
                 });
 				}
 				else{
-					validateDEName = null;
+					validateDEName = "null";
 					resolve({
                     status: 200,
                     statusText: validateDEName
