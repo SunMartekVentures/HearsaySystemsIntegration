@@ -202,6 +202,7 @@ export default class SfmcApiHelper
 				let validateDEName = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['Properties'][0]['Property'][0]['Value'][0];
 				Utils.logInfo('Validated Data Extension Name : ' + validateDEName);
                 if(validateDEName){
+					Utils.logInfo('Validated Data Extension Name : ' + validateDEName);
 				resolve(
                 {
                     status: 200,
@@ -209,13 +210,16 @@ export default class SfmcApiHelper
                 });
 			}
 			else{
+				
 				resolve(
                 {
                     status: 302,
                     statusText: validateDEName
                 });
 			}
-				})
+				}).catch(err : any) => {
+					Utils.logError(err);
+				}
 			
             })
             .catch((error: any) => {
