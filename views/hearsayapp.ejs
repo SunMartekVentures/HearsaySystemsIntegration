@@ -910,6 +910,7 @@ axios({
 				
 				if(responseXML!=null||responseXML!='null'){
 					ValidationStatus = false;
+					console.log("ValidationStatus = false" + responseXML);
 					ReactDOM.render(<p style={{color: "red"}}>Template Name already exists.</p>, document.getElementById('valMsgPageTwo'));
 				}
 				else{
