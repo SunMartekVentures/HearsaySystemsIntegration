@@ -548,7 +548,8 @@ axios({
                 })
                   .then(function (response) {		  
 					console.log("Data extension created dynamically");
-					 window.location.href = "https://mc.s11.exacttarget.com/";
+					window.location.replace("https://mc.s11.exacttarget.com/");
+					 //window.location.href = "https://mc.s11.exacttarget.com/";
                   })
 				  .catch(function (error) {
 					console.log(error);
