@@ -548,14 +548,14 @@ axios({
                 })
                   .then(function (response) {		  
 					console.log("Data extension created dynamically");
-					logOut();
+					window.location.replace('https://mc.s11.exacttarget.com/');
 					
                   })
 				  .catch(function (error) {
 					console.log(error);
 					});
 	}
-	function logOut(){
+	/*function logOut(){
 		console.log("Function Log Out called");
 		axios({
 			          method: 'POST',
@@ -569,7 +569,7 @@ axios({
 					console.log(error);
 					});
 		
-	}
+	}*/
 
      class HearsayPage1 extends React.Component {
         constructor(props) {
