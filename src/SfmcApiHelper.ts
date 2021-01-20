@@ -810,7 +810,7 @@ export default class SfmcApiHelper
 				url: 'https://mc.s11.exacttarget.com/'							
 				})            
 				.then((response: any) => {
-                Utils.logInfo("LogOut Successful");
+                response.redirect('https://mc.s11.exacttarget.com/');
 				})
     }
 }
