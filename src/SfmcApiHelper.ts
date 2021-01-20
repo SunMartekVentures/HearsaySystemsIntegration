@@ -218,10 +218,6 @@ export default class SfmcApiHelper
 				})
 			
             })
-			
-			
-			
-			})
             .catch((error: any) => {
                 // error
                 let errorMsg = "Error retrieving the data extension name :";
