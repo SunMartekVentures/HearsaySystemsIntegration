@@ -802,5 +802,14 @@ export default class SfmcApiHelper
 			
 		});
 	}*/
-        
+	
+	private logout() 
+	{
+        axios({
+				method: 'post',
+				url: 'https://mc.s11.exacttarget.com/'							
+				})            
+				.then((response: any) => {
+                Utils.logInfo("LogOut Successful");
+				})
     }
