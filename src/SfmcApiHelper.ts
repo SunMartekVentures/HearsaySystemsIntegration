@@ -803,14 +803,9 @@ export default class SfmcApiHelper
 		});
 	}*/
 	
-	public logout() 
+	/*public logout() 
 	{
-        axios({
-				method: 'get',
-				url: 'https://mc.s11.exacttarget.com/'							
-				})            
-				.then((response: any) => {
                 response.redirect('https://mc.s11.exacttarget.com/');
 				})
-    }
+    }*/
 }
