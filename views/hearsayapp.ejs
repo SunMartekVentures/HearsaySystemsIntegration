@@ -832,8 +832,11 @@ axios({
 					console.log(error);
 					});
 		  }
+		  
+		  var tempPageNo=this.state.page + 1;
+		  
 		  if(this.state.page==2){
-			  var tempPageNo=this.state.page + 1;
+			  
 			  let validationTemplate = {
                     "TemplateName" : this.state.templatename
 			  }
@@ -892,7 +895,7 @@ axios({
 				console.log("Method has returned the ExistingTemplateName :" + ExistingTemplateName);*/
 				
 				
-				this.setState({page: tempPageNo});
+				//this.setState({page: tempPageNo});
 		  }
 
           //Validation
@@ -959,7 +962,7 @@ axios({
           if(ValidationStatus==true){
 
             
-            let ipage = this.state.page + 1;
+            let ipage = tempPageNo;
             if(ipage==4){
               //reset to first page
               ipage=1;
