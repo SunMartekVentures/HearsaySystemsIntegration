@@ -833,7 +833,7 @@ axios({
 					});
 		  }
 		  if(this.state.page==2){
-			  var tempPageNo=ipage;
+			  var tempPageNo=this.state.page + 1;
 			  let validationTemplate = {
                     "TemplateName" : this.state.templatename
 			  }
