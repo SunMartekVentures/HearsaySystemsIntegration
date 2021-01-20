@@ -219,7 +219,7 @@ export default class SfmcApiHelper
 			}
 				}).catch(err : any) => {
 					Utils.logError(err);
-				}
+				});
 			
             })
             .catch((error: any) => {
