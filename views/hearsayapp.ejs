@@ -555,6 +555,7 @@ axios({
 					});
 	}
 	function renderError(){
+		console.log("Function Render Error called");
 		ReactDOM.render(<p style={{color: "red"}}>Template Name already exists.</p>,  document.getElementById('valMsgPageTwo'));
 	}
 
