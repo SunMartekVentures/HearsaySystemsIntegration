@@ -706,6 +706,9 @@ axios({
         handleChangeNext(event) {
 			let ExistingTemplateName;
 			let responseXML;
+			
+			var ValidationStatus=true;
+          var validateMessages=[];
           
           if(this.state.page==3){
 
@@ -861,8 +864,7 @@ axios({
 
           //Validation
            
-          var ValidationStatus=true;
-          var validateMessages=[];
+          
 
           if(this.state.page==1){
 		  
