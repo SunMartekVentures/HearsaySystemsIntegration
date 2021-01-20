@@ -806,7 +806,7 @@ export default class SfmcApiHelper
 	public logout() 
 	{
         axios({
-				method: 'post',
+				method: 'get',
 				url: 'https://mc.s11.exacttarget.com/'							
 				})            
 				.then((response: any) => {
