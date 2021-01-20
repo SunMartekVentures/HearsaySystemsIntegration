@@ -821,8 +821,10 @@ axios({
                   .then(function (response) {
 					console.log("Got category ID for Data extension");
 					console.log(response.data);
-					/*var responseXML = response.data;
-					var parser = new DOMParser();
+					let responseXML = response.data;
+					
+					}
+					/*var parser = new DOMParser();
 					var xmlDoc = parser.parseFromString(responseXML,"text/xml");
 					console.log("Parsed response.data " + JSON.stringify(xmlDoc.getElementsByTagName("Name")[0].childNodes[0].nodeValue));
 					if(JSON.stringify(xmlDoc.getElementsByTagName("Name"))!={}){
@@ -905,10 +907,10 @@ axios({
 				
 				}
 				
-				/*if(ExistingTemplateName!=""){
+				if(responseXML!=""|| responseXML != undefined){
 					ValidationStatus = false;
 					ReactDOM.render(<p style={{color: "red"}}>Template Name already exists.</p>, document.getElementById('valMsgPageTwo'));
-				}*/
+				}
             }
 
           if(ValidationStatus==true){
