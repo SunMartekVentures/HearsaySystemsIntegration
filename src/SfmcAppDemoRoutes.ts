@@ -86,7 +86,7 @@ export default class SfmcAppDemoRoutes
         //return res.redirect('https://mc.s11.exacttarget.com/'); // accepted
 	    let self = this;
         Utils.logInfo("Logout");
-        self._apiHelper.logout();
+        //self._apiHelper.logout();
     }
 
     /**
