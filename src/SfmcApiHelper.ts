@@ -195,13 +195,13 @@ export default class SfmcApiHelper
                 Utils.logInfo("Validation Successful \n\n" + response.data);
 				this.ValidateResponse = response.data;
 				
-				var parser = new xml2js.Parser();
+				let parser = new xml2js.Parser();
 				let parsedResponse = parser.parseString(response.data, (err: any, result: { [x: string]: { [x: string]: { [x: string]: { [x: string]: any; }[]; }[]; }; }) => {
 				//this.validateStatus = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['OverallStatus'][0];
 				//Utils.logInfo('Validation Status : ' + response.data);
-				let validateDEName;
-				if(result){
-				 validateDEName = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'];
+				
+				
+				let validateDEName = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'];
 				Utils.logInfo('Validated Data Extension Name : ' + validateDEName);
 				if(validateDEName!=undefined){
 				resolve(
@@ -213,7 +213,7 @@ export default class SfmcApiHelper
 				else{
 					resolve({
                     status: 200,
-                    statusText: "TemplateName does not exist"
+                    statusText: undefined
                 });
 				}
 				
@@ -225,15 +225,8 @@ export default class SfmcApiHelper
                     statusText: validateDEName[0]['Properties'][0]['Property'][0]['Value'][0]
                 });
 			}*/
-				}
-			else{
 				
-				resolve(
-                {
-                    status: 200,
-                    statusText: err
-                });
-			}
+			
 				});
 				
 			
