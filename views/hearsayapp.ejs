@@ -554,6 +554,9 @@ axios({
 					console.log(error);
 					});
 	}
+	function renderError(){
+		ReactDOM.render(<p style={{color: "red"}}>Template Name already exists.</p>,  document.getElementById('valMsgPageTwo'));
+	}
 
      class HearsayPage1 extends React.Component {
         constructor(props) {
@@ -830,7 +833,8 @@ axios({
 					 if(responseXML!=undefined){
 					ValidationStatus = false;
 					console.log("ValidationStatus = false" + responseXML);
-					this.setState({DuplicateError: 'Test Error'});
+					//this.setState({DuplicateError: 'Test Error'});
+					renderError();
 					//ReactDOM.render(<p style={{color: "red"}}>Template Name already exists.</p>,  document.getElementById('valMsgPageTwo'));
 				}
 				else{
@@ -1515,8 +1519,8 @@ axios({
                   <div class='row epaddingbottom10'>
                       <div class='col-md-1'></div>
                       <div class='col-md-10'>
-                        <span  id="valMsgPageTwo" class = 'ValidationPage2'></span>
-						<span style={{"color":"red"}} id="idDuplicateError">{this.state.DuplicateError}</span>
+                        <span  id="valMsgPageTwo"></span>
+						
                       </div>
                       <div class='col-md-1'></div>
                   </div>
