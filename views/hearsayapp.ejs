@@ -556,7 +556,7 @@ axios({
 	}
 	function renderError(){
 		console.log("Function Render Error called");
-		ReactDOM.render(<p style={{color: "red"}}>Template Name already exists.</p>,  document.getElementById('valMsgPageTwo'));
+		
 	}
 
      class HearsayPage1 extends React.Component {
@@ -669,6 +669,10 @@ axios({
         componentDidMount() {
 
         }
+		
+		handleValidation(){
+			ReactDOM.render(<p style={{color: "red"}}>Template Name already exists.</p>,  document.getElementById('valMsgPageTwo'));
+		}
 
         handleNewFieldClick(event){
           const counter=this.state.FieldCounter+1;
@@ -835,12 +839,12 @@ axios({
 					ValidationStatus = false;
 					console.log("ValidationStatus = false" + responseXML);
 					//this.setState({DuplicateError: 'Test Error'});
-					renderError();
+					this.handleValidation();
 					//ReactDOM.render(<p style={{color: "red"}}>Template Name already exists.</p>,  document.getElementById('valMsgPageTwo'));
 				}
 				else{
 					console.log("ValidationStatus = true");
-					this.setState({DuplicateError: ''});
+					//this.setState({DuplicateError: ''});
 					
 					ValidationStatus = true;
 				}
