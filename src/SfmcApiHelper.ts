@@ -204,11 +204,20 @@ export default class SfmcApiHelper
                 
             });
 			this.getCategoryIDHelper();
+			if(validateDEName){
 			resolve(
                 {
-                    status: response.status,
+                    status: 200,
                     statusText: response.data
                 });
+			}
+			else{
+				resolve(
+                {
+                    status: 302,
+                    statusText: response.data
+                });
+			}
 			
 			})
             .catch((error: any) => {
