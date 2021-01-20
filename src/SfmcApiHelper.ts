@@ -213,7 +213,7 @@ export default class SfmcApiHelper
 				else{
 					resolve({
                     status: 200,
-                    statusText: undefined
+                    statusText: validateDEName
                 });
 				}
 				
