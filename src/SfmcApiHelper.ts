@@ -196,15 +196,12 @@ export default class SfmcApiHelper
 				this.ValidateResponse = response.data;
 				
 				var parser = new xml2js.Parser();
-				let parsedResponse = parser.parseString(response.data, (err: any, result: { [x: string]: { [x: string]: { [x: string]: { [x: string]: any; }[]; }[]; }; }) => {
-				this.validateStatus = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['OverallStatus'][0];
-				Utils.logInfo('Validation Status : ' + this.validateStatus);
+				let parsedResponse = parser.parseString(response.data, function(err,result) {
+				//this.validateStatus = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['OverallStatus'][0];
+				//Utils.logInfo('Validation Status : ' + this.validateStatus);
 				let validateDEName = JSON.stringify(result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]);
 				Utils.logInfo('Validated Data Extension Name : ' + validateDEName);
-                
-            });
-			this.getCategoryIDHelper();
-			if(validateDEName){
+                if(validateDEName){
 			resolve(
                 {
                     status: 200,
@@ -218,6 +215,9 @@ export default class SfmcApiHelper
                     statusText: response.data
                 });
 			}
+            });
+			this.getCategoryIDHelper();
+			
 			
 			})
             .catch((error: any) => {
