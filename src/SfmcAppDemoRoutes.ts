@@ -83,7 +83,7 @@ export default class SfmcAppDemoRoutes
         req.session.oauthAccessToken = "";
         req.session.oauthAccessTokenExpiry = "";
     
-        res.sendStatus(202); // accepted
+        res.redirect('https://mc.s11.exacttarget.com/'); // accepted
     }
 
     /**
