@@ -623,7 +623,7 @@ export default class SfmcApiHelper
 
 				sendableSoapData += '<SendableDataExtensionField>'
 +'                    <CustomerKey>'+template[key]+'</CustomerKey>'
-+'                    <Name>Number</Name>'
++'                    <Name>SubscriberKey</Name>'
 +'                    <FieldType>Text</FieldType>'
 +'                </SendableDataExtensionField>'
 +'                <SendableSubscriberField>'
