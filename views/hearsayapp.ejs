@@ -668,10 +668,8 @@ axios({
 					});
 	}
 	
-	const validationForExistingTemplate = async () => {
-	let validationTemplate = {
-                    "TemplateName" : this.state.templatename
-			  }
+	const validationForExistingTemplate(validationTemplate) = async () => {
+	
 			  
 			  
 			  
@@ -948,8 +946,11 @@ axios({
 		  
 		  var tempPageNo=this.state.page + 1;
 		  
-		  if(this.state.page==2){			  
-			 responseXML = validationForExistingTemplate();
+		  if(this.state.page==2){
+let validationTemplate = {
+                    "TemplateName" : this.state.templatename
+			  }			  
+			 responseXML = validationForExistingTemplate(validationTemplate);
 		  }
 
           //Validation
