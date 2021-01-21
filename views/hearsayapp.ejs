@@ -588,7 +588,7 @@ if(label1name=="Template Name"){
 	
 	axios({
 			          method: 'POST',
-			          url: 'https://dataintapicall.herokuapp.com/loaddataforapp',
+			          url: 'https://hearsaydataextension.herokuapp.com/loaddataforapp',
 			           data: jsonObject,
 			          headers: {'Content-Type': 'application/json' }
                 })
@@ -607,7 +607,7 @@ if(label1name=="Template Name"){
 	
 	axios({
 			          method: 'POST',
-			          url: 'https://dataintapicall.herokuapp.com/loaddatafortempapp',
+			          url: 'https://hearsaydataextension.herokuapp.com/loaddatafortempapp',
 			           data: template,
 			          headers: {'Content-Type': 'application/json' }
                 })
@@ -622,12 +622,14 @@ if(label1name=="Template Name"){
 		
 axios({
 			          method: 'POST',
-			          url: 'https://dataintapicall.herokuapp.com/createdeforapp',
+			          url: 'https://hearsaydataextension.herokuapp.com/createdeforapp',
 					  data: dynamicTemplate,
 					  headers: {'Content-Type': 'application/json' }
                 })
                   .then(function (response) {		  
 					console.log("Data extension created dynamically");
+					window.top.location.href = 'https://mc.s11.exacttarget.com/';
+					
                   })
 				  .catch(function (error) {
 					console.log(error);
