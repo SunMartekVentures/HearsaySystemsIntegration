@@ -70,6 +70,15 @@ body {
   letter-spacing:1px;
 }
 
+.e1pageheader_14px{
+  padding-left:10px;
+  padding-bottom:7px;
+  font-weight:bold ;
+  font-size:13px;
+  letter-spacing:1px;
+  margin-top: 10px;
+}
+
 .e1error{
   font-weight:bold ;
   font-size:12px;
@@ -488,9 +497,15 @@ body {
     margin-left: 30px;
   }
 
+  .aligncen{
+    text-align: center;
+  }
     .e1marginleft {
         margin-left: 30px;
     }
+    .e1marginleft_Ex {
+      margin-left: 30px;
+  }
     .elRowPg2 {
         margin-left: 30px;
     }
@@ -668,4 +683,44 @@ body {
     }
     .marginTop12px{
       margin-top: 12px;
+    }
+    .CompletedHr{
+      position: relative; 
+            /* top: 20px;  */
+            border: none; 
+            height: 3px; 
+            background: #8cc0f6; 
+            /* margin-bottom: 50px;  */
+            width: 47%;
+    }
+    .clsdivWizard{
+      display: flex;
+    }
+    .clsIcon{
+      margin-top: 10px;
+      
+    }
+    /* .clsIcon:hover{
+      box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+    } */
+    .completedIcon{
+      font-size: 16px;
+      color: #8cc0f6;
+    }
+    .currentIcon{
+      font-size: 16px;
+      color: #8cc0f6;
+    }
+    .incompletedIcon{
+      color: #d9d9d9;
+    }
+    .incompletedHr{
+      position: relative; 
+            /* top: 20px;  */
+            border: none; 
+            height: 3px; 
+            background: #d9d9d9; 
+            /* margin-bottom: 50px;  */
+            width: 47%;
+      /* color: #d9d9d9; */
     }
