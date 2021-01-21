@@ -34,7 +34,7 @@
         function AddLogorow(abcd, second){
           return (
                 <div class="e1logorowpadding">
-                    <div><img src='https://github.com/Sivaskandharuban/authmcdataext/blob/master/views/hearsay.png?raw=true' width='50' height='50' /><label class='e1pageheader'>Hearsay Systems - Organization Preferences</label></div>
+                    <div><img src='/images/hearsay.png' width='50' height='50' /><label class='e1pageheader'>Hearsay Systems - Organization Preferences</label></div>
                 </div>);
         }
 
@@ -985,19 +985,11 @@ axios({
 					console.log(error);
 					});
 	  }
-      
-
-      if(this.state.templatename=="Test"){
-        this.setState({DuplicateError: 'Test Error'});
-        ValidationStatus=false;
-      } else{
-        //ValidationStatus=true;
-        this.setState({DuplicateError: ''});
       }
 
 
 
-            if(this.state.templatename=="" && this.state.temp1text=="" && this.state.temp2text=="" &&
+            if(this.state.templatename=="" &&
 			    this.state.temp3text=="" && this.state.temp4text=="" &&
 				this.state.temp5text=="" && this.state.temp6text=="" && this.state.temp7text==""){
               ValidationStatus=false;
