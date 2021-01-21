@@ -668,7 +668,7 @@ axios({
 					});
 	}
 	
-	const sendGetRequest = async () => {
+	const validationForExistingTemplate = async () => {
 	let validationTemplate = {
                     "TemplateName" : this.state.templatename
 			  }
@@ -987,10 +987,9 @@ axios({
 		  
 		  var tempPageNo=this.state.page + 1;
 		  
-		  /*if(this.state.page==2){
-			  
-			  
-		  }*/
+		  if(this.state.page==2){			  
+			 responseXML = validationForExistingTemplate();
+		  }
 
           //Validation
            
