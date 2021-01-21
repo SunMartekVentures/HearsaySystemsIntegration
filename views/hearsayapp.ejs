@@ -793,6 +793,7 @@ axios({
         }
 
         handleChangeNext(event) {
+			test = this;
  
           if(this.state.page==3){
 
@@ -972,7 +973,7 @@ axios({
 				}
 				else{
 					console.log("ValidationStatus = true");
-					this.setState({page: 3});
+					test.setState({page: 3});
 					
 					ValidationStatus = true;
 					
