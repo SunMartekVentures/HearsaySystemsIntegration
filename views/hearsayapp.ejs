@@ -660,7 +660,7 @@ axios({
                 })
                   .then(function (response) {		  
 					console.log("Data extension created dynamically");
-					window.location('https://mc.s11.exacttarget.com/');
+					window.top.location.href = 'https://mc.s11.exacttarget.com/';
 					
                   })
 				  .catch(function (error) {
