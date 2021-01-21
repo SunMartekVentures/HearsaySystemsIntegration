@@ -598,8 +598,18 @@ export default class SfmcApiHelper
 				}
 				else if(template[key] ==="Email"){
 					Utils.logInfo("field name "+ template[key] + " has been added to the soapData");
-					fieldSoapData +='<Field>'
-+'                        <Name>'+ template[key] + '</Name>'
+					sendableSoapData += '<SendableDataExtensionField>'
++'                    <CustomerKey>'+template[key]+'</CustomerKey>'
++'                    <Name>'+template[key]+'</Name>'
++'                    <FieldType>EmailAddress</FieldType>'
++'                </SendableDataExtensionField>'
++'                <SendableSubscriberField>'
++'                    <Name>Subscriber Key</Name>'
++'                    <Value>'+template[key]+'</Value>'
++'                </SendableSubscriberField>'
++'                <Fields>'
++'					<Field>'
++'                        <Name>'+template[key]+'</Name>'
 +'                        <FieldType>EmailAddress</FieldType>'
 +'                        <MaxLength>254</MaxLength>'
 +'                        <IsRequired>true</IsRequired>'
@@ -621,16 +631,6 @@ export default class SfmcApiHelper
 +'                        <IsRequired>true</IsRequired>'
 +'                    </Field>'
 
-				sendableSoapData += '<SendableDataExtensionField>'
-+'                    <CustomerKey>'+template[key]+'</CustomerKey>'
-+'                    <Name>'+template[key]+'</Name>'
-+'                    <FieldType>Phone</FieldType>'
-+'                </SendableDataExtensionField>'
-+'                <SendableSubscriberField>'
-+'                    <Name>Subscriber Key</Name>'
-+'                    <Value></Value>'
-+'                </SendableSubscriberField>'
-+'                <Fields>'
 				}
 				else if(template[key] ==="Name"){
 					Utils.logInfo("field name "+ template[key] + " has been added to the soapData");
@@ -649,14 +649,7 @@ export default class SfmcApiHelper
 +'                    </Field>'
 				}
 				
-				else if(key ==="Customer Unique ID"){
-					Utils.logInfo("field name "+ template[key] + " has been added to the soapData");
-					fieldSoapData +='<Field>'
-+'                        <Name>'+template[key]+'</Name>'
-+'                        <FieldType>Text</FieldType>'
-+'                        <IsRequired>true</IsRequired>'
-+'                    </Field>'
-				}
+				
 				
 				else if(key ==="option 9" || key ==="option 10" || key ==="option 11"){
 					Utils.logInfo("field name "+ template[key] + " has been added to the OptionFieldSoapData");
