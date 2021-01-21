@@ -663,16 +663,23 @@ export default class SfmcApiHelper
 
 				}
 				else if(key ==="FieldType 1" || key ==="FieldType 2" || key ==="FieldType 3"){
+					if(template[key] === "Date"){
+						OptionFieldSoapData +='<FieldType>'+template[key]+'</FieldType>'
+					+'                        <IsRequired>false</IsRequired>'
+					+'                    </Field>'
+					}
+					else{
 					Utils.logInfo("field type "+ template[key] + " has been added to the OptionFieldSoapData");
 					OptionFieldSoapData +='<FieldType>'+template[key]+'</FieldType>'
+					}
 				}
 				
-				else if(key ==="FieldType 1" && template[key] === "Date"|| key ==="FieldType 2" && template[key] === "Date"|| key ==="FieldType 3" && template[key] === "Date"){
+				/*else if(key ==="FieldType 1" && template[key] === "Date"|| key ==="FieldType 2" && template[key] === "Date"|| key ==="FieldType 3" && template[key] === "Date"){
 					Utils.logInfo("This is to check whether the selected data type is Date");
 					OptionFieldSoapData +='<FieldType>'+template[key]+'</FieldType>'
 					+'                        <IsRequired>false</IsRequired>'
 					+'                    </Field>'
-				}
+				}*/
 				
 				else if(key ==="FieldLength 1" || key ==="FieldLength 2" || key ==="FieldLength 3"){
 					Utils.logInfo("field length "+ template[key] + " has been added to the OptionFieldSoapData");
