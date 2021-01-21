@@ -668,7 +668,7 @@ export default class SfmcApiHelper
 				}
 				
 				else if(key ==="FieldType 1" && template[key] === "Date"|| key ==="FieldType 2" && template[key] === "Date"|| key ==="FieldType 3" && template[key] === "Date"){
-					Utils.logInfo("field type "+ template[key] + " has been added to the OptionFieldSoapData");
+					Utils.logInfo("This is to check whether the selected data type is Date");
 					OptionFieldSoapData +='<FieldType>'+template[key]+'</FieldType>'
 					+'                        <IsRequired>false</IsRequired>'
 					+'                    </Field>'
