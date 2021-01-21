@@ -667,6 +667,13 @@ export default class SfmcApiHelper
 					OptionFieldSoapData +='<FieldType>'+template[key]+'</FieldType>'
 				}
 				
+				else if(key ==="FieldType 1" && template[key] === "Date"|| key ==="FieldType 2" && template[key] === "Date"|| key ==="FieldType 3" && template[key] === "Date"){
+					Utils.logInfo("field type "+ template[key] + " has been added to the OptionFieldSoapData");
+					OptionFieldSoapData +='<FieldType>'+template[key]+'</FieldType>'
+					+'                        <IsRequired>false</IsRequired>'
+					+'                    </Field>'
+				}
+				
 				else if(key ==="FieldLength 1" || key ==="FieldLength 2" || key ==="FieldLength 3"){
 					Utils.logInfo("field length "+ template[key] + " has been added to the OptionFieldSoapData");
 					OptionFieldSoapData += '<MaxLength>'+ template[key] +'</MaxLength>'
