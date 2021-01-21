@@ -208,7 +208,7 @@ export default class SfmcApiHelper
 				resolve(
                 {
                     status: 200,
-                    statusText: validateDEName[0]['Properties'][0]['Property'][0]['Value'][0]
+                    statusText: validateDEName[0]['Name'][0]
                 });
 				}
 				else{
