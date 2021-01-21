@@ -950,6 +950,7 @@ axios({
 
       }
 	  else{
+		  ValidationStatus = false;
 		  let validationTemplate = {
                     "TemplateName" : this.state.templatename
 			  }			  
@@ -966,10 +967,8 @@ axios({
 					 if(responseXML!=undefined){
 					ValidationStatus = false;
 					console.log("ValidationStatus = false" + responseXML);
-					
-					
-					
-					ReactDOM.render(<p style={{color: "red"}}>Template Name already exists.</p>,  document.getElementById('valMsgPageTwo'));
+					alert("Template Name already exists.");
+					//ReactDOM.render(<p style={{color: "red"}}>Template Name already exists.</p>,  document.getElementById('valMsgPageTwo'));
 				}
 				else{
 					console.log("ValidationStatus = true");
