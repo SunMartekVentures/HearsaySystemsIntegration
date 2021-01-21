@@ -943,7 +943,12 @@ axios({
 
           } else if(this.state.page==2){
 
-
+			if(this.state.temp2text !="Email" && this.state.temp3text !="Email" && this.state.temp4text !="Email" && this.state.temp5text !="Email" && this.state.temp6text !="Email" && this.state.temp7text !="Email"){
+	     console.log('inside a first condition');
+	      ValidationStatus=false;
+		  //alert('Email Field is mandatory.');
+              ReactDOM.render(<p style={{color: "red"}}>Email Field is mandatory.</p>, document.getElementById('valMsgPageTwo'));
+	    }
 			if(this.state.templatename==""){
               ValidationStatus=false;
               ReactDOM.render(<p style={{color: "red"}}>Template name is mandatory.</p>, document.getElementById('valMsgPageTwo'));
