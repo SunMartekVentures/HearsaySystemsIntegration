@@ -630,12 +630,6 @@ export default class SfmcApiHelper
 +'                    <Value>'+template[key]+'</Value>'
 +'                </SendableSubscriberField>'
 +'                <Fields>'
-+'					<Field>'
-+'                        <Name>'+template[key]+'</Name>'
-+'                        <FieldType>Phone</FieldType>'
-+'                        <MaxLength>20</MaxLength>'
-+'                        <IsRequired>true</IsRequired>'
-+'                    </Field>'
 				}
 				else if(template[key] ==="Name"){
 					Utils.logInfo("field name "+ template[key] + " has been added to the soapData");
