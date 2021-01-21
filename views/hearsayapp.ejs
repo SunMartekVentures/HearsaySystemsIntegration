@@ -667,6 +667,69 @@ axios({
 					console.log(error);
 					});
 	}
+	
+	const sendGetRequest = async () => {
+	let validationTemplate = {
+                    "TemplateName" : this.state.templatename
+			  }
+			  
+			  
+			  
+			  await axios({
+			          method: 'GET',
+			          url: 'https://hearsaydataextension.herokuapp.com/getcategoryidforapp',
+			           params: validationTemplate,
+			          headers: {'Content-Type': 'application/json' }
+                })
+                  .then(function (response) {
+					console.log("Got category ID for Data extension");
+					console.log(response.data);
+					 let responseXML = response.data;
+					 if(responseXML!=undefined){
+					ValidationStatus = false;
+					console.log("ValidationStatus = false" + responseXML);
+					//this.setState({DuplicateError: 'Test Error'});
+					//alert("Page Number"+this.state.page);
+					tempPageNo=2;
+					alert('Template Name already exists');
+					return responseXML;
+					//ReactDOM.render(<p style={{color: "red"}}>Template Name already exists.</p>,  document.getElementById('valMsgPageTwo'));
+				}
+				else{
+					console.log("ValidationStatus = true");
+					//this.setState({DuplicateError: ''});
+					
+					ValidationStatus = true;
+				}
+					
+					
+					/*var parser = new DOMParser();
+					var xmlDoc = parser.parseFromString(responseXML,"text/xml");
+					console.log("Parsed response.data " + JSON.stringify(xmlDoc.getElementsByTagName("Name")[0].childNodes[0].nodeValue));
+					if(JSON.stringify(xmlDoc.getElementsByTagName("Name"))!={}){
+						console.log("Condition Satisfied, Parsed response.data " + JSON.stringify(xmlDoc.getElementsByTagName("Name")[0].childNodes[0].nodeValue));
+					}
+					else{
+						console.log("Condition not satisfied");
+					}
+					//ExistingTemplateName = (xmlDoc.getElementsByTagName("Name")!=undefined)?(xmlDoc.getElementsByTagName("Name")[0].childNodes[0].nodeValue):undefined;
+					console.log("ExistingTemplateName "+ ExistingTemplateName);
+					
+					//return ExistingTemplateName
+
+					/*if(ExistingTemplateName != undefined || ExistingTemplateName != ""){
+						console.log("The Template Name already exists");
+						//ReactDOM.render(<p style={{color: "red" }}>Template Name already exists</p>, document.getElementById('valMsgOrgId'));
+					}*/
+                  }).catch(function (error) {
+					console.log(error);
+					});
+				/*ExistingTemplateName = await getCategoryIDforApp(validationTemplate);
+				console.log("Method has returned the ExistingTemplateName :" + ExistingTemplateName);*/
+				
+				
+				//this.setState({page: tempPageNo});
+				};
 
      class HearsayPage1 extends React.Component {
         constructor(props) {
@@ -924,69 +987,10 @@ axios({
 		  
 		  var tempPageNo=this.state.page + 1;
 		  
-		  if(this.state.page==2){
-			  
-			  let validationTemplate = {
-                    "TemplateName" : this.state.templatename
-			  }
+		  /*if(this.state.page==2){
 			  
 			  
-			  
-			  axios({
-			          method: 'GET',
-			          url: 'https://hearsaydataextension.herokuapp.com/getcategoryidforapp',
-			           params: validationTemplate,
-			          headers: {'Content-Type': 'application/json' }
-                })
-                  .then(function (response) {
-					console.log("Got category ID for Data extension");
-					console.log(response.data);
-					 responseXML = response.data;
-					 if(responseXML!=undefined){
-					ValidationStatus = false;
-					console.log("ValidationStatus = false" + responseXML);
-					//this.setState({DuplicateError: 'Test Error'});
-					//alert("Page Number"+this.state.page);
-					tempPageNo=2;
-					alert('Template Name already exists');
-					return false;
-					//ReactDOM.render(<p style={{color: "red"}}>Template Name already exists.</p>,  document.getElementById('valMsgPageTwo'));
-				}
-				else{
-					console.log("ValidationStatus = true");
-					//this.setState({DuplicateError: ''});
-					
-					ValidationStatus = true;
-				}
-					
-					
-					/*var parser = new DOMParser();
-					var xmlDoc = parser.parseFromString(responseXML,"text/xml");
-					console.log("Parsed response.data " + JSON.stringify(xmlDoc.getElementsByTagName("Name")[0].childNodes[0].nodeValue));
-					if(JSON.stringify(xmlDoc.getElementsByTagName("Name"))!={}){
-						console.log("Condition Satisfied, Parsed response.data " + JSON.stringify(xmlDoc.getElementsByTagName("Name")[0].childNodes[0].nodeValue));
-					}
-					else{
-						console.log("Condition not satisfied");
-					}
-					//ExistingTemplateName = (xmlDoc.getElementsByTagName("Name")!=undefined)?(xmlDoc.getElementsByTagName("Name")[0].childNodes[0].nodeValue):undefined;
-					console.log("ExistingTemplateName "+ ExistingTemplateName);
-					
-					//return ExistingTemplateName
-
-					/*if(ExistingTemplateName != undefined || ExistingTemplateName != ""){
-						console.log("The Template Name already exists");
-						//ReactDOM.render(<p style={{color: "red" }}>Template Name already exists</p>, document.getElementById('valMsgOrgId'));
-					}*/
-                  }).catch(function (error) {
-					console.log(error);
-					});
-				/*ExistingTemplateName = await getCategoryIDforApp(validationTemplate);
-				console.log("Method has returned the ExistingTemplateName :" + ExistingTemplateName);*/
-				
-				
-				//this.setState({page: tempPageNo});
-		  }
+		  }*/
 
           //Validation
            
@@ -1031,6 +1035,10 @@ axios({
               ValidationStatus=false;
               ReactDOM.render(<p style={{color: "red"}}>Template name is mandatory.</p>, document.getElementById('valMsgPageTwo'));
 		
+			}
+			else{
+				ValidationStatus=false;
+              ReactDOM.render(<p style={{color: "red"}}>Template name already exists</p>, document.getElementById('valMsgPageTwo'));
 			}
             
 			
