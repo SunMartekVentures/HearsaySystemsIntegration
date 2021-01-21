@@ -11,6 +11,7 @@
   integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
   crossorigin="anonymous"
 />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js" 
   integrity="sha512-DZqqY3PiOvTP9HkjIWgjO6ouCbq+dxqWoJZ/Q+zPYNHmlnI2dQnbJ5bxAHpAMw+LXRm4D72EIRXzvcHQtE8/VQ==" 
   crossorigin="anonymous">
@@ -46,9 +47,9 @@
                 </span>
             );
         }
-		function CheckDropDownItemExist(itemname,sel1,sel2,sel3,sel4,sel5,sel6,sel7){
+		function CheckDropDownItemExist(itemname,sel1,sel2,sel3,sel4,sel5,sel6,sel7, sel11, sel12){
 			if(sel1 != itemname && sel2 != itemname && sel3 != itemname && sel4 != itemname &&
-			sel5 != itemname && sel6 != itemname && sel7 != itemname){
+			sel5 != itemname && sel6 != itemname && sel7 != itemname && sel11 != itemname && sel12 != itemname){
 				//OK Good to go
 			}
 			else{
@@ -60,36 +61,36 @@
 			return '--Select--';
 		}
 
-		function GetDropdownListItemsNEW(sel1,sel2,sel3,sel4,sel5,sel6,sel7){
+		function GetDropdownListItemsNEW(sel1,sel2,sel3,sel4,sel5,sel6,sel7, sel11, sel12){
 		    let arrtemp=[];
 			arrtemp.push(GetSelectItemName());
 
-			let itemelement=CheckDropDownItemExist('Birth Date',sel1,sel2,sel3,sel4,sel5,sel6,sel7);
+			let itemelement=CheckDropDownItemExist('Birth Date',sel1,sel2,sel3,sel4,sel5,sel6,sel7, sel11, sel12);
 			if(itemelement.length >0){arrtemp.push(itemelement);}
 
-     		itemelement=CheckDropDownItemExist('Email',sel1,sel2,sel3,sel4,sel5,sel6,sel7);
+     		itemelement=CheckDropDownItemExist('Email',sel1,sel2,sel3,sel4,sel5,sel6,sel7, sel11, sel12);
 			if(itemelement.length >0){arrtemp.push(itemelement);}
 
-     		itemelement=CheckDropDownItemExist('First Name',sel1,sel2,sel3,sel4,sel5,sel6,sel7);
+     		itemelement=CheckDropDownItemExist('First Name',sel1,sel2,sel3,sel4,sel5,sel6,sel7, sel11, sel12);
 			if(itemelement.length >0){arrtemp.push(itemelement);}
 
-     		itemelement=CheckDropDownItemExist('Last Name',sel1,sel2,sel3,sel4,sel5,sel6,sel7);
+     		itemelement=CheckDropDownItemExist('Last Name',sel1,sel2,sel3,sel4,sel5,sel6,sel7, sel11, sel12);
 			if(itemelement.length >0){arrtemp.push(itemelement);}
 
 			// itemelement=CheckDropDownItemExist('Phone',sel1,sel2,sel3,sel4,sel5,sel6,sel7);
 			// if(itemelement.length >0){arrtemp.push(itemelement);}
 
-			// itemelement=CheckDropDownItemExist('Preferred Name',sel1,sel2,sel3,sel4,sel5,sel6,sel7);
-			// if(itemelement.length >0){arrtemp.push(itemelement);}
+			itemelement=CheckDropDownItemExist('Preferred Name',sel1,sel2,sel3,sel4,sel5,sel6,sel7, sel11, sel12);
+			if(itemelement.length >0){arrtemp.push(itemelement);}
 
-			itemelement=CheckDropDownItemExist('Title',sel1,sel2,sel3,sel4,sel5,sel6,sel7);
+			itemelement=CheckDropDownItemExist('Title',sel1,sel2,sel3,sel4,sel5,sel6,sel7, sel11, sel12);
 			if(itemelement.length >0){arrtemp.push(itemelement);}
 			return arrtemp;
 		}
         function SecondPageHeader(){
             return (
                 <div class="row epaddingbottom10">
-                    <div class="col-md-11 elRowPg1">
+                    <div class="col-md-11">
                         <label class='e1labelheaderPage1'>Create Data Template</label>
                     </div>
                     <div class="col-md-1"></div>
@@ -156,7 +157,7 @@
               } else if(controlname=="temp2"){
                 return (
                         <select disabled name={controlname} value={controlvalue} onChange={handler} class='e1inputdd col-md-11'>
-                          <option value="Preferred Name">Name</option>
+                          <option value="Name">Name</option>
                         </select>
                       );
               }else if(controlname=="temp3"){
@@ -181,8 +182,9 @@
 
 
         function SecondPageTemplateNameControl(controlname,controlvalue,handler){
+          
             return (
-                <input class='e1inputpg2' placeholder='Enter Template name'  name={controlname} value={controlvalue} onChange={handler} type="text" maxlength="30" />
+                <input class='e1inputpg2' placeholder='Enter Template name'   name={controlname} value={controlvalue} onChange={handler} type="text" maxlength="30" />
             );
         }
 
@@ -191,7 +193,7 @@
 let sPageHeader="";
 let scontrol1 = "";
 let scontrol2 = "";
-let sclass1="col-md-1";
+let sclass1="col-md-1 aligncen";
 let sclass2="col-md-4";
 if(rowpos==1){
     sPageHeader=SecondPageHeader();
@@ -232,7 +234,7 @@ return (
         let sPageHeader="";
         let scontrol1 = "";
         let scontrol2 = "";
-		let sclass1="col-md-1";
+		let sclass1="col-md-1 aligncen";
 		let sclass2="col-md-4";
         if(rowpos==1){
             sPageHeader=SecondPageHeader();
@@ -247,10 +249,29 @@ return (
         }
 
         scontrol2=SecondPageDropdownControl(control2name,control2value,handler, customuniqueid,ddl2array);
-        return (
+
+var divClass=(label1name=="Template Name")?"row epaddingbottom10 e1marginleft":"row epaddingbottom10 e1marginleft";
+
+if(label1name=="Template Name"){
+  return (
             <div>
                 {sPageHeader}
-                <div class="row epaddingbottom10 e1marginleft">
+                <div class={divClass}>
+                    <div class="col-md-1">
+                        <label style={{"font-size":"10px"}} class='e1labelheaderPage2'>{label1name}</label>
+                    </div>
+                    <div class="col-md-4">
+                        {scontrol1}
+                    </div>
+                </div>
+            </div>
+            )
+        
+} else{
+  return (
+            <div>
+                {sPageHeader}
+                <div class={divClass}>
                     <div class={sclass1}>
                         <label class='e1labelheaderPage2'>{label1name}</label>
                     </div>
@@ -267,6 +288,9 @@ return (
             </div>
             )
         }
+}
+
+        
 
         function AddBackButton(page, btnclick, btnclass){
           if(page>1){
@@ -562,65 +586,9 @@ return (
 		function loaddata(jsonObject){
 	console.log("load data function called");
 	
-	var hearsayOrgId = jsonObject.orgid;
-	var hearsayRefId = jsonObject.refid;
-	var CUID = jsonObject.cuid;
-	
-	
-	
-	console.log("getting values from fields : " + hearsayOrgId + hearsayRefId + CUID);
-	
-	//var ={
-             // orgId:this.state.orgid,
-             // refid:this.state.refid,
-             // cuid:this.state.customeruniqueid
-           // }
-	
 	axios({
 			          method: 'POST',
-			          url: 'https://hearsaydataextension.herokuapp.com/loaddata',
-			           data: jsonObject,
-			          headers: {'Content-Type': 'application/json' }
-                })
-                  .then(function (response) {
-                  //handle success
-                  //return response;	
-		  console.log(response.data);		  
-                  });
-	}
-	
-	
-	function loaddataforpage2(jsonObject){	
-	
-	console.log("load data for page 2 function called");
-	
-	
-	axios({
-			          method: 'POST',
-			          url: 'https://hearsaydataextension.herokuapp.com/loaddatafortemp',
-			           data: jsonObject,
-			          headers: {'Content-Type': 'application/json' }
-                })
-                  .then(function (response) {
-                  //handle success
-                  //return response;	
-		  console.log(response.data);		  
-                  });
-	}
-	
-	/*async function getCategoryIDforApp(validationTemplate){
-		console.log("getCategoryIDforApp function called");
-	
-	
-		
-		}*/
-		
-		function loaddata(jsonObject){
-	console.log("load data function called");
-	
-	axios({
-			          method: 'POST',
-			          url: 'https://hearsaydataextension.herokuapp.com/loaddataforapp',
+			          url: 'https://dataintapicall.herokuapp.com/loaddataforapp',
 			           data: jsonObject,
 			          headers: {'Content-Type': 'application/json' }
                 })
@@ -639,7 +607,7 @@ return (
 	
 	axios({
 			          method: 'POST',
-			          url: 'https://hearsaydataextension.herokuapp.com/loaddatafortempapp',
+			          url: 'https://dataintapicall.herokuapp.com/loaddatafortempapp',
 			           data: template,
 			          headers: {'Content-Type': 'application/json' }
                 })
@@ -654,40 +622,16 @@ return (
 		
 axios({
 			          method: 'POST',
-			          url: 'https://hearsaydataextension.herokuapp.com/createdeforapp',
+			          url: 'https://dataintapicall.herokuapp.com/createdeforapp',
 					  data: dynamicTemplate,
 					  headers: {'Content-Type': 'application/json' }
                 })
                   .then(function (response) {		  
 					console.log("Data extension created dynamically");
-					window.top.location.href = 'https://mc.s11.exacttarget.com/';
-					
                   })
 				  .catch(function (error) {
 					console.log(error);
 					});
-	}
-	
-	const validationForExistingTemplate = async (validationTemplate) => {
-	
-			  
-			  
-			  
-			  await axios({
-			          method: 'GET',
-			          url: 'https://hearsaydataextension.herokuapp.com/getcategoryidforapp',
-			           params: validationTemplate,
-			          headers: {'Content-Type': 'application/json' }
-                })
-                  .then(function (response) {
-					console.log("Got category ID for Data extension");
-					console.log(response.data);
-					 let responseXML = response.data;
-					 return responseXML;
-					
-					
-					
-				});
 	}
 
      class HearsayPage1 extends React.Component {
@@ -712,9 +656,11 @@ axios({
             temp8: '',
             temp9: '',
             temp10: '',
+            temp11: GetSelectItemName(),
+            temp12: GetSelectItemName(),
 
             temp1text: '',
-            temp2text: 'Preferred Name',
+            temp2text: 'Name',
             temp3text: 'Phone',
             temp4text: '',
             temp5text: '',
@@ -723,6 +669,9 @@ axios({
             temp8text: '',
             temp9text: '',
             temp10text: '',
+            temp11text: '',
+            temp12text: '',
+            
 
             temp1label: AddTextLabels(),
             temp2label: AddTextLabels(),
@@ -731,15 +680,18 @@ axios({
             temp5label: AddDigitInCircle('5'),
             temp6label: AddDigitInCircle('6'),
             temp7label: AddDigitInCircle('7'),
-            temp8label: AddDigitInCircle('8'),
-            temp9label: AddDigitInCircle('9'),
-            temp10label: AddDigitInCircle('10'),
+            temp8label: AddDigitInCircle('10'),
+            temp9label: AddDigitInCircle('11'),
+            temp10label: AddDigitInCircle('12'),
+            temp11label: AddDigitInCircle('8'),
+            temp12label: AddDigitInCircle('9'),
+            
 
             FieldCounter:7,
 
-            Field8Css:"row epaddingbottom10 ehidediv e1marginleft emargintop10",
-            Field9Css:"row epaddingbottom10 ehidediv e1marginleft",
-            Field10Css:"row epaddingbottom10 ehidediv e1marginleft",
+            Field8Css:"row epaddingbottom10 ehidediv e1marginleft emargintop10 paddingTop10px",
+            Field9Css:"row epaddingbottom10 ehidediv e1marginleft paddingTop10px",
+            Field10Css:"row epaddingbottom10 ehidediv e1marginleft paddingTop10px",
 
 
 
@@ -778,7 +730,10 @@ axios({
 			ArrayList4:GetDropdownListItemsNEW('','','','','','',''),
 			ArrayList5:GetDropdownListItemsNEW('','','','','','',''),
 			ArrayList6:GetDropdownListItemsNEW('','','','','','',''),
-			ArrayList7:GetDropdownListItemsNEW('','','','','','',''),
+      ArrayList7:GetDropdownListItemsNEW('','','','','','',''),
+      ArrayList11:GetDropdownListItemsNEW('','','','','','',''),
+      ArrayList12:GetDropdownListItemsNEW('','','','','','',''),
+      
 
             };
 
@@ -800,12 +755,12 @@ axios({
         handleNewFieldClick(event){
           const counter=this.state.FieldCounter+1;
           if(counter>10){
-            alert('Maximum limit exceeded (limit: 10)')
+            alert('Maximum limit exceeded (limit: 13)')
           }
           else{
               let stemp2='row epaddingbottom10 e1marginleft';
               if(counter==8){
-			    stemp2='row epaddingbottom10 e1marginleft emargintop10';
+			    stemp2='row epaddingbottom10 e1marginleft';
 
                 this.setState({Field8Css: stemp2});
               }
@@ -836,12 +791,7 @@ axios({
         }
 
         handleChangeNext(event) {
-			let ExistingTemplateName;
-			let responseXML;
-			
-			var ValidationStatus=true;
-          var validateMessages=[];
-          
+ 
           if(this.state.page==3){
 
             //Clear Dropdown
@@ -852,10 +802,11 @@ axios({
             this.setState({ArrayList5: GetDropdownListItemsNEW()});
             this.setState({ArrayList6: GetDropdownListItemsNEW()});
             this.setState({ArrayList7: GetDropdownListItemsNEW()});
-			
-			}
-			
-			if(this.state.page==3){
+            this.setState({ArrayList11: GetDropdownListItemsNEW()});
+            this.setState({ArrayList12: GetDropdownListItemsNEW()});
+          
+		  }
+		  if(this.state.page==3){
 			
 			let template=[
 	    
@@ -873,9 +824,11 @@ axios({
 					"option 4":this.state.temp5text,
 					"option 5":this.state.temp6text,
 					"option 6":this.state.temp7text,
-					"option 7":this.state.temp8FieldLabel,
-             		"option 8":this.state.temp9FieldLabel,
-              		"option 9":this.state.temp10FieldLabel,
+					"option 7":this.state.temp11text,
+             		"option 8":this.state.temp12text,
+              		"option 9":this.state.temp8FieldLabel,
+					"option 10":this.state.temp9FieldLabel,
+					"option 11":this.state.temp10FieldLabel
             		}
 	    	}
 	    ];
@@ -893,13 +846,15 @@ axios({
 					"option 4":this.state.temp5text,
 					"option 5":this.state.temp6text,
 					"option 6":this.state.temp7text,
-					"option 7":this.state.temp8FieldLabel,
+					"option 7":this.state.temp11text,
+             		"option 8":this.state.temp12text,
+					"option 9":this.state.temp8FieldLabel,
 					"FieldType 1":this.state.temp8DataType,
 					"FieldLength 1":this.state.temp8Length,
-             		"option 8":this.state.temp9FieldLabel,
+             		"option 10":this.state.temp9FieldLabel,
 					"FieldType 2":this.state.temp9DataType,
 					"FieldLength 2":this.state.temp9Length,
-              		"option 9":this.state.temp10FieldLabel,
+              		"option 11":this.state.temp10FieldLabel,
 					"FieldType 3":this.state.temp10DataType,
 					"FieldLength 3":this.state.temp10Length
             		
@@ -944,23 +899,55 @@ axios({
 					});
 		  }
 		  
-		  var tempPageNo=this.state.page + 1;
+		 
 		  
 		  if(this.state.page==2){
-let validationTemplate = {
+				let validationTemplate = {
                     "TemplateName" : this.state.templatename
 			  }			  
-			 responseXML = validationForExistingTemplate(validationTemplate);
-			 console.log(responseXML);
+			 axios({
+			          method: 'GET',
+			          url: 'https://hearsaydataextension.herokuapp.com/getcategoryidforapp',
+			           params: validationTemplate,
+			          headers: {'Content-Type': 'application/json' }
+                })
+                  .then(function (response) {
+					console.log("Got category ID for Data extension");
+					console.log(response.data);
+					 let responseXML = response.data;
+					 if(responseXML!=undefined){
+					ValidationStatus = false;
+					console.log("ValidationStatus = false" + responseXML);
+					
+					
+					
+					ReactDOM.render(<p style={{color: "red"}}>Template Name already exists.</p>,  document.getElementById('valMsgPageTwo'));
+				}
+				else{
+					console.log("ValidationStatus = true");
+					//this.setState({DuplicateError: ''});
+					
+					ValidationStatus = true;
+				}
+					
+					
+					
+				});
 		  }
 
           //Validation
-           
-          
+
+          var ValidationStatus=true;
+          var validateMessages=[];
 
           if(this.state.page==1){
-		  
-		  
+
+            //this.setState({temp1: ""});
+            // this.setState({temp2text: "Preferred Name"});
+            // this.setState({temp3text: "Phone"});
+            
+
+
             if(this.state.orgid=="" || this.state.orgid==null || this.state.orgid==" "){
             ValidationStatus=false;
                 ReactDOM.render(<p style={{color: "red" }}>Hearsay Org ID is mandatory.</p>, document.getElementById('valMsgOrgId'));
@@ -979,57 +966,42 @@ let validationTemplate = {
               ReactDOM.render(<p style={{color: "red"}}>Customer Unique ID is mandatory.</p>, document.getElementById('spncustomeruniqueid'));
             } else{
               ReactDOM.render(<p></p>, document.getElementById('spncustomeruniqueid'));
-            }			
+            }
 
-			
+
           } else if(this.state.page==2){
-			  
 
-              if(this.state.temp2text !="Email" && this.state.temp3text !="Email" && this.state.temp4text !="Email" && this.state.temp5text !="Email" && this.state.temp6text !="Email" && this.state.temp7text !="Email"){
-	     console.log('inside a first condition');
-	      ValidationStatus=false;
-		  //alert('Email Field is mandatory.');
-              ReactDOM.render(<p style={{color: "red"}}>Email Field is mandatory.</p>, document.getElementById('valMsgPageTwo'));
-	    }
-	   
-	   
-			 if(this.state.templatename==""){
+
+			if(this.state.templatename==""){
               ValidationStatus=false;
               ReactDOM.render(<p style={{color: "red"}}>Template name is mandatory.</p>, document.getElementById('valMsgPageTwo'));
-		
-			}
-			if(responseXML!=undefined){
-					ValidationStatus = false;
-					console.log("ValidationStatus = false" + responseXML);
-					
-					
-					
-					ReactDOM.render(<p style={{color: "red"}}>Template Name already exists.</p>,  document.getElementById('valMsgPageTwo'));
-				}
-				else{
-					console.log("ValidationStatus = true");
-					//this.setState({DuplicateError: ''});
-					
-					ValidationStatus = true;
-				}
-            
-			
 
-            if(this.state.templatename=="" && this.state.temp1text=="" && this.state.temp2text=="" && 
-			    this.state.temp3text=="" && this.state.temp4text=="" && 
+      }
+      
+
+      if(this.state.templatename=="Test"){
+        this.setState({DuplicateError: 'Test Error'});
+        ValidationStatus=false;
+      } else{
+        //ValidationStatus=true;
+        this.setState({DuplicateError: ''});
+      }
+
+
+
+            if(this.state.templatename=="" && this.state.temp1text=="" && this.state.temp2text=="" &&
+			    this.state.temp3text=="" && this.state.temp4text=="" &&
 				this.state.temp5text=="" && this.state.temp6text=="" && this.state.temp7text==""){
               ValidationStatus=false;
-              
-				
+              ReactDOM.render(<p style={{color: "red"}}>Data template fields are mandatory.</p>, document.getElementById('valMsgPageTwo'));
+
 				}
-				
-				
             }
 
           if(ValidationStatus==true){
 
-            
-            let ipage = tempPageNo;
+
+            let ipage = this.state.page + 1;
             if(ipage==4){
               //reset to first page
               ipage=1;
@@ -1037,13 +1009,19 @@ let validationTemplate = {
               this.setState({orgid: ''});
               this.setState({refid: 1});
               this.setState({reftext: 'First'});
-			  
+
 			  this.setState({templatename: ''});
-			  this.setState({customeruniqueid: ''});
-			  
-              this.setState({temp1: GetSelectItemName()});
-              this.setState({temp2: GetSelectItemName()});
-              this.setState({temp3: GetSelectItemName()});
+        this.setState({customeruniqueid: ''});
+        
+        
+
+        
+        
+        
+
+              this.setState({temp1label: AddTextLabels()});
+              this.setState({temp2label: AddTextLabels()});
+              this.setState({temp3label: AddTextLabels()});
               this.setState({temp4: GetSelectItemName()});
               this.setState({temp5: GetSelectItemName()});
               this.setState({temp6: GetSelectItemName()});
@@ -1053,8 +1031,8 @@ let validationTemplate = {
               this.setState({temp10: '1'});
 
               this.setState({temp1text: ''});
-              this.setState({temp2text: ''});
-              this.setState({temp3text: ''});
+              this.setState({temp2text: 'Name'});
+              this.setState({temp3text: 'Phone'});
               this.setState({temp4text: ''});
 
               this.setState({temp5text: ''});
@@ -1077,48 +1055,51 @@ let validationTemplate = {
               this.setState({artemp8: []});
               this.setState({artemp9: []});
               this.setState({artemp10: []});
-			  
+
               this.setState({temp8FieldLabel: ''});
               this.setState({temp9FieldLabel: ''});
               this.setState({temp10FieldLabel: ''});
-			  
+
               this.setState({temp8DataType: ''});
               this.setState({temp9DataType: ''});
               this.setState({temp10DataType: ''});
-			  
+
               this.setState({temp8Length: ''});
               this.setState({temp9Length: ''});
               this.setState({temp10Length: ''});
-			  
-			  
+
+
 			  this.setState({temp8ButtonLabel: 'Save'});
               this.setState({temp9ButtonLabel: 'Save'});
               this.setState({temp10ButtonLabel: 'Save'});
-			  
+
 
 			  this.setState({Field8Disabled: ''});
               this.setState({Field9Disabled: ''});
               this.setState({Field10Disabled: ''});
-			  
-			  
+
+
 			  this.setState({LenthFld8CSS: ' true '});
 			  this.setState({LenthFld9CSS: ' true '});
 			  this.setState({LenthFld10CSS: ' true '});
 
-              this.setState({temp1label: AddDigitInCircle('1')});
-              this.setState({temp2label: AddDigitInCircle('2')});
-              this.setState({temp3label: AddDigitInCircle('3')});
+              // this.setState({temp1label: AddDigitInCircle('1')});
+              // this.setState({temp2label: AddDigitInCircle('2')});
+              // this.setState({temp3label: AddDigitInCircle('3')});
               this.setState({temp4label: AddDigitInCircle('4')});
               this.setState({temp5label: AddDigitInCircle('5')});
               this.setState({temp6label: AddDigitInCircle('6')});
               this.setState({temp7label: AddDigitInCircle('7')});
+              this.setState({temp11label: AddDigitInCircle('8')});
+              this.setState({temp12label: AddDigitInCircle('9')});
+              
 
 				this.setState({Field8Css: 'row epaddingbottom10 ehidediv e1marginleft emargintop10'});
 				this.setState({Field9Css: 'row epaddingbottom10 ehidediv e1marginleft'});
 				this.setState({Field10Css: 'row epaddingbottom10 ehidediv e1marginleft'});
             }
             this.setState({page: ipage});
-			
+
 			//alert("Test");
 			// this.setState({ArrayList1: GetDropdownListItemsNEW()});
 			// this.setState({ArrayList2: GetDropdownListItemsNEW()});
@@ -1128,7 +1109,7 @@ let validationTemplate = {
 			// this.setState({ArrayList6: GetDropdownListItemsNEW()});
 			// this.setState({ArrayList7: GetDropdownListItemsNEW()});
           }
-        } 
+        }
 
         updateCustomFieldObject = (event) => {
           let nam = event.target.name;
@@ -1154,6 +1135,7 @@ let validationTemplate = {
             } else{
 			  this.setState({artemp8:""});
               this.setState({artemp8:""});
+              this.setState({temp8label:AddDigitInCircle("10")});
               this.setState({temp8ButtonLabel:'Save'});
 			  this.setState({Field8Disabled:''});
             }
@@ -1172,7 +1154,7 @@ let validationTemplate = {
 			  this.setState({Field9Disabled:'disabled'});
             } else{
               this.setState({artemp9:""});
-              this.setState({temp9label:AddDigitInCircle("9")});
+              this.setState({temp9label:AddDigitInCircle("11")});
 			  this.setState({temp9ButtonLabel:'Save'});
 			  this.setState({Field9Disabled:''});
             }
@@ -1191,7 +1173,7 @@ let validationTemplate = {
 			  this.setState({Field10Disabled:'disabled'});
             } else{
               this.setState({artemp10:""});
-              this.setState({temp10label:AddDigitInCircle("10")});
+              this.setState({temp10label:AddDigitInCircle("12")});
 			  this.setState({temp10ButtonLabel:'Save'});
 			  this.setState({Field10Disabled:''});
             }
@@ -1235,8 +1217,12 @@ let validationTemplate = {
 		  let ddl4 = this.state.temp4;
 		  let ddl5 = this.state.temp5;
 		  let ddl6 = this.state.temp6;
-		  let ddl7 = this.state.temp7;
-
+      let ddl7 = this.state.temp7;
+      let ddl11 = this.state.temp11;
+      let ddl12 = this.state.temp12;
+      
+      debugger;
+ 
 //		  alert(ddl1 + ' - ' + ddl2 + ' -- ' + ddl3 + ' -- ' + ddl4 + ' -- ' + ddl5 + ' -- ' + ddl6);
 
 		  let ddlselitem =GetSelectItemName();
@@ -1244,7 +1230,7 @@ let validationTemplate = {
 		   if(pos==1){
 			//first dropdown selected, refresh the other dropdowns
 			ddl1=value;ddl2=ddlselitem;ddl3=ddlselitem;ddl4=ddlselitem;ddl5=ddlselitem;
-			ddl6=ddlselitem;ddl7=ddlselitem;
+			ddl6=ddlselitem;ddl7=ddlselitem;ddl11=ddlselitem;ddl12=ddlselitem;
 
 				//clear temp state values too
               this.setState({temp2: ddlselitem});
@@ -1253,6 +1239,9 @@ let validationTemplate = {
               this.setState({temp5: ddlselitem});
               this.setState({temp6: ddlselitem});
               this.setState({temp7: ddlselitem});
+              this.setState({temp11: ddlselitem});
+              this.setState({temp12: ddlselitem});
+              
 
 				//clear label fields too
               this.setState({temp2label: AddDigitInCircle('2')});
@@ -1261,6 +1250,9 @@ let validationTemplate = {
               this.setState({temp5label: AddDigitInCircle('5')});
               this.setState({temp6label: AddDigitInCircle('6')});
               this.setState({temp7label: AddDigitInCircle('7')});
+              this.setState({temp11label: AddDigitInCircle('8')});
+              this.setState({temp12label: AddDigitInCircle('9')});
+              
 
 			  //clear array list
 			this.setState({ArrayList2: GetDropdownListItemsNEW()});
@@ -1268,16 +1260,22 @@ let validationTemplate = {
 			this.setState({ArrayList4: GetDropdownListItemsNEW()});
 			this.setState({ArrayList5: GetDropdownListItemsNEW()});
 			this.setState({ArrayList6: GetDropdownListItemsNEW()});
-			this.setState({ArrayList7: GetDropdownListItemsNEW()});
+      this.setState({ArrayList7: GetDropdownListItemsNEW()});
+      this.setState({ArrayList11: GetDropdownListItemsNEW()});
+      this.setState({ArrayList12: GetDropdownListItemsNEW()});
+      
 
 
 
-			this.setState({ArrayList2: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7)});
-			this.setState({ArrayList3: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7)});
-			this.setState({ArrayList4: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7)});
-			this.setState({ArrayList5: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7)});
-			this.setState({ArrayList6: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7)});
-			this.setState({ArrayList7: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7)});
+			this.setState({ArrayList2: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7, ddl11, ddl12)});
+			this.setState({ArrayList3: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7, ddl11, ddl12)});
+			this.setState({ArrayList4: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7, ddl11, ddl12)});
+			this.setState({ArrayList5: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7, ddl11, ddl12)});
+			this.setState({ArrayList6: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7, ddl11, ddl12)});
+      this.setState({ArrayList7: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7, ddl11, ddl12)});
+      this.setState({ArrayList11: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7, ddl11, ddl12)});
+      this.setState({ArrayList12: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7, ddl11, ddl12)});
+      
 
 
 
@@ -1285,14 +1283,17 @@ let validationTemplate = {
 		  }
 		  else if(pos==2){
 			ddl2=value;ddl3=ddlselitem;ddl4=ddlselitem;ddl5=ddlselitem;
-			ddl6=ddlselitem;ddl7=ddlselitem;
+			ddl6=ddlselitem;ddl7=ddlselitem;ddl11=ddlselitem;ddl12=ddlselitem;
 			//update the unselected dropdowns
 
-			this.setState({ArrayList3: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7)});
-			this.setState({ArrayList4: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7)});
-			this.setState({ArrayList5: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7)});
-			this.setState({ArrayList6: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7)});
-			this.setState({ArrayList7: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7)});
+			this.setState({ArrayList3: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7, ddl11, ddl12)});
+			this.setState({ArrayList4: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7, ddl11, ddl12)});
+			this.setState({ArrayList5: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7, ddl11, ddl12)});
+			this.setState({ArrayList6: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7, ddl11, ddl12)});
+      this.setState({ArrayList7: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7, ddl11, ddl12)});
+      this.setState({ArrayList11: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7, ddl11, ddl12)});
+      this.setState({ArrayList12: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7, ddl11, ddl12)});
+      
 
 			  //clear label too
 			  this.setState({temp3label: AddDigitInCircle('3')});
@@ -1300,6 +1301,9 @@ let validationTemplate = {
               this.setState({temp5label: AddDigitInCircle('5')});
               this.setState({temp6label: AddDigitInCircle('6')});
               this.setState({temp7label: AddDigitInCircle('7')});
+              this.setState({temp11label: AddDigitInCircle('8')});
+              this.setState({temp12label: AddDigitInCircle('9')});
+              
 
 				//clear temp state values too
               this.setState({temp3: ddlselitem});
@@ -1307,73 +1311,130 @@ let validationTemplate = {
               this.setState({temp5: ddlselitem});
               this.setState({temp6: ddlselitem});
               this.setState({temp7: ddlselitem});
+              this.setState({temp11: ddlselitem});
+              this.setState({temp12: ddlselitem});
+              
 
 		  }
 		  else if(pos==3){
-			ddl3=value;;ddl4=ddlselitem;ddl5=ddlselitem;
-			ddl6=ddlselitem;ddl7=ddlselitem;
+			ddl3=value;ddl4=ddlselitem;ddl5=ddlselitem;
+			ddl6=ddlselitem;ddl7=ddlselitem;ddl11=ddlselitem;ddl12=ddlselitem;
 
-			this.setState({ArrayList4: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7)});
-			this.setState({ArrayList5: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7)});
-			this.setState({ArrayList6: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7)});
-			this.setState({ArrayList7: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7)});
+			this.setState({ArrayList4: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7, ddl11, ddl12)});
+			this.setState({ArrayList5: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7, ddl11, ddl12)});
+			this.setState({ArrayList6: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7, ddl11, ddl12)});
+      this.setState({ArrayList7: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7, ddl11, ddl12)});
+      this.setState({ArrayList11: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7, ddl11, ddl12)});
+      this.setState({ArrayList12: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7, ddl11, ddl12)});
+      
 			  //clear label too
               this.setState({temp4label: AddDigitInCircle('4')});
               this.setState({temp5label: AddDigitInCircle('5')});
               this.setState({temp6label: AddDigitInCircle('6')});
               this.setState({temp7label: AddDigitInCircle('7')});
+              this.setState({temp11label: AddDigitInCircle('8')});
+              this.setState({temp12label: AddDigitInCircle('9')});
+              
 
 				//clear temp state values too
               this.setState({temp4: ddlselitem});
               this.setState({temp5: ddlselitem});
               this.setState({temp6: ddlselitem});
               this.setState({temp7: ddlselitem});
+              this.setState({temp11: ddlselitem});
+              this.setState({temp12: ddlselitem});
+              
 
 		  }
 		  else if(pos==4){
 			ddl4=value;;ddl5=ddlselitem;
-			ddl6=ddlselitem;ddl7=ddlselitem;
+			ddl6=ddlselitem;ddl7=ddlselitem;ddl11=ddlselitem;ddl12=ddlselitem;
 
-			this.setState({ArrayList5: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7)});
-			this.setState({ArrayList6: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7)});
-			this.setState({ArrayList7: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7)});
+			this.setState({ArrayList5: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7, ddl11, ddl12)});
+			this.setState({ArrayList6: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7, ddl11, ddl12)});
+      this.setState({ArrayList7: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7, ddl11, ddl12)});
+      this.setState({ArrayList11: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7, ddl11, ddl12)});
+      this.setState({ArrayList12: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7, ddl11, ddl12)});
+      
 			  //clear label too
               this.setState({temp5label: AddDigitInCircle('5')});
               this.setState({temp6label: AddDigitInCircle('6')});
               this.setState({temp7label: AddDigitInCircle('7')});
+              this.setState({temp11label: AddDigitInCircle('8')});
+              this.setState({temp12label: AddDigitInCircle('9')});
+              
 
 				//clear temp state values too
               this.setState({temp5: ddlselitem});
               this.setState({temp6: ddlselitem});
               this.setState({temp7: ddlselitem});
+              this.setState({temp11: ddlselitem});
+              this.setState({temp12: ddlselitem});
+              
 
 		  }
 		  else if(pos==5){
-			ddl5=value;ddl6=ddlselitem;ddl7=ddlselitem;
-			this.setState({ArrayList6: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7)});
-			this.setState({ArrayList7: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7)});
+			ddl5=value;ddl6=ddlselitem;ddl7=ddlselitem;ddl11=ddlselitem;ddl12=ddlselitem;
+			this.setState({ArrayList6: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7, ddl11, ddl12)});
+      this.setState({ArrayList7: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7, ddl11, ddl12)});
+      this.setState({ArrayList11: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7, ddl11, ddl12)});
+      this.setState({ArrayList12: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7, ddl11, ddl12)});
+      
 			  //clear label too
               this.setState({temp6label: AddDigitInCircle('6')});
-			  this.setState({temp7label: AddDigitInCircle('7')});
+              this.setState({temp7label: AddDigitInCircle('7')});
+              this.setState({temp11label: AddDigitInCircle('8')});
+              this.setState({temp12label: AddDigitInCircle('9')});
+        
 
 				//clear temp state values too
               this.setState({temp6: ddlselitem});
               this.setState({temp7: ddlselitem});
+              this.setState({temp11: ddlselitem});
+              this.setState({temp12: ddlselitem});
+              
 
 
 		  }
 		  else if(pos==6){
-			ddl6=value;ddl7=ddlselitem;
-			this.setState({ArrayList7: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7)});
+			ddl6=value;ddl7=ddlselitem;ddl11=ddlselitem;ddl12=ddlselitem;
+      this.setState({ArrayList7: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7, ddl11, ddl12)});
+      this.setState({ArrayList11: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7, ddl11, ddl12)});
+      this.setState({ArrayList12: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7, ddl11, ddl12)});
 			  //clear label too
-			  this.setState({temp7label: AddDigitInCircle('7')});
+        this.setState({temp7label: AddDigitInCircle('7')});
+        this.setState({temp11label: AddDigitInCircle('8')});
+        this.setState({temp12label: AddDigitInCircle('9')});
+        
 
 				//clear temp state values too
-              this.setState({temp7: ddlselitem});
+        this.setState({temp7: ddlselitem});
+        this.setState({temp11: ddlselitem});
+        this.setState({temp12: ddlselitem});
+              
 		  }
 		  else if(pos==7){
-			ddl7=value;
-
+      ddl7=value;ddl11=ddlselitem;ddl12=ddlselitem;
+      this.setState({ArrayList11: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7, ddl11, ddl12)});
+      this.setState({ArrayList12: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7, ddl11, ddl12)});
+        //clear label too
+        this.setState({temp11label: AddDigitInCircle('8')});
+        this.setState({temp12label: AddDigitInCircle('9')});
+        
+				//clear temp state values too
+        this.setState({temp11: ddlselitem});
+        this.setState({temp12: ddlselitem});
+		  }else if(pos==11){
+      ddl11=value;ddl12=ddlselitem;
+      this.setState({ArrayList12: GetDropdownListItemsNEW(ddl1,ddl2,ddl3,ddl4,ddl5,ddl6,ddl7, ddl11, ddl12)});
+        //clear label too
+        this.setState({temp12label: AddDigitInCircle('9')});
+        
+				//clear temp state values too
+        this.setState({temp12: ddlselitem});
+		  }else if(pos==12){
+        ddl12=value;
+        
 		  }
         }
 
@@ -1397,7 +1458,7 @@ let validationTemplate = {
 
           //stoe the seleted text also in the state variable
           if(nam=='refid' || nam=='temp1' || nam=='temp2' || nam=='temp3' || nam=='temp4' || nam=='temp5' ||
-              nam=='temp6' || nam=='temp7' || nam=='temp8' || nam=='temp9' || nam=='temp10'){
+              nam=='temp6' || nam=='temp7' || nam=='temp8' || nam=='temp9' || nam=='temp10'|| nam=='temp11'|| nam=='temp12'){
             var index = event.nativeEvent.target.selectedIndex;
             let label = event.nativeEvent.target[index].text;
             label=(label!="--Select--")?label:"";
@@ -1451,6 +1512,18 @@ let validationTemplate = {
                 if(val=="" || val=="--Select--"){this.setState({temp7label: AddDigitInCircle('7')});}else{this.setState({temp7label: stick});}
 
 				this.RefreshOtherDropDownLists(7,val);  //now refresh the other dropdowns
+            }else if(nam=='temp11'){
+              this.setState({temp11text: label});
+                this.setState({temp11label: stick});
+                if(val=="" || val=="--Select--"){this.setState({temp11label: AddDigitInCircle('8')});}else{this.setState({temp11label: stick});}
+
+				this.RefreshOtherDropDownLists(11,val);  //now refresh the other dropdowns
+            }else if(nam=='temp12'){
+              this.setState({temp12text: label});
+                this.setState({temp12label: stick});
+                if(val=="" || val=="--Select--"){this.setState({temp12label: AddDigitInCircle('9')});}else{this.setState({temp12label: stick});}
+
+				this.RefreshOtherDropDownLists(12,val);  //now refresh the other dropdowns
             }
             else if(nam=='temp8'){
               this.setState({temp8text: label});
@@ -1597,16 +1670,23 @@ let validationTemplate = {
                   {AddPage2RowSingle('temp3',this.state.temp3,this.state.temp3label,this.state.ArrayList3,2,this.myChangeHandler, this.state.customeruniqueid)}
                   
                   
-<div class="row epaddingbottom10 e1marginleft"><label class="e1pageheader_14px">Optional Fields</label></div>
+<div class="row e1marginleft">
+  <div class="col-sm-1"></div>
+  <div class="col-sm-11"><label class="e1pageheader_14px">Optional Fields</label></div>
+  </div>
 
                     
-                    {AddPage2Row('temp4',this.state.temp4,this.myChangeHandler,this.state.temp4label,this.state.ArrayList4,2,this.state.temp6label,'temp6',this.state.temp6, this.state.customeruniqueid,this.state.ArrayList6)}
-                    {AddPage2Row('temp5',this.state.temp5,this.myChangeHandler,this.state.temp5label,this.state.ArrayList5,3,this.state.temp7label,'temp7',this.state.temp7, this.state.customeruniqueid,this.state.ArrayList7)}
+                    {AddPage2Row('temp4',this.state.temp4,this.myChangeHandler,this.state.temp4label,this.state.ArrayList4,2,this.state.temp7label,'temp7',this.state.temp7, this.state.customeruniqueid,this.state.ArrayList7)}
+                    {AddPage2Row('temp5',this.state.temp5,this.myChangeHandler,this.state.temp5label,this.state.ArrayList5,3,this.state.temp11label,'temp11',this.state.temp11, this.state.customeruniqueid,this.state.ArrayList11)}
+                    {AddPage2Row('temp6',this.state.temp6,this.myChangeHandler,this.state.temp6label,this.state.ArrayList6,4,this.state.temp12label,'temp12',this.state.temp12, this.state.customeruniqueid,this.state.ArrayList12)}
 					{/*{AddPage2Row('temp2',this.state.temp2,this.myChangeHandler,this.state.temp2label,this.state.ArrayList2,4,this.state.temp6label,'temp6',this.state.temp6, this.state.customeruniqueid,this.state.ArrayList6)}*/}
 				{/*{AddPage2Row('temp4',this.state.temp4,this.myChangeHandler,this.state.temp4label,this.state.ArrayList4,5,"",'blank','', '','')}*/}	
 
-        <div class="row epaddingbottom10 e1marginleft"><label class="e1pageheader_14px">Other Fields</label></div>
-
+        
+        <div class="row e1marginleft ">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-11"><label class="e1pageheader_14px" style={{"padding-bottom":"10px"}}>Other Fields</label></div>
+        </div>
 				  {AddCustomFieldBlock('temp8FieldLabel','temp8DataType','temp8Length','temp8Button' ,this.state.temp8FieldLabel, this.state.temp8DataType, this.state.temp8Length,this.myChangeHandler, this.updateCustomFieldObject,this.state.Field8Css, this.state.temp8label, this.state.LenthFld8CSS,this.state.temp8ButtonLabel,'temp8clear',this.state.Field8Disabled)}
 				  {AddCustomFieldBlock('temp9FieldLabel','temp9DataType','temp9Length','temp9Button' ,this.state.temp9FieldLabel, this.state.temp9DataType, this.state.temp9Length,this.myChangeHandler, this.updateCustomFieldObject,this.state.Field9Css, this.state.temp9label, this.state.LenthFld9CSS,this.state.temp9ButtonLabel,'temp9clear',this.state.Field9Disabled)}
 				  {AddCustomFieldBlock('temp10FieldLabel','temp10DataType','temp10Length','temp10Button' ,this.state.temp10FieldLabel, this.state.temp10DataType, this.state.temp10Length,this.myChangeHandler, this.updateCustomFieldObject,this.state.Field10Css, this.state.temp10label, this.state.LenthFld10CSS,this.state.temp10ButtonLabel,'temp10clear',this.state.Field10Disabled)}
@@ -1616,9 +1696,9 @@ let validationTemplate = {
 
 
                   <div class='row epaddingbottom10 e1marginleft'>
-					   <div class='col-md-1'></div>
+                    <div class='col-md-1'></div>
                       <div class='col-md-11'>
-                          <button onClick={this.handleNewFieldClick} class='btn btn-link e1butonfontsize float-left  emargintop10 btn-xs'> + Add New Field</button>
+                          <button onClick={this.handleNewFieldClick} class='btn btn-link e1butonfontsize float-left  emargintop10 btn-xs'> + </button> <label class='e1labelheaderPage2 addNewBtn'>Add New Field</label>
                       </div>
 
 
@@ -1686,7 +1766,7 @@ let validationTemplate = {
                     </div>
 					<div class="row epaddingbottom10 e1marginleft emargintop24">
                         <div class="col-md-11">
-                            <label class='e1labelheaderPage3'>DATA EXTENSION TEMPLATE (NEW)</label>
+                            <label class='e1labelheaderPage3'>DATA EXTENSION TEMPLATES (NEW)</label>
                         </div>
                         <div class="col-md-1"></div>
 
@@ -1694,13 +1774,17 @@ let validationTemplate = {
                     <div class="row epaddingbottom10 e1marginleft">
 						<div class="col-md-11 ">
 
+								<div>{this.state.templatename} </div>
 								<div>{this.state.temp1text} </div>
 								<div>{this.state.temp2text} </div>
 								<div>{this.state.temp3text} </div>
 								<div>{this.state.temp4text} </div>
 								<div>{this.state.temp5text} </div>
 								<div>{this.state.temp6text} </div>
-								<div>{this.state.temp7text} </div>
+                <div>{this.state.temp7text} </div>
+                <div>{this.state.temp11text} </div>
+                <div>{this.state.temp12text} </div>
+                
 								<div>{this.state.temp8FieldLabel}  </div>
 								<div>{this.state.temp9FieldLabel}</div>
 								<div>{this.state.temp10FieldLabel}</div>
