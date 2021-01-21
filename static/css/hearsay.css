@@ -76,7 +76,19 @@ body {
   font-weight:bold ;
   font-size:13px;
   letter-spacing:1px;
-  margin-top: 10px;
+  margin-top: 5px;
+}
+
+paddingBottom15px{
+  padding-bottom: 15px;
+}
+
+paddingBottom5px{
+  padding-bottom: 10px !important;
+}
+
+paddingTop10px{
+  padding-top: 10px;
 }
 
 .e1error{
@@ -118,6 +130,14 @@ body {
     font-size: 13px;
     letter-spacing: 1px;
     margin-top: 12px;
+}
+
+.addNewBtn {
+  font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 1px;
+  margin-left: 10px;
+  margin-top: 6px;
 }
 
 .e1labelheaderPage3 {
@@ -497,11 +517,11 @@ body {
     margin-left: 30px;
   }
 
-  .aligncen{
+  /* .aligncen{
     text-align: center;
-  }
+  } */
     .e1marginleft {
-        margin-left: 30px;
+        margin-left: 10px;
     }
     .e1marginleft_Ex {
       margin-left: 30px;
@@ -556,6 +576,10 @@ body {
         left: 0;
         top: 0;
     }
+
+.marginTop15px{
+  margin-top: 15px;
+}
 
     .checkmark_stem {
         position: absolute;
