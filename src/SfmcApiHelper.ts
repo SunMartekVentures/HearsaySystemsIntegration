@@ -693,7 +693,7 @@ export default class SfmcApiHelper
 			
  soapData = headerSoapData + bodySoapData + sendableSoapData + orgIDSoapData + fieldSoapData + OptionFieldSoapData + endSoapData;	
  
-	    Utils.logInfo("Soap data before the data extension creation call\n " + JSON.stringify(template));
+	    Utils.logInfo("Soap data before the data extension creation call\n " + soapData);
         return new Promise<any>((resolve, reject) =>
         {
 				
@@ -752,7 +752,7 @@ export default class SfmcApiHelper
 			})*/
 			.catch((error: any) => {
                 // error
-                let errorMsg = "Error loading sample data. POST response from Marketing Cloud:";
+                let errorMsg = "Error Creating data extension dynamically using soap format";
                 errorMsg += "\nMessage: " + error.message;
                 errorMsg += "\nStatus: " + error.response ? error.response.status : "<None>";
                 errorMsg += "\nResponse data: " + error.response.data ? Utils.prettyPrintJson(JSON.stringify(error.response.data)) : "<None>";
