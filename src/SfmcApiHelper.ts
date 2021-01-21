@@ -656,7 +656,7 @@ export default class SfmcApiHelper
 +'                    </Field>'
 				}
 				
-				else if(key ==="option 7" || key ==="option 8" || key ==="option 9"){
+				else if(key ==="option 9" || key ==="option 10" || key ==="option 11"){
 					Utils.logInfo("field name "+ template[key] + " has been added to the OptionFieldSoapData");
 					OptionFieldSoapData +='<Field>'
 +'                        <Name>'+template[key]+'</Name>'
