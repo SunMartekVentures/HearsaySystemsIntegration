@@ -600,7 +600,7 @@ if(label1name=="Template Name"){
 	}
 	
 	
-	function loaddataforpage2(template, dynamicTemplate){	
+	function loaddataforpage2(template){	
 	
 	console.log("load data for page 2 function called");
 	
@@ -613,11 +613,10 @@ if(label1name=="Template Name"){
                 })
                   .then(function (response) {
 					console.log(response.data);
-					createDE(dynamicTemplate);
                   });
 	}
 	
-	function createDE(dynamicTemplate){
+	function createDE(template, dynamicTemplate){
 		console.log("createDE function called "+ dynamicTemplate);
 		
 axios({
@@ -628,7 +627,7 @@ axios({
                 })
                   .then(function (response) {		  
 					console.log("Data extension created dynamically");
-					
+					loaddataforpage2(template);
 					
                   })
 				  .catch(function (error) {
@@ -863,7 +862,7 @@ axios({
             		
 	    	}
 			console.log("Template Name :" + JSON.stringify(template));		
-		loaddataforpage2(template, dynamicTemplate);
+		createDE(template, dynamicTemplate);
 	    }
 	    
 	    
