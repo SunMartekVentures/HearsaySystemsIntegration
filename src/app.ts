@@ -93,7 +93,10 @@ app.post('/createdeforapp', function(req, res) {
   
   app.get('/getcategoryidforapp', function(req, res) {
   appDemoRoutes.getCategoryIDforApp(req, res); });
-
+  
+  //dataextensionfoldercheck
+	app.post('/dataextensionfoldercheck', function(req, res) {
+  appDemoRoutes.DataExtensionFolderCheck(req, res); });
 
 
 // Marketing Cloud POSTs the JWT to the '/login' endpoint when a user logs in
