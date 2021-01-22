@@ -151,7 +151,7 @@ export default class SfmcApiHelper
 	
 	private ValidationForDataExtName(TemplateName : string) : Promise<any>
 	{
-		
+		this.getCategoryIDHelper();
 			//Utils.logInfo("Validation Body : "+ ValidationBody);
 			
 			//let headers = {
@@ -172,10 +172,11 @@ export default class SfmcApiHelper
 +'    <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">'
 +'   <RetrieveRequestMsg xmlns="http://exacttarget.com/wsdl/partnerAPI">'
 +'      <RetrieveRequest>'
-+'		<ObjectType>DataExtensionObject[Data Extension Template]</ObjectType>'
-+'                <Properties>Template Name</Properties>'
++'		<ObjectType>DataExtension</ObjectType>'
++'                <Properties>CustomerKey</Properties>'
++'                <Properties>Name</Properties>'
 +'                <Filter xsi:type="SimpleFilterPart">'
-+'                  <Property>Template Name</Property>'
++'                  <Property>Name</Property>'
 +'                  <SimpleOperator>equals</SimpleOperator>'
 +'                  <Value>'+TemplateName+'</Value>'
 +'                </Filter>'
@@ -195,33 +196,43 @@ export default class SfmcApiHelper
                 Utils.logInfo("Validation Successful \n\n" + response.data);
 				this.ValidateResponse = response.data;
 				
-				var parser = new xml2js.Parser();
-				let parsedResponse = parser.parseString(response.data, function(err: any, result: any) => {
+				let parser = new xml2js.Parser();
+				let parsedResponse = parser.parseString(response.data, (err: any, result: { [x: string]: { [x: string]: { [x: string]: { [x: string]: any; }[]; }[]; }; }) => {
 				//this.validateStatus = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['OverallStatus'][0];
-				//Utils.logInfo('Validation Status : ' + this.validateStatus);
-				let validateDEName = JSON.stringify(result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]);
+				//Utils.logInfo('Validation Status : ' + response.data);
+				
+				
+				let validateDEName = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'];
 				Utils.logInfo('Validated Data Extension Name : ' + validateDEName);
-                
-            }).catch(err : any) =>{
-				Utils.logInfo('Error on validation : ' + err);
-			}
-			this.getCategoryIDHelper();
-			if(validateDEName){
-			resolve(
-                {
-                    status: 200,
-                    statusText: response.data
-                });
-			}
-			else{
+				if(validateDEName!=undefined){
 				resolve(
                 {
-                    status: 302,
-                    statusText: response.data
+                    status: 200,
+                    statusText: validateDEName[0]['Name'][0]
                 });
-			}
+				}
+				else{
+					validateDEName = "null";
+					resolve({
+                    status: 200,
+                    statusText: validateDEName
+                });
+				}
+				
+                /*if(validateDEName){
+					Utils.logInfo('Validated Data Extension Name : ' + validateDEName);
+				resolve(
+                {
+                    status: 200,
+                    statusText: validateDEName[0]['Properties'][0]['Property'][0]['Value'][0]
+                });
+			}*/
+				
 			
-			})
+				});
+				
+			
+            })
             .catch((error: any) => {
                 // error
                 let errorMsg = "Error retrieving the data extension name :";
@@ -612,13 +623,14 @@ export default class SfmcApiHelper
 +'                        <IsRequired>false</IsRequired>'
 +'                    </Field>'
 				}
-				else if(template[key] ==="Phone"){
+				else if(key ==="option 2"){
 					Utils.logInfo("field name "+ template[key] + " has been added to the soapData");
 					fieldSoapData +='<Field>'
 +'                        <Name>'+template[key]+'</Name>'
 +'                        <FieldType>Phone</FieldType>'
-+'                        <IsRequired>false</IsRequired>'
++'                        <IsRequired>true</IsRequired>'
 +'                    </Field>'
+
 				}
 				else if(template[key] ==="Name"){
 					Utils.logInfo("field name "+ template[key] + " has been added to the soapData");
@@ -637,25 +649,32 @@ export default class SfmcApiHelper
 +'                    </Field>'
 				}
 				
-				else if(key ==="Customer Unique ID"){
-					Utils.logInfo("field name "+ template[key] + " has been added to the soapData");
-					fieldSoapData +='<Field>'
-+'                        <Name>'+template[key]+'</Name>'
-+'                        <FieldType>Text</FieldType>'
-+'                        <IsRequired>true</IsRequired>'
-+'                    </Field>'
-				}
 				
-				else if(key ==="option 7" || key ==="option 8" || key ==="option 9"){
+				
+				else if(key ==="option 9" || key ==="option 10" || key ==="option 11"){
 					Utils.logInfo("field name "+ template[key] + " has been added to the OptionFieldSoapData");
 					OptionFieldSoapData +='<Field>'
 +'                        <Name>'+template[key]+'</Name>'
 
 				}
 				else if(key ==="FieldType 1" || key ==="FieldType 2" || key ==="FieldType 3"){
+					if(template[key] === "Date"){
+						OptionFieldSoapData +='<FieldType>'+template[key]+'</FieldType>'
+					+'                        <IsRequired>false</IsRequired>'
+					+'                    </Field>'
+					}
+					else{
 					Utils.logInfo("field type "+ template[key] + " has been added to the OptionFieldSoapData");
 					OptionFieldSoapData +='<FieldType>'+template[key]+'</FieldType>'
+					}
 				}
+				
+				/*else if(key ==="FieldType 1" && template[key] === "Date"|| key ==="FieldType 2" && template[key] === "Date"|| key ==="FieldType 3" && template[key] === "Date"){
+					Utils.logInfo("This is to check whether the selected data type is Date");
+					OptionFieldSoapData +='<FieldType>'+template[key]+'</FieldType>'
+					+'                        <IsRequired>false</IsRequired>'
+					+'                    </Field>'
+				}*/
 				
 				else if(key ==="FieldLength 1" || key ==="FieldLength 2" || key ==="FieldLength 3"){
 					Utils.logInfo("field length "+ template[key] + " has been added to the OptionFieldSoapData");
@@ -681,8 +700,9 @@ export default class SfmcApiHelper
 			
 			Utils.logInfo("Request body after deletion: " + JSON.stringify(template));
 			
- soapData = headerSoapData + bodySoapData + sendableSoapData + orgIDSoapData + fieldSoapData + OptionFieldSoapData + endSoapData;	    
-	    
+ soapData = headerSoapData + bodySoapData + sendableSoapData + orgIDSoapData + fieldSoapData + OptionFieldSoapData + endSoapData;	
+ 
+	    Utils.logInfo("Soap data before the data extension creation call\n " + soapData);
         return new Promise<any>((resolve, reject) =>
         {
 				
@@ -741,7 +761,7 @@ export default class SfmcApiHelper
 			})*/
 			.catch((error: any) => {
                 // error
-                let errorMsg = "Error loading sample data. POST response from Marketing Cloud:";
+                let errorMsg = "Error Creating data extension dynamically using soap format";
                 errorMsg += "\nMessage: " + error.message;
                 errorMsg += "\nStatus: " + error.response ? error.response.status : "<None>";
                 errorMsg += "\nResponse data: " + error.response.data ? Utils.prettyPrintJson(JSON.stringify(error.response.data)) : "<None>";
@@ -792,5 +812,10 @@ export default class SfmcApiHelper
 			
 		});
 	}*/
-        
-    }
+	
+	/*public logout() 
+	{
+                response.redirect('https://mc.s11.exacttarget.com/');
+				})
+    }*/
+}
