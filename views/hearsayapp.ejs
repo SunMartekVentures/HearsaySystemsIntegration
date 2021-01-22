@@ -89,11 +89,12 @@
 		}
         function SecondPageHeader(){
             return (
-                <div class="row epaddingbottom10">
-                    <div class="col-md-11">
-                        <label class='e1labelheaderPage1'>Create Data Template</label>
+                <div class="row epaddingbottom10 e1marginleft">
+                  <div class="col-md-4"><label class='e1labelheaderPage1'>Create Data Template</label></div>
+                    <div class="col-md-7">
+                        
                     </div>
-                    <div class="col-md-1"></div>
+                    
                 </div>
 
             );
@@ -147,24 +148,17 @@
             }
             else if(controlname=="temp1" || controlname=="temp2" || controlname=="temp3")
             {
-
               if(controlname=="temp1"){
                 return (
-                        <select disabled name={controlname} value={controlvalue} onChange={handler} class='e1inputdd col-md-11'>
-                          <option value={customoption}>{customoption}</option>
-                        </select>
+                  <input disabled class="e1inputpg2 txtbox"  name={controlname} type="text" maxlength="30"  value={customoption}/>
                       );
               } else if(controlname=="temp2"){
                 return (
-                        <select disabled name={controlname} value={controlvalue} onChange={handler} class='e1inputdd col-md-11'>
-                          <option value="Name">Name</option>
-                        </select>
+                  <input disabled class="e1inputpg2 txtbox"  name={controlname} type="text" maxlength="30"  value="Name"/>
                       );
               }else if(controlname=="temp3"){
                 return (
-                        <select disabled name={controlname} value={controlvalue} onChange={handler} class='e1inputdd col-md-11'>
-                          <option value="Phone">Phone</option>
-                        </select>
+                  <input disabled class="e1inputpg2 txtbox"  name={controlname} type="text" maxlength="30"  value="Phone"/>
                       );
               }
             }
@@ -184,7 +178,7 @@
         function SecondPageTemplateNameControl(controlname,controlvalue,handler){
           
             return (
-                <input class='e1inputpg2' placeholder='Enter Template name'   name={controlname} value={controlvalue} onChange={handler} type="text" maxlength="30" />
+                <input class='e1inputpg2 txtbox' placeholder='Enter Template name'   name={controlname} value={controlvalue} onChange={handler} type="text" maxlength="30" />
             );
         }
 
@@ -193,7 +187,7 @@
 let sPageHeader="";
 let scontrol1 = "";
 let scontrol2 = "";
-let sclass1="col-md-1 aligncen";
+let sclass1="col-md-2 aligncen";
 let sclass2="col-md-4";
 if(rowpos==1){
     sPageHeader=SecondPageHeader();
@@ -234,7 +228,7 @@ return (
         let sPageHeader="";
         let scontrol1 = "";
         let scontrol2 = "";
-		let sclass1="col-md-1 aligncen";
+		let sclass1="col-md-2 aligncen";
 		let sclass2="col-md-4";
         if(rowpos==1){
             sPageHeader=SecondPageHeader();
@@ -254,11 +248,11 @@ var divClass=(label1name=="Template Name")?"row epaddingbottom10 e1marginleft":"
 
 if(label1name=="Template Name"){
   return (
-            <div>
+            <div class="marginBottom12px">
                 {sPageHeader}
                 <div class={divClass}>
-                    <div class="col-md-1">
-                        <label style={{"font-size":"10px"}} class='e1labelheaderPage2'>{label1name}</label>
+                    <div class="col-md-2">
+                        <label class='e1labelheaderPage2'>{label1name}</label>
                     </div>
                     <div class="col-md-4">
                         {scontrol1}
@@ -269,7 +263,7 @@ if(label1name=="Template Name"){
         
 } else{
   return (
-            <div>
+            <div class="marginBottom12px">
                 {sPageHeader}
                 <div class={divClass}>
                     <div class={sclass1}>
@@ -278,7 +272,7 @@ if(label1name=="Template Name"){
                     <div class={sclass2}>
                         {scontrol1}
                     </div>
-                    <div class="col-md-1 ">
+                    <div class="col-md-2 aligncen">
                         <label class='e1labelheaderPage2'>{label2name}</label>
                     </div>
                     <div class="col-md-4 ">
@@ -330,14 +324,14 @@ if(label1name=="Template Name"){
           return (
 
         <div class={divcssclass}>
-            <div class="col-md-1">
+            <div class="col-md-2 aligncen">
                 <label class="e1labelheaderPage1">{noOfField}</label>
             </div>
             <div class="col-md-1">
                 <label class="e1labelheaderPage1">Field</label>
             </div>
-            <div class="col-md-3">
-                <input disabled={inputdisabled} class='e1input3' name={fieldLabelControlName} value={fieldLabelControlValue} onChange={handler} type="text" maxlength="30" />
+            <div class="col-md-2">
+                <input disabled={inputdisabled} class='e1input3 txtbox' name={fieldLabelControlName} value={fieldLabelControlValue} onChange={handler} type="text" maxlength="30" />
             </div>
             <div class="col-md-1">
                 <label class="e1labelheaderPage1">Type</label>
@@ -359,7 +353,7 @@ if(label1name=="Template Name"){
                 <label class="e1labelheaderPage1 emarginleft10">Size</label>
             </div>
             <div class="col-md-1">
-                <input disabled={inputdisabled} class="e1input120" name={lengthControlName} value={lengthControlValue} type="text" onChange={handler} maxlength="5"/>
+                <input disabled={inputdisabled} class="e1input120 txtbox" name={lengthControlName} value={lengthControlValue} type="text" onChange={handler} maxlength="5"/>
             </div>
             <div class="col-md-2">
                 <button name={btnName} onClick={FieldObjectHandler} class="btn btn-primary btn-xs e1buttonleftpadding " style={{"margin-top":"1px"}}>{buttonlabel}</button>
@@ -374,7 +368,7 @@ if(label1name=="Template Name"){
 
         function AddDigitInCircle(number){
 		let cssclass='Roundedbadge';
-		if(number==10){cssclass='Roundedbadge10'}
+		if(number>=10){cssclass='Roundedbadge10'}
 
         return (
           <span class={cssclass} aria-hidden="true">{number}</span>
@@ -943,12 +937,12 @@ axios({
 
           } else if(this.state.page==2){
 
-			/*if(this.state.temp2text !="Email" && this.state.temp3text !="Email" && this.state.temp4text !="Email" && this.state.temp5text !="Email" && this.state.temp6text !="Email" && this.state.temp7text !="Email"){
+			if(this.state.temp2text !="Email" && this.state.temp3text !="Email" && this.state.temp4text !="Email" && this.state.temp5text !="Email" && this.state.temp6text !="Email" && this.state.temp7text !="Email"){
 	     console.log('inside a first condition');
 	      ValidationStatus=false;
 		  //alert('Email Field is mandatory.');
               ReactDOM.render(<p style={{color: "red"}}>Email Field is mandatory.</p>, document.getElementById('valMsgPageTwo'));
-	    }*/
+	    }
 			if(this.state.templatename==""){
               ValidationStatus=false;
               ReactDOM.render(<p style={{color: "red"}}>Template name is mandatory.</p>, document.getElementById('valMsgPageTwo'));
@@ -1634,7 +1628,7 @@ axios({
                     <div class="row epaddingbottom10">
                         <div class="col-md-11 elRowPg1">
                             <label class='e1labelheaderPage1 e1margintop10'>Hearsay Org ID</label>
-                            <input name='orgid' value={this.state.orgid} placeholder='Enter Hearsay Organization ID' class='e1inputpg1' maxlength='40' onChange={this.myChangeHandler} />
+                            <input name='orgid' value={this.state.orgid} placeholder='Enter Hearsay Organization ID' class='e1inputpg1 txtbox' maxlength='40' onChange={this.myChangeHandler} />
                             <span id="valMsgOrgId"></span>
                         </div>
                         <div class="col-md-1"></div>
@@ -1658,7 +1652,7 @@ axios({
                   <div class="row epaddingbottom10">
                         <div class="col-md-11 elRowPg1">
                             <label class='e1labelheaderPage1 e1margintop10'>Customer Unique ID</label>
-                            <input name='customeruniqueid' value={this.state.customeruniqueid} placeholder='Enter Customer Unique ID' class='e1inputpg1' maxlength='40' onChange={this.myChangeHandler} />
+                            <input name='customeruniqueid' value={this.state.customeruniqueid} placeholder='Enter Customer Unique ID' class='e1inputpg1 txtbox' maxlength='40' onChange={this.myChangeHandler} />
                             <span id="spncustomeruniqueid"></span>
                         </div>
                         <div class="col-md-1"></div>
@@ -1685,8 +1679,8 @@ axios({
                   
                   
 <div class="row e1marginleft">
-  <div class="col-sm-1"></div>
-  <div class="col-sm-11"><label class="e1pageheader_14px">Optional Fields</label></div>
+  <div class="col-sm-2"></div>
+  <div class="col-sm-10"><label class="e1pageheader_14px">Optional Fields</label></div>
   </div>
 
                     
@@ -1698,8 +1692,8 @@ axios({
 
         
         <div class="row e1marginleft ">
-        <div class="col-sm-1"></div>
-        <div class="col-sm-11"><label class="e1pageheader_14px" style={{"padding-bottom":"10px"}}>Other Fields</label></div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-10"><label class="e1pageheader_14px">Other Fields</label></div>
         </div>
 				  {AddCustomFieldBlock('temp8FieldLabel','temp8DataType','temp8Length','temp8Button' ,this.state.temp8FieldLabel, this.state.temp8DataType, this.state.temp8Length,this.myChangeHandler, this.updateCustomFieldObject,this.state.Field8Css, this.state.temp8label, this.state.LenthFld8CSS,this.state.temp8ButtonLabel,'temp8clear',this.state.Field8Disabled)}
 				  {AddCustomFieldBlock('temp9FieldLabel','temp9DataType','temp9Length','temp9Button' ,this.state.temp9FieldLabel, this.state.temp9DataType, this.state.temp9Length,this.myChangeHandler, this.updateCustomFieldObject,this.state.Field9Css, this.state.temp9label, this.state.LenthFld9CSS,this.state.temp9ButtonLabel,'temp9clear',this.state.Field9Disabled)}
@@ -1710,9 +1704,13 @@ axios({
 
 
                   <div class='row epaddingbottom10 e1marginleft'>
-                    <div class='col-md-1'></div>
-                      <div class='col-md-11'>
-                          <button onClick={this.handleNewFieldClick} class='btn btn-link e1butonfontsize float-left  emargintop10 btn-xs'> + </button> <label class='e1labelheaderPage2 addNewBtn'>Add New Field</label>
+                    <div class='col-md-2'></div>
+                      <div class='col-md-10'>
+                        <div class="row">
+                          <div class="col-sm-12">
+                            <button onClick={this.handleNewFieldClick} class='btn btn-link e1butonfontsize float-left  emargintop10 btn-xs'> + </button> <label class='e1labelheaderPage2 addNewBtn'>Add New Field</label>
+                          </div>
+                        </div>
                       </div>
 
 
@@ -1738,7 +1736,7 @@ axios({
                 {PageNavigation(3, this.redirectFromWizardSteps)}
                 {AddLogorow()}
                 <div class='e1container'>
-                    <div class="row epaddingbottom10 e1marginleft emargintop10">
+                    <div class="row e1marginleft emargintop10">
                         <div class="col-md-11">
                             <label class='e1labelheaderPage3'>HEARSAY ORG ID</label>
                         </div>
@@ -1752,7 +1750,7 @@ axios({
                         <div class="col-md-1"></div>
                     </div>
 
-					<div class="row epaddingbottom10 e1marginleft emargintop24">
+					<div class="row  e1marginleft emargintop10">
                         <div class="col-md-11">
                             <label class='e1labelheaderPage3'>HEARSAY USER REFERENCE ID</label>
                         </div>
@@ -1765,7 +1763,7 @@ axios({
                         </div>
                         <div class="col-md-1"></div>
                     </div>
-                    <div class="row epaddingbottom10 e1marginleft emargintop24">
+                    <div class="row  e1marginleft emargintop10">
                         <div class="col-md-11">
                             <label class='e1labelheaderPage3'>Customer Unique ID</label>
                         </div>
@@ -1778,7 +1776,7 @@ axios({
                         </div>
                         <div class="col-md-1"></div>
                     </div>
-					<div class="row epaddingbottom10 e1marginleft emargintop24">
+					<div class="row  e1marginleft emargintop10">
                         <div class="col-md-11">
                             <label class='e1labelheaderPage3'>DATA EXTENSION TEMPLATE (NEW)</label>
                         </div>
