@@ -974,6 +974,9 @@ axios({
 					console.log("ValidationStatus = false" + responseXML);
 					
 					var para = document.createElement("p");
+					var att = document.createAttribute("style");       // Create a "class" attribute
+					att.value = "color : 'red'";                           // Set the value of the class attribute
+					h1.setAttributeNode(att);
 					var node = document.createTextNode("Template Name already exists.");
 					para.appendChild(node);
 
