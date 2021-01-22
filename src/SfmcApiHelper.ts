@@ -89,7 +89,7 @@ export default class SfmcApiHelper
             axios.post(sfmcAuthServiceApiUrl, postBody, {"headers" : headers})            
             .then((response : any) => {
                 // success
-                Utils.logInfo("Success, got auth token from MC..." + Utils.prettyPrintJson(JSON.stringify(response.data));
+                Utils.logInfo("Success, got auth token from MC..." + Utils.prettyPrintJson(JSON.stringify(response.data)));
                 let accessToken = response.data.access_token;
                 Utils.logInfo("oauth token..." + accessToken);
                 let bearer = response.data.token_type;
