@@ -21,6 +21,8 @@ export default class SfmcApiHelper
 	private isValidated = '';
 	//private xmlDoc = '';
 	private ValidateResponse = '';
+	private soap_instance_url ='';
+	private rest_instance_url = '';
     
     
     /**
@@ -98,9 +100,11 @@ export default class SfmcApiHelper
                 Utils.logInfo("tokenExpiry..." + tokenExpiry);
                 
 				this._oauthToken = response.data.access_token;
-				Utils.logInfo("Storing the accesstoken in a object's variable "+ this._oauthToken);
-                //tokenExpiry.setSeconds(tokenExpiry.getSeconds() + response.data.expires_in);
-                Utils.logInfo("Got OAuth token: " + accessToken + ", expires = " +  tokenExpiry);
+				Utils.logInfo("Storing the accesstoken in a object's variable "+ this._oauthToken+"\n");
+				this.soap_instance_url = response.data.soap_instance_url;
+				Utils.logInfo("Storing the Soap URL in a object's variable "+ this.soap_instance_url+"\n");
+                this.rest_instance_url = response.data.rest_instance_url;
+				Utils.logInfo("Storing the Rest URL in a object's variable "+ this.rest_instance_url+"\n");
 
                 resolve(
                 {
