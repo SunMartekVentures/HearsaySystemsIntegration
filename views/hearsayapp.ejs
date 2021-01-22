@@ -577,6 +577,20 @@ if(label1name=="Template Name"){
 
         }
 		
+		function dataExtensionFolderCheck(jsonObject){
+			
+			axios({
+			          method: 'POST',
+			          url: 'https://hearsaydataextension.herokuapp.com/dataextensionfoldercheck',
+			           //data: jsonObject,
+			          //headers: {'Content-Type': 'application/json' }
+                })
+                  .then(function (response) {	
+					console.log(response.data);	
+					//loaddata(jsonObject);
+                  });
+		}
+		
 		function loaddata(jsonObject){
 	console.log("load data function called");
 	
@@ -744,6 +758,20 @@ axios({
         }
 
         componentDidMount() {
+			
+			 console.log("Before axios");	    
+	    axios({
+			          method: 'POST',
+			          url: 'https://hearsaydataextension.herokuapp.com/appdemoauthtoken', 
+			          
+			          //headers: {'Content-Type': 'application/json' }
+                })
+                  .then(function (response) {		  				
+					console.log("authentication token obtained");
+                  })
+				  .catch(function (error) {
+					console.log(error);
+					});
 
         }
 
@@ -873,26 +901,10 @@ axios({
 						
                     }
                 }                   
-            ];            
-	    
-	    console.log("Before axios");	    
-	    axios({
-			          method: 'POST',
-			          url: 'https://hearsaydataextension.herokuapp.com/appdemoauthtoken', 
-			          
-			          //headers: {'Content-Type': 'application/json' }
-                })
-                  .then(function (response) {		  
-					var responseData = response.data;
-					//getCategoryIDforApp(jsonObject);
-					loaddata(jsonObject);
-					//console.log("Before createDE function ");					
-					console.log("authentication token obtained and row has been created");
-		  
-                  })
-				  .catch(function (error) {
-					console.log(error);
-					});
+            ]; 
+
+			dataExtensionFolderCheck(jsonObject);
+			//loaddata();
 		  }
 		  
 		 
