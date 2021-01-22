@@ -86,7 +86,7 @@ export default class SfmcAppDemoRoutes
         //return res.redirect('https://mc.s11.exacttarget.com/'); // accepted
 	    let self = this;
         Utils.logInfo("Logout");
-        //self._apiHelper.logout();
+        //self._apiHelper.logout(req, res);
     }
 
     /**
@@ -173,4 +173,10 @@ export default class SfmcAppDemoRoutes
         self._apiHelper.createDataExtension(req, res);
 		Utils.logInfo("Request Body." + req);
     }
+	
+	public DataExtensionFolderCheck(req: express.Request, res: express.Response){
+		let self = this;
+        Utils.logInfo("Checking the data extension folder and Data extension is available or not.");
+        self._apiHelper.DataExtensionFolderCheck(req, res);
+	}
 }
