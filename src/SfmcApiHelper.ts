@@ -128,7 +128,9 @@ export default class SfmcApiHelper
     }
 	
 	public DataExtensionFolderCheck(req: express.Request, res: express.Response){
-		Utils.logInfo("Get Category Method: " + this._oauthToken);
+		Utils.logInfo("DataExtensionFolderCheck Method: " + this._oauthToken);
+		res.status(200).send("The The The Tha Tha Tha The The The");
+		
 	}
 	
 	public getCategoryID(req: express.Request, res: express.Response)
@@ -608,22 +610,15 @@ export default class SfmcApiHelper
 				}
 				else if(template[key] ==="Email"){
 					Utils.logInfo("field name "+ template[key] + " has been added to the soapData");
-					sendableSoapData += '<SendableDataExtensionField>'
-+'                    <CustomerKey>'+template[key]+'</CustomerKey>'
-+'                    <Name>'+template[key]+'</Name>'
-+'                    <FieldType>EmailAddress</FieldType>'
-+'                </SendableDataExtensionField>'
-+'                <SendableSubscriberField>'
-+'                    <Name>Subscriber Key</Name>'
-+'                    <Value>'+template[key]+'</Value>'
-+'                </SendableSubscriberField>'
-+'                <Fields>'
-+'					<Field>'
+					else{
+					fieldSoapData +='<Field>'
 +'                        <Name>'+template[key]+'</Name>'
 +'                        <FieldType>EmailAddress</FieldType>'
 +'                        <MaxLength>254</MaxLength>'
-+'                        <IsRequired>true</IsRequired>'
++'                        <IsRequired>false</IsRequired>'
 +'                    </Field>'
+				}	
+					
 				}
 				else if(template[key] ==="Birth Date"){
 					Utils.logInfo("field name Birth Date of "+key+"has been added to the soapData");
@@ -652,9 +647,20 @@ export default class SfmcApiHelper
 				}
 				else if(key ==="Customer Unique ID"){
 					Utils.logInfo("field name "+ template[key] + " has been added to the soapData");
-					fieldSoapData +='<Field>'
+					sendableSoapData += '<SendableDataExtensionField>'
++'                    <CustomerKey>'+template[key]+'</CustomerKey>'
++'                    <Name>'+template[key]+'</Name>'
++'                    <FieldType>EmailAddress</FieldType>'
++'                </SendableDataExtensionField>'
++'                <SendableSubscriberField>'
++'                    <Name>Subscriber Key</Name>'
++'                    <Value>'+template[key]+'</Value>'
++'                </SendableSubscriberField>'
++'                <Fields>'
++'					<Field>'
 +'                        <Name>'+template[key]+'</Name>'
-+'                        <FieldType>Text</FieldType>'
++'                        <FieldType>EmailAddress</FieldType>'
++'                        <MaxLength>254</MaxLength>'
 +'                        <IsRequired>true</IsRequired>'
 +'                    </Field>'
 				}
