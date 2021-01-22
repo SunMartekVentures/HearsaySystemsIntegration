@@ -71,12 +71,14 @@ body {
 }
 
 .e1pageheader_14px{
-  padding-left:10px;
-  padding-bottom:7px;
-  font-weight:bold ;
-  font-size:13px;
-  letter-spacing:1px;
-  margin-top: 5px;
+  /* padding-left: 10px; */
+    padding-bottom: 0px;
+    padding-top: 10px;
+    font-weight: bold;
+    font-size: 13px;
+    letter-spacing: 1px;
+    padding-left: 4px;
+    /* margin-top: 5px; */
 }
 
 paddingBottom15px{
@@ -110,7 +112,7 @@ paddingTop10px{
 }
 
 .e1labelheader{
-  
+
   /* font-weight:bold ; */
   font-size:13px;
   letter-spacing:1px;
@@ -150,13 +152,17 @@ paddingTop10px{
   margin-bottom: 40px;
 }
 
+.marginBottom12px{
+ margin-bottom: 12px;
+}
+
 .e1labelheader2{
-  
+
   /* font-weight:bold ; */
   font-size:13px;
   letter-spacing:1px;
   margin-top: 10px;
-  
+
 }
 
 .e1labelvalue{
@@ -175,13 +181,13 @@ paddingTop10px{
     }
 
 .e1inputdd {
-    padding-bottom: 0px;
-    padding-left: 4px;
-    margin-top: 10px;
-    width: 220px;
-    border-radius: 6px;
-    margin-left: 2px;
-    height:26px;
+  padding-bottom: 0px;
+  padding-left: 4px;
+  margin-top: 5px;
+  width: 220px;
+  border-radius: 6px;
+  margin-left: 2px;
+  height: 26px;
 }
 
 
@@ -211,32 +217,43 @@ paddingTop10px{
         margin-top: 12px;
         height: 26px;
         /* margin-left: 50px; */
+
+
+    }
+    .txtbox{
+      border-left-width: 1px;
+        border-top-width: 1px;
+        border-right-width: 1px;
+        border-bottom-width: 1px;
+        border-left-color: #eeeeee !important;
+        border-top-color: #eeeeee !important;
+
     }
     .e1inputpg2:hover {
       color: #495057;
-      background-color: #fff;
+      /* background-color: #fff; */
       border-color: #80bdff;
       outline: 0;
       box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
     }
     .e1input3:hover{
       color: #495057;
-      background-color: #fff;
+      /* background-color: #fff; */
       border-color: #80bdff;
       outline: 0;
       box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
-	  
+
     }
     .e1inputddsmall:hover{
       color: #495057;
-      background-color: #fff;
+      /* background-color: #fff; */
       border-color: #80bdff;
       outline: 0;
       box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
     }
     .e1input120:hover{
       color: #495057;
-      background-color: #fff;
+      /* background-color: #fff; */
       border-color: #80bdff;
       outline: 0;
       box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
@@ -263,7 +280,7 @@ paddingTop10px{
         padding-top: 4px;
         border-radius: 6px;
         /* margin-left: 20px; */
-        width: 150px;
+        width: 130px;
         border-color: #c0c0c0 !important;
     }
 
@@ -312,14 +329,14 @@ paddingTop10px{
 .rectangle {
     height: 45px;
     /* width: 185px; */
-    background-color: #4BCA81; 
+    background-color: #4BCA81;
   }
   .rectangle-unselected {
     height: 45px;
     /* width: 185px; */
     background-color:#1E67B7;
   }
-  
+
   .rect-first-step{
       width: 185px;
   }
@@ -329,12 +346,12 @@ paddingTop10px{
   .rect-third-step{
       width: 120px;
   }
-  
+
   .triangle-right {
       width: 0;
       height: 0;
       border-top: 22px solid transparent;
-      border-left: 20px solid #4BCA81; 
+      border-left: 20px solid #4BCA81;
       border-bottom: 23px solid transparent;
   }
   .triangle-right-unselected {
@@ -362,7 +379,7 @@ paddingTop10px{
       width: 0;
       height: 0;
       border-top: 22px solid transparent;
-      border-left: 20px solid #4BCA81; 
+      border-left: 20px solid #4BCA81;
       border-bottom: 23px solid transparent;
   }
   .triangle-right-inverted-first-unselected{
@@ -372,14 +389,14 @@ paddingTop10px{
       border-left: 20px solid #1E67B7;
       border-bottom: 23px solid transparent;
   }
-  
+
   .div{
       display:flex;
   }
   .divWizardHead{
       background-color: #a8b9d0;
   }
-  
+
   .triangle-right-cover-unselected{
       background-color: #a8b9d0;
   }
@@ -399,28 +416,28 @@ paddingTop10px{
       height: 45px;
   }
   .triangle-right-cover-green{
-      background-color: #4BCA81; 
+      background-color: #4BCA81;
   }
   .triangle-right-unselected-cover{
       background-color: #1E67B7;
   }
   .triangle-right-cover-first{
-      background-color: #4BCA81; 
+      background-color: #4BCA81;
   }
   .triangle-right-cover-first-unselected{
       background-color:  #1E67B7;
   }
   .triangle-right-inverted-cover{
-      background-color:   #4BCA81; 
+      background-color:   #4BCA81;
   }
   .triangle-right-inverted-cover-unselected{
       background-color:   #1E67B7;
   }
   .triangle-right-inverted-cover-unselected-green{
-      background-color:   #4BCA81; 
+      background-color:   #4BCA81;
   }
   .triangle-right-inverted-cover-first{
-      background-color:   #4BCA81; 
+      background-color:   #4BCA81;
       height: 45px;
   }
   .triangle-right-inverted-cover-first-unselected{
@@ -437,10 +454,10 @@ paddingTop10px{
     .greenbgcolor3 {
         background-color: #4BCA81;
     }
-	
+
     .greenbgcolor4 {
         background-color: #1E67B7;
-    }	
+    }
 
     .greenbgcolor2 {
         content: 'fa fa-check-circle';
@@ -480,13 +497,13 @@ paddingTop10px{
       background-color: #fff;
       border-radius: 5px;
   }
-  
+
   .btn-primary {
     background-color: #fff;
     border: 1px solid #0069d9;
     color: #0069d9;
   }
-  
+
   .btn-primary:hover {
     background-color:#e6e6e6;
     border: 1px solid #0056b3;
@@ -502,8 +519,8 @@ paddingTop10px{
     border: 1px solid #0056b3;
     color: #0056b3;
   }
-  
-  
+
+
   .btn-xs {
     padding: 3px 10px;
     font-size: 11px;
@@ -517,9 +534,9 @@ paddingTop10px{
     margin-left: 30px;
   }
 
-  /* .aligncen{
+  .aligncen{
     text-align: center;
-  } */
+  }
     .e1marginleft {
         margin-left: 10px;
     }
@@ -542,7 +559,7 @@ paddingTop10px{
     margin-left:14px;
   }
   label {
-      
+
       margin-bottom: 0px;
   }
 
@@ -616,23 +633,23 @@ paddingTop10px{
     padding-right: 5px;
     padding-bottom: 2px;
     }
-	
+
 	    .Roundedbadge10{
-      border-radius: 50%;
-    width: 22px;
-    height: 28px;
-    /* padding: 5px; */
-    background: #fff;
-    border: 2px solid #666;
-    color: #666;
-    text-align: center;
-    size: 18px;
-    margin-top: 15px;
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-bottom: 2px;
+        border-radius: 50%;
+        width: 22px;
+        height: 28px;
+        /* padding: 5px; */
+        background: #fff;
+        border: 2px solid #666;
+        color: #666;
+        text-align: center;
+        size: 18px;
+        margin-top: 15px;
+        padding-left: 4px;
+        padding-right: 3px;
+        padding-bottom: 2px;
     }
-	
+
     .valMessage{
       color: red;
     }
@@ -647,12 +664,12 @@ paddingTop10px{
       font-family: -1apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
 	  letter-spacing:0.2px;
     }
-	
+
     .polygonStyleSelected{
       fill: #4BCA81;
       stroke: #AEB5BE;
       stroke-width: 1;
-      
+
     }
     .polygonStyleUnselected{
       fill: #1E67B7;
@@ -709,11 +726,11 @@ paddingTop10px{
       margin-top: 12px;
     }
     .CompletedHr{
-      position: relative; 
+      position: relative;
             /* top: 20px;  */
-            border: none; 
-            height: 3px; 
-            background: #8cc0f6; 
+            border: none;
+            height: 3px;
+            background: #8cc0f6;
             /* margin-bottom: 50px;  */
             width: 47%;
     }
@@ -722,7 +739,7 @@ paddingTop10px{
     }
     .clsIcon{
       margin-top: 10px;
-      
+
     }
     /* .clsIcon:hover{
       box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
@@ -739,11 +756,11 @@ paddingTop10px{
       color: #d9d9d9;
     }
     .incompletedHr{
-      position: relative; 
+      position: relative;
             /* top: 20px;  */
-            border: none; 
-            height: 3px; 
-            background: #d9d9d9; 
+            border: none;
+            height: 3px;
+            background: #d9d9d9;
             /* margin-bottom: 50px;  */
             width: 47%;
       /* color: #d9d9d9; */
