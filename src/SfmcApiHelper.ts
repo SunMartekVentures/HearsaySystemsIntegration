@@ -9,7 +9,7 @@ export default class SfmcApiHelper
 {
     // Instance variables 
     private _deExternalKey = "Org_Setup";
-    private _sfmcDataExtensionApiUrl = "https://mc4f63jqqhfc51yw6d1h0n1ns1-m.rest.marketingcloudapis.com/hub/v1/dataevents/key:" + this._deExternalKey + "/rowset";
+    
     private _oauthToken = "";
 	private FolderID='';
 	private ParentFolderID = '';
@@ -372,6 +372,7 @@ export default class SfmcApiHelper
     private loadDataHelper(oauthAccessToken: string, jsonData: string) : Promise<any>    
     {
         let self = this;
+		private _sfmcDataExtensionApiUrl = this.rest_instance_url + "/hub/v1/dataevents/key:" + this._deExternalKey + "/rowset";
         Utils.logInfo("loadDataHelper called.");
         Utils.logInfo("Loading sample data into Data Extension: " + self._deExternalKey);
         Utils.logInfo("Using OAuth token: " + this._oauthToken);
