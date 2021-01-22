@@ -127,6 +127,10 @@ export default class SfmcApiHelper
         });
     }
 	
+	public DataExtensionFolderCheck(req: express.Request, res: express.Response){
+		Utils.logInfo("Get Category Method: " + this._oauthToken);
+	}
+	
 	public getCategoryID(req: express.Request, res: express.Response)
     {
 		Utils.logInfo("Get Category Method: " + this._oauthToken);
