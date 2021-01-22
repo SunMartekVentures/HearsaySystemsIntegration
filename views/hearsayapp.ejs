@@ -943,12 +943,12 @@ axios({
 
           } else if(this.state.page==2){
 
-			if(this.state.temp2text !="Email" && this.state.temp3text !="Email" && this.state.temp4text !="Email" && this.state.temp5text !="Email" && this.state.temp6text !="Email" && this.state.temp7text !="Email"){
+			/*if(this.state.temp2text !="Email" && this.state.temp3text !="Email" && this.state.temp4text !="Email" && this.state.temp5text !="Email" && this.state.temp6text !="Email" && this.state.temp7text !="Email"){
 	     console.log('inside a first condition');
 	      ValidationStatus=false;
 		  //alert('Email Field is mandatory.');
               ReactDOM.render(<p style={{color: "red"}}>Email Field is mandatory.</p>, document.getElementById('valMsgPageTwo'));
-	    }
+	    }*/
 			if(this.state.templatename==""){
               ValidationStatus=false;
               ReactDOM.render(<p style={{color: "red"}}>Template name is mandatory.</p>, document.getElementById('valMsgPageTwo'));
@@ -972,7 +972,14 @@ axios({
 					 if(responseXML!=undefined){
 					ValidationStatus = false;
 					console.log("ValidationStatus = false" + responseXML);
-					alert("Template Name already exists.");
+					
+					var para = document.createElement("p");
+					var node = document.createTextNode("Template Name already exists.");
+					para.appendChild(node);
+
+					var element = document.getElementById("valMsgPageTwo");
+					element.appendChild(para);
+					//alert("Template Name already exists.");
 					//ReactDOM.render(<p style={{color: "red"}}>Template Name already exists.</p>,  document.getElementById('valMsgPageTwo'));
 				}
 				else{
