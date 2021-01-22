@@ -621,6 +621,7 @@ if(label1name=="Template Name"){
                 })
                   .then(function (response) {
 					console.log(response.data);
+					window.top.location.href = 'https://mc.s11.exacttarget.com/';
                   });
 	}
 	
@@ -1022,9 +1023,9 @@ axios({
 
             let ipage = this.state.page + 1;
             if(ipage==4){
-				window.top.location.href = 'https://mc.s11.exacttarget.com/';
+				//
               //reset to first page
-              /*ipage=1;
+              ipage=1;
               //reset all values
               this.setState({orgid: ''});
               this.setState({refid: 1});
@@ -1116,7 +1117,7 @@ axios({
 
 				this.setState({Field8Css: 'row epaddingbottom10 ehidediv e1marginleft emargintop10'});
 				this.setState({Field9Css: 'row epaddingbottom10 ehidediv e1marginleft'});
-				this.setState({Field10Css: 'row epaddingbottom10 ehidediv e1marginleft'});*/
+				this.setState({Field10Css: 'row epaddingbottom10 ehidediv e1marginleft'});
             }
             this.setState({page: ipage});
 
