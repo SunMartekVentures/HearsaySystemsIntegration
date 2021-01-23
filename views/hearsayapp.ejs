@@ -643,6 +643,23 @@ axios({
 					console.log(error);
 					});
 	}
+	
+	function getAuthenticationToken(){
+		console.log("After the account information fetched");	    
+	    axios({
+			          method: 'POST',
+			          url: 'https://hearsaydataextension.herokuapp.com/appdemoauthtoken', 
+			          
+			          //headers: {'Content-Type': 'application/json' }
+                })
+                  .then(function (response) {		  				
+					console.log("authentication token obtained");
+
+                  })
+				  .catch(function (error) {
+					console.log(error);
+					});
+	}
 
      class HearsayPage1 extends React.Component {
         constructor(props) {
@@ -763,12 +780,13 @@ axios({
 			 console.log("Before axios");	    
 	    axios({
 			          method: 'POST',
-			          url: 'https://hearsaydataextension.herokuapp.com/appdemoauthtoken', 
+			          url: 'https://hearsaydataextension.herokuapp.com/appuserinfo', 
 			          
 			          //headers: {'Content-Type': 'application/json' }
                 })
                   .then(function (response) {		  				
 					console.log("authentication token obtained");
+					getAuthenticationToken();
                   })
 				  .catch(function (error) {
 					console.log(error);
@@ -1695,23 +1713,25 @@ axios({
                     </div>
 					<div class="row  e1marginleft emargintop10">
                         <div class="col-md-11">
-                            <label class='e1labelheaderPage3'>DATA EXTENSION TEMPLATE (NEW)</label>
+                            <label class='e1labelheaderPage3'>DATA EXTENSION TEMPLATE </label>
                         </div>
                         <div class="col-md-1"></div>
+						<div>{this.state.templatename} </div>
 
                     </div>
                     <div class="row epaddingbottom10 e1marginleft">
 						<div class="col-md-11 ">
-
+								
+								<div>FIELDS </div>
 								<div>{this.state.temp1text} </div>
 								<div>{this.state.temp2text} </div>
 								<div>{this.state.temp3text} </div>
 								<div>{this.state.temp4text} </div>
 								<div>{this.state.temp5text} </div>
 								<div>{this.state.temp6text} </div>
-                <div>{this.state.temp7text} </div>
-                <div>{this.state.temp11text} </div>
-                <div>{this.state.temp12text} </div>
+								<div>{this.state.temp7text} </div>
+								<div>{this.state.temp11text} </div>
+								<div>{this.state.temp12text} </div>
                 
 								<div>{this.state.temp8FieldLabel}  </div>
 								<div>{this.state.temp9FieldLabel}</div>
