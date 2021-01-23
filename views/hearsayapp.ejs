@@ -785,7 +785,7 @@ axios({
 			          //headers: {'Content-Type': 'application/json' }
                 })
                   .then(function (response) {		  				
-					console.log("authentication token obtained");
+					console.log(response.data);
 					getAuthenticationToken();
                   })
 				  .catch(function (error) {
