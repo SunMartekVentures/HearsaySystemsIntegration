@@ -23,6 +23,7 @@ export default class SfmcApiHelper
 	private ValidateResponse = '';
 	private soap_instance_url ='';
 	private rest_instance_url = '';
+	private member_id = '';
     
     
     /**
@@ -101,10 +102,7 @@ export default class SfmcApiHelper
                 
 				this._oauthToken = response.data.access_token;
 				Utils.logInfo("Storing the accesstoken in a object's variable "+ this._oauthToken+"\n");
-				this.soap_instance_url = response.data.soap_instance_url;
-				Utils.logInfo("Storing the Soap URL in a object's variable "+ this.soap_instance_url+"\n");
-                this.rest_instance_url = response.data.rest_instance_url;
-				Utils.logInfo("Storing the Rest URL in a object's variable "+ this.rest_instance_url+"\n");
+				
 
                 resolve(
                 {
@@ -149,6 +147,11 @@ export default class SfmcApiHelper
                 // success
                 Utils.logInfo("User Information response Body : "+ Utils.prettyPrintJson(JSON.stringify(response.data)));
 				Utils.logInfo("Member ID of the Current Business Unit : "+ Utils.prettyPrintJson(JSON.stringify(response.data.organization.member_id)));
+				this.member_id = response.data.organization.member_id;
+				this.soap_instance_url = response.data.rest.soap_instance_url;
+				Utils.logInfo("Storing the Soap URL in a object's variable "+ this.soap_instance_url+"\n");
+                this.rest_instance_url = response.data.rest.rest_instance_url;
+				Utils.logInfo("Storing the Rest URL in a object's variable "+ this.rest_instance_url+"\n");
 				res.status(200).send(Utils.prettyPrintJson(JSON.stringify(response.data)));
             })
             .catch((error: any) => {
