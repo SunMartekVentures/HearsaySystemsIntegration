@@ -133,6 +133,12 @@ export default class SfmcApiHelper
 		
 	}
 	
+	public AppUserInfo(req: express.Request, res: express.Response){
+		Utils.logInfo("App User Information method called " + this._oauthToken);
+		res.status(200).send("AppUserInfo Method Successful a call aaiduchu da perapasangala");
+		
+	}
+	
 	public getCategoryID(req: express.Request, res: express.Response)
     {
 		Utils.logInfo("Get Category Method: " + this._oauthToken);
