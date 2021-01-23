@@ -644,17 +644,23 @@ axios({
 					});
 	}
 	
-	function getAuthenticationToken(){
-		console.log("After the account information fetched");	    
-	    axios({
+	/*function getAuthenticationToken(){
+			    
+	    
+	}*/
+	
+	function AppUserInfo(){
+		console.log("After the OAuth Token fetched");
+		
+		axios({
 			          method: 'POST',
-			          url: 'https://hearsaydataextension.herokuapp.com/appdemoauthtoken', 
+			          url: 'https://hearsaydataextension.herokuapp.com/appuserinfo', 
 			          
 			          //headers: {'Content-Type': 'application/json' }
                 })
                   .then(function (response) {		  				
-					console.log("authentication token obtained");
-
+					console.log("User information obtained" + response.data);
+					
                   })
 				  .catch(function (error) {
 					console.log(error);
@@ -777,20 +783,20 @@ axios({
 
         componentDidMount() {
 			
-			 console.log("Before axios");	    
-	    axios({
+				    axios({
 			          method: 'POST',
-			          url: 'https://hearsaydataextension.herokuapp.com/appuserinfo', 
+			          url: 'https://hearsaydataextension.herokuapp.com/appdemoauthtoken', 
 			          
 			          //headers: {'Content-Type': 'application/json' }
                 })
                   .then(function (response) {		  				
-					console.log(response.data);
-					getAuthenticationToken();
+					console.log("authentication token obtained");
+					AppUserInfo();
                   })
 				  .catch(function (error) {
 					console.log(error);
 					});
+	    
 
         }
 
