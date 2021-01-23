@@ -183,7 +183,7 @@ export default class SfmcApiHelper
 +'<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">'
 +'    <s:Header>'
 +'        <a:Action s:mustUnderstand="1">Retrieve</a:Action>'
-+'        <a:To s:mustUnderstand="1">https://mc4f63jqqhfc51yw6d1h0n1ns1-m.soap.marketingcloudapis.com/Service.asmx</a:To>'
++'        <a:To s:mustUnderstand="1">'+this.soap_instance_url+'Service.asmx'+'</a:To>'
 +'        <fueloauth xmlns="http://exacttarget.com">'+this._oauthToken+'</fueloauth>'
 +'    </s:Header>'
 +'    <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">'
@@ -204,7 +204,7 @@ export default class SfmcApiHelper
 			Utils.logInfo("Ahpppaaaddaa, Method call aaiduchu");
 			 axios({
 				method: 'post',
-				url: 'https://mc4f63jqqhfc51yw6d1h0n1ns1-m.soap.marketingcloudapis.com/Service.asmx',
+				url: ''+this.soap_instance_url+'Service.asmx'+'',
 				data: validateName,
 				headers: {'Content-Type': 'text/xml'}							
 				}) 
@@ -272,7 +272,7 @@ export default class SfmcApiHelper
 +'<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">'
 +'    <s:Header>'
 +'        <a:Action s:mustUnderstand="1">Retrieve</a:Action>'
-+'        <a:To s:mustUnderstand="1">https://mc4f63jqqhfc51yw6d1h0n1ns1-m.soap.marketingcloudapis.com/Service.asmx</a:To>'
++'        <a:To s:mustUnderstand="1">'+this.soap_instance_url+'Service.asmx'+'</a:To>'
 +'        <fueloauth xmlns="http://exacttarget.com">'+this._oauthToken+'</fueloauth>'
 +'    </s:Header>'
 +'    <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">'
@@ -304,7 +304,7 @@ export default class SfmcApiHelper
             // POST to Marketing Cloud Data Extension endpoint to load sample data in the POST body
             axios({
 				method: 'post',
-				url: 'https://mc4f63jqqhfc51yw6d1h0n1ns1-m.soap.marketingcloudapis.com/Service.asmx',
+				url: ''+this.soap_instance_url+'Service.asmx'+'',
 				data: soapMessage,
 				headers: {'Content-Type': 'text/xml'}							
 				})            
@@ -469,7 +469,7 @@ export default class SfmcApiHelper
             };
 
             // POST to Marketing Cloud Data Extension endpoint to load sample data in the POST body
-            axios.post("https://mc4f63jqqhfc51yw6d1h0n1ns1-m.rest.marketingcloudapis.com/hub/v1/dataevents/key:" + "Data_Extension_Template" + "/rowset", jsonData, {"headers" : headers})
+            axios.post(this.rest_instance_url+"/hub/v1/dataevents/key:" + "Data_Extension_Template" + "/rowset", jsonData, {"headers" : headers})
             .then((response: any) => {
                 // success
                 Utils.logInfo("Successfully loaded sample data into Data Extension!");
@@ -542,7 +542,7 @@ export default class SfmcApiHelper
 +'        <a:ReplyTo>'
 +'            <a:Address>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</a:Address>'
 +'        </a:ReplyTo>'
-+'        <a:To s:mustUnderstand="1">https://mc4f63jqqhfc51yw6d1h0n1ns1-m.soap.marketingcloudapis.com/Service.asmx</a:To>'
++'        <a:To s:mustUnderstand="1">'+this.soap_instance_url+'Service.asmx'+'</a:To>'
 +'        <fueloauth xmlns="http://exacttarget.com">'+oauthAccessToken+'</fueloauth>'
 +'    </s:Header>'
 +'    <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">'
@@ -729,7 +729,7 @@ export default class SfmcApiHelper
 				
 				axios({
 				method: 'post',
-				url: 'https://mc4f63jqqhfc51yw6d1h0n1ns1-m.soap.marketingcloudapis.com/Service.asmx',
+				url: this.soap_instance_url+'Service.asmx',
 				data: soapData,
 				headers: {'Content-Type': 'text/xml'}							
 				})            
