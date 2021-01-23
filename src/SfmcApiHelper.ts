@@ -147,7 +147,7 @@ export default class SfmcApiHelper
 		axios.get(userInfoUrl,{"headers" : headers})            
             .then((response : any) => {
                 // success
-                Utils.logInfo("User Information response Body : "+ JSON.stringify(response.data));
+                Utils.logInfo("User Information response Body : "+ Utils.prettyPrintJson(JSON.stringify(response.data)));
 				res.status(200).send(Utils.prettyPrintJson(JSON.stringify(response.data)));
             })
             .catch((error: any) => {
