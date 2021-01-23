@@ -145,7 +145,7 @@ export default class SfmcApiHelper
 		axios.get(userInfoUrl,{"headers" : headers})            
             .then((response : any) => {
                 // success
-                Utils.logInfo("User Information response Body : "+ Utils.prettyPrintJson(JSON.stringify(response.data)));
+                Utils.logInfo("User Information response Body : "+ JSON.stringify(response.data));
 				Utils.logInfo("Member ID of the Current Business Unit : "+ Utils.prettyPrintJson(JSON.stringify(response.data.organization.member_id)));
 				this.member_id = response.data.organization.member_id;
 				this.soap_instance_url = response.data.rest.soap_instance_url;
