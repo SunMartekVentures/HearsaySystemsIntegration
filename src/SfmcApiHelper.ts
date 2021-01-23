@@ -616,14 +616,13 @@ export default class SfmcApiHelper
 				}
 				else if(template[key] ==="Email"){
 					Utils.logInfo("field name "+ template[key] + " has been added to the soapData");
-					else{
+					
 					fieldSoapData +='<Field>'
 +'                        <Name>'+template[key]+'</Name>'
 +'                        <FieldType>EmailAddress</FieldType>'
 +'                        <MaxLength>254</MaxLength>'
 +'                        <IsRequired>false</IsRequired>'
-+'                    </Field>'
-				}	
++'                    </Field>'	
 					
 				}
 				else if(template[key] ==="Birth Date"){
