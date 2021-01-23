@@ -135,7 +135,32 @@ export default class SfmcApiHelper
 	
 	public AppUserInfo(req: express.Request, res: express.Response){
 		Utils.logInfo("App User Information method called " + this._oauthToken);
-		res.status(200).send("AppUserInfo Method Successful a call aaiduchu da perapasangala");
+		let self = this;
+		
+		let userInfoUrl = process.env.BASE_URL +"auth.marketingcloudapis.com/v2/userinfo";
+		
+		let headers = {
+            'Content-Type': 'application/json',
+			'Authorization': 'Bearer ' + this._oauthToken
+        };
+		
+		axios.get(userInfoUrl,{"headers" : headers})            
+            .then((response : any) => {
+                // success
+                Utils.logInfo("User Information response Body : "+ response.data);
+				res.status(200).send(Utils.prettyPrintJson(JSON.stringify(response.data)));
+            })
+            .catch((error: any) => {
+                // error
+                let errorMsg = "Error getting User's Information.";
+                errorMsg += "\nMessage: " + error.message;
+                errorMsg += "\nStatus: " + error.response ? error.response.status : "<None>";
+                errorMsg += "\nResponse data: " + error.response ? Utils.prettyPrintJson(JSON.stringify(error.response.data)) : "<None>";
+                Utils.logError(errorMsg);
+
+                res.status(500).send(Utils.prettyPrintJson(JSON.stringify(error.response.data)));
+            });
+		//res.status(200).send("AppUserInfo Method Successful a call aaiduchu da perapasangala");
 		
 	}
 	
@@ -173,7 +198,7 @@ export default class SfmcApiHelper
 			
 			//let headers = {
                 //'Content-Type': 'application/json',
-                //'Authorization': 'Bearer ' + this._oauthToken
+                //
             //};
 		
 		return new Promise<any>((resolve, reject) =>
