@@ -148,6 +148,7 @@ export default class SfmcApiHelper
             .then((response : any) => {
                 // success
                 Utils.logInfo("User Information response Body : "+ Utils.prettyPrintJson(JSON.stringify(response.data)));
+				Utils.logInfo("Member ID of the Current Business Unit : "+ Utils.prettyPrintJson(JSON.stringify(response.data.organization.member_id)));
 				res.status(200).send(Utils.prettyPrintJson(JSON.stringify(response.data)));
             })
             .catch((error: any) => {
