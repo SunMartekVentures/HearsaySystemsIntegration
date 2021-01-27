@@ -512,8 +512,7 @@ export default class SfmcApiHelper
 					
 						if(HearsayIntegrationsID!=undefined){
 							this.FolderID = HearsayIntegrationsID;
-							this.creatingDefaultDataExtensions();
-							
+							this.creatingDefaultDataExtensions();							
 						}
 				
 				});
@@ -600,8 +599,7 @@ export default class SfmcApiHelper
 		return new Promise<any>((resolve, reject) =>
 		{
 			let headers = {
-                'Content-Type': 'text/xml',
-                'SOAPAction': 'Create'
+                'Content-Type': 'text/xml'
             };
 
             // POST to Marketing Cloud Data Extension endpoint to load sample data in the POST body
