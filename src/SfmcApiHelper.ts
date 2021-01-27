@@ -456,7 +456,6 @@ export default class SfmcApiHelper
 		
 		let createFolderData = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">'
                                  +'<soapenv:Header>'
-								 +'        <a:Action s:mustUnderstand="1">Create</a:Action>'
                                  +'<fueloauth>'+this._oauthToken+'</fueloauth>'
                                  +'</soapenv:Header>'
                                  +'<soapenv:Body>'
@@ -494,7 +493,7 @@ export default class SfmcApiHelper
 				method: 'post',
 				url: ''+this.soap_instance_url+'Service.asmx'+'',
 				data: createFolderData,
-				headers: {'Content-Type': 'text/xml'}							
+				headers: headers							
 				})            
 				.then((response: any) => {
 					
