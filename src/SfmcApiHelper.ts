@@ -500,7 +500,7 @@ export default class SfmcApiHelper
 					Utils.logInfo("Hearsay Integrations Folder has been created Successfully");
                 Utils.logInfo(response.data);
 				
-				Utils.logInfo("Folder ID nu onnu naa create pannae adhoda value a check panrae : " +this.FolderID);
+				//Utils.logInfo("Folder ID nu onnu naa create pannae adhoda value a check panrae : " +this.FolderID);
 				//this.createDefaultDataExtension
                 var extractedData = "";
 				var parser = new xml2js.Parser();
