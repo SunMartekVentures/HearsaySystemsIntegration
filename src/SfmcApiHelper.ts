@@ -858,7 +858,7 @@ export default class SfmcApiHelper
 		
 		
 		
-		Utils.logInfo("The soap data for creating the Data Extension Template Data Extension\n\n\n" + OrgMsg);
+		Utils.logInfo("The soap data for creating the Data Extension Template Data Extension\n\n\n" + DETmsg);
 		
 		return new Promise<any>((resolve, reject) =>
 		{
