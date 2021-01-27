@@ -425,13 +425,13 @@ export default class SfmcApiHelper
                 var extractedData = "";
 				var parser = new xml2js.Parser();
 				parser.parseString(response.data, (err: any, result: { [x: string]: { [x: string]: { [x: string]: { [x: string]: any; }[]; }[]; }; }) => {
-				let ParentFolderID = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'];
+				let ParentFolderID = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ID'][0];
 				Utils.logInfo('Idhu dhan da parentFolder ID en vendru : ' + ParentFolderID);
 				//this.ParentFolderID = JSON.stringify(result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ParentFolder'][0]);
 				//Utils.logInfo('Parent Folder ID : ' + this.ParentFolderID);
 					
 						if(ParentFolderID!=undefined){
-							this.ParentFolderID = ParentFolderID[0]['ID'][0];
+							this.ParentFolderID = ParentFolderID;
 							this.creatingHearsayIntegrationFolder(ParentFolderID);
 							
 						}
