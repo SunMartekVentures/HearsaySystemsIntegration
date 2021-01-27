@@ -354,11 +354,7 @@ export default class SfmcApiHelper
 				//this.ParentFolderID = JSON.stringify(result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ParentFolder'][0]);
 				//Utils.logInfo('Parent Folder ID : ' + this.ParentFolderID);
 					if(FolderID!=undefined){
-				this.FolderID = FolderID[0]['ID'][0]
-				resolve({
-                    status: 200,
-                    statusText: FolderID[0]['ID'][0]
-                });
+				this.FolderID = FolderID[0]['ID'][0];
 				}
 				else{
 					this.retrievingDataExtensionFolderID();
@@ -430,7 +426,7 @@ export default class SfmcApiHelper
 				var parser = new xml2js.Parser();
 				parser.parseString(response.data, (err: any, result: { [x: string]: { [x: string]: { [x: string]: { [x: string]: any; }[]; }[]; }; }) => {
 				let ParentFolderID = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ID'][0];
-				Utils.logInfo('Folder ID : ' + ParentFolderID);
+				Utils.logInfo('Idhu dhan da parentFolder ID en vendru : ' + ParentFolderID);
 				//this.ParentFolderID = JSON.stringify(result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ParentFolder'][0]);
 				//Utils.logInfo('Parent Folder ID : ' + this.ParentFolderID);
 					
@@ -460,6 +456,7 @@ export default class SfmcApiHelper
 		
 		let createFolderData = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">'
                                  +'<soapenv:Header>'
+								 +'        <a:Action s:mustUnderstand="1">Create</a:Action>'
                                  +'<fueloauth>'+this._oauthToken+'</fueloauth>'
                                  +'</soapenv:Header>'
                                  +'<soapenv:Body>'
