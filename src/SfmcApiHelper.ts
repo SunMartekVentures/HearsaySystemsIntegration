@@ -501,7 +501,7 @@ export default class SfmcApiHelper
 				})            
 				.then((response: any) => {
 					
-					Utils.logInfo("Hearsay Integrations Folder has been created Successfully";
+					Utils.logInfo("Hearsay Integrations Folder has been created Successfully");
                 Utils.logInfo(response.data);
                 /*var extractedData = "";
 				var parser = new xml2js.Parser();
