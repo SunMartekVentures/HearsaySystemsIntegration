@@ -505,13 +505,13 @@ export default class SfmcApiHelper
                 var extractedData = "";
 				var parser = new xml2js.Parser();
 				parser.parseString(response.data, (err: any, result: { [x: string]: { [x: string]: { [x: string]: { [x: string]: any; }[]; }[]; }; }) => {
-				let HearsayIntegrationsID = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['NewID'][0];
+				let HearsayIntegrationsID = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'];
 				Utils.logInfo('Hearsay Integrations Folder ID : ' + HearsayIntegrationsID);
 				//this.ParentFolderID = JSON.stringify(result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ParentFolder'][0]);
 				//Utils.logInfo('Parent Folder ID : ' + this.ParentFolderID);
 					
 						if(HearsayIntegrationsID!=undefined){
-							this.FolderID = HearsayIntegrationsID;
+							this.FolderID = HearsayIntegrationsID[0]['NewID'][0];
 							this.creatingDefaultDataExtensions();
 							
 						}
