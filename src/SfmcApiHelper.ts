@@ -654,7 +654,7 @@ export default class SfmcApiHelper
 		+'<CustomerKey>Created or Modified Date</CustomerKey>'
 		+'<Name>Created or Modified Date</Name>'
 		+'<FieldType>Date</FieldType>'
-	        +'<DefaultValue>GetDate()</DefaultValue>'
+	        +'<DefaultValue>getDate()</DefaultValue>'
 		+'<IsRequired>true</IsRequired>'
 		+'<IsPrimaryKey>false</IsPrimaryKey>'
 		+'</Field>'
