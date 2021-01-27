@@ -128,6 +128,13 @@ export default class SfmcApiHelper
 	public DataExtensionFolderCheck(req: express.Request, res: express.Response){
 		Utils.logInfo("DataExtensionFolderCheck Method: " + this._oauthToken);
 		res.status(200).send("The The The Tha Tha Tha The The The");
+		this.getCategoryIDHelper()
+		.then((result) => {
+                res.status(result.status).send(result.statusText);
+            })
+            .catch((err) => {
+                res.status(500).send(err);
+            });
 		
 	}
 	
@@ -197,7 +204,7 @@ export default class SfmcApiHelper
 	
 	private ValidationForDataExtName(TemplateName : string) : Promise<any>
 	{
-		this.getCategoryIDHelper();
+		
 			//Utils.logInfo("Validation Body : "+ ValidationBody);
 			
 			//let headers = {
@@ -342,19 +349,25 @@ export default class SfmcApiHelper
                 var extractedData = "";
 				var parser = new xml2js.Parser();
 				parser.parseString(response.data, (err: any, result: { [x: string]: { [x: string]: { [x: string]: { [x: string]: any; }[]; }[]; }; }) => {
-				this.FolderID = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ID'][0];
-				Utils.logInfo('Folder ID : ' + this.FolderID);
-				this.ParentFolderID = JSON.stringify(result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ParentFolder'][0]);
-				Utils.logInfo('Parent Folder ID : ' + this.ParentFolderID);
-								
+				let FolderID = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'];
+				Utils.logInfo('Folder ID : ' + FolderID);
+				//this.ParentFolderID = JSON.stringify(result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ParentFolder'][0]);
+				//Utils.logInfo('Parent Folder ID : ' + this.ParentFolderID);
+					if(FolderID!=undefined){
+				this.FolderID = FolderID[0]['ID'][0]
+				resolve({
+                    status: 200,
+                    statusText: FolderID[0]['ID'][0]
+                });
+				}
+				else{
+					this.retrievingDataExtensionFolderID();
+					
+                }			
 				
 				});
-			resolve(
-					{
-                    status: response.status,
-                    statusText: response.statusText + "\n" + Utils.prettyPrintJson(JSON.stringify(response.data))
-					});
-			})
+			
+				})
 			.catch((error: any) => {
 						// error
 						let errorMsg = "Error loading sample data. POST response from Marketing Cloud:";
@@ -369,6 +382,156 @@ export default class SfmcApiHelper
         });
 	}
 	
+	public retrievingDataExtensionFolderID(){
+		
+		Utils.logInfo('Retrieving DataExtension Folder Properties......');
+		let soapMessage = '<?xml version="1.0" encoding="UTF-8"?>'
++'<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">'
++'    <s:Header>'
++'        <a:Action s:mustUnderstand="1">Retrieve</a:Action>'
++'        <a:To s:mustUnderstand="1">'+this.soap_instance_url+'Service.asmx'+'</a:To>'
++'        <fueloauth xmlns="http://exacttarget.com">'+this._oauthToken+'</fueloauth>'
++'    </s:Header>'
++'    <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">'
++'        <RetrieveRequestMsg xmlns="http://exacttarget.com/wsdl/partnerAPI">'
++'            <RetrieveRequest>'
++'                <ObjectType>DataFolder</ObjectType>'
++'                <Properties>ID</Properties>'
++'                <Properties>CustomerKey</Properties>'
++'                <Properties>Name</Properties>'
++'                <Filter xsi:type="SimpleFilterPart">'
++'                    <Property>Name</Property>'
++'                    <SimpleOperator>equals</SimpleOperator>'
++'                    <Value>Data Extensions</Value>'
++'                </Filter>'
++'            </RetrieveRequest>'
++'        </RetrieveRequestMsg>'
++'    </s:Body>'
++'</s:Envelope>';
+	
+	
+	return new Promise<any>((resolve, reject) =>
+		{
+			let headers = {
+                'Content-Type': 'text/xml',
+                'SOAPAction': 'Retrieve'
+            };
+
+            // POST to Marketing Cloud Data Extension endpoint to load sample data in the POST body
+            axios({
+				method: 'post',
+				url: ''+this.soap_instance_url+'Service.asmx'+'',
+				data: soapMessage,
+				headers: {'Content-Type': 'text/xml'}							
+				})            
+				.then((response: any) => {
+                Utils.logInfo(response.data);
+                var extractedData = "";
+				var parser = new xml2js.Parser();
+				parser.parseString(response.data, (err: any, result: { [x: string]: { [x: string]: { [x: string]: { [x: string]: any; }[]; }[]; }; }) => {
+				let ParentFolderID = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ID'][0];
+				Utils.logInfo('Folder ID : ' + ParentFolderID);
+				//this.ParentFolderID = JSON.stringify(result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ParentFolder'][0]);
+				//Utils.logInfo('Parent Folder ID : ' + this.ParentFolderID);
+					
+						if(ParentFolderID!=undefined){
+							this.ParentFolderID = ParentFolderID;
+							this.creatingHearsayIntegrationFolder(ParentFolderID);
+							
+						}
+				
+				});
+				})
+			.catch((error: any) => {
+						// error
+						let errorMsg = "Error getting the Data extensions folder properties......";
+						errorMsg += "\nMessage: " + error.message;
+						errorMsg += "\nStatus: " + error.response ? error.response.status : "<None>";
+						errorMsg += "\nResponse data: " + error.response.data ? Utils.prettyPrintJson(JSON.stringify(error.response.data)) : "<None>";
+						Utils.logError(errorMsg);
+
+										reject(errorMsg);
+									});
+			
+        });
+}
+	
+	public creatingHearsayIntegrationFolder(ParentFolderID : any){
+		
+		let createFolderData = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">'
+                                 +'<soapenv:Header>'
+                                 +'<fueloauth>'+this._oauthToken+'</fueloauth>'
+                                 +'</soapenv:Header>'
+                                 +'<soapenv:Body>'
+                                 +'<CreateRequest xmlns="http://exacttarget.com/wsdl/partnerAPI">'
+                                 +'<Options/>'
+                                 +'<ns1:Objects xmlns:ns1="http://exacttarget.com/wsdl/partnerAPI" xsi:type="ns1:DataFolder">'
+                                 +'<ns1:ModifiedDate xsi:nil="true"/>'
+                                 +'<ns1:ObjectID xsi:nil="true"/>'
+                                 +'<ns1:CustomerKey>Hearsay Integrations</ns1:CustomerKey>'
+                                 +'<ns1:ParentFolder>'
+                                 +'<ns1:ModifiedDate xsi:nil="true"/>'
+                                 +'<ns1:ID>'+ParentFolderID+'</ns1:ID>'
+                                 +'<ns1:ObjectID xsi:nil="true"/>'
+                                 +'</ns1:ParentFolder>'
+                                 +'<ns1:Name>Hearsay Integrations</ns1:Name>'
+                                 +'<ns1:Description>Hearsay Integrations Folder</ns1:Description>'
+                                 +'<ns1:ContentType>dataextension</ns1:ContentType>'
+                                 +'<ns1:IsActive>true</ns1:IsActive>'
+                                 +'<ns1:IsEditable>true</ns1:IsEditable>'
+                                 +'<ns1:AllowChildren>true</ns1:AllowChildren>'
+                                 +'</ns1:Objects>'
+                                 +'</CreateRequest>'
+                                 +'</soapenv:Body>'
+                                 +'</soapenv:Envelope>';
+		
+		return new Promise<any>((resolve, reject) =>
+		{
+			let headers = {
+                'Content-Type': 'text/xml',
+                'SOAPAction': 'Create'
+            };
+
+            // POST to Marketing Cloud Data Extension endpoint to load sample data in the POST body
+            axios({
+				method: 'post',
+				url: ''+this.soap_instance_url+'Service.asmx'+'',
+				data: createFolderData,
+				headers: {'Content-Type': 'text/xml'}							
+				})            
+				.then((response: any) => {
+					
+					Utils.logInfo("Hearsay Integrations Folder has been created Successfully";
+                Utils.logInfo(response.data);
+                /*var extractedData = "";
+				var parser = new xml2js.Parser();
+				parser.parseString(response.data, (err: any, result: { [x: string]: { [x: string]: { [x: string]: { [x: string]: any; }[]; }[]; }; }) => {
+				let ParentFolderID = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ID'][0];
+				Utils.logInfo('Folder ID : ' + ParentFolderID);
+				//this.ParentFolderID = JSON.stringify(result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ParentFolder'][0]);
+				//Utils.logInfo('Parent Folder ID : ' + this.ParentFolderID);
+					
+						if(ParentFolderID!=undefined){
+							this.ParentFolderID = ParentFolderID;
+							this.creatingHearsayIntegrationFolder(ParentFolderID);
+							
+						}
+				
+				});*/
+				})
+			.catch((error: any) => {
+						// error
+						let errorMsg = "Error creating the Hearsay Integrations folder......";
+						errorMsg += "\nMessage: " + error.message;
+						errorMsg += "\nStatus: " + error.response ? error.response.status : "<None>";
+						errorMsg += "\nResponse data: " + error.response.data ? Utils.prettyPrintJson(JSON.stringify(error.response.data)) : "<None>";
+						Utils.logError(errorMsg);
+
+										reject(errorMsg);
+									});
+			
+        });
+	}
 	
 
     /**
