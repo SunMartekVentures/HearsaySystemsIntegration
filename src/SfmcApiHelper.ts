@@ -688,7 +688,8 @@ export default class SfmcApiHelper
 					
 				Utils.logInfo("Org Setup Data extension has been created Successfully\n\n\n");
                 Utils.logInfo(response.data+"\n\n\n");				
-				Utils.logInfo("Oru valiya idhuvum create panni aachu, innum Data Extension Template mattum dha mitcham\n\n\n");					
+				Utils.logInfo("Oru valiya idhuvum create panni aachu, innum Data Extension Template mattum dha mitcham\n\n\n");	
+				this.createDataExtensionTemplate();
 				})
 			.catch((error: any) => {
 						// error
@@ -704,6 +705,194 @@ export default class SfmcApiHelper
         });
 	}
 	
+	public createDataExtensionTemplate(){
+		
+		Utils.logInfo("Creating Default Data Extensions for Data Extension Template");
+		
+		let DETmsg = '<?xml version="1.0" encoding="UTF-8"?>'
++'<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">'
++'    <s:Header>'
++'        <a:Action s:mustUnderstand="1">Create</a:Action>'
++'        <a:To s:mustUnderstand="1">'+this.soap_instance_url+'Service.asmx'+'</a:To>'
++'        <fueloauth xmlns="http://exacttarget.com">'+this._oauthToken+'</fueloauth>'
++'    </s:Header>'
++'    <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">'
++'        <CreateRequest xmlns="http://exacttarget.com/wsdl/partnerAPI">'
++'            <Objects xsi:type="DataExtension">'
++'				<CategoryID>'+this.FolderID+'</CategoryID>'
++'                <Client>'
++'                    <ID>'+this.member_id+'</ID>'
++'                </Client>'
++'                <CustomerKey>Data_Extension_Template</CustomerKey>'
++'                <Name>Data Extension Template</Name>'
++'                <IsSendable>true</IsSendable>'
++'                <SendableDataExtensionField>'
++'                    <CustomerKey>Template Name</CustomerKey>'
++'                    <Name>Template Name</Name>'
++'                    <FieldType>Text</FieldType>'
++'                </SendableDataExtensionField>'
++'                <SendableSubscriberField>'
++'                    <Name>Subscriber Key</Name>'
++'                    <Value></Value>'
++'                </SendableSubscriberField>'
++'                <Fields>'
++'                    <Field>'
++'                        <CustomerKey>Template Name</CustomerKey>'
++'                        <Name>Template Name</Name>'
++'                        <FieldType>Text</FieldType>'
++'                        <MaxLength>100</MaxLength>'
++'                        <IsRequired>true</IsRequired>'
++'                        <IsPrimaryKey>true</IsPrimaryKey>'
++'                    </Field>'
++'                    <Field>'
++'                        <CustomerKey>Hearsay Org ID</CustomerKey>'
++'                        <Name>Hearsay Org ID</Name>'
++'                       <FieldType>Text</FieldType>'
++'                        <MaxLength>50</MaxLength>'
++'                        <IsRequired>true</IsRequired>'
++'                        <IsPrimaryKey>false</IsPrimaryKey>'
++'                    </Field>'
++'                    <Field>'
++'                        <CustomerKey>Hearsay User Reference ID</CustomerKey>'
++'                        <Name>Hearsay User Reference ID</Name>'
++'                        <FieldType>Text</FieldType>'
++'                        <MaxLength>50</MaxLength>'
++'                        <IsRequired>true</IsRequired>'
++'                        <IsPrimaryKey>false</IsPrimaryKey>'
++'                    </Field>'
++'                    <Field>'
++'                        <CustomerKey>option 1</CustomerKey>'
++'                        <Name>option 1</Name>'
++'                        <FieldType>Text</FieldType>'
++'                        <MaxLength>50</MaxLength>'
++'                       <IsRequired>true</IsRequired>'
++'                        <IsPrimaryKey>false</IsPrimaryKey>'
++'                    </Field>'
++'                    <Field>'
++'                        <CustomerKey>option 2</CustomerKey>'
++'                        <Name>option 2</Name>'
++'                        <FieldType>Text</FieldType>'
++'                        <MaxLength>50</MaxLength>'
++'                       <IsRequired>true</IsRequired>'
++'                        <IsPrimaryKey>false</IsPrimaryKey>'
++'                    </Field>'
++'                    <Field>'
++'                        <CustomerKey>option 3</CustomerKey>'
++'                        <Name>option 3</Name>'
++'                        <FieldType>Text</FieldType>'
++'                        <MaxLength>50</MaxLength>'
++'                       <IsRequired>true</IsRequired>'
++'                        <IsPrimaryKey>false</IsPrimaryKey>'
++'                    </Field>'
++'                    <Field>'
++'                        <CustomerKey>option 4</CustomerKey>'
++'                        <Name>option 4</Name>'
++'                        <FieldType>Text</FieldType>'
++'                        <MaxLength>50</MaxLength>'
++'                       <IsRequired>true</IsRequired>'
++'                        <IsPrimaryKey>false</IsPrimaryKey>'
++'                    </Field>'
++'                    <Field>'
++'                        <CustomerKey>option 5</CustomerKey>'
++'                        <Name>option 5</Name>'
++'                        <FieldType>Text</FieldType>'
++'                        <MaxLength>50</MaxLength>'
++'                       <IsRequired>true</IsRequired>'
++'                        <IsPrimaryKey>false</IsPrimaryKey>'
++'                    </Field>'
++'                    <Field>'
++'                        <CustomerKey>option 6</CustomerKey>'
++'                        <Name>option 6</Name>'
++'                        <FieldType>Text</FieldType>'
++'                        <MaxLength>50</MaxLength>'
++'                       <IsRequired>true</IsRequired>'
++'                        <IsPrimaryKey>false</IsPrimaryKey>'
++'                    </Field>'
++'                    <Field>'
++'                        <CustomerKey>option 7</CustomerKey>'
++'                        <Name>option 7</Name>'
++'                        <FieldType>Text</FieldType>'
++'                        <MaxLength>50</MaxLength>'
++'                       <IsRequired>true</IsRequired>'
++'                        <IsPrimaryKey>false</IsPrimaryKey>'
++'                    </Field>'
++'                    <Field>'
++'                        <CustomerKey>option 8</CustomerKey>'
++'                        <Name>option 8</Name>'
++'                        <FieldType>Text</FieldType>'
++'                        <MaxLength>50</MaxLength>'
++'                       <IsRequired>true</IsRequired>'
++'                        <IsPrimaryKey>false</IsPrimaryKey>'
++'                    </Field>'
++'                    <Field>'
++'                        <CustomerKey>option 9</CustomerKey>'
++'                        <Name>option 9</Name>'
++'                        <FieldType>Text</FieldType>'
++'                        <MaxLength>50</MaxLength>'
++'                       <IsRequired>true</IsRequired>'
++'                        <IsPrimaryKey>false</IsPrimaryKey>'
++'                    </Field>'
++'                    <Field>'
++'                        <CustomerKey>option 10</CustomerKey>'
++'                        <Name>option 10</Name>'
++'                        <FieldType>Text</FieldType>'
++'                        <MaxLength>50</MaxLength>'
++'                       <IsRequired>true</IsRequired>'
++'                        <IsPrimaryKey>false</IsPrimaryKey>'
++'                    </Field>'
++'                    <Field>'
++'                        <CustomerKey>option 11</CustomerKey>'
++'                        <Name>option 11</Name>'
++'                        <FieldType>Text</FieldType>'
++'                        <MaxLength>50</MaxLength>'
++'                       <IsRequired>true</IsRequired>'
++'                        <IsPrimaryKey>false</IsPrimaryKey>'
++'                    </Field>'
++'                </Fields>'
++'            </Objects>'
++'        </CreateRequest>'
++'    </s:Body>'
++'</s:Envelope>'
+		
+		
+		
+		
+		
+		Utils.logInfo("The soap data for creating the Data Extension Template Data Extension\n\n\n" + OrgMsg);
+		
+		return new Promise<any>((resolve, reject) =>
+		{
+			let headers = {
+                'Content-Type': 'text/xml'
+            };
+
+            // POST to Marketing Cloud Data Extension endpoint to load sample data in the POST body
+            axios({
+				method: 'post',
+				url: ''+this.soap_instance_url+'Service.asmx'+'',
+				data: DETmsg,
+				headers: headers							
+				})            
+				.then((response: any) => {
+					
+				Utils.logInfo("Data Extension Template Data extension has been created Successfully\n\n\n");
+                Utils.logInfo(response.data+"\n\n\n");				
+				Utils.logInfo("Mudinchhh\n\n\n");	
+				
+				})
+			.catch((error: any) => {
+						// error
+						let errorMsg = "Error creating the Org Setup Data extension......";
+						errorMsg += "\nMessage: " + error.message;
+						errorMsg += "\nStatus: " + error.response ? error.response.status : "<None>";
+						errorMsg += "\nResponse data: " + error.response.data ? Utils.prettyPrintJson(JSON.stringify(error.response.data)) : "<None>";
+						Utils.logError(errorMsg);
+
+										reject(errorMsg);
+									});
+			
+        });
+	}
 
     /**
      * loadData: called by the GET handlers for /apidemoloaddata and /appdemoloaddata
