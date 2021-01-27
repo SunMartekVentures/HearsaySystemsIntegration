@@ -499,21 +499,24 @@ export default class SfmcApiHelper
 					
 					Utils.logInfo("Hearsay Integrations Folder has been created Successfully");
                 Utils.logInfo(response.data);
-                /*var extractedData = "";
+				
+				Utils.logInfo("Folder ID nu onnu naa create pannae adhoda value a check panrae : " +this.FolderID);
+				//this.createDefaultDataExtension
+                var extractedData = "";
 				var parser = new xml2js.Parser();
 				parser.parseString(response.data, (err: any, result: { [x: string]: { [x: string]: { [x: string]: { [x: string]: any; }[]; }[]; }; }) => {
-				let ParentFolderID = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ID'][0];
-				Utils.logInfo('Folder ID : ' + ParentFolderID);
+				let HearsayIntegrationsID = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['NewID'][0];
+				Utils.logInfo('Hearsay Integrations Folder ID : ' + HearsayIntegrationsID);
 				//this.ParentFolderID = JSON.stringify(result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ParentFolder'][0]);
 				//Utils.logInfo('Parent Folder ID : ' + this.ParentFolderID);
 					
-						if(ParentFolderID!=undefined){
-							this.ParentFolderID = ParentFolderID;
-							this.creatingHearsayIntegrationFolder(ParentFolderID);
+						if(HearsayIntegrationsID!=undefined){
+							this.FolderID = HearsayIntegrationsID;
+							//this.creatingHearsayIntegrationFolder(ParentFolderID);
 							
 						}
 				
-				});*/
+				});
 				})
 			.catch((error: any) => {
 						// error
