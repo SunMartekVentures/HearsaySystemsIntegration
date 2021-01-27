@@ -544,7 +544,7 @@ export default class SfmcApiHelper
 		+'    <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">'
 		+'        <CreateRequest xmlns="http://exacttarget.com/wsdl/partnerAPI">'
 		+'<Objects xsi:type="DataExtension">'
-		+'<CategoryID>CategoryID</CategoryID>'
+		+'<CategoryID>'+this.FolderID+'</CategoryID>'
 		+'<CustomerKey>Org_Setup</CustomerKey>'
         	+'<Name>Org Setup</Name>'
         	+'<IsSendable>true</IsSendable>'
@@ -617,7 +617,7 @@ export default class SfmcApiHelper
 				})
 			.catch((error: any) => {
 						// error
-						let errorMsg = "Error creating the Hearsay Integrations folder......";
+						let errorMsg = "Error creating the Org Setup Data extension......";
 						errorMsg += "\nMessage: " + error.message;
 						errorMsg += "\nStatus: " + error.response ? error.response.status : "<None>";
 						errorMsg += "\nResponse data: " + error.response.data ? Utils.prettyPrintJson(JSON.stringify(error.response.data)) : "<None>";
