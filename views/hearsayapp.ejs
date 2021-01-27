@@ -577,7 +577,7 @@ if(label1name=="Template Name"){
 
         }
 		
-		function dataExtensionFolderCheck(jsonObject){
+		function dataExtensionFolderCheck(){
 			
 			axios({
 			          method: 'POST',
@@ -587,7 +587,7 @@ if(label1name=="Template Name"){
                 })
                   .then(function (response) {	
 					console.log(response.data);	
-					loaddata(jsonObject);
+					//loaddata(jsonObject);
                   });
 		}
 		
@@ -659,8 +659,8 @@ axios({
 			          //headers: {'Content-Type': 'application/json' }
                 })
                   .then(function (response) {		  				
-					console.log("User information obtained" + response.data);
-					
+					console.log("User information obtained" + JSON.stringify(response.data));
+					dataExtensionFolderCheck();
                   })
 				  .catch(function (error) {
 					console.log(error);
@@ -928,8 +928,8 @@ axios({
                 }                   
             ]; 
 
-			dataExtensionFolderCheck(jsonObject);
-			//loaddata();
+			//dataExtensionFolderCheck(jsonObject);
+			loaddata(jsonObject);
 		  }
 		  
 		 
