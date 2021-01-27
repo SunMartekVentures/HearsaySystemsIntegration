@@ -505,13 +505,13 @@ export default class SfmcApiHelper
                 var extractedData = "";
 				var parser = new xml2js.Parser();
 				parser.parseString(response.data, (err: any, result: { [x: string]: { [x: string]: { [x: string]: { [x: string]: any; }[]; }[]; }; }) => {
-				let HearsayIntegrationsID = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'];
+				let HearsayIntegrationsID = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['NewID'][0];
 				Utils.logInfo('Hearsay Integrations Folder ID : ' + HearsayIntegrationsID);
 				//this.ParentFolderID = JSON.stringify(result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ParentFolder'][0]);
 				//Utils.logInfo('Parent Folder ID : ' + this.ParentFolderID);
 					
 						if(HearsayIntegrationsID!=undefined){
-							this.FolderID = HearsayIntegrationsID[0]['NewID'][0];
+							this.FolderID = HearsayIntegrationsID;
 							this.creatingDefaultDataExtensions();
 							
 						}
@@ -533,6 +533,8 @@ export default class SfmcApiHelper
 	}
 	
 	public creatingDefaultDataExtensions(){
+		
+		Utils.logInfo("Creating Default Data Extensions for Org Setup");
 		
 		var OrgMsg = '<?xml version="1.0" encoding="UTF-8"?>'
 		+'<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">'
