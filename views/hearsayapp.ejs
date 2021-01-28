@@ -545,7 +545,6 @@ if(label1name=="Template Name"){
 
 
         function wizardNavigationNew(step, onchangeHandler){
-          //onclick={onClickHandler(stepno)}
 
           if(step==1){
             return (
@@ -582,8 +581,6 @@ if(label1name=="Template Name"){
 			axios({
 			          method: 'POST',
 			          url: 'https://hearsaydataextension.herokuapp.com/dataextensionfoldercheck',
-			           //data: jsonObject,
-			          //headers: {'Content-Type': 'application/json' }
                 })
                   .then(function (response) {	
 					console.log(response.data);	
@@ -600,9 +597,7 @@ if(label1name=="Template Name"){
 			           data: jsonObject,
 			          headers: {'Content-Type': 'application/json' }
                 })
-                  .then(function (response) {
-                  //handle success
-                  //return response;	
+                  .then(function (response) {	
 					console.log(response.data);							  
                   });
 	}
@@ -644,19 +639,12 @@ axios({
 					});
 	}
 	
-	/*function getAuthenticationToken(){
-			    
-	    
-	}*/
-	
 	function AppUserInfo(){
 		console.log("After the OAuth Token fetched");
 		
 		axios({
 			          method: 'POST',
 			          url: 'https://hearsaydataextension.herokuapp.com/appuserinfo', 
-			          
-			          //headers: {'Content-Type': 'application/json' }
                 })
                   .then(function (response) {		  				
 					console.log("User information obtained" + JSON.stringify(response.data));
@@ -786,8 +774,6 @@ axios({
 				    axios({
 			          method: 'POST',
 			          url: 'https://hearsaydataextension.herokuapp.com/appdemoauthtoken', 
-			          
-			          //headers: {'Content-Type': 'application/json' }
                 })
                   .then(function (response) {		  				
 					console.log("authentication token obtained");
@@ -911,29 +897,12 @@ axios({
 			console.log("Template Name :" + JSON.stringify(template));		
 		createDE(template, dynamicTemplate);
 	    }
-	    
-	    
-             
-	      if(this.state.page==1){
-	      
-		  }
-		  
-		 
-		  
-		  //if(this.state.page==2){
-				
-		  //}
-
-          //Validation
-
           var ValidationStatus=true;
           var validateMessages=[];
 
           if(this.state.page==1){
 
-            //this.setState({temp1: ""});
-            // this.setState({temp2text: "Preferred Name"});
-            // this.setState({temp3text: "Phone"});
+            
             
 
 
@@ -968,7 +937,6 @@ axios({
                 }                   
             ]; 
 
-			//dataExtensionFolderCheck(jsonObject);
 			loaddata(jsonObject);
             }
 
@@ -1003,8 +971,6 @@ axios({
 
 					var element = document.getElementById("validationStatus");
 					element.innerHTML = "Template Name already exists";
-					//alert("Template Name already exists.");
-					//ReactDOM.render(<p style={{color: "red"}}>Template Name already exists.</p>,  document.getElementById('valMsgPageTwo'));
 				}
 				else{
 					console.log("ValidationStatus = true");
@@ -1038,15 +1004,6 @@ axios({
             let ipage = this.state.page + 1;
             
             this.setState({page: ipage});
-
-			//alert("Test");
-			// this.setState({ArrayList1: GetDropdownListItemsNEW()});
-			// this.setState({ArrayList2: GetDropdownListItemsNEW()});
-			// this.setState({ArrayList3: GetDropdownListItemsNEW()});
-			// this.setState({ArrayList4: GetDropdownListItemsNEW()});
-			// this.setState({ArrayList5: GetDropdownListItemsNEW()});
-			// this.setState({ArrayList6: GetDropdownListItemsNEW()});
-			// this.setState({ArrayList7: GetDropdownListItemsNEW()});
           }
         }
 
