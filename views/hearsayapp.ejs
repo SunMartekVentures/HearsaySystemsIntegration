@@ -949,6 +949,7 @@ axios({
 
       }
 	  else{
+		  let State = this.state;
 		  ValidationStatus = false;
 		  let validationTemplate = {
                     "TemplateName" : this.state.templatename
@@ -970,7 +971,7 @@ axios({
 					
 
 					var element = document.getElementById("validationStatus");
-					element.innerHTML = "Template Name "+this.state.templatename+" already exists";
+					element.innerHTML = "Template Name "+State.templatename+" already exists";
 				}
 				else{
 					console.log("ValidationStatus = true");
