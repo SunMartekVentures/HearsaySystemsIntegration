@@ -1000,15 +1000,10 @@ axios({
 					ValidationStatus = false;
 					console.log("ValidationStatus = false" + responseXML);
 					
-					var para = document.createElement("p");
-					var att = document.createAttribute("style");       // Create a "class" attribute
-					att.value = "color : red";                           // Set the value of the class attribute
-					para.setAttributeNode(att);
-					var node = document.createTextNode("Template Name already exists.");
-					para.appendChild(node);
+					
 
-					var element = document.getElementById("valMsgPageTwo");
-					element.appendChild(para);
+					var element = document.getElementById("validationStatus");
+					element.innerHTML("Template Name already exists");
 					//alert("Template Name already exists.");
 					//ReactDOM.render(<p style={{color: "red"}}>Template Name already exists.</p>,  document.getElementById('valMsgPageTwo'));
 				}
@@ -1655,7 +1650,7 @@ axios({
                   <div class='row epaddingbottom10'>
                       <div class='col-md-1'></div>
                       <div class='col-md-10'>
-                        <span id="valMsgPageTwo"></span>
+                        <span id="valMsgPageTwo"><p id = "validationStatus" style="color:red;"></p></span>
                         <span style={{"color":"red"}} id="idDuplicateError">{this.state.DuplicateError}</span>
                       </div>
                       <div class='col-md-1'></div>
