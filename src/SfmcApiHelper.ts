@@ -15,11 +15,7 @@ export default class SfmcApiHelper
 	private ParentFolderID = '';
 	private StatusCode = '';
 	private DataExtensionName = '';
-	private Hearsay_Org_ID = '';
-	private validateStatus = '';
 	private validateDEName = '';
-	private isValidated = '';
-	//private xmlDoc = '';
 	private ValidateResponse = '';
 	private soap_instance_url ='';
 	private rest_instance_url = '';
@@ -171,7 +167,6 @@ export default class SfmcApiHelper
 
                 res.status(500).send(Utils.prettyPrintJson(JSON.stringify(error.response.data)));
             });
-		//res.status(200).send("AppUserInfo Method Successful a call aaiduchu da perapasangala");
 		
 	}
 	
@@ -184,7 +179,7 @@ export default class SfmcApiHelper
 		let TemplateName = req.query.TemplateName;
 		if (this._oauthToken!= "")
         {
-            //Utils.logInfo("Using OAuth token: " + req.session.oauthAccessToken);
+  
             self.ValidationForDataExtName(TemplateName)
             .then((result) => {
                 res.status(result.status).send(result.statusText);
@@ -204,14 +199,6 @@ export default class SfmcApiHelper
 	
 	private ValidationForDataExtName(TemplateName : string) : Promise<any>
 	{
-		
-			//Utils.logInfo("Validation Body : "+ ValidationBody);
-			
-			//let headers = {
-                //'Content-Type': 'application/json',
-                //
-            //};
-		
 		return new Promise<any>((resolve, reject) =>
         {
 			
@@ -237,7 +224,6 @@ export default class SfmcApiHelper
 +'   </RetrieveRequestMsg>'
 +'    </s:Body>'
 +'</s:Envelope>';
-			Utils.logInfo("Ahpppaaaddaa, Method call aaiduchu");
 			 axios({
 				method: 'post',
 				url: ''+this.soap_instance_url+'Service.asmx'+'',
@@ -251,9 +237,7 @@ export default class SfmcApiHelper
 				
 				let parser = new xml2js.Parser();
 				let parsedResponse = parser.parseString(response.data, (err: any, result: { [x: string]: { [x: string]: { [x: string]: { [x: string]: any; }[]; }[]; }; }) => {
-				//this.validateStatus = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['OverallStatus'][0];
-				//Utils.logInfo('Validation Status : ' + response.data);
-				
+								
 				
 				let validateDEName = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'];
 				Utils.logInfo('Validated Data Extension Name : ' + validateDEName);
@@ -270,18 +254,7 @@ export default class SfmcApiHelper
                     status: 200,
                     statusText: validateDEName
                 });
-				}
-				
-                /*if(validateDEName){
-					Utils.logInfo('Validated Data Extension Name : ' + validateDEName);
-				resolve(
-                {
-                    status: 200,
-                    statusText: validateDEName[0]['Properties'][0]['Property'][0]['Value'][0]
-                });
-			}*/
-				
-			
+				}		
 				});
 				
 			
@@ -337,7 +310,7 @@ export default class SfmcApiHelper
                 'SOAPAction': 'Retrieve'
             };
 
-            // POST to Marketing Cloud Data Extension endpoint to load sample data in the POST body
+            
             axios({
 				method: 'post',
 				url: ''+this.soap_instance_url+'Service.asmx'+'',
@@ -351,8 +324,6 @@ export default class SfmcApiHelper
 				parser.parseString(response.data, (err: any, result: { [x: string]: { [x: string]: { [x: string]: { [x: string]: any; }[]; }[]; }; }) => {
 				let FolderID = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'];
 				Utils.logInfo('Folder ID : ' + FolderID);
-				//this.ParentFolderID = JSON.stringify(result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ParentFolder'][0]);
-				//Utils.logInfo('Parent Folder ID : ' + this.ParentFolderID);
 					if(FolderID!=undefined){
 				this.FolderID = FolderID[0]['ID'][0];
 				}
@@ -413,7 +384,7 @@ export default class SfmcApiHelper
                 'SOAPAction': 'Retrieve'
             };
 
-            // POST to Marketing Cloud Data Extension endpoint to load sample data in the POST body
+            
             axios({
 				method: 'post',
 				url: ''+this.soap_instance_url+'Service.asmx'+'',
@@ -426,9 +397,6 @@ export default class SfmcApiHelper
 				var parser = new xml2js.Parser();
 				parser.parseString(response.data, (err: any, result: { [x: string]: { [x: string]: { [x: string]: { [x: string]: any; }[]; }[]; }; }) => {
 				let ParentFolderID = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ID'][0];
-				Utils.logInfo('Idhu dhan da parentFolder ID en vendru : ' + ParentFolderID);
-				//this.ParentFolderID = JSON.stringify(result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ParentFolder'][0]);
-				//Utils.logInfo('Parent Folder ID : ' + this.ParentFolderID);
 					
 						if(ParentFolderID!=undefined){
 							this.ParentFolderID = ParentFolderID;
@@ -500,15 +468,11 @@ export default class SfmcApiHelper
 					Utils.logInfo("Hearsay Integrations Folder has been created Successfully");
                 Utils.logInfo(response.data);
 				
-				//Utils.logInfo("Folder ID nu onnu naa create pannae adhoda value a check panrae : " +this.FolderID);
-				//this.createDefaultDataExtension
                 var extractedData = "";
 				var parser = new xml2js.Parser();
 				parser.parseString(response.data, (err: any, result: { [x: string]: { [x: string]: { [x: string]: { [x: string]: any; }[]; }[]; }; }) => {
 				let HearsayIntegrationsID = result['soap:Envelope']['soap:Body'][0]['CreateResponse'][0]['Results'][0]['NewID'][0];
 				Utils.logInfo('Hearsay Integrations Folder ID : ' + HearsayIntegrationsID);
-				//this.ParentFolderID = JSON.stringify(result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ParentFolder'][0]);
-				//Utils.logInfo('Parent Folder ID : ' + this.ParentFolderID);
 					
 						if(HearsayIntegrationsID!=undefined){
 							this.FolderID = HearsayIntegrationsID;
@@ -534,71 +498,6 @@ export default class SfmcApiHelper
 	public creatingDefaultDataExtensions(){
 		
 		Utils.logInfo("Creating Default Data Extensions for Org Setup");
-		
-		/*let OrgMsg = '<?xml version="1.0" encoding="UTF-8"?>'
-		+'<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">'
-		+'    <s:Header>'
-		+'        <<a:Action s:mustUnderstand="1">Create</a:Action>'
-		+'        <a:MessageID>urn:uuid:7e0cca04-57bd-4481-864c-6ea8039d2ea0</a:MessageID>'
-		+'        <a:ReplyTo>'
-		+'            <a:Address>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</a:Address>'
-		+'        </a:ReplyTo>'
-		+'        <a:To s:mustUnderstand="1">'+this.soap_instance_url+'Service.asmx'+'</a:To>'
-		+'        <fueloauth xmlns="http://exacttarget.com">'+this._oauthToken+'</fueloauth>'
-		+'    </s:Header>'
-		+'    <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">'
-		+'        <CreateRequest xmlns="http://exacttarget.com/wsdl/partnerAPI">'
-		+'<Objects xsi:type="DataExtension">'
-		+'<CategoryID>'+this.FolderID+'</CategoryID>'
-		+'<CustomerKey>Org_Setup</CustomerKey>'
-        	+'<Name>Org Setup</Name>'
-        	+'<IsSendable>true</IsSendable>'
-        	+'<SendableDataExtensionField>'
-		+'    <CustomerKey>Hearsay User Reference ID</CustomerKey>'
-		+'    <Name>Hearsay User Reference ID</Name>'
-		+'    <FieldType>Text</FieldType>'
-		+'</SendableDataExtensionField>'
-        	+'<SendableSubscriberField>'
-        	+'    <Name>Subscriber Key</Name>'
-        	+'    <Value></Value>'
-        	+'</SendableSubscriberField>'
-		+'<Fields>'
-		+'<CustomerKey>Hearsay Org ID</CustomerKey>'
-		+'<Name>Hearsay Org ID</Name>'
-		+'<FieldType>Text</FieldType>'
-		+'<MaxLength>50</MaxLength>'
-		+'<IsRequired>true</IsRequired>'
-		+'<IsPrimaryKey>false</IsPrimaryKey>'
-		+'</Field>'
-	    	+'<Field>'
-		+'<CustomerKey>Hearsay User Reference ID</CustomerKey>'
-		+'<Name>Hearsay User Reference ID</Name>'
-		+'<FieldType>Text</FieldType>'
-		+'<MaxLength>50</MaxLength>'
-		+'<IsRequired>true</IsRequired>'
-		+'<IsPrimaryKey>true</IsPrimaryKey>'
-		+'</Field>'
-	    	+'<Field>'
-		+'<CustomerKey>Customer Unique ID</CustomerKey>'
-		+'<Name>Customer Unique ID</Name>'
-		+'<FieldType>Text</FieldType>'
-		+'<MaxLength>50</MaxLength>'
-		+'<IsRequired>true</IsRequired>'
-		+'<IsPrimaryKey>false</IsPrimaryKey>'
-		+'</Field>'
-	        +'<Field>'
-		+'<CustomerKey>Created or Modified Date</CustomerKey>'
-		+'<Name>Created or Modified Date</Name>'
-		+'<FieldType>Date</FieldType>'
-	        +'<DefaultValue>GetDate()</DefaultValue>'
-		+'<IsRequired>true</IsRequired>'
-		+'<IsPrimaryKey>false</IsPrimaryKey>'
-		+'</Field>'
-	    	+'</Fields>'
-		+'</Objects>'
-		+'        </CreateRequest>'
-		+'    </s:Body>'
-		+'</s:Envelope>';*/
 		
 		let OrgMsg = '<?xml version="1.0" encoding="UTF-8"?>'
 +'<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">'
@@ -685,10 +584,6 @@ export default class SfmcApiHelper
 				headers: headers							
 				})            
 				.then((response: any) => {
-					
-				Utils.logInfo("Org Setup Data extension has been created Successfully\n\n\n");
-                Utils.logInfo(response.data+"\n\n\n");				
-				Utils.logInfo("Oru valiya idhuvum create panni aachu, innum Data Extension Template mattum dha mitcham\n\n\n");	
 				this.createDataExtensionTemplate();
 				})
 			.catch((error: any) => {
@@ -885,7 +780,6 @@ export default class SfmcApiHelper
 					
 				Utils.logInfo("Data Extension Template Data extension has been created Successfully\n\n\n");
                 Utils.logInfo(response.data+"\n\n\n");				
-				Utils.logInfo("Mudinchhh\n\n\n");	
 				
 				})
 			.catch((error: any) => {
@@ -912,12 +806,11 @@ export default class SfmcApiHelper
         let self = this;
         let sessionId = req.session.id;
         Utils.logInfo("loadData entered. SessionId = " + sessionId);
-	    //Utils.logInfo("Using OAuth token: " + req.session.oauthAccessToken);
 		Utils.logInfo("Getting the accesstoken in a object's variable "+ this._oauthToken);
 
         if (this._oauthToken!= "")
         {
-            //Utils.logInfo("Using OAuth token: " + req.session.oauthAccessToken);
+            
             self.loadDataHelper(this._oauthToken, JSON.stringify(req.body))
             .then((result) => {
                 res.status(result.status).send(result.statusText);
@@ -1060,11 +953,9 @@ export default class SfmcApiHelper
         let self = this;
         let sessionId = req.session.id;
         Utils.logInfo("loadData entered. SessionId = " + sessionId);
-	    //let template = req.body;
 
         if (this._oauthToken!= "")
         {
-            //Utils.logInfo("Create Data extension method called and Condition satisfied: " + template );
             self.createDataExtensionHelper(this._oauthToken, req.body)
             .then((result) => {
                 res.status(result.status).send(result.statusText);
@@ -1110,19 +1001,10 @@ export default class SfmcApiHelper
 +'            <Options/>'
 
 
-
-
-
-        //Utils.logInfo("createDataExtensionHelper method is called.");
-        //Utils.logInfo("Using OAuth token: " + oauthAccessToken);
-		//let dynamicTemplate = JSON.stringify(template);
 		Utils.logInfo("Request body as a parameter: " + JSON.stringify(template));
 		Object.keys(template).forEach(key => {
 				Utils.logInfo(key);
 				
-				/*else{
-					Utils.logInfo("Thambi, Hearsay User Reference ID innum varala");
-				}*/
 				if(key === "Template Name" ){
 					Utils.logInfo("if condition satisfied");
 					bodySoapData +=	'<Objects xsi:type="DataExtension">'
@@ -1250,13 +1132,6 @@ export default class SfmcApiHelper
 					}
 				}
 				
-				/*else if(key ==="FieldType 1" && template[key] === "Date"|| key ==="FieldType 2" && template[key] === "Date"|| key ==="FieldType 3" && template[key] === "Date"){
-					Utils.logInfo("This is to check whether the selected data type is Date");
-					OptionFieldSoapData +='<FieldType>'+template[key]+'</FieldType>'
-					+'                        <IsRequired>false</IsRequired>'
-					+'                    </Field>'
-				}*/
-				
 				else if(key ==="FieldLength 1" || key ==="FieldLength 2" || key ==="FieldLength 3"){
 					Utils.logInfo("field length "+ template[key] + " has been added to the OptionFieldSoapData");
 					OptionFieldSoapData += '<MaxLength>'+ template[key] +'</MaxLength>'
@@ -1295,29 +1170,6 @@ export default class SfmcApiHelper
 				})            
 				.then((response: any) => {
                 Utils.logInfo(response.data);
-                //var extractedData = "";
-				/*var parser = new xml2js.Parser();
-				parser.parseString(response.data, (err: any, result: { [x: string]: { [x: string]: { [x: string]: { [x: string]: any; }[]; }[]; }; }) => {
-				//this.FolderID = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ID'][0];
-				//Utils.logInfo('Folder ID : ' + this.FolderID);
-				this.StatusCode = result['soap:Envelope']['soap:Body'][0]['CreateResponse'][0]['Results'][0]['StatusCode'];
-				Utils.logInfo('Status Code : ' + this.StatusCode);
-				if(this.StatusCode=='OK'){
-					this.DataExtensionName = result['soap:Envelope']['soap:Body'][0]['CreateResponse'][0]['Results'][0]['Object'][0]['Name'];
-					Utils.logInfo('Data Extension Name : ' + this.DataExtensionName);
-					
-					self.RowCreationDynamicDataExt(this.DataExtensionName)
-					.then((result : any) => {
-						Utils.logInfo('Row Created Successfully in Dynamically created DE');
-						})
-					.catch((err : any) => {
-						Utils.logInfo('Error when creating row in Dynamically created DE');
-					});
-				}
-				else{
-					Utils.logInfo('Olunga odi poiru condition ae satisfy aagala');
-				}
-				});*/
 				
 				resolve(
                 {
@@ -1325,21 +1177,7 @@ export default class SfmcApiHelper
                     statusText: response.statusText + "\n" + Utils.prettyPrintJson(JSON.stringify(response.data))
                 });
 				})
-		/*let headers = {
-                'Content-Type': 'text/xml'
-            };
-			
-            axios.post('https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.soap.marketingcloudapis.com/Service.asmx', soapData, {"headers" : headers})
-			.then(function (response) {
-				Utils.logInfo(response.data);
-				var parser = new xml2js.Parser();
-				parser.parseString(response.data, (err: any, result: { [x: string]: { [x: string]: { [x: string]: { [x: string]: any; }[]; }[]; }; }) => {
-				//this.FolderID = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ID'][0];
-				//Utils.logInfo('Folder ID : ' + this.FolderID);
-				this.StatusCode = result['soap:Envelope']['soap:Body'][0]['CreateResponse'][0]['Results'][0]['StatusCode'];
-				Utils.logInfo('Status Code : ' + this.StatusCode);
-				});
-			})*/
+		
 			.catch((error: any) => {
                 // error
                 let errorMsg = "Error Creating data extension dynamically using soap format";
@@ -1347,56 +1185,8 @@ export default class SfmcApiHelper
                 errorMsg += "\nStatus: " + error.response ? error.response.status : "<None>";
                 errorMsg += "\nResponse data: " + error.response.data ? Utils.prettyPrintJson(JSON.stringify(error.response.data)) : "<None>";
                 Utils.logError(errorMsg);
-
                 reject(errorMsg);
             });
         });
     }
-	
-	/*private RowCreationDynamicDataExt(DataExtensionName : any) : Promise<any>
-	{
-		
-		let RowData=
-	    {
-			items: [{
-			Org_ID : this.Hearsay_Org_ID
-			}]                                		
-	    }
-			let Row = JSON.stringify(RowData);
-			Utils.logInfo("Row "+ Row);
-			
-			let headers = {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + this._oauthToken
-            };
-		
-		return new Promise<any>((resolve, reject) =>
-        {
-			Utils.logInfo("Ahpppaaaddaa, Method call aaiduchu");
-			 axios.post("https://mcj6cy1x9m-t5h5tz0bfsyqj38ky.rest.marketingcloudapis.com/data/v1/async/dataextensions/key:" + DataExtensionName + "/rows", Row, {"headers" : headers})
-            .then((response: any) => {
-                // success
-                Utils.logInfo("Hearsay_Org_ID Updated Successfully");
-
-                
-            })
-            .catch((error: any) => {
-                // error
-                let errorMsg = "Error loading sample data. POST response from Marketing Cloud:";
-                errorMsg += "\nMessage: " + error.message;
-                errorMsg += "\nStatus: " + error.response ? error.response.status : "<None>";
-                errorMsg += "\nResponse data: " + error.response.data ? Utils.prettyPrintJson(JSON.stringify(error.response.data)) : "<None>";
-                Utils.logError(errorMsg);
-
-                reject(errorMsg);
-            });
-			
-		});
-	}*/
-	
-	/*public logout() 
-	{
-                response.redirect('https://mc.s11.exacttarget.com/');
-				})
-    }*/
 }
