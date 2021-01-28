@@ -915,23 +915,7 @@ axios({
 	    
              
 	      if(this.state.page==1){
-	      let jsonObject = [
-                {
-                    keys: {
-						"Customer Unique ID" : this.state.customeruniqueid,
-                        
-                    },
-                    values: {
-						"Hearsay Org ID" : this.state.orgid,
-                        "Hearsay User Reference ID" : this.state.refid,
-						
-						
-                    }
-                }                   
-            ]; 
-
-			//dataExtensionFolderCheck(jsonObject);
-			loaddata(jsonObject);
+	      
 		  }
 		  
 		 
@@ -971,6 +955,21 @@ axios({
               ReactDOM.render(<p style={{color: "red"}}>Customer Unique ID is mandatory.</p>, document.getElementById('spncustomeruniqueid'));
             } else{
               ReactDOM.render(<p></p>, document.getElementById('spncustomeruniqueid'));
+			  let jsonObject = [
+                {
+                    keys: {
+						"Customer Unique ID" : this.state.customeruniqueid,
+                        
+                    },
+                    values: {
+						"Hearsay Org ID" : this.state.orgid,
+                        "Hearsay User Reference ID" : this.state.refid						
+                    }
+                }                   
+            ]; 
+
+			//dataExtensionFolderCheck(jsonObject);
+			loaddata(jsonObject);
             }
 
 
