@@ -170,9 +170,22 @@ export default class SfmcApiHelper
 		
 	}
 	
+	public getOauthForCurrentBusinessUnit(req: express.Request, res: express.Response){
+		
+		let self = this;
+		
+		self.getOauthForCurrentBusinessUnitHelper()
+		.then((result) => {
+                res.status(result.status).send(result.statusText);
+            })
+            .catch((err) => {
+                res.status(500).send(err);
+            });
+		
+	}
 		
 		
-		public getOauthForCurrentBusinessUnit(req: express.Request, res: express.Response){
+		public getOauthForCurrentBusinessUnitHelper(req: express.Request, res: express.Response){
 			
 			 return new Promise<any>((resolve, reject) =>
         {
