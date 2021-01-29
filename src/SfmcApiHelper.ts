@@ -193,30 +193,18 @@ export default class SfmcApiHelper
 			let clientSecret = process.env.DF18DEMO_CLIENTSECRET;
 			let headers = {
             'Content-Type': 'application/json',
+			'Authorization': 'Bearer ' + this._oauthToken
 			};
 
-			let postBody = {
-            'grant_type': 'client_credentials',
-            'client_id': clientId,
-            'client_secret': clientSecret,
-			'account_id': this.member_id
-			};
 			
-			let sfmcAuthServiceApiUrl = process.env.BASE_URL +"auth.marketingcloudapis.com/v2/token";
+			
+			let sfmcAuthServiceApiUrl = process.env.BASE_URL +"auth.marketingcloudapis.com/platform/v1/tokenContext";
             Utils.logInfo("oauth token is called, waiting for status...");
-            axios.post(sfmcAuthServiceApiUrl, postBody, {"headers" : headers})            
+            axios.post(sfmcAuthServiceApiUrl,{"headers" : headers})            
             .then((response : any) => {
                 // success
                 Utils.logInfo("Success, got auth token from MC for current Business Unit..." + Utils.prettyPrintJson(JSON.stringify(response.data)));
-                let accessToken = response.data.access_token;
-                Utils.logInfo("oauth token..." + accessToken);
-                let bearer = response.data.token_type;
-                Utils.logInfo("Bearer..." + bearer);
-                let tokenExpiry = response.data.expires_in;
-                Utils.logInfo("tokenExpiry..." + tokenExpiry);
-                
-				this._oauthToken = response.data.access_token;
-				Utils.logInfo("Storing the accesstoken in a object's variable "+ this._oauthToken+"\n");
+               
 				
 
                 resolve(
