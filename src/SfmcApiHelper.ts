@@ -198,7 +198,7 @@ export default class SfmcApiHelper
 
 			
 			
-			let sfmcAuthServiceApiUrl = process.env.BASE_URL +"auth.marketingcloudapis.com/platform/v1/tokenContext";
+			let sfmcAuthServiceApiUrl = process.env.BASE_URL +"rest.marketingcloudapis.com/platform/v1/tokenContext";
             Utils.logInfo("oauth token is called, waiting for status...");
             axios.get(sfmcAuthServiceApiUrl,{"headers" : headers})            
             .then((response : any) => {
