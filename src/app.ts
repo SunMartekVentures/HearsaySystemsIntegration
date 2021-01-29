@@ -94,10 +94,6 @@ app.post('/createdeforapp', function(req, res) {
   app.get('/getcategoryidforapp', function(req, res) {
   appDemoRoutes.getCategoryIDforApp(req, res); });
   
-  //getOauthForCurrentBusinessUnit
-  app.post('/getoauthforcurrentbusinessunit', function(req, res) {
-  appDemoRoutes.getOauthForCurrentBusinessUnit(req, res); });
-  
   //dataextensionfoldercheck
 	app.post('/dataextensionfoldercheck', function(req, res) {
 	appDemoRoutes.DataExtensionFolderCheck(req, res); });
