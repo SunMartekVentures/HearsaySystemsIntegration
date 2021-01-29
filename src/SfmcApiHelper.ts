@@ -185,7 +185,7 @@ export default class SfmcApiHelper
 	}
 		
 		
-		public getOauthForCurrentBusinessUnitHelper(req: express.Request, res: express.Response){
+		public getOauthForCurrentBusinessUnitHelper(){
 			
 			 return new Promise<any>((resolve, reject) =>
         {
