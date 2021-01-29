@@ -576,7 +576,6 @@ if(label1name=="Template Name"){
 
         }
 		
-		//4
 		function dataExtensionFolderCheck(){
 			
 			axios({
@@ -585,20 +584,7 @@ if(label1name=="Template Name"){
                 })
                   .then(function (response) {	
 					console.log(response.data);	
-					//getOauthForCurrentBusinessUnit();
-                  });
-		}
-		
-		//3
-		function getOauthForCurrentBusinessUnit(){
-			
-			axios({
-			          method: 'POST',
-			          url: 'https://hearsaydataextension.herokuapp.com/getoauthforcurrentbusinessunit',
-                })
-                  .then(function (response) {	
-					console.log(response.data);	
-					dataExtensionFolderCheck();
+					//loaddata(jsonObject);
                   });
 		}
 		
@@ -653,7 +639,6 @@ axios({
 					});
 	}
 	
-	//2
 	function AppUserInfo(){
 		console.log("After the OAuth Token fetched");
 		
@@ -663,7 +648,7 @@ axios({
                 })
                   .then(function (response) {		  				
 					console.log("User information obtained" + JSON.stringify(response.data));
-					getOauthForCurrentBusinessUnit();
+					dataExtensionFolderCheck();
                   })
 				  .catch(function (error) {
 					console.log(error);
@@ -784,7 +769,6 @@ axios({
 
         }
 
-		//1
         componentDidMount() {
 			
 				    axios({
