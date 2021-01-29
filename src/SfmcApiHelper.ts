@@ -222,7 +222,7 @@ export default class SfmcApiHelper
 
                 reject(errorMsg);
             });
-		}
+		});
 		}
 	
 	public getCategoryID(req: express.Request, res: express.Response)
