@@ -170,6 +170,61 @@ export default class SfmcApiHelper
 		
 	}
 	
+		
+		
+		public getOauthForCurrentBusinessUnit(req: express.Request, res: express.Response){
+			
+			 return new Promise<any>((resolve, reject) =>
+        {
+			let clientId = process.env.DF18DEMO_CLIENTID;
+			let clientSecret = process.env.DF18DEMO_CLIENTSECRET;
+			let headers = {
+            'Content-Type': 'application/json',
+			};
+
+			let postBody = {
+            'grant_type': 'client_credentials',
+            'client_id': clientId,
+            'client_secret': clientSecret,
+			'account_id': this.member_id
+			};
+			
+			let sfmcAuthServiceApiUrl = process.env.BASE_URL +"auth.marketingcloudapis.com/v2/token";
+            Utils.logInfo("oauth token is called, waiting for status...");
+            axios.post(sfmcAuthServiceApiUrl, postBody, {"headers" : headers})            
+            .then((response : any) => {
+                // success
+                Utils.logInfo("Success, got auth token from MC for current Business Unit..." + Utils.prettyPrintJson(JSON.stringify(response.data)));
+                let accessToken = response.data.access_token;
+                Utils.logInfo("oauth token..." + accessToken);
+                let bearer = response.data.token_type;
+                Utils.logInfo("Bearer..." + bearer);
+                let tokenExpiry = response.data.expires_in;
+                Utils.logInfo("tokenExpiry..." + tokenExpiry);
+                
+				this._oauthToken = response.data.access_token;
+				Utils.logInfo("Storing the accesstoken in a object's variable "+ this._oauthToken+"\n");
+				
+
+                resolve(
+                {
+                    status: response.status,
+                    statusText: response.statusText + "\n" + Utils.prettyPrintJson(JSON.stringify(response.data))
+                });
+            })
+            .catch((error: any) => {
+                // error
+                let errorMsg = "Error getting OAuth Access Token.";
+                errorMsg += "\nMessage: " + error.message;
+                errorMsg += "\nStatus: " + error.response ? error.response.status : "<None>";
+                errorMsg += "\nResponse data: " + error.response ? Utils.prettyPrintJson(JSON.stringify(error.response.data)) : "<None>";
+                Utils.logError(errorMsg);
+
+                reject(errorMsg);
+            });
+		}
+		}
+	
 	public getCategoryID(req: express.Request, res: express.Response)
     {
 		Utils.logInfo("Get Category Method: " + this._oauthToken);
