@@ -170,62 +170,6 @@ export default class SfmcApiHelper
 		
 	}
 	
-	public getOauthForCurrentBusinessUnit(req: express.Request, res: express.Response){
-		
-		let self = this;
-		
-		self.getOauthForCurrentBusinessUnitHelper()
-		.then((result) => {
-                res.status(result.status).send(result.statusText);
-            })
-            .catch((err) => {
-                res.status(500).send(err);
-            });
-		
-	}
-		
-		
-		public getOauthForCurrentBusinessUnitHelper(){
-			
-			 return new Promise<any>((resolve, reject) =>
-        {
-			let clientId = process.env.DF18DEMO_CLIENTID;
-			let clientSecret = process.env.DF18DEMO_CLIENTSECRET;
-			let headers = {
-            'Content-Type': 'application/json',
-			'Authorization': 'Bearer ' + this._oauthToken
-			};
-
-			
-			
-			let sfmcAuthServiceApiUrl = process.env.BASE_URL +"rest.marketingcloudapis.com/platform/v1/tokenContext";
-            Utils.logInfo("oauth token is called, waiting for status...");
-            axios.get(sfmcAuthServiceApiUrl,{"headers" : headers})            
-            .then((response : any) => {
-                // success
-                Utils.logInfo("Success, got auth token from MC for current Business Unit..." + Utils.prettyPrintJson(JSON.stringify(response.data)));
-               
-				
-
-                resolve(
-                {
-                    status: response.status,
-                    statusText: response.statusText + "\n" + Utils.prettyPrintJson(JSON.stringify(response.data))
-                });
-            })
-            .catch((error: any) => {
-                // error
-                let errorMsg = "Error getting OAuth Access Token.";
-                errorMsg += "\nMessage: " + error.message;
-                errorMsg += "\nStatus: " + error.response ? error.response.status : "<None>";
-                errorMsg += "\nResponse data: " + error.response ? Utils.prettyPrintJson(JSON.stringify(error.response.data)) : "<None>";
-                Utils.logError(errorMsg);
-
-                reject(errorMsg);
-            });
-		});
-		}
-	
 	public getCategoryID(req: express.Request, res: express.Response)
     {
 		Utils.logInfo("Get Category Method: " + this._oauthToken);
