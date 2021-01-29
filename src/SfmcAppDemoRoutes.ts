@@ -185,10 +185,4 @@ export default class SfmcAppDemoRoutes
         Utils.logInfo("Checking the data extension folder and Data extension is available or not.");
         self._apiHelper.AppUserInfo(req, res);
 	}
-	//getOauthForCurrentBusinessUnit
-	public getOauthForCurrentBusinessUnit(req: express.Request, res: express.Response){
-		let self = this;
-        Utils.logInfo("Checking the data extension folder and Data extension is available or not.");
-        self._apiHelper.getOauthForCurrentBusinessUnit(req, res);
-	}
 }
