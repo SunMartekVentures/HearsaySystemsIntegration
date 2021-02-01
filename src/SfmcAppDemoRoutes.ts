@@ -180,6 +180,18 @@ export default class SfmcAppDemoRoutes
         self._apiHelper.DataExtensionFolderCheck(req, res);
 	}
 	
+	public orgSetupCheck(req: express.Request, res: express.Response){
+		let self = this;
+        Utils.logInfo("Hearsay Integrations laam irukku, Org Setup Data extension irukka nu paakuroam.");
+        self._apiHelper.orgSetupCheck(req, res);
+	}
+	
+	public dataExtensionTemplateCheck(req: express.Request, res: express.Response){
+		let self = this;
+        Utils.logInfo("Hearsay Integrations laam irukku, Org Setup Data extension irukka nu paakuroam.");
+        self._apiHelper.dataExtensionTemplateCheck(req, res);
+	}
+	
 	public AppUserInfo(req: express.Request, res: express.Response){
 		let self = this;
         Utils.logInfo("Checking the data extension folder and Data extension is available or not.");
