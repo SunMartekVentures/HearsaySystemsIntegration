@@ -784,6 +784,12 @@ export default class SfmcApiHelper
 				Utils.logInfo("Data Extension Template Data extension has been created Successfully\n\n\n");
                 Utils.logInfo(response.data+"\n\n\n");
 				
+				resolve(
+                {
+                    status: response.status,
+                    statusText: response.data
+                });
+				
 				})
 			.catch((error: any) => {
 						// error
