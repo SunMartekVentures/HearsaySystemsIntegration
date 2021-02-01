@@ -8,7 +8,7 @@ import xml2js = require("xml2js");
 export default class SfmcApiHelper
 {
     // Instance variables 
-    private _deExternalKey = "Org_Setup";
+    private _deExternalKeyForOrgSetup = '';
     
     private _oauthToken = "";
 	private FolderID='';
@@ -20,6 +20,7 @@ export default class SfmcApiHelper
 	private soap_instance_url ='';
 	private rest_instance_url = '';
 	private member_id = '';
+	private _deExternalKeyForDataExtensionTemplate = '';
     
     
     /**
@@ -476,7 +477,8 @@ export default class SfmcApiHelper
 					
 						if(HearsayIntegrationsID!=undefined){
 							this.FolderID = HearsayIntegrationsID;
-							this.creatingDefaultDataExtensions();							
+							this.creatingDefaultDataExtensions();
+							this.creatingDefaultDataExtensionTemplate();							
 						}
 				
 				});
@@ -584,7 +586,8 @@ export default class SfmcApiHelper
 				headers: headers							
 				})            
 				.then((response: any) => {
-				this.createDefaultDataExtensionTemplate();
+
+				
 				})
 			.catch((error: any) => {
 						// error
@@ -600,7 +603,7 @@ export default class SfmcApiHelper
         });
 	}
 	
-	public createDefaultDataExtensionTemplate(){
+	public creatingDefaultDataExtensionTemplate(){
 		
 		Utils.logInfo("Creating Default Data Extensions for Data Extension Template");
 		
@@ -779,7 +782,7 @@ export default class SfmcApiHelper
 				.then((response: any) => {
 					
 				Utils.logInfo("Data Extension Template Data extension has been created Successfully\n\n\n");
-                Utils.logInfo(response.data+"\n\n\n");				
+                Utils.logInfo(response.data+"\n\n\n");
 				
 				})
 			.catch((error: any) => {
@@ -856,19 +859,20 @@ export default class SfmcApiHelper
                 Utils.logInfo(response.data);
                 var extractedData = "";
 				var parser = new xml2js.Parser();
-				/*parser.parseString(response.data, (err: any, result: { [x: string]: { [x: string]: { [x: string]: { [x: string]: any; }[]; }[]; }; }) => {
-				let  = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ID'][0];
+				parser.parseString(response.data, (err: any, result: { [x: string]: { [x: string]: { [x: string]: { [x: string]: any; }[]; }[]; }; }) => {
+				let OrgSetup = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'];
 					
-						if(ParentFolderID!=undefined){
+						if(OrgSetup!=undefined){
+							this._deExternalKeyForOrgSetup = OrgSetup[0]['CustomerKey'];
 							
 						}
+						else{
+							this.creatingDefaultDataExtensions();
+						}
 				
-				});*/
-				
-				resolve(
-                {
-                    status: response.status,
-                    statusText: response.statusText + "\n" + Utils.prettyPrintJson(JSON.stringify(response.data))
+				resolve({
+                    status: 200,
+                    statusText: "Org Setup Data Extension has been created successfully"
                 });
 				
 				})
@@ -946,20 +950,20 @@ public validateDataExtensionTemplate(){
                 Utils.logInfo(response.data);
                 var extractedData = "";
 				var parser = new xml2js.Parser();
-				/*parser.parseString(response.data, (err: any, result: { [x: string]: { [x: string]: { [x: string]: { [x: string]: any; }[]; }[]; }; }) => {
-				let  = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ID'][0];
+				parser.parseString(response.data, (err: any, result: { [x: string]: { [x: string]: { [x: string]: { [x: string]: any; }[]; }[]; }; }) => {
+				let DataExtensionTemplate = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'];
 					
-						if(ParentFolderID!=undefined){
+						if(DataExtensionTemplate!=undefined){
+							this._deExternalKeyForDataExtensionTemplate = DataExtensionTemplate[0]['CustomerKey'];
 							
 						}
+						else{
+							this.creatingDefaultDataExtensionTemplate();
+							})
+						}
+						
 				
-				});*/
-				
-				resolve(
-                {
-                    status: response.status,
-                    statusText: response.statusText + "\n" + Utils.prettyPrintJson(JSON.stringify(response.data))
-                });
+				});
 				
 				})
 			.catch((error: any) => {
@@ -1018,9 +1022,9 @@ public validateDataExtensionTemplate(){
     private loadDataHelper(oauthAccessToken: string, jsonData: string) : Promise<any>    
     {
         let self = this;
-		let _sfmcDataExtensionApiUrl = this.rest_instance_url + "/hub/v1/dataevents/key:" + this._deExternalKey + "/rowset";
+		let _sfmcDataExtensionApiUrl = this.rest_instance_url + "/hub/v1/dataevents/key:" + this._deExternalKeyForOrgSetup + "/rowset";
         Utils.logInfo("loadDataHelper called.");
-        Utils.logInfo("Loading sample data into Data Extension: " + self._deExternalKey);
+        Utils.logInfo("Loading sample data into Data Extension: " + self._deExternalKeyForOrgSetup);
         Utils.logInfo("Using OAuth token: " + this._oauthToken);
 
         return new Promise<any>((resolve, reject) =>
@@ -1103,7 +1107,7 @@ public validateDataExtensionTemplate(){
             };
 
             // POST to Marketing Cloud Data Extension endpoint to load sample data in the POST body
-            axios.post(this.rest_instance_url+"/hub/v1/dataevents/key:" + "Data_Extension_Template" + "/rowset", jsonData, {"headers" : headers})
+            axios.post(this.rest_instance_url+"/hub/v1/dataevents/key:" + this._deExternalKeyForDataExtensionTemplate + "/rowset", jsonData, {"headers" : headers})
             .then((response: any) => {
                 // success
                 Utils.logInfo("Successfully loaded sample data into Data Extension!");
