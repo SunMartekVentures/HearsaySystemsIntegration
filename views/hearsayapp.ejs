@@ -584,8 +584,31 @@ if(label1name=="Template Name"){
                 })
                   .then(function (response) {	
 					console.log(response.data);	
-					//loaddata(jsonObject);
+					orgSetupCheck();
                   });
+		}
+		
+		function orgSetupCheck(){
+			axios({
+			          method: 'POST',
+			          url: 'https://hearsaydataextension.herokuapp.com/orgsetupcheck',
+                })
+                  .then(function (response) {	
+					console.log(response.data);	
+					dataExtensionTemplateCheck();
+                  });
+			
+		}
+		
+		function dataExtensionTemplateCheck(){
+			axios({
+			          method: 'POST',
+			          url: 'https://hearsaydataextension.herokuapp.com/dataextensiontemplatecheck',
+                })
+                  .then(function (response) {	
+					console.log(response.data);
+                  });
+			
 		}
 		
 		function loaddata(jsonObject){
