@@ -584,7 +584,7 @@ export default class SfmcApiHelper
 				headers: headers							
 				})            
 				.then((response: any) => {
-				this.createDataExtensionTemplate();
+				this.createDefaultDataExtensionTemplate();
 				})
 			.catch((error: any) => {
 						// error
@@ -600,7 +600,7 @@ export default class SfmcApiHelper
         });
 	}
 	
-	public createDataExtensionTemplate(){
+	public createDefaultDataExtensionTemplate(){
 		
 		Utils.logInfo("Creating Default Data Extensions for Data Extension Template");
 		
@@ -795,6 +795,173 @@ export default class SfmcApiHelper
 			
         });
 	}
+	
+	public orgSetupCheck(req: express.Request, res: express.Response){
+		Utils.logInfo("DataExtensionFolderCheck Method: " + this._oauthToken);
+		//res.status(200).send("The The The Tha Tha Tha The The The");
+		this.validateOrgSetup()
+		.then((result) => {
+                res.status(result.status).send(result.statusText);
+            })
+            .catch((err) => {
+                res.status(500).send(err);
+            });
+		
+	}
+	
+	public validateOrgSetup(){
+		
+		Utils.logInfo('Retrieving Org Setup Data Extensions properties......');
+		let soapMessage = '<?xml version="1.0" encoding="UTF-8"?>'
++'<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">'
++'    <s:Header>'
++'        <a:Action s:mustUnderstand="1">Retrieve</a:Action>'
++'        <a:To s:mustUnderstand="1">'+this.soap_instance_url+'Service.asmx'+'</a:To>'
++'        <fueloauth xmlns="http://exacttarget.com">'+this._oauthToken+'</fueloauth>'
++'    </s:Header>'
++'    <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">'
++'        <RetrieveRequestMsg xmlns="http://exacttarget.com/wsdl/partnerAPI">'
++'            <RetrieveRequest>'
++'                <ObjectType>DataExtension</ObjectType>'
++'                <Properties>ObjectID</Properties>'
++'                <Properties>CustomerKey</Properties>'
++'                <Properties>Name</Properties>'
++'                <Filter xsi:type="SimpleFilterPart">'
++'                    <Property>Name</Property>'
++'                    <SimpleOperator>equals</SimpleOperator>'
++'                    <Value>Org Setup</Value>'
++'                </Filter>'
++'            </RetrieveRequest>'
++'        </RetrieveRequestMsg>'
++'    </s:Body>'
++'</s:Envelope>';
+	
+	
+	return new Promise<any>((resolve, reject) =>
+		{
+			let headers = {
+                'Content-Type': 'text/xml',
+                'SOAPAction': 'Retrieve'
+            };
+
+            
+            axios({
+				method: 'post',
+				url: ''+this.soap_instance_url+'Service.asmx'+'',
+				data: soapMessage,
+				headers: {'Content-Type': 'text/xml'}							
+				})            
+				.then((response: any) => {
+					Utils.logInfo("Response Body for the Org Setup validation");
+                Utils.logInfo(response.data);
+                var extractedData = "";
+				var parser = new xml2js.Parser();
+				/*parser.parseString(response.data, (err: any, result: { [x: string]: { [x: string]: { [x: string]: { [x: string]: any; }[]; }[]; }; }) => {
+				let  = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ID'][0];
+					
+						if(ParentFolderID!=undefined){
+							
+						}
+				
+				});*/
+				})
+			.catch((error: any) => {
+						// error
+						let errorMsg = "Error getting the 'Org Setup' Data extension properties......";
+						errorMsg += "\nMessage: " + error.message;
+						errorMsg += "\nStatus: " + error.response ? error.response.status : "<None>";
+						errorMsg += "\nResponse data: " + error.response.data ? Utils.prettyPrintJson(JSON.stringify(error.response.data)) : "<None>";
+						Utils.logError(errorMsg);
+
+										reject(errorMsg);
+									});
+			
+        });
+}
+
+public dataExtensionTemplateCheck(req: express.Request, res: express.Response){
+		Utils.logInfo("DataExtensionFolderCheck Method: " + this._oauthToken);
+		//res.status(200).send("The The The Tha Tha Tha The The The");
+		this.validateDataExtensionTemplate()
+		.then((result) => {
+                res.status(result.status).send(result.statusText);
+            })
+            .catch((err) => {
+                res.status(500).send(err);
+            });
+		
+	}
+
+public validateDataExtensionTemplate(){
+		
+		Utils.logInfo('Retrieving DataExtension Folder Properties......');
+		let soapMessage = '<?xml version="1.0" encoding="UTF-8"?>'
++'<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">'
++'    <s:Header>'
++'        <a:Action s:mustUnderstand="1">Retrieve</a:Action>'
++'        <a:To s:mustUnderstand="1">'+this.soap_instance_url+'Service.asmx'+'</a:To>'
++'        <fueloauth xmlns="http://exacttarget.com">'+this._oauthToken+'</fueloauth>'
++'    </s:Header>'
++'    <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">'
++'        <RetrieveRequestMsg xmlns="http://exacttarget.com/wsdl/partnerAPI">'
++'            <RetrieveRequest>'
++'                <ObjectType>DataExtension</ObjectType>'
++'                <Properties>ObjectID</Properties>'
++'                <Properties>CustomerKey</Properties>'
++'                <Properties>Name</Properties>'
++'                <Filter xsi:type="SimpleFilterPart">'
++'                    <Property>Name</Property>'
++'                    <SimpleOperator>equals</SimpleOperator>'
++'                    <Value>Data Extension Template</Value>'
++'                </Filter>'
++'            </RetrieveRequest>'
++'        </RetrieveRequestMsg>'
++'    </s:Body>'
++'</s:Envelope>';
+	
+	
+	return new Promise<any>((resolve, reject) =>
+		{
+			let headers = {
+                'Content-Type': 'text/xml',
+                'SOAPAction': 'Retrieve'
+            };
+
+            
+            axios({
+				method: 'post',
+				url: ''+this.soap_instance_url+'Service.asmx'+'',
+				data: soapMessage,
+				headers: {'Content-Type': 'text/xml'}							
+				})            
+				.then((response: any) => {
+					Utils.logInfo("Response Body for the Data Extension Template validation\n\n");
+                Utils.logInfo(response.data);
+                var extractedData = "";
+				var parser = new xml2js.Parser();
+				/*parser.parseString(response.data, (err: any, result: { [x: string]: { [x: string]: { [x: string]: { [x: string]: any; }[]; }[]; }; }) => {
+				let  = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'][0]['ID'][0];
+					
+						if(ParentFolderID!=undefined){
+							
+						}
+				
+				});*/
+				})
+			.catch((error: any) => {
+						// error
+						let errorMsg = "Error getting the 'Data Extension Template' Data extension properties......";
+						errorMsg += "\nMessage: " + error.message;
+						errorMsg += "\nStatus: " + error.response ? error.response.status : "<None>";
+						errorMsg += "\nResponse data: " + error.response.data ? Utils.prettyPrintJson(JSON.stringify(error.response.data)) : "<None>";
+						Utils.logError(errorMsg);
+
+										reject(errorMsg);
+									});
+			
+        });
+}
+	
 
     /**
      * loadData: called by the GET handlers for /apidemoloaddata and /appdemoloaddata
