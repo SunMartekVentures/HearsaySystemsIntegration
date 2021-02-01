@@ -875,6 +875,7 @@ export default class SfmcApiHelper
                     statusText: "Org Setup Data Extension has been created successfully"
                 });
 				
+				});
 				})
 			.catch((error: any) => {
 						// error
@@ -888,7 +889,7 @@ export default class SfmcApiHelper
 									});
 			
         });
-}
+
 	}
 
 public dataExtensionTemplateCheck(req: express.Request, res: express.Response){
