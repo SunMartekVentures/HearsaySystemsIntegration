@@ -889,6 +889,7 @@ export default class SfmcApiHelper
 			
         });
 }
+	}
 
 public dataExtensionTemplateCheck(req: express.Request, res: express.Response){
 		Utils.logInfo("DataExtensionFolderCheck Method: " + this._oauthToken);
