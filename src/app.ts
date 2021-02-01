@@ -97,6 +97,13 @@ app.post('/createdeforapp', function(req, res) {
   //dataextensionfoldercheck
 	app.post('/dataextensionfoldercheck', function(req, res) {
 	appDemoRoutes.DataExtensionFolderCheck(req, res); });
+	
+	//orgsetupcheck
+	app.post('/orgsetupcheck', function(req, res) {
+	appDemoRoutes.orgSetupCheck(req, res); });
+	
+	app.post('/dataextensiontemplatecheck', function(req, res) {
+	appDemoRoutes.dataExtensionTemplateCheck(req, res); });
 
 //appuserinfo
 	app.post('/appuserinfo', function(req, res) {
