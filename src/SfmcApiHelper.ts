@@ -960,12 +960,11 @@ public validateDataExtensionTemplate(){
 						}
 						else{
 							this.creatingDefaultDataExtensionTemplate();
-							})
+							
 						}
 						
 				
 				});
-				
 				})
 			.catch((error: any) => {
 						// error
@@ -979,6 +978,7 @@ public validateDataExtensionTemplate(){
 									});
 			
         });
+		
 }
 	
 
