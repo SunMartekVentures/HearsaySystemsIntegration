@@ -864,6 +864,13 @@ export default class SfmcApiHelper
 						}
 				
 				});*/
+				
+				resolve(
+                {
+                    status: response.status,
+                    statusText: response.statusText + "\n" + Utils.prettyPrintJson(JSON.stringify(response.data))
+                });
+				
 				})
 			.catch((error: any) => {
 						// error
@@ -947,6 +954,13 @@ public validateDataExtensionTemplate(){
 						}
 				
 				});*/
+				
+				resolve(
+                {
+                    status: response.status,
+                    statusText: response.statusText + "\n" + Utils.prettyPrintJson(JSON.stringify(response.data))
+                });
+				
 				})
 			.catch((error: any) => {
 						// error
