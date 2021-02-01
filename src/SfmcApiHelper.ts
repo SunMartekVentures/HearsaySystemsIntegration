@@ -1098,7 +1098,7 @@ public validateDataExtensionTemplate(){
     {
         let self = this;
         Utils.logInfo("loadDataHelper called.");
-        Utils.logInfo("Loading sample data into Data Extension: " + self._deExternalKey);
+        Utils.logInfo("Loading sample data into Data Extension: " + self._deExternalKeyForDataExtensionTemplate);
         Utils.logInfo("Using OAuth token: " + this._oauthToken);
 
         return new Promise<any>((resolve, reject) =>
