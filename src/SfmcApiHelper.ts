@@ -970,6 +970,11 @@ public validateDataExtensionTemplate(){
 							
 						}
 						
+						resolve({
+                    status: 200,
+                    statusText: "Data Extension Template has been created successfully"
+                });
+						
 				
 				});
 				})
