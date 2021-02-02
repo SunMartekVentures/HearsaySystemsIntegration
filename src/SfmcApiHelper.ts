@@ -358,7 +358,7 @@ export default class SfmcApiHelper
         });
 	}
 	
-	public retrievingDataExtensionFolderID(){
+	public retrievingDataExtensionFolderID(req: express.Request, res: express.Response){
 		
 		Utils.logInfo('Retrieving DataExtension Folder Properties......');
 		let soapMessage = '<?xml version="1.0" encoding="UTF-8"?>'
