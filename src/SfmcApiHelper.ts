@@ -850,6 +850,8 @@ export default class SfmcApiHelper
 +'    </s:Body>'
 +'</s:Envelope>';
 	
+	Utils.logInfo('soapMessage for OrgSetup......' + soapMessage);
+	
 	
 	return new Promise<any>((resolve, reject) =>
 		{
@@ -868,7 +870,6 @@ export default class SfmcApiHelper
 				.then((response: any) => {
 					Utils.logInfo("Response Body for the Org Setup validation");
                 Utils.logInfo(response.data);
-                var extractedData = "";
 				var parser = new xml2js.Parser();
 				parser.parseString(response.data, (err: any, result: { [x: string]: { [x: string]: { [x: string]: { [x: string]: any; }[]; }[]; }; }) => {
 				let OrgSetup = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'];
