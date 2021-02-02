@@ -326,6 +326,13 @@ export default class SfmcApiHelper
 				Utils.logInfo('Folder ID : ' + FolderID);
 					if(FolderID!=undefined){
 				this.FolderID = FolderID[0]['ID'][0];
+				
+				resolve(
+                {
+                    status: response.status,
+                    statusText: response.data
+                });
+				
 				}
 				else{
 					this.retrievingDataExtensionFolderID();
