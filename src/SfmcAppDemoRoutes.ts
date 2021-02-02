@@ -196,7 +196,7 @@ export default class SfmcAppDemoRoutes
 	public retrievingDataExtensionFolderID(req: express.Request, res: express.Response){
 		let self = this;
         Utils.logInfo("Retrieving Data Extension FolderID Routed to Helper class.");
-        self._apiHelper.retrievingDataExtensionFolderID();
+        self._apiHelper.retrievingDataExtensionFolderID(req, res);
 	}
 	
 	public AppUserInfo(req: express.Request, res: express.Response){
