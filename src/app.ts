@@ -101,6 +101,10 @@ app.post('/createdeforapp', function(req, res) {
 	app.post('/retrievingdataextensionfolderid', function(req, res) {
 	appDemoRoutes.retrievingDataExtensionFolderID(req, res); });
 	
+	//creatingHearsayIntegrationFolder
+	app.post('/creatinghearsayintegrationfolder', function(req, res) {
+	appDemoRoutes.creatingHearsayIntegrationFolder(req, res); });
+	
 	//orgsetupcheck
 	app.post('/orgsetupcheck', function(req, res) {
 	appDemoRoutes.orgSetupCheck(req, res); });
