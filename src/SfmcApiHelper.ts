@@ -103,10 +103,8 @@ export default class SfmcApiHelper
 
                 resolve(
                 {
-                    oauthAccessToken: accessToken,
-                    oauthAccessTokenExpiry: tokenExpiry,
                     status: response.status,
-                    statusText: response.statusText + "\n" + Utils.prettyPrintJson(JSON.stringify(response.data))
+                    statusText: "OAuth Token Generated"
                 });
             })
             .catch((error: any) => {
@@ -155,7 +153,7 @@ export default class SfmcApiHelper
 				Utils.logInfo("Storing the Soap URL in a object's variable "+ this.soap_instance_url+"\n");
                 this.rest_instance_url = response.data.rest.rest_instance_url;
 				Utils.logInfo("Storing the Rest URL in a object's variable "+ this.rest_instance_url+"\n");
-				res.status(200).send(Utils.prettyPrintJson(JSON.stringify(response.data)));
+				res.status(200).send("Installed Package Information Obtained");
             })
             .catch((error: any) => {
                 // error
@@ -329,7 +327,7 @@ export default class SfmcApiHelper
 				resolve(
                 {
                     status: response.status,
-                    statusText: "Data Extension Folder Check"
+                    statusText: "true"
                 });
 				
 				
