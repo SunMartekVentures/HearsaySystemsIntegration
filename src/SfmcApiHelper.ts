@@ -483,9 +483,9 @@ export default class SfmcApiHelper
 					
 						if(HearsayIntegrationsID!=undefined){
 							this.FolderID = HearsayIntegrationsID;	
-							});
+							}
 													
-						}
+						
 				
 				});
 				})
