@@ -436,7 +436,7 @@ export default class SfmcApiHelper
         });
 }
 	
-	public creatingHearsayIntegrationFolder(ParentFolderID : any){
+	public creatingHearsayIntegrationFolder(req: express.Request, res: express.Response){
 		
 		let createFolderData = '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">'
                                  +'<soapenv:Header>'
@@ -451,7 +451,7 @@ export default class SfmcApiHelper
                                  +'<ns1:CustomerKey>Hearsay Integrations</ns1:CustomerKey>'
                                  +'<ns1:ParentFolder>'
                                  +'<ns1:ModifiedDate xsi:nil="true"/>'
-                                 +'<ns1:ID>'+ParentFolderID+'</ns1:ID>'
+                                 +'<ns1:ID>'+this.ParentFolderID+'</ns1:ID>'
                                  +'<ns1:ObjectID xsi:nil="true"/>'
                                  +'</ns1:ParentFolder>'
                                  +'<ns1:Name>Hearsay Integrations</ns1:Name>'
@@ -490,14 +490,12 @@ export default class SfmcApiHelper
 					
 						if(HearsayIntegrationsID!=undefined){
 							this.FolderID = HearsayIntegrationsID;	
-											
-							}			
-				});
-				
-				resolve({
-                    status: response.status,
-                    statusText: 'Hearsay Integrations Folder has been created Successfully'
-                });	
+							res.status(200).send(true);			
+					}
+						else{
+						res.status(200).send(false);
+					}			
+				});	
 				
 				})
 			.catch((error: any) => {
