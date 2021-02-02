@@ -330,7 +330,7 @@ export default class SfmcApiHelper
 				resolve(
                 {
                     status: response.status,
-                    statusText: response.data
+                    statusText: "Data Extension Folder Check"
                 });
 				
 				}
