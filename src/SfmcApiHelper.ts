@@ -124,7 +124,6 @@ export default class SfmcApiHelper
 	
 	public DataExtensionFolderCheck(req: express.Request, res: express.Response){
 		Utils.logInfo("DataExtensionFolderCheck Method: " + this._oauthToken);
-		res.status(200).send("CHECKED");
 		this.getCategoryIDHelper()
 		.then((result) => {
                 res.status(result.status).send(result.statusText);
@@ -156,7 +155,7 @@ export default class SfmcApiHelper
 				Utils.logInfo("Storing the Soap URL in a object's variable "+ this.soap_instance_url+"\n");
                 this.rest_instance_url = response.data.rest.rest_instance_url;
 				Utils.logInfo("Storing the Rest URL in a object's variable "+ this.rest_instance_url+"\n");
-				res.status(200).send("Collected User Informations");
+				res.status(200).send(Utils.prettyPrintJson(JSON.stringify(response.data)));
             })
             .catch((error: any) => {
                 // error
@@ -476,7 +475,12 @@ export default class SfmcApiHelper
 				Utils.logInfo('Hearsay Integrations Folder ID : ' + HearsayIntegrationsID);
 					
 						if(HearsayIntegrationsID!=undefined){
-							this.FolderID = HearsayIntegrationsID;													
+							this.FolderID = HearsayIntegrationsID;
+							this.creatingDefaultDataExtensions().then((response: any) => {
+								Utils.logInfo("Here is the place we need to look");
+								this.creatingDefaultDataExtensionTemplate();	
+							});
+													
 						}
 				
 				});
@@ -509,10 +513,6 @@ export default class SfmcApiHelper
 +'    <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">'
 +'        <CreateRequest xmlns="http://exacttarget.com/wsdl/partnerAPI">'
 +'            <Objects xsi:type="DataExtension">'
-+'				<CategoryID>'+this.FolderID+'</CategoryID>'
-+'                <Client>'
-+'                    <ID>'+this.member_id+'</ID>'
-+'                </Client>'
 +'                <CustomerKey>Org_Setup</CustomerKey>'
 +'                <Name>Org Setup</Name>'
 +'                <IsSendable>true</IsSendable>'
@@ -624,10 +624,6 @@ export default class SfmcApiHelper
 +'    <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">'
 +'        <CreateRequest xmlns="http://exacttarget.com/wsdl/partnerAPI">'
 +'            <Objects xsi:type="DataExtension">'
-+'				<CategoryID>'+this.FolderID+'</CategoryID>'
-+'                <Client>'
-+'                    <ID>'+this.member_id+'</ID>'
-+'                </Client>'
 +'                <CustomerKey>Data_Extension_Template</CustomerKey>'
 +'                <Name>Data Extension Template</Name>'
 +'                <IsSendable>true</IsSendable>'
@@ -836,6 +832,7 @@ export default class SfmcApiHelper
 +'    </s:Header>'
 +'    <s:Body xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">'
 +'        <RetrieveRequestMsg xmlns="http://exacttarget.com/wsdl/partnerAPI">'
++'            <RetrieveRequest>'
 +'                <ObjectType>DataExtension</ObjectType>'
 +'                <Properties>ObjectID</Properties>'
 +'                <Properties>CustomerKey</Properties>'
@@ -849,8 +846,6 @@ export default class SfmcApiHelper
 +'        </RetrieveRequestMsg>'
 +'    </s:Body>'
 +'</s:Envelope>';
-	
-	Utils.logInfo('soapMessage for OrgSetup......' + soapMessage);
 	
 	
 	return new Promise<any>((resolve, reject) =>
@@ -870,6 +865,7 @@ export default class SfmcApiHelper
 				.then((response: any) => {
 					Utils.logInfo("Response Body for the Org Setup validation");
                 Utils.logInfo(response.data);
+                var extractedData = "";
 				var parser = new xml2js.Parser();
 				parser.parseString(response.data, (err: any, result: { [x: string]: { [x: string]: { [x: string]: { [x: string]: any; }[]; }[]; }; }) => {
 				let OrgSetup = result['soap:Envelope']['soap:Body'][0]['RetrieveResponseMsg'][0]['Results'];
