@@ -479,7 +479,7 @@ export default class SfmcApiHelper
 							this.FolderID = HearsayIntegrationsID;
 							this.creatingDefaultDataExtensions().then((response: any) => {
 								this.creatingDefaultDataExtensionTemplate();	
-							}
+							});
 													
 						}
 				
