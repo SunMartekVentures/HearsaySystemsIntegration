@@ -589,6 +589,25 @@ if(label1name=="Template Name"){
 					}
 					else{
 						console.log("Hearsay Integration Folder is not found");
+						retrievingDataExtensionFolderID();
+					}
+                  });
+		}
+		
+		function retrievingDataExtensionFolderID(){
+			
+			axios({
+			          method: 'POST',
+			          url: 'https://hearsayintegration.herokuapp.com/retrievingdataextensionfolderid',
+                })
+                  .then(function (response) {	
+					console.log(response.data);
+					if(response.data){
+					console.log(Folder ID obtained);
+					}
+					else{
+						console.log("Data Extension Folder ID not Obtained");
+						//retrievingDataExtensionFolderID();
 					}
                   });
 		}
