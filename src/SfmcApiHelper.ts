@@ -327,11 +327,7 @@ export default class SfmcApiHelper
 					if(FolderID!=undefined){
 				this.FolderID = FolderID[0]['ID'][0];
 				
-				resolve(
-                {
-                    status: response.status,
-                    statusText: "Data Extension Folder Check"
-                });
+				
 				
 				}
 				else{
@@ -340,6 +336,11 @@ export default class SfmcApiHelper
                 }			
 				
 				});
+				resolve(
+                {
+                    status: response.status,
+                    statusText: "Data Extension Folder Check"
+                });
 			
 				})
 			.catch((error: any) => {
@@ -408,11 +409,7 @@ export default class SfmcApiHelper
 						if(ParentFolderID!=undefined){
 							this.ParentFolderID = ParentFolderID;
 							this.creatingHearsayIntegrationFolder(ParentFolderID);
-							resolve(
-							{
-                    status: response.status,
-                    statusText: 'Data Extension Folder ID obtained Successfully'
-                });
+							
 						}
 				
 				});
@@ -478,28 +475,19 @@ export default class SfmcApiHelper
 					
 					Utils.logInfo("Hearsay Integrations Folder has been created Successfully");
                 Utils.logInfo(response.data);
-				
-                var extractedData = "";
 				var parser = new xml2js.Parser();
 				parser.parseString(response.data, (err: any, result: { [x: string]: { [x: string]: { [x: string]: { [x: string]: any; }[]; }[]; }; }) => {
 				let HearsayIntegrationsID = result['soap:Envelope']['soap:Body'][0]['CreateResponse'][0]['Results'][0]['NewID'][0];
 				Utils.logInfo('Hearsay Integrations Folder ID : ' + HearsayIntegrationsID);
 					
 						if(HearsayIntegrationsID!=undefined){
-							this.FolderID = HearsayIntegrationsID;
-
-							
-							}
-							
-							resolve(
-                {
+							this.FolderID = HearsayIntegrationsID;							
+							}			
+				});
+				resolve({
                     status: response.status,
                     statusText: 'Hearsay Integrations Folder has been created Successfully'
                 });	
-													
-						
-				
-				});
 				})
 			.catch((error: any) => {
 						// error
