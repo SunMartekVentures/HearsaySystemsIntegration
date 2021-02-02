@@ -482,10 +482,7 @@ export default class SfmcApiHelper
 				Utils.logInfo('Hearsay Integrations Folder ID : ' + HearsayIntegrationsID);
 					
 						if(HearsayIntegrationsID!=undefined){
-							this.FolderID = HearsayIntegrationsID;
-							this.creatingDefaultDataExtensions().then((response: any) => {
-								Utils.logInfo("Here is the place we need to look");
-								this.creatingDefaultDataExtensionTemplate();	
+							this.FolderID = HearsayIntegrationsID;	
 							});
 													
 						}
