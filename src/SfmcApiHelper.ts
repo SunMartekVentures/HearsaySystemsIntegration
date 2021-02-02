@@ -1036,6 +1036,7 @@ public validateDataExtensionTemplate(){
     {
         let self = this;
 		let _sfmcDataExtensionApiUrl = this.rest_instance_url + "/hub/v1/dataevents/key:" + this._deExternalKeyForOrgSetup + "/rowset";
+		Utils.logInfo("URL : "+ _sfmcDataExtensionApiUrl);
         Utils.logInfo("loadDataHelper called.");
         Utils.logInfo("Loading sample data into Data Extension: " + self._deExternalKeyForOrgSetup);
         Utils.logInfo("Using OAuth token: " + this._oauthToken);
