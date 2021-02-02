@@ -409,20 +409,12 @@ export default class SfmcApiHelper
 					
 						if(ParentFolderID!=undefined){
 							this.ParentFolderID = ParentFolderID;
-							resolve(
-							{
-							status: response.status,
-							statusText: "true"
-							});
+							res.status(200).send(true);
 				
 				
 					}
 						else{
-						resolve(
-						{
-                    status: response.status,
-                    statusText: "false"
-					});
+						res.status(200).send(false);
 					}
 							//this.creatingHearsayIntegrationFolder(ParentFolderID);
 							
