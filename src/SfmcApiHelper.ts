@@ -512,7 +512,7 @@ export default class SfmcApiHelper
         });
 	}
 	
-	public creatingDefaultDataExtensions(){
+	public creatingDefaultDataExtensions(req: express.Request, res: express.Response){
 		
 		Utils.logInfo("Creating Default Data Extensions for Org Setup");
 		
@@ -602,11 +602,7 @@ export default class SfmcApiHelper
 				Utils.logInfo("Org Setup Data extension has been created Successfully\n\n\n");
                 Utils.logInfo(response.data+"\n\n\n");
 				
-				resolve(
-                {
-                    status: response.status,
-                    statusText: response.data
-                });
+				res.status(200).send("Org Setup Data extension has been created Successfully");		
 				
 				
 				})
@@ -825,7 +821,7 @@ export default class SfmcApiHelper
 	public orgSetupCheck(req: express.Request, res: express.Response){
 		Utils.logInfo("orgSetupCheck Method: " + this._oauthToken);
 		//res.status(200).send("The The The Tha Tha Tha The The The");
-		this.validateOrgSetup()
+		this.validateOrgSetup(req,res)
 		.then((result) => {
                 res.status(result.status).send(result.statusText);
             })
@@ -835,7 +831,7 @@ export default class SfmcApiHelper
 		
 	}
 	
-	public validateOrgSetup(){
+	public validateOrgSetup(req: express.Request, res: express.Response){
 		
 		Utils.logInfo('Retrieving Org Setup Data Extensions properties......');
 				let soapMessage = '<?xml version="1.0" encoding="UTF-8"?>'
@@ -894,11 +890,7 @@ export default class SfmcApiHelper
 							
 						}
 						else{
-							this.creatingDefaultDataExtensions();
-							resolve({
-							status: 200,
-							statusText: "Org Setup Data Extension has been created successfully"
-							});
+							this.creatingDefaultDataExtensions(req,res);
 						}
 				
 				
