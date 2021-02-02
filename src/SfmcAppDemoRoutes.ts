@@ -86,7 +86,7 @@ export default class SfmcAppDemoRoutes
         //return res.redirect('https://mc.s11.exacttarget.com/'); // accepted
 	    let self = this;
         Utils.logInfo("Logout");
-        //self._apiHelper.logout(req, res);
+       
     }
 
     /**
@@ -182,13 +182,13 @@ export default class SfmcAppDemoRoutes
 	
 	public orgSetupCheck(req: express.Request, res: express.Response){
 		let self = this;
-        Utils.logInfo("Hearsay Integrations laam irukku, Org Setup Data extension irukka nu paakuroam.");
+		Utils.logInfo("Org Setup check Routed to Helper class.");
         self._apiHelper.orgSetupCheck(req, res);
 	}
 	
 	public dataExtensionTemplateCheck(req: express.Request, res: express.Response){
 		let self = this;
-        Utils.logInfo("Hearsay Integrations laam irukku, Org Setup Data extension irukka nu paakuroam.");
+        Utils.logInfo("Data Extension Template Routed to Helper class.");
         self._apiHelper.dataExtensionTemplateCheck(req, res);
 	}
 	
