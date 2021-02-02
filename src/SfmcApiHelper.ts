@@ -335,12 +335,13 @@ export default class SfmcApiHelper
 				
 				}
 				else{
-					this.retrievingDataExtensionFolderID();
+					this.retrievingDataExtensionFolderID().then((response: any) => {
 					resolve({
                     status: response.status,
                     statusText: 'Hearsay Integrations Folder has been created Successfully'
                 });		
-                }			
+                });
+				}				
 				
 				});
 				
@@ -830,7 +831,7 @@ export default class SfmcApiHelper
 	public validateOrgSetup(){
 		
 		Utils.logInfo('Retrieving Org Setup Data Extensions properties......');
-		let soapMessage = '<?xml version="1.0" encoding="UTF-8"?>'
+				let soapMessage = '<?xml version="1.0" encoding="UTF-8"?>'
 +'<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">'
 +'    <s:Header>'
 +'        <a:Action s:mustUnderstand="1">Retrieve</a:Action>'
