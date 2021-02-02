@@ -56,10 +56,9 @@ app.use(favicon(path.join(__dirname,'../static','images','favicons', 'favicon.ic
 // Routes: pages
 
 
-app.get('/', function(req, res) { Utils.initSampleDataAndRenderView(req, res, 'hearsayapi.ejs') });
-app.get('/apidemo', function(req, res) { Utils.initSampleDataAndRenderView(req, res, 'hearsayapi.ejs') });
+app.get('/', function(req, res) { Utils.initSampleDataAndRenderView(req, res, 'hearsayapp.ejs') });
 app.get('/appdemo', function(req, res) { Utils.initSampleDataAndRenderView(req, res, 'hearsayapp.ejs') });
-app.get('/jbdemo', function(req, res) { Utils.initSampleDataAndRenderView(req, res, 'jbdemo.ejs') });
+//app.get('/jbdemo', function(req, res) { Utils.initSampleDataAndRenderView(req, res, 'jbdemo.ejs') });
 
 const apiDemoRoutes = new SfmcApiDemoRoutes();
 const appDemoRoutes = new SfmcAppDemoRoutes();
@@ -97,6 +96,10 @@ app.post('/createdeforapp', function(req, res) {
   //dataextensionfoldercheck
 	app.post('/dataextensionfoldercheck', function(req, res) {
 	appDemoRoutes.DataExtensionFolderCheck(req, res); });
+	
+	//retrievingdataextensionfolderid
+	app.post('/retrievingdataextensionfolderid', function(req, res) {
+	appDemoRoutes.retrievingDataExtensionFolderID(req, res); });
 	
 	//orgsetupcheck
 	app.post('/orgsetupcheck', function(req, res) {
