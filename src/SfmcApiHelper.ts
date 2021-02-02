@@ -879,16 +879,21 @@ export default class SfmcApiHelper
 					
 						if(OrgSetup!=undefined){
 							this._deExternalKeyForOrgSetup = OrgSetup[0]['CustomerKey'];
+							resolve({
+                    status: 200,
+                    statusText: "Org Setup Data Extension already created"
+					});
 							
 						}
 						else{
 							this.creatingDefaultDataExtensions();
+							resolve({
+							status: 200,
+							statusText: "Org Setup Data Extension has been created successfully"
+							});
 						}
 				
-				resolve({
-                    status: 200,
-                    statusText: "Org Setup Data Extension has been created successfully"
-                });
+				
 				
 				});
 				})
@@ -972,17 +977,21 @@ public validateDataExtensionTemplate(){
 					
 						if(DataExtensionTemplate!=undefined){
 							this._deExternalKeyForDataExtensionTemplate = DataExtensionTemplate[0]['CustomerKey'];
-							
+							resolve({
+							status: 200,
+							statusText: "Data Extension Template already created"
+							});
 						}
 						else{
 							this.creatingDefaultDataExtensionTemplate();
+							resolve({
+							status: 200,
+							statusText: "Data Extension Template has been created successfully"
+						});
 							
 						}
 						
-						resolve({
-                    status: 200,
-                    statusText: "Data Extension Template has been created successfully"
-                });
+						
 						
 				
 				});
