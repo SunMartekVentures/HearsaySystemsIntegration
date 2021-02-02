@@ -604,10 +604,31 @@ if(label1name=="Template Name"){
 					console.log(response.data);
 					if(response.data){
 					console.log("Folder ID obtained");
+					creatingHearsayIntegrationFolder();
 					}
 					else{
 						console.log("Data Extension Folder ID not Obtained");
 						//retrievingDataExtensionFolderID();
+					}
+                  });
+		}
+		
+		//creatinghearsayintegrationfolder
+		
+		function creatingHearsayIntegrationFolder(){
+			
+			axios({
+			          method: 'POST',
+			          url: 'https://hearsayintegration.herokuapp.com/creatinghearsayintegrationfolder',
+                })
+                  .then(function (response) {	
+					console.log(response.data);
+					if(response.data){
+					console.log("Hearsay Integration Folder Created");
+					}
+					else{
+						console.log("Error Creating Hearsay Integration Folder");
+						
 					}
                   });
 		}
