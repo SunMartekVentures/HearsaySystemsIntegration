@@ -276,7 +276,7 @@ export default class SfmcApiHelper
 	
 	public getCategoryIDHelper() : Promise<any>
 	{
-		Utils.logInfo('getCategoryIDHelper Method has been called, Finally it Worked. We are going to complete');
+		Utils.logInfo('getCategoryIDHelper Method has been called.');
 		let soapMessage = '<?xml version="1.0" encoding="UTF-8"?>'
 +'<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:u="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">'
 +'    <s:Header>'
@@ -326,7 +326,11 @@ export default class SfmcApiHelper
 				Utils.logInfo('Folder ID : ' + FolderID);
 					if(FolderID!=undefined){
 				this.FolderID = FolderID[0]['ID'][0];
-				
+				resolve(
+                {
+                    status: response.status,
+                    statusText: "Data Extension Folder Check"
+                });
 				
 				
 				}
@@ -336,11 +340,7 @@ export default class SfmcApiHelper
                 }			
 				
 				});
-				resolve(
-                {
-                    status: response.status,
-                    statusText: "Data Extension Folder Check"
-                });
+				
 			
 				})
 			.catch((error: any) => {
@@ -481,13 +481,14 @@ export default class SfmcApiHelper
 				Utils.logInfo('Hearsay Integrations Folder ID : ' + HearsayIntegrationsID);
 					
 						if(HearsayIntegrationsID!=undefined){
-							this.FolderID = HearsayIntegrationsID;							
-							}			
-				});
-				resolve({
+							this.FolderID = HearsayIntegrationsID;	
+					resolve({
                     status: response.status,
                     statusText: 'Hearsay Integrations Folder has been created Successfully'
-                });	
+                });								
+							}			
+				});
+				
 				})
 			.catch((error: any) => {
 						// error
