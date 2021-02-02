@@ -124,7 +124,7 @@ export default class SfmcApiHelper
 	
 	public DataExtensionFolderCheck(req: express.Request, res: express.Response){
 		Utils.logInfo("DataExtensionFolderCheck Method: " + this._oauthToken);
-		res.status(200).send("The The The Tha Tha Tha The The The");
+		res.status(200).send("CHECKED");
 		this.getCategoryIDHelper()
 		.then((result) => {
                 res.status(result.status).send(result.statusText);
@@ -476,12 +476,7 @@ export default class SfmcApiHelper
 				Utils.logInfo('Hearsay Integrations Folder ID : ' + HearsayIntegrationsID);
 					
 						if(HearsayIntegrationsID!=undefined){
-							this.FolderID = HearsayIntegrationsID;
-							this.creatingDefaultDataExtensions().then((response: any) => {
-								Utils.logInfo("Here is the place we need to look");
-								this.creatingDefaultDataExtensionTemplate();	
-							});
-													
+							this.FolderID = HearsayIntegrationsID;													
 						}
 				
 				});
