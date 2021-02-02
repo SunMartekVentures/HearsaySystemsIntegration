@@ -426,7 +426,7 @@ export default class SfmcApiHelper
 					}
 							//this.creatingHearsayIntegrationFolder(ParentFolderID);
 							
-						}
+						
 				
 				});
 				})
