@@ -331,6 +331,13 @@ export default class SfmcApiHelper
                 });
 				
 				
+				}
+				else{
+					resolve(
+                {
+                    status: response.status,
+                    statusText: "false"
+                });
 				}				
 				
 				});
