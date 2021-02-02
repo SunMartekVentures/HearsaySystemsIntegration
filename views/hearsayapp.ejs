@@ -583,8 +583,13 @@ if(label1name=="Template Name"){
 			          url: 'https://hearsayintegration.herokuapp.com/dataextensionfoldercheck',
                 })
                   .then(function (response) {	
-					console.log(response.data);	
+					console.log(response.data);
+					if(response.data){
 					orgSetupCheck();
+					}
+					else{
+						console.log("Hearsay Integration Folder is not found");
+					}
                   });
 		}
 		
