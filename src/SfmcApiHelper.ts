@@ -156,7 +156,7 @@ export default class SfmcApiHelper
 				Utils.logInfo("Storing the Soap URL in a object's variable "+ this.soap_instance_url+"\n");
                 this.rest_instance_url = response.data.rest.rest_instance_url;
 				Utils.logInfo("Storing the Rest URL in a object's variable "+ this.rest_instance_url+"\n");
-				res.status(200).send(Utils.prettyPrintJson(JSON.stringify(response.data)));
+				res.status(200).send("Collected User Informations");
             })
             .catch((error: any) => {
                 // error
@@ -794,7 +794,6 @@ export default class SfmcApiHelper
 				.then((response: any) => {
 					
 				Utils.logInfo("Data Extension Template Data extension has been created Successfully\n\n\n");
-                Utils.logInfo(response.data+"\n\n\n");
 				
 				resolve(
                 {
