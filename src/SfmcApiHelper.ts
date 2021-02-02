@@ -810,7 +810,7 @@ export default class SfmcApiHelper
 	}
 	
 	public orgSetupCheck(req: express.Request, res: express.Response){
-		Utils.logInfo("DataExtensionFolderCheck Method: " + this._oauthToken);
+		Utils.logInfo("orgSetupCheck Method: " + this._oauthToken);
 		//res.status(200).send("The The The Tha Tha Tha The The The");
 		this.validateOrgSetup()
 		.then((result) => {
@@ -903,7 +903,7 @@ export default class SfmcApiHelper
 	}
 
 public dataExtensionTemplateCheck(req: express.Request, res: express.Response){
-		Utils.logInfo("DataExtensionFolderCheck Method: " + this._oauthToken);
+		Utils.logInfo("DataExtensionTemplateCheck Method: " + this._oauthToken);
 		//res.status(200).send("The The The Tha Tha Tha The The The");
 		this.validateDataExtensionTemplate()
 		.then((result) => {
