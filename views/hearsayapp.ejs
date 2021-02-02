@@ -580,7 +580,7 @@ if(label1name=="Template Name"){
 			
 			axios({
 			          method: 'POST',
-			          url: 'https://hearsaydataextension.herokuapp.com/dataextensionfoldercheck',
+			          url: 'https://hearsayintegration.herokuapp.com/dataextensionfoldercheck',
                 })
                   .then(function (response) {	
 					console.log(response.data);	
@@ -591,7 +591,7 @@ if(label1name=="Template Name"){
 		function orgSetupCheck(){
 			axios({
 			          method: 'POST',
-			          url: 'https://hearsaydataextension.herokuapp.com/orgsetupcheck',
+			          url: 'https://hearsayintegration.herokuapp.com/orgsetupcheck',
                 })
                   .then(function (response) {	
 					console.log(response.data);	
@@ -603,7 +603,7 @@ if(label1name=="Template Name"){
 		function dataExtensionTemplateCheck(){
 			axios({
 			          method: 'POST',
-			          url: 'https://hearsaydataextension.herokuapp.com/dataextensiontemplatecheck',
+			          url: 'https://hearsayintegration.herokuapp.com/dataextensiontemplatecheck',
                 })
                   .then(function (response) {	
 					console.log(response.data);
@@ -616,7 +616,7 @@ if(label1name=="Template Name"){
 	
 	axios({
 			          method: 'POST',
-			          url: 'https://hearsaydataextension.herokuapp.com/loaddataforapp',
+			          url: 'https://hearsayintegration.herokuapp.com/loaddataforapp',
 			           data: jsonObject,
 			          headers: {'Content-Type': 'application/json' }
                 })
@@ -633,7 +633,7 @@ if(label1name=="Template Name"){
 	
 	axios({
 			          method: 'POST',
-			          url: 'https://hearsaydataextension.herokuapp.com/loaddatafortempapp',
+			          url: 'https://hearsayintegration.herokuapp.com/loaddatafortempapp',
 			           data: template,
 			          headers: {'Content-Type': 'application/json' }
                 })
@@ -648,7 +648,7 @@ if(label1name=="Template Name"){
 		
 axios({
 			          method: 'POST',
-			          url: 'https://hearsaydataextension.herokuapp.com/createdeforapp',
+			          url: 'https://hearsayintegration.herokuapp.com/createdeforapp',
 					  data: dynamicTemplate,
 					  headers: {'Content-Type': 'application/json' }
                 })
@@ -667,7 +667,7 @@ axios({
 		
 		axios({
 			          method: 'POST',
-			          url: 'https://hearsaydataextension.herokuapp.com/appuserinfo', 
+			          url: 'https://hearsayintegration.herokuapp.com/appuserinfo', 
                 })
                   .then(function (response) {		  				
 					console.log("User information obtained" + JSON.stringify(response.data));
@@ -796,7 +796,7 @@ axios({
 			
 				    axios({
 			          method: 'POST',
-			          url: 'https://hearsaydataextension.herokuapp.com/appdemoauthtoken', 
+			          url: 'https://hearsayintegration.herokuapp.com/appdemoauthtoken', 
                 })
                   .then(function (response) {		  				
 					console.log("authentication token obtained");
@@ -979,7 +979,7 @@ axios({
 			  }			  
 			 axios({
 			          method: 'GET',
-			          url: 'https://hearsaydataextension.herokuapp.com/getcategoryidforapp',
+			          url: 'https://hearsayintegration.herokuapp.com/getcategoryidforapp',
 			           params: validationTemplate,
 			          headers: {'Content-Type': 'application/json' }
                 })
