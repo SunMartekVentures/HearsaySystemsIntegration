@@ -331,9 +331,6 @@ export default class SfmcApiHelper
                 });
 				
 				
-				}
-				else{
-					this.retrievingDataExtensionFolderID();
 				}				
 				
 				});
