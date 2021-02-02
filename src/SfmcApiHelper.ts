@@ -802,7 +802,7 @@ export default class SfmcApiHelper
 				})
 			.catch((error: any) => {
 						// error
-						let errorMsg = "Error creating the Org Setup Data extension......";
+						let errorMsg = "Error creating the Data Extension Template Data extension......";
 						errorMsg += "\nMessage: " + error.message;
 						errorMsg += "\nStatus: " + error.response ? error.response.status : "<None>";
 						errorMsg += "\nResponse data: " + error.response.data ? Utils.prettyPrintJson(JSON.stringify(error.response.data)) : "<None>";
