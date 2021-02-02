@@ -409,6 +409,10 @@ export default class SfmcApiHelper
 							this.ParentFolderID = ParentFolderID;
 							this.creatingHearsayIntegrationFolder(ParentFolderID);
 							
+							{
+                    status: response.status,
+                    statusText: 'Data Extension Folder ID obtained Successfully'
+                });
 						}
 				
 				});
