@@ -336,7 +336,10 @@ export default class SfmcApiHelper
 				}
 				else{
 					this.retrievingDataExtensionFolderID();
-					
+					resolve({
+                    status: response.status,
+                    statusText: 'Hearsay Integrations Folder has been created Successfully'
+                });		
                 }			
 				
 				});
@@ -482,10 +485,7 @@ export default class SfmcApiHelper
 					
 						if(HearsayIntegrationsID!=undefined){
 							this.FolderID = HearsayIntegrationsID;	
-					resolve({
-                    status: response.status,
-                    statusText: 'Hearsay Integrations Folder has been created Successfully'
-                });								
+											
 							}			
 				});
 				
