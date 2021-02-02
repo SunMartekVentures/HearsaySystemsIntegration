@@ -189,14 +189,14 @@ export default class SfmcAppDemoRoutes
 	public dataExtensionTemplateCheck(req: express.Request, res: express.Response){
 		let self = this;
         Utils.logInfo("Data Extension Template Routed to Helper class.");
-        self._apiHelper.dataExtensionTemplateCheck();
+        self._apiHelper.dataExtensionTemplateCheck(req, res);
 	}
 	
 	//retrievingDataExtensionFolderID
 	public retrievingDataExtensionFolderID(req: express.Request, res: express.Response){
 		let self = this;
         Utils.logInfo("Retrieving Data Extension FolderID Routed to Helper class.");
-        self._apiHelper.retrievingDataExtensionFolderID(req, res);
+        self._apiHelper.retrievingDataExtensionFolderID();
 	}
 	
 	public AppUserInfo(req: express.Request, res: express.Response){
