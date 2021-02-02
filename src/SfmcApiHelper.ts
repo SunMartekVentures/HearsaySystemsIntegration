@@ -477,7 +477,7 @@ export default class SfmcApiHelper
 					
 						if(HearsayIntegrationsID!=undefined){
 							this.FolderID = HearsayIntegrationsID;
-							this.creatingDefaultDataExtensions();
+							this.creatingDefaultDataExtensions()
 							this.creatingDefaultDataExtensionTemplate();							
 						}
 				
@@ -586,7 +586,16 @@ export default class SfmcApiHelper
 				headers: headers							
 				})            
 				.then((response: any) => {
-
+				
+				Utils.logInfo("Org Setup Data extension has been created Successfully\n\n\n");
+                Utils.logInfo(response.data+"\n\n\n");
+				
+				resolve(
+                {
+                    status: response.status,
+                    statusText: response.data
+                });
+				
 				
 				})
 			.catch((error: any) => {
