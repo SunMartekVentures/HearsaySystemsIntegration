@@ -580,7 +580,7 @@ if(label1name=="Template Name"){
 			
 			axios({
 			          method: 'POST',
-			          url: 'https://hearsayintegration.herokuapp.com/dataextensionfoldercheck',
+			          url: '/dataextensionfoldercheck',
                 })
                   .then(function (response) {	
 					console.log(response.data);
@@ -598,7 +598,7 @@ if(label1name=="Template Name"){
 			
 			axios({
 			          method: 'POST',
-			          url: 'https://hearsayintegration.herokuapp.com/retrievingdataextensionfolderid',
+			          url: '/retrievingdataextensionfolderid',
                 })
                   .then(function (response) {	
 					console.log(response.data);
@@ -619,7 +619,7 @@ if(label1name=="Template Name"){
 			
 			axios({
 			          method: 'POST',
-			          url: 'https://hearsayintegration.herokuapp.com/creatinghearsayintegrationfolder',
+			          url: '/creatinghearsayintegrationfolder',
                 })
                   .then(function (response) {	
 					console.log(response.data);
@@ -637,7 +637,7 @@ if(label1name=="Template Name"){
 		function orgSetupCheck(){
 			axios({
 			          method: 'POST',
-			          url: 'https://hearsayintegration.herokuapp.com/orgsetupcheck',
+			          url: '/orgsetupcheck',
                 })
                   .then(function (response) {	
 					console.log(response.data);	
@@ -649,7 +649,7 @@ if(label1name=="Template Name"){
 		function dataExtensionTemplateCheck(){
 			axios({
 			          method: 'POST',
-			          url: 'https://hearsayintegration.herokuapp.com/dataextensiontemplatecheck',
+			          url: '/dataextensiontemplatecheck',
                 })
                   .then(function (response) {	
 					console.log(response.data);
@@ -662,7 +662,7 @@ if(label1name=="Template Name"){
 	
 	axios({
 			          method: 'POST',
-			          url: 'https://hearsayintegration.herokuapp.com/loaddataforapp',
+			          url: '/loaddataforapp',
 			           data: jsonObject,
 			          headers: {'Content-Type': 'application/json' }
                 })
@@ -679,7 +679,7 @@ if(label1name=="Template Name"){
 	
 	axios({
 			          method: 'POST',
-			          url: 'https://hearsayintegration.herokuapp.com/loaddatafortempapp',
+			          url: '/loaddatafortempapp',
 			           data: template,
 			          headers: {'Content-Type': 'application/json' }
                 })
@@ -694,7 +694,7 @@ if(label1name=="Template Name"){
 		
 axios({
 			          method: 'POST',
-			          url: 'https://hearsayintegration.herokuapp.com/createdeforapp',
+			          url: '/createdeforapp',
 					  data: dynamicTemplate,
 					  headers: {'Content-Type': 'application/json' }
                 })
@@ -713,7 +713,7 @@ axios({
 		
 		axios({
 			          method: 'POST',
-			          url: 'https://hearsayintegration.herokuapp.com/appuserinfo', 
+			          url: '/appuserinfo', 
                 })
                   .then(function (response) {		  				
 					console.log("User information obtained" + JSON.stringify(response.data));
@@ -1025,7 +1025,7 @@ axios({
 			  }			  
 			 axios({
 			          method: 'GET',
-			          url: 'https://hearsayintegration.herokuapp.com/getcategoryidforapp',
+			          url: '/getcategoryidforapp',
 			           params: validationTemplate,
 			          headers: {'Content-Type': 'application/json' }
                 })
