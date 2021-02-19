@@ -437,7 +437,7 @@
 	
 	axios({
 			          method: 'POST',
-			          url: 'https://hearsaysystems.herokuapp.com/loaddata',
+			          url: '/loaddata',
 			           data: jsonObject,
 			          headers: {'Content-Type': 'application/json' }
                 })
@@ -457,7 +457,7 @@
 	
 	axios({
 			          method: 'POST',
-			          url: 'https://hearsaysystems.herokuapp.com/loaddatafortemp',
+			          url: '/loaddatafortemp',
 			           data: jsonObject,
 			          headers: {'Content-Type': 'application/json' }
                 })
@@ -472,7 +472,7 @@
 		console.log("createDE function called "+ customeruniqueid);
 axios({
 			          method: 'POST',
-			          url: 'https://hearsaysystems.herokuapp.com/createde',
+			          url: '/createde',
 					  data : customeruniqueid
                 })
                   .then(function (response) {		  
@@ -680,7 +680,7 @@ axios({
 	    console.log("Before axios");	    
 	    axios({
 			          method: 'POST',
-			          url: 'https://hearsaysystems.herokuapp.com/apidemooauthtoken', 
+			          url: '/apidemooauthtoken', 
 			          
 			          //headers: {'Content-Type': 'application/json' }
                 })
